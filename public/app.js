@@ -49,6 +49,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   };
 
+  const loadChatHistory = async (email) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/chat/history?email=${encodeURIComponent(email)}`);
+      const data = await response.json();
+      if (data.messages && data.messages.length > 0) {
+        messages = data.messages;
+        chatMessages.innerHTML = '';
+        messages.forEach(msg => {
+          appendMessage(msg.role, msg.content);
+        });
+      } else {
+        resetChat();
+      }
+    } catch(err) {
+      console.error('Failed to load history:', err);
+      resetChat();
+    }
+  };
+
+  const resetChat = () => {
+    messages = [];
+    chatMessages.innerHTML = `
+      <div class="flex gap-4 max-w-3xl mx-auto mt-10">
+        <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex-1 pt-1">
+          <p class="text-gray-200 text-base leading-relaxed">
+            How can I help you today?
+          </p>
+        </div>
+      </div>
+    `;
+  };
+
   // --- UI Switching ---
   const showChat = (e) => {
     if (e) e.preventDefault();
@@ -63,6 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update User Display
     userEmailDisplay.textContent = userEmail;
     userAvatar.textContent = userEmail.charAt(0).toUpperCase();
+
+    // Load Chat History
+    loadChatHistory(userEmail);
   };
   
   const hideChat = () => {
@@ -165,21 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Chat Logic ---
-  newChatBtn.addEventListener('click', () => {
-    messages = [];
-    chatMessages.innerHTML = `
-      <div class="flex gap-4 max-w-3xl mx-auto mt-10">
-        <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div class="flex-1 pt-1">
-          <p class="text-gray-200 text-base leading-relaxed">
-            How can I help you today?
-          </p>
-        </div>
-      </div>
-    `;
-  });
+  newChatBtn.addEventListener('click', resetChat);
 
   // Input Auto-Grow
   chatInput.addEventListener('input', () => {
@@ -320,13 +344,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (done) break;
         
         buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\\n');
+        const lines = buffer.split('\n');
         buffer = lines.pop() || ''; // Keep the last incomplete line in buffer
 
         for (const line of lines) {
-          if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+          const trimmedLine = line.trim();
+          if (trimmedLine.startsWith('data: ') && trimmedLine !== 'data: [DONE]') {
             try {
-              const data = JSON.parse(line.slice(6));
+              const data = JSON.parse(trimmedLine.slice(6));
               if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
                 aiFullText += data.choices[0].delta.content;
                 contentDiv.innerHTML = parseMarkdown(aiFullText);
