@@ -15,13 +15,18 @@ try {
   let serviceAccount;
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    initializeApp({
+      credential: cert(serviceAccount)
+    });
   } else {
-    serviceAccount = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
+    // If no service account env var, try to read the local config to get projectId
+    const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
+    initializeApp({
+      projectId: localConfig.projectId
+      // In GCP/AI Studio, Application Default Credentials will automatically provide access
+    });
   }
   
-  initializeApp({
-    credential: cert(serviceAccount)
-  });
   db = getFirestore();
   console.log("Firebase initialized successfully");
 } catch (error) {
@@ -101,10 +106,15 @@ app.post('/api/chat', async (req, res) => {
       }
     }
 
-    const openRouterMessages = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...messages
-    ];
+    const openRouterMessages = [...messages];
+    if (openRouterMessages.length > 0 && openRouterMessages[0].role === 'user') {
+      openRouterMessages[0] = {
+        ...openRouterMessages[0],
+        content: `${SYSTEM_PROMPT}\n\n${openRouterMessages[0].content}`
+      };
+    } else {
+      openRouterMessages.unshift({ role: 'system', content: SYSTEM_PROMPT });
+    }
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',

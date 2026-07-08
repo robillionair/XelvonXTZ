@@ -346,6 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
       appendMessage('model', aiFullText);
     }
     
-    messages.push({ role: 'model', content: aiFullText });
+    messages.push({ role: 'assistant', content: aiFullText });
   });
 });
