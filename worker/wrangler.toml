@@ -1,0 +1,17 @@
+name = "xelvon-xpt-backend"
+main = "src/index.ts"
+compatibility_date = "2024-03-01"
+
+[vars]
+MODEL_ID = "google/gemini-2.5-flash"
+
+[[kv_namespaces]]
+binding = "XELVON_EMAILS"
+id = "YOUR_PRODUCTION_KV_NAMESPACE_ID_HERE"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID_HERE"
+
+# To deploy, run:
+# 1. Create KV Namespace: npx wrangler kv:namespace create XELVON_EMAILS
+# 2. Update the "id" value above with the generated namespace ID
+# 3. Add API Secret: npx wrangler secret put OPENROUTER_API_KEY
+# 4. Deploy: npx wrangler deploy

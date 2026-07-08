@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xelvon XPT — Neural Interface</title>
+  <meta name="description" content="Access Xelvon XPT, the premium proprietary AI assistant interface for Robillionair.com. Initialize neural uplink.">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Xelvon XPT — Neural Interface">
+  <meta property="og:description" content="Access Xelvon XPT, the premium proprietary AI assistant interface for Robillionair.com. Initialize neural uplink.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robillionair.com">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png" fallback="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body class="loading-state">
+
+  <!-- Cyberpunk Background Grid and Scanlines -->
+  <div class="matrix-grid"></div>
+  <div class="scanlines"></div>
+
+  <!-- Main Gated / Splash Screen -->
+  <main id="splash-screen" class="splash-container">
+    <div class="terminal-card glass-panel">
+      <div class="card-header">
+        <div class="header-dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="system-status">SYS.LOC: ROBILLIONAIR.COM</div>
+      </div>
+      
+      <div class="card-body">
+        <div class="logo-area">
+          <div class="logo-icon">⚡</div>
+          <h1 class="logo-title">XELVON <span class="accent-text">XPT</span></h1>
+        </div>
+
+        <div class="loading-prompt">
+          <span id="typewriter-text" class="typewriter"></span>
+          <span class="cursor">|</span>
+        </div>
+
+        <form id="lead-form" class="auth-form" novalidate>
+          <div class="input-group">
+            <label for="user-email">Enter Neural Identifier (Email)</label>
+            <input 
+              type="email" 
+              id="user-email" 
+              placeholder="operator@robillionair.com" 
+              required 
+              autocomplete="email"
+            >
+            <div id="email-error" class="error-msg" aria-live="polite"></div>
+          </div>
+          
+          <button type="submit" id="submit-btn" class="glow-button">
+            <span class="btn-text">Initialize Neural Link</span>
+            <span class="btn-glow"></span>
+          </button>
+          
+          <div class="privacy-note">
+            We will only use this email to grant secure console access. No spam. 
+            View our <a href="privacy.html" class="privacy-link" target="_blank">Privacy Policy</a>.
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Premium Chat Console Screen (Initially Hidden) -->
+  <main id="chat-screen" class="chat-container hidden">
+    <header class="console-nav glass-panel">
+      <div class="logo-area-nav">
+        <span class="nav-bolt">⚡</span>
+        <span class="nav-title">XELVON <span class="nav-accent">XPT</span></span>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot pulsing"></span>
+        <span class="status-label">UPLINK ACTIVE</span>
+      </div>
+    </header>
+
+    <div class="chat-wrapper">
+      <section id="chat-messages" class="messages-panel" aria-label="Conversation Messages">
+        <!-- System greeting will load dynamically or show initially -->
+        <div class="msg-bubble system-msg">
+          <div class="bubble-header">SYSTEM DEPLOYMENT SUCCESSFUL</div>
+          <div class="bubble-content">
+            Welcome to the Xelvon XPT terminal. Secure link established. Enter your queries below.
+          </div>
+        </div>
+      </section>
+
+      <footer class="console-input-area glass-panel">
+        <form id="chat-form" class="input-form">
+          <textarea 
+            id="chat-input" 
+            placeholder="Input command or query..." 
+            rows="1"
+            required
+          ></textarea>
+          <button type="submit" id="send-btn" class="send-glow-button" aria-label="Send message">
+            <svg viewBox="0 0 24 24" class="send-icon">
+              <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

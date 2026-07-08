@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Xelvon XPT</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .privacy-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      line-height: 1.6;
+    }
+    .privacy-card {
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+      color: var(--secondary-accent);
+      text-shadow: 0 0 10px var(--secondary-glow);
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin: 30px 0 15px 0;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 5px;
+    }
+    p {
+      color: var(--text-main);
+      margin-bottom: 15px;
+    }
+    ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 30px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 10px 20px;
+      border-radius: 6px;
+      color: var(--primary-accent);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(176, 38, 255, 0.1);
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+  </style>
+</head>
+<body>
+  <div class="matrix-grid"></div>
+  <div class="scanlines"></div>
+
+  <main class="privacy-container">
+    <a href="index.html" class="back-btn">&lt; Return to Console</a>
+    
+    <div class="privacy-card glass-panel">
+      <div class="card-header">
+        <div class="header-dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="system-status">SECURE_DOC: PRIVACY_POLICY</div>
+      </div>
+      
+      <div class="card-body" style="align-items: flex-start; padding: 30px 0 0 0;">
+        <h1>Privacy Policy</h1>
+        
+        <p>Effective Date: July 8, 2026</p>
+        
+        <p>At Xelvon XPT (hosted on robillionair.com), we respect your privacy. This policy describes how we collect, store, and protect your information when using this interface.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We only collect the minimum required data to provide access to the interface:</p>
+        <ul>
+          <li><strong>Email Address:</strong> Captured strictly to authenticate access and manage system limits.</li>
+          <li><strong>System Signatures:</strong> Basic request parameters (IP, User Agent, Timestamp) are logged when checking requests to prevent abuse and spam.</li>
+        </ul>
+
+        <h2>2. How We Store Your Data</h2>
+        <p>Emails are saved securely in Cloudflare KV storage. We utilize zero third-party analytical integrations, cookie tracking systems, or commercial advertising scripts.</p>
+
+        <h2>3. How We Use Your Data</h2>
+        <p>Your email identifier is strictly used to unlock terminal access. We do not sell, rent, share, or market your personal information to third parties.</p>
+
+        <h2>4. Your Rights</h2>
+        <p>You can request deletion of your email signature at any time. Simply reach out to the site administrator to have your record removed from our KV databases.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
