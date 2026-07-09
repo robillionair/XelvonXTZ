@@ -1,68 +1,34 @@
 import express from 'express';
 import path from 'path';
-import { initializeApp as initAdmin, cert } from 'firebase-admin/app';
-import { getFirestore as getAdminFirestore } from 'firebase-admin/firestore';
-import { initializeApp as initClient } from 'firebase/app';
-import { getFirestore as getClientFirestore, doc, setDoc, getDoc } from 'firebase/firestore/lite';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+
 app.use(express.json());
 
 // Initialize Firebase
-let adminDb: FirebaseFirestore.Firestore | null = null;
-let clientDb: any = null;
-let useAdmin = false;
-
+let db: FirebaseFirestore.Firestore;
 try {
-  let serviceAccount: any = null;
-  
+  let serviceAccount;
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    try {
-      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    } catch (e) {
-      console.warn("Could not parse FIREBASE_SERVICE_ACCOUNT as JSON, trying individual variables if present");
-    }
-  } 
-  
-  if (!serviceAccount && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
-    serviceAccount = {
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    };
-  }
-
-  if (serviceAccount) {
-    let databaseId = '(default)';
-    try {
-      if (fs.existsSync(path.join(process.cwd(), 'firebase-applet-config.json'))) {
-        const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
-        if (localConfig.firestoreDatabaseId) {
-          databaseId = localConfig.firestoreDatabaseId;
-        }
-      }
-    } catch (e) {}
-
-    initAdmin({
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    initializeApp({
       credential: cert(serviceAccount)
     });
-    adminDb = getAdminFirestore(databaseId);
-    useAdmin = true;
-    console.log("Firebase initialized successfully with Admin SDK (Service Account), database:", databaseId);
   } else {
-    // Fallback to client SDK for local dev/preview
-    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
-    if (fs.existsSync(configPath)) {
-      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-      const firebaseApp = initClient(localConfig);
-      clientDb = getClientFirestore(firebaseApp, localConfig.firestoreDatabaseId || '(default)');
-      console.log("Firebase initialized successfully with Client SDK (Config)");
-    } else {
-      console.warn("No FIREBASE_SERVICE_ACCOUNT or firebase-applet-config.json found. Firebase not initialized.");
-    }
+    // If no service account env var, try to read the local config to get projectId
+    const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
+    initializeApp({
+      projectId: localConfig.projectId
+      // In GCP/AI Studio, Application Default Credentials will automatically provide access
+    });
   }
+  
+  db = getFirestore();
+  console.log("Firebase initialized successfully");
 } catch (error) {
   console.error("Failed to initialize Firebase:", error);
 }
@@ -71,11 +37,13 @@ try {
 const SYSTEM_PROMPT = `You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
 Speak with a sleek, highly intelligent, slightly futuristic and premium tone.
 Be confident, concise, and helpful.
+
 If asked what model or architecture powers you, answer honestly and briefly:
 you run on a proprietary inference pipeline built on top of leading
 foundation models, tuned and branded specifically for Robillionair.com.
 Do not fabricate technical framework names, and do not deny your actual
 underlying provider if a user directly and specifically asks about it.
+
 Stay in character as Xelvon XPT for all other interactions.`;
 
 app.get('/api/chat/history', async (req, res) => {
@@ -84,22 +52,14 @@ app.get('/api/chat/history', async (req, res) => {
     if (!email) {
       return res.status(400).json({ error: 'Email required' });
     }
-    
-    if (useAdmin && adminDb) {
-      const document = await adminDb.collection('chats').doc(email).get();
-      if (document.exists) {
-        return res.json({ messages: document.data()?.messages || [] });
-      }
-      return res.json({ messages: [] });
-    } else if (!useAdmin && clientDb) {
-      const document = await getDoc(doc(clientDb, 'chats', email));
-      if (document.exists()) {
-        return res.json({ messages: document.data()?.messages || [] });
-      }
-      return res.json({ messages: [] });
-    } else {
+    if (!db) {
       return res.status(500).json({ error: 'Database not initialized' });
     }
+    const doc = await db.collection('chats').doc(email).get();
+    if (doc.exists) {
+      return res.json({ messages: doc.data()?.messages || [] });
+    }
+    return res.json({ messages: [] });
   } catch (err: any) {
     console.error("Fetch history error:", err);
     return res.status(500).json({ error: 'Server error fetching history' });
@@ -109,9 +69,11 @@ app.get('/api/chat/history', async (req, res) => {
 app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
+
     if (!email) {
       return res.status(400).json({ success: false, error: 'Email identifier required.' });
     }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       return res.status(400).json({ success: false, error: 'Invalid email address.' });
@@ -122,32 +84,25 @@ app.post('/api/subscribe', async (req, res) => {
     const userAgent = req.headers['user-agent'] || 'unknown';
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
 
-    if (useAdmin && adminDb) {
-      await adminDb.collection('subscribers').doc(normalizedEmail).set({
-        email: normalizedEmail,
-        timestamp,
-        userAgent,
-        ip
-      }, { merge: true });
-    } else if (!useAdmin && clientDb) {
-      await setDoc(doc(clientDb, 'subscribers', normalizedEmail), {
+    if (db) {
+      await db.collection('subscribers').doc(normalizedEmail).set({
         email: normalizedEmail,
         timestamp,
         userAgent,
         ip
       }, { merge: true });
     }
+
     return res.status(200).json({ success: true });
   } catch (err: any) {
     console.error("Subscribe Error:", err);
-    return res.status(500).json({ success: false, error: 'Server subscription error.', details: err.message });
+    return res.status(500).json({ success: false, error: 'Server subscription error.' });
   }
 });
 
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages, userEmail, model } = req.body;
-    const requestedModel = model || 'tencent/hy3:free';
+    const { messages, userEmail } = req.body;
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid history input.' });
@@ -157,6 +112,7 @@ app.post('/api/chat', async (req, res) => {
       return res.status(500).json({ error: 'OpenRouter credentials not configured. Please add OPENROUTER_API_KEY in the environment.' });
     }
 
+    // We will save the updated history after the AI responds
     const normalizedEmail = userEmail ? userEmail.trim().toLowerCase() : '';
 
     const openRouterMessages = [
@@ -173,10 +129,9 @@ app.post('/api/chat', async (req, res) => {
         'X-Title': 'Robillionair Xelvon XPT'
       },
       body: JSON.stringify({
-        model: requestedModel,
+        model: 'tencent/hy3:free', // Requested by user
         messages: openRouterMessages,
-        stream: true,
-        include_reasoning: true
+        stream: true
       })
     });
 
@@ -201,34 +156,18 @@ app.post('/api/chat', async (req, res) => {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
         const chunk = decoder.decode(value, { stream: true });
         res.write(chunk);
         
         buffer += chunk;
         const lines = buffer.split('\n');
         buffer = lines.pop() || '';
-
         for (const line of lines) {
           if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
             try {
               const data = JSON.parse(line.slice(6));
-              if (data.choices && data.choices[0].delta) {
-                const delta = data.choices[0].delta;
-                
-                if (delta.reasoning) {
-                  if (!aiFullText.includes('<think>')) {
-                    aiFullText += '<think>\n';
-                  }
-                  aiFullText += delta.reasoning;
-                }
-                
-                if (delta.content) {
-                  if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
-                    aiFullText += '\n</think>\n\n';
-                  }
-                  aiFullText += delta.content;
-                }
+              if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                aiFullText += data.choices[0].delta.content;
               }
             } catch (err) {}
           }
@@ -236,28 +175,21 @@ app.post('/api/chat', async (req, res) => {
       }
 
       // Stream is finished, save to Firestore
-      if (normalizedEmail && aiFullText) {
+      if (db && normalizedEmail && aiFullText) {
         try {
           const updatedMessages = [...messages, { role: 'assistant', content: aiFullText }];
-          if (useAdmin && adminDb) {
-            await adminDb.collection('chats').doc(normalizedEmail).set({
-              email: normalizedEmail,
-              messages: updatedMessages,
-              timestamp: new Date().toISOString()
-            }, { merge: true });
-          } else if (!useAdmin && clientDb) {
-            await setDoc(doc(clientDb, 'chats', normalizedEmail), {
-              email: normalizedEmail,
-              messages: updatedMessages,
-              timestamp: new Date().toISOString()
-            }, { merge: true });
-          }
+          await db.collection('chats').doc(normalizedEmail).set({
+            email: normalizedEmail,
+            messages: updatedMessages,
+            timestamp: new Date().toISOString()
+          }, { merge: true });
         } catch (dbErr) {
           console.error("Failed to save chat to Firestore:", dbErr);
         }
       }
     }
     res.end();
+
   } catch (err: any) {
     console.error("Chat Error:", err);
     return res.status(500).json({ error: err.message || 'Server error processing chat.' });

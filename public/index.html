@@ -108,7 +108,7 @@
     ::-webkit-scrollbar-thumb:hover { background: #555; }
   </style>
 </head>
-<body class="bg-apple-black text-white h-[100dvh] flex flex-col overflow-hidden font-sans">
+<body class="bg-apple-black text-white h-screen flex flex-col overflow-hidden font-sans">
   
   <!-- Hidden SEO text -->
   <div class="sr-only" aria-hidden="true">
@@ -305,55 +305,6 @@
       </div>
     </section>
 
-    <!-- Founder Story Section -->
-    <section id="founder-story" class="py-32 px-6 bg-[#0a0a0c] relative z-10 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col lg:flex-row gap-16 items-start">
-          <div class="lg:w-1/3 flex flex-col items-center lg:items-start lg:sticky lg:top-32 scroll-anim">
-            <div class="w-64 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl relative mb-8">
-              <img src="/assets/images/founder.jpg" alt="Robin-Kevin Vettik" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" onerror="this.src='https://via.placeholder.com/400x500/111/444?text=Founder'">
-              <div class="absolute inset-0 bg-blue-500/10 mix-blend-overlay"></div>
-            </div>
-            <div class="text-center lg:text-left">
-              <p class="text-white font-semibold text-2xl">Robin-Kevin Vettik</p>
-              <p class="text-blue-400 text-sm tracking-wide uppercase mt-2">Founder & Creator of Xelvon XTP <br><span class="text-gray-500">@ Robillionair</span></p>
-            </div>
-          </div>
-          
-          <div class="lg:w-2/3 scroll-anim delay-1">
-            <h2 class="text-3xl md:text-5xl font-display font-semibold tracking-tight text-white mb-12">The Story Behind Xelvon XTP</h2>
-            <div class="space-y-8 text-lg text-gray-300 leading-relaxed font-sans">
-              <p class="text-2xl text-white font-medium leading-snug">Every technological revolution begins with a single conviction.</p>
-              
-              <p>Mine was that artificial intelligence should never require businesses to sacrifice what matters most—their privacy, their intellectual property, and their competitive advantage.</p>
-              
-              <p>For years, I watched companies hesitate to embrace AI because their most valuable asset—their data—had to leave their control. I believed there had to be another way.</p>
-              
-              <p>That belief became <span class="text-white font-semibold">Xelvon XTP</span>.</p>
-              
-              <p>Built from countless hours of engineering, experimentation, and relentless refinement, Xelvon XTP was created with one purpose: to bring enterprise-grade artificial intelligence directly to organizations while allowing them to maintain ownership and control of their information.</p>
-              
-              <p>This beta is only a glimpse of what is coming.</p>
-              
-              <p>The future of Robillionair extends far beyond today's capabilities. It is being designed as an evolving intelligence platform that will help organizations automate operations, accelerate innovation, enhance decision-making, and unlock entirely new possibilities—all while keeping privacy and security at its core.</p>
-              
-              <div class="p-8 rounded-2xl bg-white/5 border border-white/10 my-10">
-                <p class="text-xl text-white italic mb-0">"The greatest technologies are not those that demand trust. They are the ones that earn it."</p>
-              </div>
-              
-              <p>Xelvon XTP represents the beginning of a much larger journey—one where AI works alongside humanity without compromising the data, ideas, and innovations that define every business.</p>
-              
-              <p>This is not the destination. It is the first chapter.</p>
-              
-              <blockquote class="mt-12 border-l-4 border-blue-500 pl-6 italic text-xl text-gray-400">
-                "The future of AI isn't measured by how much data it collects, but by how much trust it preserves.”
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- Floating CTA Bar -->
@@ -368,7 +319,7 @@
 
   <!-- EMAIL CAPTURE MODAL -->
   <div id="email-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 sm:p-10 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300" id="email-modal-content">
+    <div class="glass-card rounded-3xl p-10 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300" id="email-modal-content">
       <div class="flex justify-between items-start mb-6">
         <h3 class="text-2xl font-semibold text-white">Access Xelvon XPT</h3>
         <button id="close-modal-btn" class="text-gray-400 hover:text-white p-1">
@@ -392,12 +343,7 @@
   <main id="chat-screen" class="hidden flex-1 overflow-hidden bg-apple-gray flex h-full w-full z-40 absolute inset-0">
     <!-- Sidebar -->
     <aside class="w-64 bg-[#171717] border-r border-[#2d2d2d] hidden md:flex flex-col flex-shrink-0">
-      <div class="p-4 flex flex-col gap-3">
-        <select id="desktop-model-select" class="w-full bg-[#2d2d2d] text-gray-300 border border-gray-700/50 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gray-500 transition-colors">
-          <option value="tencent/hy3:free">Thinking Mode (Hy3)</option>
-          <option value="google/gemini-2.5-flash">Fast Mode (Flash)</option>
-          <option value="google/gemini-2.5-pro">Pro Mode (Pro)</option>
-        </select>
+      <div class="p-4">
         <button id="new-chat-btn" class="w-full flex items-center gap-2 bg-transparent hover:bg-[#2d2d2d] text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
           New chat
@@ -406,7 +352,7 @@
       <div class="flex-1 overflow-y-auto p-4">
         <div class="text-xs font-semibold text-gray-500 mb-3 px-2">Today</div>
         <div class="space-y-1" id="chat-history-sidebar">
-          <button class="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-[#2d2d2d] rounded-lg truncate transition-colors bg-[#2d2d2d]">Current Session</button>
+          <button class="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-[#2d2d2d] rounded-lg truncate transition-colors">Architecture discussion</button>
         </div>
       </div>
       <div class="p-4 border-t border-[#2d2d2d] flex items-center gap-3">
@@ -419,26 +365,19 @@
     </aside>
 
     <!-- Main Chat Area -->
-    <section class="flex-1 flex flex-col relative h-[100dvh] w-full bg-[#212121]">
+    <section class="flex-1 flex flex-col relative h-full w-full bg-[#212121]">
       <!-- Mobile Header -->
-      <div class="md:hidden flex items-center justify-between p-4 border-b border-[#2d2d2d] bg-[#171717] shrink-0">
+      <div class="md:hidden flex items-center justify-between p-4 border-b border-[#2d2d2d] bg-[#171717]">
         <button class="text-gray-300">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
-        <div class="flex flex-col items-center">
-          <span class="text-white font-medium">Xelvon XPT</span>
-          <select id="mobile-model-select" class="bg-transparent text-gray-400 text-xs text-center focus:outline-none appearance-none mt-0.5">
-            <option value="tencent/hy3:free">Thinking Mode (Hy3)</option>
-            <option value="google/gemini-2.5-flash">Fast Mode (Flash)</option>
-            <option value="google/gemini-2.5-pro">Pro Mode (Pro)</option>
-          </select>
-        </div>
+        <span class="text-white font-medium">Xelvon XPT</span>
         <button id="exit-chat-mobile-btn" class="text-gray-300">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7"/></svg>
         </button>
       </div>
 
-      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 scroll-smooth">
+      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 pb-40">
         <!-- ChatGPT-like Initial Message -->
         <div class="flex gap-4 max-w-3xl mx-auto mt-10">
           <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
@@ -453,7 +392,7 @@
       </div>
 
       <!-- Input Area -->
-      <div class="shrink-0 w-full bg-[#212121] pt-2 pb-6 sm:pb-8 px-4 sm:px-6 relative">
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#212121] via-[#212121] to-transparent pt-6 pb-8 px-4 sm:px-6">
         <div class="max-w-3xl mx-auto relative">
           <form id="chat-form" class="relative flex items-center bg-[#2f2f2f] rounded-2xl border border-gray-600/50 shadow-lg focus-within:border-gray-500 transition-colors">
             <textarea id="chat-input" rows="1" class="w-full pl-5 pr-14 py-4 bg-transparent text-white placeholder-gray-400 focus:outline-none resize-none max-h-48 overflow-y-auto text-base" placeholder="Message Xelvon XPT..."></textarea>

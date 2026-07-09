@@ -203,23 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Chat Logic ---
-  let selectedModel = 'tencent/hy3:free';
-  const mobileModelSelect = document.getElementById('mobile-model-select');
-  const desktopModelSelect = document.getElementById('desktop-model-select');
-
-  if (mobileModelSelect) {
-    mobileModelSelect.addEventListener('change', (e) => {
-      selectedModel = e.target.value;
-      if (desktopModelSelect) desktopModelSelect.value = selectedModel;
-    });
-  }
-  if (desktopModelSelect) {
-    desktopModelSelect.addEventListener('change', (e) => {
-      selectedModel = e.target.value;
-      if (mobileModelSelect) mobileModelSelect.value = selectedModel;
-    });
-  }
-
   newChatBtn.addEventListener('click', resetChat);
 
   // Input Auto-Grow
@@ -239,14 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Markdown Parser
   function parseMarkdown(text) {
     let html = text
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      
-    // Handle thinking process
-    html = html.replace(/&lt;think&gt;([\s\S]*?)(?:&lt;\/think&gt;|$)/gi, function(match, thinkContent) {
-       return `</p><div class="bg-gray-800/30 border border-gray-700/50 rounded-xl p-4 my-4 text-sm text-gray-400"><div class="flex items-center gap-2 mb-2 text-gray-500 font-semibold uppercase tracking-wider text-xs"><svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg> Thinking Process</div><div class="font-mono whitespace-pre-wrap">${thinkContent}</div></div><p class="mt-4">`;
-    });
-
-    html = html
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
       .replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold mt-4 mb-2 text-white">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold mt-5 mb-3 text-white">$1</h2>')
       .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mt-6 mb-4 text-white">$1</h1>')
@@ -337,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages, userEmail, model: selectedModel })
+        body: JSON.stringify({ messages, userEmail })
       });
 
       removeTypingIndicator();
@@ -376,20 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (trimmedLine.startsWith('data: ') && trimmedLine !== 'data: [DONE]') {
             try {
               const data = JSON.parse(trimmedLine.slice(6));
-              if (data.choices && data.choices[0].delta) {
-                const delta = data.choices[0].delta;
-                if (delta.reasoning) {
-                  if (!aiFullText.includes('<think>')) {
-                    aiFullText += '<think>\n';
-                  }
-                  aiFullText += delta.reasoning;
-                }
-                if (delta.content) {
-                  if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
-                    aiFullText += '\n</think>\n\n';
-                  }
-                  aiFullText += delta.content;
-                }
+              if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                aiFullText += data.choices[0].delta.content;
                 contentDiv.innerHTML = parseMarkdown(aiFullText);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
               }
