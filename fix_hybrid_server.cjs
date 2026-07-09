@@ -1,9 +1,11 @@
-import express from 'express';
+const fs = require('fs');
+
+const code = `import express from 'express';
 import path from 'path';
 import { initializeApp as initAdmin, cert } from 'firebase-admin/app';
 import { getFirestore as getAdminFirestore } from 'firebase-admin/firestore';
 import { initializeApp as initClient } from 'firebase/app';
-import { getFirestore as getClientFirestore, doc, setDoc, getDoc } from 'firebase/firestore/lite';
+import { getFirestore as getClientFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import fs from 'fs';
 
 const app = express();
@@ -51,7 +53,7 @@ try {
 }
 
 // System prompt
-const SYSTEM_PROMPT = `You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
+const SYSTEM_PROMPT = \`You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
 Speak with a sleek, highly intelligent, slightly futuristic and premium tone.
 Be confident, concise, and helpful.
 If asked what model or architecture powers you, answer honestly and briefly:
@@ -59,7 +61,7 @@ you run on a proprietary inference pipeline built on top of leading
 foundation models, tuned and branded specifically for Robillionair.com.
 Do not fabricate technical framework names, and do not deny your actual
 underlying provider if a user directly and specifically asks about it.
-Stay in character as Xelvon XPT for all other interactions.`;
+Stay in character as Xelvon XPT for all other interactions.\`;
 
 app.get('/api/chat/history', async (req, res) => {
   try {
@@ -95,7 +97,7 @@ app.post('/api/subscribe', async (req, res) => {
     if (!email) {
       return res.status(400).json({ success: false, error: 'Email identifier required.' });
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       return res.status(400).json({ success: false, error: 'Invalid email address.' });
     }
@@ -150,7 +152,7 @@ app.post('/api/chat', async (req, res) => {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': \`Bearer \${process.env.OPENROUTER_API_KEY}\`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://robillionair.com',
         'X-Title': 'Robillionair Xelvon XPT'
@@ -189,7 +191,7 @@ app.post('/api/chat', async (req, res) => {
         res.write(chunk);
         
         buffer += chunk;
-        const lines = buffer.split('\n');
+        const lines = buffer.split('\\n');
         buffer = lines.pop() || '';
 
         for (const line of lines) {
@@ -201,14 +203,14 @@ app.post('/api/chat', async (req, res) => {
                 
                 if (delta.reasoning) {
                   if (!aiFullText.includes('<think>')) {
-                    aiFullText += '<think>\n';
+                    aiFullText += '<think>\\n';
                   }
                   aiFullText += delta.reasoning;
                 }
                 
                 if (delta.content) {
                   if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
-                    aiFullText += '\n</think>\n\n';
+                    aiFullText += '\\n</think>\\n\\n';
                   }
                   aiFullText += delta.content;
                 }
@@ -251,5 +253,8 @@ app.post('/api/chat', async (req, res) => {
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(\`Server running on port \${PORT}\`);
 });
+`;
+
+fs.writeFileSync('server.ts', code);

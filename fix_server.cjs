@@ -1,9 +1,9 @@
-import express from 'express';
+const fs = require('fs');
+
+const code = `import express from 'express';
 import path from 'path';
-import { initializeApp as initAdmin, cert } from 'firebase-admin/app';
-import { getFirestore as getAdminFirestore } from 'firebase-admin/firestore';
-import { initializeApp as initClient } from 'firebase/app';
-import { getFirestore as getClientFirestore, doc, setDoc, getDoc } from 'firebase/firestore/lite';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
 
 const app = express();
@@ -11,14 +11,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Initialize Firebase
-let adminDb: FirebaseFirestore.Firestore | null = null;
-let clientDb: any = null;
-let useAdmin = false;
-
+let db: FirebaseFirestore.Firestore | null = null;
 try {
+  let serviceAccount;
+  let databaseId = '(default)';
+  
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    let databaseId = '(default)';
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
     try {
       if (fs.existsSync(path.join(process.cwd(), 'firebase-applet-config.json'))) {
         const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
@@ -28,30 +27,33 @@ try {
       }
     } catch (e) {}
 
-    initAdmin({
+    initializeApp({
       credential: cert(serviceAccount)
     });
-    adminDb = getAdminFirestore(databaseId);
-    useAdmin = true;
-    console.log("Firebase initialized successfully with Admin SDK (Service Account), database:", databaseId);
+    db = getFirestore(databaseId);
+    console.log("Firebase initialized successfully with service account, database:", databaseId);
   } else {
-    // Fallback to client SDK for local dev/preview
     const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
     if (fs.existsSync(configPath)) {
       const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-      const firebaseApp = initClient(localConfig);
-      clientDb = getClientFirestore(firebaseApp, localConfig.firestoreDatabaseId || '(default)');
-      console.log("Firebase initialized successfully with Client SDK (Config)");
+      if (localConfig.firestoreDatabaseId) {
+        databaseId = localConfig.firestoreDatabaseId;
+      }
+      initializeApp({
+        projectId: localConfig.projectId
+      });
+      db = getFirestore(databaseId);
+      console.log("Firebase initialized successfully with config, database:", databaseId);
     } else {
       console.warn("No FIREBASE_SERVICE_ACCOUNT or firebase-applet-config.json found. Firebase not initialized.");
     }
   }
 } catch (error) {
-  console.error("Failed to initialize Firebase:", error);
+  console.error("Failed to initialize Firebase Admin:", error);
 }
 
 // System prompt
-const SYSTEM_PROMPT = `You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
+const SYSTEM_PROMPT = \`You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
 Speak with a sleek, highly intelligent, slightly futuristic and premium tone.
 Be confident, concise, and helpful.
 If asked what model or architecture powers you, answer honestly and briefly:
@@ -59,7 +61,7 @@ you run on a proprietary inference pipeline built on top of leading
 foundation models, tuned and branded specifically for Robillionair.com.
 Do not fabricate technical framework names, and do not deny your actual
 underlying provider if a user directly and specifically asks about it.
-Stay in character as Xelvon XPT for all other interactions.`;
+Stay in character as Xelvon XPT for all other interactions.\`;
 
 app.get('/api/chat/history', async (req, res) => {
   try {
@@ -67,22 +69,15 @@ app.get('/api/chat/history', async (req, res) => {
     if (!email) {
       return res.status(400).json({ error: 'Email required' });
     }
-    
-    if (useAdmin && adminDb) {
-      const document = await adminDb.collection('chats').doc(email).get();
-      if (document.exists) {
-        return res.json({ messages: document.data()?.messages || [] });
-      }
-      return res.json({ messages: [] });
-    } else if (!useAdmin && clientDb) {
-      const document = await getDoc(doc(clientDb, 'chats', email));
-      if (document.exists()) {
-        return res.json({ messages: document.data()?.messages || [] });
-      }
-      return res.json({ messages: [] });
-    } else {
+    if (!db) {
       return res.status(500).json({ error: 'Database not initialized' });
     }
+    
+    const doc = await db.collection('chats').doc(email).get();
+    if (doc.exists) {
+      return res.json({ messages: doc.data()?.messages || [] });
+    }
+    return res.json({ messages: [] });
   } catch (err: any) {
     console.error("Fetch history error:", err);
     return res.status(500).json({ error: 'Server error fetching history' });
@@ -95,7 +90,7 @@ app.post('/api/subscribe', async (req, res) => {
     if (!email) {
       return res.status(400).json({ success: false, error: 'Email identifier required.' });
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       return res.status(400).json({ success: false, error: 'Invalid email address.' });
     }
@@ -105,15 +100,8 @@ app.post('/api/subscribe', async (req, res) => {
     const userAgent = req.headers['user-agent'] || 'unknown';
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
 
-    if (useAdmin && adminDb) {
-      await adminDb.collection('subscribers').doc(normalizedEmail).set({
-        email: normalizedEmail,
-        timestamp,
-        userAgent,
-        ip
-      }, { merge: true });
-    } else if (!useAdmin && clientDb) {
-      await setDoc(doc(clientDb, 'subscribers', normalizedEmail), {
+    if (db) {
+      await db.collection('subscribers').doc(normalizedEmail).set({
         email: normalizedEmail,
         timestamp,
         userAgent,
@@ -140,6 +128,7 @@ app.post('/api/chat', async (req, res) => {
       return res.status(500).json({ error: 'OpenRouter credentials not configured. Please add OPENROUTER_API_KEY in the environment.' });
     }
 
+    // We will save the updated history after the AI responds
     const normalizedEmail = userEmail ? userEmail.trim().toLowerCase() : '';
 
     const openRouterMessages = [
@@ -150,7 +139,7 @@ app.post('/api/chat', async (req, res) => {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': \`Bearer \${process.env.OPENROUTER_API_KEY}\`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://robillionair.com',
         'X-Title': 'Robillionair Xelvon XPT'
@@ -189,7 +178,7 @@ app.post('/api/chat', async (req, res) => {
         res.write(chunk);
         
         buffer += chunk;
-        const lines = buffer.split('\n');
+        const lines = buffer.split('\\n');
         buffer = lines.pop() || '';
 
         for (const line of lines) {
@@ -201,14 +190,14 @@ app.post('/api/chat', async (req, res) => {
                 
                 if (delta.reasoning) {
                   if (!aiFullText.includes('<think>')) {
-                    aiFullText += '<think>\n';
+                    aiFullText += '<think>\\n';
                   }
                   aiFullText += delta.reasoning;
                 }
                 
                 if (delta.content) {
                   if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
-                    aiFullText += '\n</think>\n\n';
+                    aiFullText += '\\n</think>\\n\\n';
                   }
                   aiFullText += delta.content;
                 }
@@ -219,22 +208,14 @@ app.post('/api/chat', async (req, res) => {
       }
 
       // Stream is finished, save to Firestore
-      if (normalizedEmail && aiFullText) {
+      if (db && normalizedEmail && aiFullText) {
         try {
           const updatedMessages = [...messages, { role: 'assistant', content: aiFullText }];
-          if (useAdmin && adminDb) {
-            await adminDb.collection('chats').doc(normalizedEmail).set({
-              email: normalizedEmail,
-              messages: updatedMessages,
-              timestamp: new Date().toISOString()
-            }, { merge: true });
-          } else if (!useAdmin && clientDb) {
-            await setDoc(doc(clientDb, 'chats', normalizedEmail), {
-              email: normalizedEmail,
-              messages: updatedMessages,
-              timestamp: new Date().toISOString()
-            }, { merge: true });
-          }
+          await db.collection('chats').doc(normalizedEmail).set({
+            email: normalizedEmail,
+            messages: updatedMessages,
+            timestamp: new Date().toISOString()
+          }, { merge: true });
         } catch (dbErr) {
           console.error("Failed to save chat to Firestore:", dbErr);
         }
@@ -251,5 +232,8 @@ app.post('/api/chat', async (req, res) => {
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(\`Server running on port \${PORT}\`);
 });
+`;
+
+fs.writeFileSync('server.ts', code);
