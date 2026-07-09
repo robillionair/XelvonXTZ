@@ -16,8 +16,25 @@ let clientDb: any = null;
 let useAdmin = false;
 
 try {
+  let serviceAccount: any = null;
+  
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    try {
+      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    } catch (e) {
+      console.warn("Could not parse FIREBASE_SERVICE_ACCOUNT as JSON, trying individual variables if present");
+    }
+  } 
+  
+  if (!serviceAccount && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
+    serviceAccount = {
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    };
+  }
+
+  if (serviceAccount) {
     let databaseId = '(default)';
     try {
       if (fs.existsSync(path.join(process.cwd(), 'firebase-applet-config.json'))) {
