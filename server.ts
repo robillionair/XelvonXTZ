@@ -1,34 +1,26 @@
 import express from 'express';
 import path from 'path';
-import { initializeApp, cert } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import fs from 'fs';
 
 const app = express();
 const PORT = 3000;
-
 app.use(express.json());
 
 // Initialize Firebase
-let db: FirebaseFirestore.Firestore;
+let db: any;
 try {
-  let serviceAccount;
-  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    initializeApp({
-      credential: cert(serviceAccount)
-    });
-  } else {
-    // If no service account env var, try to read the local config to get projectId
-    const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
-    initializeApp({
-      projectId: localConfig.projectId
-      // In GCP/AI Studio, Application Default Credentials will automatically provide access
-    });
-  }
+  let databaseId = '(default)';
+  const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
   
-  db = getFirestore();
-  console.log("Firebase initialized successfully");
+  if (localConfig.firestoreDatabaseId) {
+    databaseId = localConfig.firestoreDatabaseId;
+  }
+
+  const firebaseApp = initializeApp(localConfig);
+  db = getFirestore(firebaseApp, databaseId);
+  console.log("Firebase initialized successfully with database:", databaseId);
 } catch (error) {
   console.error("Failed to initialize Firebase:", error);
 }
@@ -55,9 +47,9 @@ app.get('/api/chat/history', async (req, res) => {
     if (!db) {
       return res.status(500).json({ error: 'Database not initialized' });
     }
-    const doc = await db.collection('chats').doc(email).get();
-    if (doc.exists) {
-      return res.json({ messages: doc.data()?.messages || [] });
+    const chatDoc = await getDoc(doc(db, 'chats', email));
+    if (chatDoc.exists()) {
+      return res.json({ messages: chatDoc.data()?.messages || [] });
     }
     return res.json({ messages: [] });
   } catch (err: any) {
@@ -85,7 +77,7 @@ app.post('/api/subscribe', async (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
 
     if (db) {
-      await db.collection('subscribers').doc(normalizedEmail).set({
+      await setDoc(doc(db, 'subscribers', normalizedEmail), {
         email: normalizedEmail,
         timestamp,
         userAgent,
@@ -96,13 +88,14 @@ app.post('/api/subscribe', async (req, res) => {
     return res.status(200).json({ success: true });
   } catch (err: any) {
     console.error("Subscribe Error:", err);
-    return res.status(500).json({ success: false, error: 'Server subscription error.' });
+    return res.status(500).json({ success: false, error: 'Server subscription error.', details: err.message });
   }
 });
 
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages, userEmail } = req.body;
+    const { messages, userEmail, model } = req.body;
+    const requestedModel = model || 'tencent/hy3:free';
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid history input.' });
@@ -129,9 +122,10 @@ app.post('/api/chat', async (req, res) => {
         'X-Title': 'Robillionair Xelvon XPT'
       },
       body: JSON.stringify({
-        model: 'tencent/hy3:free', // Requested by user
+        model: requestedModel,
         messages: openRouterMessages,
-        stream: true
+        stream: true,
+        include_reasoning: true
       })
     });
 
@@ -166,8 +160,20 @@ app.post('/api/chat', async (req, res) => {
           if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
             try {
               const data = JSON.parse(line.slice(6));
-              if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
-                aiFullText += data.choices[0].delta.content;
+              if (data.choices && data.choices[0].delta) {
+                const delta = data.choices[0].delta;
+                if (delta.reasoning) {
+                  if (!aiFullText.includes('<think>')) {
+                    aiFullText += '<think>\n';
+                  }
+                  aiFullText += delta.reasoning;
+                }
+                if (delta.content) {
+                  if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
+                    aiFullText += '\n</think>\n\n';
+                  }
+                  aiFullText += delta.content;
+                }
               }
             } catch (err) {}
           }
@@ -178,7 +184,7 @@ app.post('/api/chat', async (req, res) => {
       if (db && normalizedEmail && aiFullText) {
         try {
           const updatedMessages = [...messages, { role: 'assistant', content: aiFullText }];
-          await db.collection('chats').doc(normalizedEmail).set({
+          await setDoc(doc(db, 'chats', normalizedEmail), {
             email: normalizedEmail,
             messages: updatedMessages,
             timestamp: new Date().toISOString()

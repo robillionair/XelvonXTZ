@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+  .container { flex: 1; overflow-y: auto; background: #eee; }
+  .box { height: 1000px; background: lightblue; }
+  .anim { opacity: 0; transition: opacity 1s; }
+  .is-visible { opacity: 1; background: pink; }
+</style>
+</head>
+<body>
+  <div class="container" id="c">
+    <div class="box">Scroll down</div>
+    <div class="box anim" id="target">Target</div>
+  </div>
+  <script>
+    const target = document.getElementById('target');
+    const c = document.getElementById('c');
+    c.addEventListener('scroll', () => {
+      const top = target.getBoundingClientRect().top;
+      if (top < window.innerHeight * 0.9) {
+        target.classList.add('is-visible');
+      }
+    });
+  </script>
+</body>
+</html>
