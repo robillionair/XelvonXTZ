@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
+
 // Initialize Firebase
 let db: FirebaseFirestore.Firestore | null = null;
 
@@ -34,7 +35,13 @@ try {
     initializeApp({
       credential: cert(serviceAccount)
     });
-    db = getFirestore();
+    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
+    if (fs.existsSync(configPath)) {
+      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      db = localConfig.firestoreDatabaseId ? getFirestore(localConfig.firestoreDatabaseId) : getFirestore();
+    } else {
+      db = getFirestore();
+    }
     console.log("Firebase initialized successfully with Admin SDK (Service Account)");
   } else {
     // Fallback to local config / ADC

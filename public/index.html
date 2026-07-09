@@ -115,23 +115,23 @@
     Robin-kevin Vettik is working on the worlds first privacy filter for Ai so companies can use cloud Ai without giving their data away and keeping their work private.
   </div>
 
-  <!-- Navbar -->
-  <nav class="glass-nav absolute top-0 w-full z-50 px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center space-x-2">
-      <span class="text-xl font-semibold tracking-tight">Robillionair</span>
-    </div>
-    <div class="flex items-center space-x-6 text-sm font-medium">
-      <a href="#overview" class="text-gray-300 hover:text-white transition-colors">Overview</a>
-      <a href="#performance" class="text-gray-300 hover:text-white transition-colors">Performance</a>
-      <a href="#architecture" class="text-gray-300 hover:text-white transition-colors">Architecture</a>
-      <button id="nav-launch-btn" class="bg-white text-black px-4 py-1.5 rounded-full hover:scale-105 transition-transform">
-        Try Xelvon XPT
-      </button>
-    </div>
-  </nav>
-
   <!-- LANDING PAGE -->
-  <main id="splash-screen" class="flex-1 overflow-y-auto scroll-smooth">
+  <main id="splash-screen" class="flex-1 overflow-y-auto scroll-smooth relative">
+    
+    <!-- Navbar -->
+    <nav class="glass-nav absolute top-0 w-full z-50 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="text-lg sm:text-xl font-semibold tracking-tight">Robillionair</span>
+      </div>
+      <div class="flex items-center space-x-6 text-sm font-medium">
+        <a href="#overview" class="text-gray-300 hover:text-white transition-colors hidden sm:block">Overview</a>
+        <a href="#performance" class="text-gray-300 hover:text-white transition-colors hidden sm:block">Performance</a>
+        <a href="#architecture" class="text-gray-300 hover:text-white transition-colors hidden sm:block">Architecture</a>
+        <button id="nav-launch-btn" class="bg-white text-black px-4 py-1.5 rounded-full hover:scale-105 transition-transform text-sm sm:text-base">
+          Try Xelvon XPT
+        </button>
+      </div>
+    </nav>
     
     <!-- Hero Section -->
     <section class="min-h-screen flex flex-col items-center justify-center pt-20 relative overflow-hidden">
@@ -357,20 +357,21 @@
   </main>
 
   <!-- Floating CTA Bar -->
-  <div id="floating-cta" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] translate-y-32 opacity-0 transition-all duration-500 ease-out pointer-events-none">
-    <div class="glass-card rounded-full px-6 py-3 flex items-center gap-6 shadow-2xl pointer-events-auto">
+  <div id="floating-cta" class="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-[60] translate-y-32 opacity-0 transition-all duration-500 ease-out pointer-events-none w-[90%] sm:w-auto max-w-sm sm:max-w-none">
+    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 flex items-center justify-between sm:justify-center gap-3 sm:gap-6 shadow-2xl pointer-events-auto">
+      <span class="text-xs sm:text-sm font-medium text-white block sm:hidden">Ready to join?</span>
       <span class="text-sm font-medium text-white hidden sm:block">Experience the next generation.</span>
-      <button id="floating-launch-btn" class="bg-white text-black px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform whitespace-nowrap">
+      <button id="floating-launch-btn" class="bg-white text-black px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold hover:scale-105 transition-transform whitespace-nowrap">
         Try Xelvon XPT
       </button>
     </div>
   </div>
 
   <!-- EMAIL CAPTURE MODAL -->
-  <div id="email-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 sm:p-10 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300" id="email-modal-content">
-      <div class="flex justify-between items-start mb-6">
-        <h3 class="text-2xl font-semibold text-white">Access Xelvon XPT</h3>
+  <div id="email-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300 p-4">
+    <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-md w-full transform scale-95 transition-transform duration-300" id="email-modal-content">
+      <div class="flex justify-between items-start mb-4 sm:mb-6">
+        <h3 class="text-xl sm:text-2xl font-semibold text-white">Access Xelvon XPT</h3>
         <button id="close-modal-btn" class="text-gray-400 hover:text-white p-1">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -419,7 +420,7 @@
     </aside>
 
     <!-- Main Chat Area -->
-    <section class="flex-1 flex flex-col relative h-[100dvh] w-full bg-[#212121]">
+    <section class="flex-1 flex flex-col relative h-full w-full bg-[#212121]">
       <!-- Mobile Header -->
       <div class="md:hidden flex items-center justify-between p-4 border-b border-[#2d2d2d] bg-[#171717] shrink-0">
         <button class="text-gray-300">
