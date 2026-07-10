@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=20260710-2">
+  <link rel="stylesheet" href="/style.css?v=20260710-3">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Robillionair">
@@ -278,18 +278,26 @@
       </div>
     </aside>
     <section class="chat-main">
+      <div id="robot-companion" class="robot-companion" aria-hidden="true">
+        <span id="robot-companion-status" class="robot-companion-status">Ready</span>
+        <div class="companion-antenna"><i></i></div>
+        <div class="companion-head"><div class="companion-face"><i class="companion-eye companion-eye-left"></i><i class="companion-eye companion-eye-right"></i><span class="companion-mouth"></span></div></div>
+        <div class="companion-body"><i class="companion-arm companion-arm-left"></i><i class="companion-arm companion-arm-right"></i><span class="companion-core"></span></div>
+        <i class="companion-leg companion-leg-left"></i><i class="companion-leg companion-leg-right"></i>
+        <span class="companion-shadow"></span>
+      </div>
       <div class="chat-mobile-header">
         <span>XELVON / XPT</span>
         <select id="mobile-model-select"><option value="tencent/hy3:free">Thinking</option><option value="google/gemini-2.5-flash">Fast</option><option value="google/gemini-2.5-pro">Pro</option></select>
         <button id="exit-chat-mobile-btn" type="button" aria-label="Exit Xelvon">↗</button>
       </div>
       <div id="chat-messages" class="chat-messages">
-        <div class="chat-message assistant-message"><div class="assistant-avatar">X</div><div class="message-copy"><p>The intelligence layer is ready. What are we solving today?</p></div></div>
+        <div class="chat-message assistant-message"><div class="robot-avatar" aria-hidden="true"><div class="robot-antenna"><i></i></div><div class="robot-head"><i class="robot-ear robot-ear-left"></i><i class="robot-ear robot-ear-right"></i><div class="robot-face"><i class="robot-eye robot-eye-left"></i><i class="robot-eye robot-eye-right"></i></div><span class="robot-mouth"></span></div><span class="robot-shadow"></span></div><div class="message-copy"><p>The intelligence layer is ready. What are we solving today?</p></div></div>
       </div>
       <div class="chat-composer"><div><form id="chat-form"><textarea id="chat-input" rows="1" placeholder="Ask Xelvon anything..."></textarea><button type="submit" id="send-btn" disabled>↑</button></form><small>Xelvon can make mistakes. Verify important information.</small></div></div>
     </section>
   </main>
 
-  <script src="/app.js?v=20260710-2"></script>
+  <script src="/app.js?v=20260710-3"></script>
 </body>
 </html>

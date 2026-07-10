@@ -29,6 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const API_BASE = window.location.origin;
   let messages = [];
   let userEmail = sessionStorage.getItem('xelvon-email') || '';
+  const robotAvatarMarkup = `
+    <div class="robot-avatar" aria-hidden="true">
+      <div class="robot-antenna"><i></i></div>
+      <div class="robot-head">
+        <i class="robot-ear robot-ear-left"></i><i class="robot-ear robot-ear-right"></i>
+        <div class="robot-face"><i class="robot-eye robot-eye-left"></i><i class="robot-eye robot-eye-right"></i></div>
+        <span class="robot-mouth"></span>
+      </div>
+      <span class="robot-shadow"></span>
+    </div>`;
+
+  const setRobotState = (state = 'idle') => {
+    chatScreen.classList.remove('is-listening', 'is-thinking', 'is-answering');
+    if (state !== 'idle') chatScreen.classList.add(`is-${state}`);
+    chatScreen.dataset.robotState = state;
+    const companionStatus = document.getElementById('robot-companion-status');
+    if (companionStatus) {
+      companionStatus.textContent = ({ idle: 'Ready', listening: 'I’m listening', thinking: 'Thinking…', answering: 'Got it!' })[state] || 'Ready';
+    }
+  };
 
   // --- Modal Logic ---
   const openModal = () => {
@@ -73,10 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     messages = [];
     chatMessages.innerHTML = `
       <div class="chat-message assistant-message">
-        <div class="assistant-avatar">X</div>
+        ${robotAvatarMarkup}
         <div class="message-copy"><p>The intelligence layer is ready. What are we solving today?</p></div>
       </div>
     `;
+    setRobotState('idle');
   };
 
   // --- UI Switching ---
@@ -290,6 +311,76 @@ document.addEventListener('DOMContentLoaded', () => {
   createNeuralField(document.getElementById('neural-canvas'), { density: 12500 });
   createNeuralField(document.getElementById('cta-canvas'), { density: 15500 });
 
+  // --- Free-moving robot companion ---
+  const companion = document.getElementById('robot-companion');
+  const chatMain = document.querySelector('.chat-main');
+  if (companion && chatMain && !reduceMotion) {
+    let robotX = 80;
+    let robotY = 90;
+    let targetX = 80;
+    let targetY = 90;
+    let lastTargetAt = 0;
+    let lastState = '';
+
+    const chooseCompanionTarget = (state, now) => {
+      const bounds = chatMain.getBoundingClientRect();
+      const safeWidth = Math.max(140, bounds.width - 110);
+      const safeHeight = Math.max(170, bounds.height - 205);
+      if (state === 'listening') {
+        targetX = Math.max(30, safeWidth - 25);
+        targetY = safeHeight;
+      } else if (state === 'thinking') {
+        targetX = Math.max(35, safeWidth * (.3 + Math.random() * .4));
+        targetY = 55 + Math.random() * Math.min(170, safeHeight * .36);
+      } else if (state === 'answering') {
+        targetX = Math.max(40, safeWidth * .78);
+        targetY = 75;
+      } else {
+        targetX = 25 + Math.random() * safeWidth;
+        targetY = 45 + Math.random() * safeHeight;
+      }
+      lastTargetAt = now;
+    };
+
+    const animateCompanion = (now) => {
+      if (!chatScreen.classList.contains('hidden')) {
+        const state = chatScreen.dataset.robotState || 'idle';
+        const targetLifetime = state === 'thinking' ? 1350 : state === 'idle' ? 3900 : 2600;
+        if (state !== lastState || now - lastTargetAt > targetLifetime) {
+          chooseCompanionTarget(state, now);
+          lastState = state;
+        }
+        const dx = targetX - robotX;
+        const dy = targetY - robotY;
+        const speed = state === 'thinking' ? .035 : .022;
+        robotX += dx * speed;
+        robotY += dy * speed;
+        const tilt = Math.max(-8, Math.min(8, dx * .025));
+        companion.style.transform = `translate3d(${robotX}px, ${robotY}px, 0) rotate(${tilt}deg)`;
+        companion.style.setProperty('--travel', Math.min(1, Math.abs(dx) / 120).toFixed(2));
+      }
+      requestAnimationFrame(animateCompanion);
+    };
+
+    chatMain.addEventListener('pointermove', (event) => {
+      const bounds = chatMain.getBoundingClientRect();
+      const centerX = bounds.left + robotX + 34;
+      const centerY = bounds.top + robotY + 26;
+      const lookX = Math.max(-2.2, Math.min(2.2, (event.clientX - centerX) / 90));
+      const lookY = Math.max(-1.8, Math.min(1.8, (event.clientY - centerY) / 90));
+      companion.style.setProperty('--look-x', `${lookX}px`);
+      companion.style.setProperty('--look-y', `${lookY}px`);
+    }, { passive: true });
+
+    chatMain.addEventListener('pointerdown', () => {
+      companion.classList.remove('is-curious');
+      void companion.offsetWidth;
+      companion.classList.add('is-curious');
+    });
+
+    requestAnimationFrame(animateCompanion);
+  }
+
   // --- Chat Logic ---
   let selectedModel = 'tencent/hy3:free';
   const mobileModelSelect = document.getElementById('mobile-model-select');
@@ -315,6 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatInput.style.height = 'auto';
     chatInput.style.height = Math.min(chatInput.scrollHeight, 192) + 'px';
     sendBtn.disabled = chatInput.value.trim().length === 0;
+    setRobotState(chatInput.value.trim() ? 'listening' : 'idle');
   });
 
   chatInput.addEventListener('keydown', (e) => {
@@ -329,9 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = text
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       
-    // Handle thinking process
+    // Keep reasoning visually quieter and separate from the final answer.
     html = html.replace(/&lt;think&gt;([\s\S]*?)(?:&lt;\/think&gt;|$)/gi, function(match, thinkContent) {
-       return `</p><div class="bg-gray-800/30 border border-gray-700/50 rounded-xl p-4 my-4 text-sm text-gray-400"><div class="flex items-center gap-2 mb-2 text-gray-500 font-semibold uppercase tracking-wider text-xs"><svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg> Thinking Process</div><div class="font-mono whitespace-pre-wrap">${thinkContent}</div></div><p class="mt-4">`;
+      const isComplete = /&lt;\/think&gt;/i.test(match);
+      return `</p><details class="thinking-panel" open><summary><span class="thinking-orbit"><i></i></span><b>${isComplete ? 'Thought process' : 'Thinking'}</b><span class="thinking-dots"><i></i><i></i><i></i></span></summary><div class="thinking-copy">${thinkContent.trim()}</div></details><p class="answer-copy">`;
     });
 
     html = html
@@ -359,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
       div.innerHTML = `<div class="user-bubble message-copy">${parseMarkdown(content)}</div>`;
     } else {
       div.innerHTML = `
-        <div class="assistant-avatar">X</div>
+        ${robotAvatarMarkup}
         <div class="message-copy">${parseMarkdown(content)}</div>
       `;
     }
@@ -373,8 +466,8 @@ document.addEventListener('DOMContentLoaded', () => {
     div.id = 'typing-indicator';
     div.className = 'chat-message assistant-message';
     div.innerHTML = `
-      <div class="assistant-avatar">X</div>
-      <div class="typing-dots"><i></i><i></i><i></i></div>
+      ${robotAvatarMarkup}
+      <div class="thinking-status"><span>Thinking</span><div class="typing-dots"><i></i><i></i><i></i></div></div>
     `;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -393,6 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatInput.value = '';
     chatInput.style.height = 'auto';
     sendBtn.disabled = true;
+    setRobotState('thinking');
 
     appendMessage('user', text);
     messages.push({ role: 'user', content: text });
@@ -420,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div');
       div.className = 'chat-message assistant-message';
       div.innerHTML = `
-        <div class="assistant-avatar">X</div>
+        ${robotAvatarMarkup}
         <div class="message-copy message-content"></div>
       `;
       chatMessages.appendChild(div);
@@ -443,12 +537,14 @@ document.addEventListener('DOMContentLoaded', () => {
               if (data.choices && data.choices[0].delta) {
                 const delta = data.choices[0].delta;
                 if (delta.reasoning) {
+                  setRobotState('thinking');
                   if (!aiFullText.includes('<think>')) {
                     aiFullText += '<think>\n';
                   }
                   aiFullText += delta.reasoning;
                 }
                 if (delta.content) {
+                  setRobotState('answering');
                   if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
                     aiFullText += '\n</think>\n\n';
                   }
@@ -466,11 +562,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       removeTypingIndicator();
+      setRobotState('idle');
       console.error(error);
       aiFullText = "Sorry, I encountered an error. Please try again.";
       appendMessage('model', aiFullText);
     }
     
     messages.push({ role: 'assistant', content: aiFullText });
+    setTimeout(() => setRobotState('idle'), 900);
   });
 });
