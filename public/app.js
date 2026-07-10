@@ -600,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const safeWidth = Math.max(140, bounds.width - 110);
       const safeHeight = Math.max(170, bounds.height - 205);
       if (bounds.width < 560) {
-        targetX = bounds.width+35;
+        targetX = bounds.width+78;
         targetY = state === 'listening' ? safeHeight : 90+Math.random()*Math.max(140,safeHeight*.7);
         lastTargetAt = now;
         return;
