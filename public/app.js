@@ -254,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let width = 0;
     let height = 0;
     let frame = 0;
+    let lastDrawAt = 0;
     const density = options.density || 10000;
 
     const resize = () => {
@@ -278,7 +279,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    const draw = () => {
+    const draw = (now = 0) => {
+      if (!reduceMotion && now - lastDrawAt < 32) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      const bounds = canvas.getBoundingClientRect();
+      const onScreen = !splashScreen.classList.contains('hidden') && bounds.bottom > 0 && bounds.top < window.innerHeight;
+      if (!reduceMotion && !onScreen) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      lastDrawAt = now;
       ctx.clearRect(0, 0, width, height);
       for (let i = 0; i < dots.length; i++) {
         const a = dots[i];
@@ -343,22 +355,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const animateCompanion = (now) => {
-      if (!chatScreen.classList.contains('hidden')) {
-        const state = chatScreen.dataset.robotState || 'idle';
-        const targetLifetime = state === 'thinking' ? 1350 : state === 'idle' ? 3900 : 2600;
-        if (state !== lastState || now - lastTargetAt > targetLifetime) {
-          chooseCompanionTarget(state, now);
-          lastState = state;
-        }
-        const dx = targetX - robotX;
-        const dy = targetY - robotY;
-        const speed = state === 'thinking' ? .035 : .022;
-        robotX += dx * speed;
-        robotY += dy * speed;
-        const tilt = Math.max(-8, Math.min(8, dx * .025));
-        companion.style.transform = `translate3d(${robotX}px, ${robotY}px, 0) rotate(${tilt}deg)`;
-        companion.style.setProperty('--travel', Math.min(1, Math.abs(dx) / 120).toFixed(2));
+      if (chatScreen.classList.contains('hidden')) {
+        setTimeout(() => requestAnimationFrame(animateCompanion), 500);
+        return;
       }
+      const state = chatScreen.dataset.robotState || 'idle';
+      const targetLifetime = state === 'thinking' ? 1350 : state === 'idle' ? 3900 : 2600;
+      if (state !== lastState || now - lastTargetAt > targetLifetime) {
+        chooseCompanionTarget(state, now);
+        lastState = state;
+      }
+      const dx = targetX - robotX;
+      const dy = targetY - robotY;
+      const speed = state === 'thinking' ? .035 : .022;
+      robotX += dx * speed;
+      robotY += dy * speed;
+      const tilt = Math.max(-8, Math.min(8, dx * .025));
+      companion.style.transform = `translate3d(${robotX}px, ${robotY}px, 0) rotate(${tilt}deg)`;
+      companion.style.setProperty('--travel', Math.min(1, Math.abs(dx) / 120).toFixed(2));
       requestAnimationFrame(animateCompanion);
     };
 
