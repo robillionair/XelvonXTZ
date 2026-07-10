@@ -35,13 +35,8 @@ var db = null;
 try {
   let serviceAccount = null;
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    try {
-      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    } catch (e) {
-      console.warn("Could not parse FIREBASE_SERVICE_ACCOUNT as JSON");
-    }
-  }
-  if (!serviceAccount && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  } else if (process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
     serviceAccount = {
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
@@ -49,30 +44,14 @@ try {
     };
   }
   if (serviceAccount) {
-    (0, import_app.initializeApp)({
-      credential: (0, import_app.cert)(serviceAccount)
-    });
-    const configPath = import_path.default.join(process.cwd(), "firebase-applet-config.json");
-    if (import_fs.default.existsSync(configPath)) {
-      const localConfig = JSON.parse(import_fs.default.readFileSync(configPath, "utf8"));
-      db = localConfig.firestoreDatabaseId ? (0, import_firestore.getFirestore)(localConfig.firestoreDatabaseId) : (0, import_firestore.getFirestore)();
-    } else {
-      db = (0, import_firestore.getFirestore)();
-    }
-    console.log("Firebase initialized successfully with Admin SDK (Service Account)");
+    (0, import_app.initializeApp)({ credential: (0, import_app.cert)(serviceAccount) });
   } else {
     const configPath = import_path.default.join(process.cwd(), "firebase-applet-config.json");
-    if (import_fs.default.existsSync(configPath)) {
-      const localConfig = JSON.parse(import_fs.default.readFileSync(configPath, "utf8"));
-      (0, import_app.initializeApp)({
-        projectId: localConfig.projectId
-      });
-      db = localConfig.firestoreDatabaseId ? (0, import_firestore.getFirestore)(localConfig.firestoreDatabaseId) : (0, import_firestore.getFirestore)();
-      console.log("Firebase initialized successfully with Admin SDK (ADC/Config)");
-    } else {
-      console.warn("No credentials or config found. Firebase not initialized.");
-    }
+    const localConfig = JSON.parse(import_fs.default.readFileSync(configPath, "utf8"));
+    (0, import_app.initializeApp)({ projectId: localConfig.projectId });
   }
+  db = (0, import_firestore.getFirestore)();
+  console.log("Firebase initialized successfully (default Firestore database)");
 } catch (error) {
   console.error("Failed to initialize Firebase:", error);
 }

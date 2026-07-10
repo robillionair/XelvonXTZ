@@ -10,21 +10,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// Initialize Firebase
+// Initialize Firebase using the same default-database flow as the known-good build.
+// The app config contains a Firebase Studio database id, but the deployed Admin SDK
+// credentials and existing collections are attached to the project's default database.
 let db: FirebaseFirestore.Firestore | null = null;
 
 try {
   let serviceAccount: any = null;
-  
+
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    try {
-      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    } catch (e) {
-      console.warn("Could not parse FIREBASE_SERVICE_ACCOUNT as JSON");
-    }
-  } 
-  
-  if (!serviceAccount && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  } else if (process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
     serviceAccount = {
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
@@ -33,31 +29,15 @@ try {
   }
 
   if (serviceAccount) {
-    initializeApp({
-      credential: cert(serviceAccount)
-    });
-    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
-    if (fs.existsSync(configPath)) {
-      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-      db = localConfig.firestoreDatabaseId ? getFirestore(localConfig.firestoreDatabaseId) : getFirestore();
-    } else {
-      db = getFirestore();
-    }
-    console.log("Firebase initialized successfully with Admin SDK (Service Account)");
+    initializeApp({ credential: cert(serviceAccount) });
   } else {
-    // Fallback to local config / ADC
     const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
-    if (fs.existsSync(configPath)) {
-      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-      initializeApp({
-        projectId: localConfig.projectId
-      });
-      db = localConfig.firestoreDatabaseId ? getFirestore(localConfig.firestoreDatabaseId) : getFirestore();
-      console.log("Firebase initialized successfully with Admin SDK (ADC/Config)");
-    } else {
-      console.warn("No credentials or config found. Firebase not initialized.");
-    }
+    const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    initializeApp({ projectId: localConfig.projectId });
   }
+
+  db = getFirestore();
+  console.log("Firebase initialized successfully (default Firestore database)");
 } catch (error) {
   console.error("Failed to initialize Firebase:", error);
 }
