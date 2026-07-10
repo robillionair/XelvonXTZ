@@ -30,6 +30,7 @@ var import_fs = __toESM(require("fs"), 1);
 var app = (0, import_express.default)();
 var PORT = process.env.PORT || 3e3;
 app.use(import_express.default.json());
+app.use(import_express.default.urlencoded({ extended: false }));
 var db = null;
 try {
   let serviceAccount = null;
@@ -132,6 +133,13 @@ app.post("/api/subscribe", async (req, res) => {
     return res.status(500).json({ success: false, error: "Server subscription error.", details: err.message });
   }
 });
+app.get("/api/subscribe", (req, res) => {
+  res.setHeader("Allow", "POST");
+  if (req.accepts("html")) {
+    return res.redirect(303, "/?access=retry");
+  }
+  return res.status(405).json({ success: false, error: "This endpoint accepts POST requests only." });
+});
 app.post("/api/chat", async (req, res) => {
   try {
     const { messages, userEmail, model } = req.body;
@@ -232,10 +240,13 @@ app.post("/api/chat", async (req, res) => {
 });
 app.use(import_express.default.static(import_path.default.join(process.cwd(), "public"), {
   etag: true,
-  maxAge: process.env.NODE_ENV === "production" ? "7d" : 0,
+  maxAge: 0,
   setHeaders: (res, filePath) => {
-    if (filePath.endsWith(".html")) {
+    const extension = import_path.default.extname(filePath).toLowerCase();
+    if ([".html", ".js", ".css", ".json", ".webmanifest"].includes(extension)) {
       res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+    } else if ([".jpg", ".jpeg", ".png", ".webp", ".svg"].includes(extension)) {
+      res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
     }
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");

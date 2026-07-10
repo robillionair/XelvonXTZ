@@ -159,10 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
   splashScreen.addEventListener('scroll', handleScrollAnimation);
   // Trigger once on load
   handleScrollAnimation();
+
+  // Recover gracefully if a stale form submission reached the GET fallback.
+  const accessState = new URLSearchParams(window.location.search).get('access');
+  if (accessState === 'retry') {
+    history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+    openModal();
+  }
   
   // Form submission for email
   emailForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const email = userEmailInput.value.trim();
     
     // Validate email

@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=20260710-2">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Robillionair">
@@ -252,7 +252,7 @@
       <p class="section-kicker"><span>ACCESS</span> PRIVATE BETA</p>
       <h2 id="modal-title">Enter the intelligence layer.</h2>
       <p>Use your email to access Xelvon XPT and keep your conversation history connected.</p>
-      <form id="email-form">
+      <form id="email-form" method="post" action="/api/subscribe">
         <label for="user-email">Work or personal email</label>
         <input type="email" id="user-email" name="email" autocomplete="email" required placeholder="you@example.com">
         <button type="submit" class="button button-primary"><span>Continue to Xelvon</span><b aria-hidden="true">↗</b></button>
@@ -290,6 +290,6 @@
     </section>
   </main>
 
-  <script src="/app.js"></script>
+  <script src="/app.js?v=20260710-2"></script>
 </body>
 </html>

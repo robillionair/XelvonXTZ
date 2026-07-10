@@ -7,6 +7,7 @@ import fs from 'fs';
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 
 // Initialize Firebase
@@ -123,6 +124,16 @@ app.post('/api/subscribe', async (req, res) => {
     console.error("Subscribe Error:", err);
     return res.status(500).json({ success: false, error: 'Server subscription error.', details: err.message });
   }
+});
+
+// A stale form should never strand a visitor on Express's default 404 page.
+// The live interface submits with POST; GET visitors are returned to the entry flow.
+app.get('/api/subscribe', (req, res) => {
+  res.setHeader('Allow', 'POST');
+  if (req.accepts('html')) {
+    return res.redirect(303, '/?access=retry');
+  }
+  return res.status(405).json({ success: false, error: 'This endpoint accepts POST requests only.' });
 });
 
 app.post('/api/chat', async (req, res) => {
@@ -242,10 +253,13 @@ app.post('/api/chat', async (req, res) => {
 // Serve static frontend files
 app.use(express.static(path.join(process.cwd(), 'public'), {
   etag: true,
-  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
+  maxAge: 0,
   setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.html')) {
+    const extension = path.extname(filePath).toLowerCase();
+    if (['.html', '.js', '.css', '.json', '.webmanifest'].includes(extension)) {
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else if (['.jpg', '.jpeg', '.png', '.webp', '.svg'].includes(extension)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
     }
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
