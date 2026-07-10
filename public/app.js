@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatScreen = document.getElementById('chat-screen');
   const navLaunchBtn = document.getElementById('nav-launch-btn');
   const heroLaunchBtn = document.getElementById('hero-launch-btn');
+  const footerLaunchBtn = document.getElementById('footer-launch-btn');
   const exitChatBtn = document.getElementById('exit-chat-btn');
   const exitChatMobileBtn = document.getElementById('exit-chat-mobile-btn');
   const newChatBtn = document.getElementById('new-chat-btn');
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const API_BASE = window.location.origin;
   let messages = [];
-  let userEmail = '';
+  let userEmail = sessionStorage.getItem('xelvon-email') || '';
 
   // --- Modal Logic ---
   const openModal = () => {
@@ -71,15 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetChat = () => {
     messages = [];
     chatMessages.innerHTML = `
-      <div class="flex gap-4 max-w-3xl mx-auto mt-10">
-        <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div class="flex-1 pt-1">
-          <p class="text-gray-200 text-base leading-relaxed">
-            How can I help you today?
-          </p>
-        </div>
+      <div class="chat-message assistant-message">
+        <div class="assistant-avatar">X</div>
+        <div class="message-copy"><p>The intelligence layer is ready. What are we solving today?</p></div>
       </div>
     `;
   };
@@ -111,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
   navLaunchBtn.addEventListener('click', showChat);
   heroLaunchBtn.addEventListener('click', showChat);
+  if (footerLaunchBtn) footerLaunchBtn.addEventListener('click', showChat);
   closeModalBtn.addEventListener('click', closeModal);
   exitChatBtn.addEventListener('click', hideChat);
   if (exitChatMobileBtn) exitChatMobileBtn.addEventListener('click', hideChat);
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Scroll Animations & Floating CTA ---
-  const scrollElements = document.querySelectorAll('.scroll-anim');
+  const scrollElements = document.querySelectorAll('.reveal');
   const floatingCta = document.getElementById('floating-cta');
   const floatingLaunchBtn = document.getElementById('floating-launch-btn');
   
@@ -153,12 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle floating CTA visibility
-    if (!splashScreen.classList.contains('hidden') && splashScreen.scrollTop > window.innerHeight * 0.8) {
-      floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
-      floatingCta.classList.add('translate-y-0', 'opacity-100');
+    if (!splashScreen.classList.contains('hidden') && splashScreen.scrollTop > window.innerHeight * 0.8 && splashScreen.scrollTop < splashScreen.scrollHeight - window.innerHeight * 1.15) {
+      floatingCta.classList.add('is-visible');
     } else {
-      floatingCta.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
-      floatingCta.classList.remove('translate-y-0', 'opacity-100');
+      floatingCta.classList.remove('is-visible');
     }
   };
   
@@ -197,10 +191,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (email) {
       userEmail = email;
+      sessionStorage.setItem('xelvon-email', email);
       closeModal();
       showChat();
     }
   });
+
+  // --- Immersive 3D interactions ---
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    splashScreen.addEventListener('pointermove', (event) => {
+      const x = (event.clientX / window.innerWidth - 0.5) * 2;
+      const y = (event.clientY / window.innerHeight - 0.5) * 2;
+      splashScreen.style.setProperty('--mx', x.toFixed(3));
+      splashScreen.style.setProperty('--my', y.toFixed(3));
+    }, { passive: true });
+
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateX(${-y * 5}deg) rotateY(${x * 7}deg) translateY(-4px)`;
+      });
+      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  function createNeuralField(canvas, options = {}) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dots = [];
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    const density = options.density || 10000;
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots.length = 0;
+      const count = Math.min(95, Math.max(34, Math.floor((width * height) / density)));
+      for (let i = 0; i < count; i++) {
+        dots.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - .5) * .18,
+          vy: (Math.random() - .5) * .18,
+          r: Math.random() * 1.3 + .35,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) {
+        const a = dots[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < -10) a.x = width + 10; if (a.x > width + 10) a.x = -10;
+        if (a.y < -10) a.y = height + 10; if (a.y > height + 10) a.y = -10;
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 145) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(161, 230, 194, ${(1 - distance / 145) * .11})`;
+            ctx.lineWidth = .55;
+            ctx.stroke();
+          }
+        }
+        const pulse = .5 + Math.sin(frame * .012 + a.phase) * .5;
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r + pulse * .45, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(190, 246, 210, ${.22 + pulse * .42})`; ctx.fill();
+      }
+      frame++;
+      if (!reduceMotion) requestAnimationFrame(draw);
+    };
+    resize(); draw();
+    window.addEventListener('resize', resize, { passive: true });
+  }
+
+  createNeuralField(document.getElementById('neural-canvas'), { density: 12500 });
+  createNeuralField(document.getElementById('cta-canvas'), { density: 15500 });
 
   // --- Chat Logic ---
   let selectedModel = 'tencent/hy3:free';
@@ -265,26 +345,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function appendMessage(role, content) {
     const div = document.createElement('div');
-    div.className = 'flex gap-4 max-w-3xl mx-auto';
+    div.className = `chat-message ${role === 'user' ? 'user-message' : 'assistant-message'}`;
     
     if (role === 'user') {
-      div.innerHTML = `
-        <div class="flex-1 flex justify-end">
-          <div class="bg-[#2f2f2f] px-5 py-3 rounded-3xl max-w-[85%] text-gray-100 inline-block text-left text-base">
-            ${parseMarkdown(content)}
-          </div>
-        </div>
-      `;
+      div.innerHTML = `<div class="user-bubble message-copy">${parseMarkdown(content)}</div>`;
     } else {
       div.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div class="flex-1 pt-1">
-          <div class="text-gray-200 leading-relaxed text-base">
-            ${parseMarkdown(content)}
-          </div>
-        </div>
+        <div class="assistant-avatar">X</div>
+        <div class="message-copy">${parseMarkdown(content)}</div>
       `;
     }
     
@@ -295,18 +363,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function appendTypingIndicator() {
     const div = document.createElement('div');
     div.id = 'typing-indicator';
-    div.className = 'flex gap-4 max-w-3xl mx-auto';
+    div.className = 'chat-message assistant-message';
     div.innerHTML = `
-      <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-      </div>
-      <div class="flex-1 pt-2">
-        <div class="flex space-x-1.5 items-center h-4">
-          <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
-          <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
-          <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
-        </div>
-      </div>
+      <div class="assistant-avatar">X</div>
+      <div class="typing-dots"><i></i><i></i><i></i></div>
     `;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -350,14 +410,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Create empty message container
       const div = document.createElement('div');
-      div.className = 'flex gap-4 max-w-3xl mx-auto';
+      div.className = 'chat-message assistant-message';
       div.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-black font-bold">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div class="flex-1 pt-1">
-          <div class="text-gray-200 leading-relaxed text-base message-content"></div>
-        </div>
+        <div class="assistant-avatar">X</div>
+        <div class="message-copy message-content"></div>
       `;
       chatMessages.appendChild(div);
       const contentDiv = div.querySelector('.message-content');

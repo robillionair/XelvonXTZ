@@ -5,30 +5,58 @@ import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
 
 const app = express();
-const PORT = 3000;
-
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
+
 // Initialize Firebase
-let db: FirebaseFirestore.Firestore;
+let db: FirebaseFirestore.Firestore | null = null;
+
 try {
-  let serviceAccount;
+  let serviceAccount: any = null;
+  
   if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    try {
+      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    } catch (e) {
+      console.warn("Could not parse FIREBASE_SERVICE_ACCOUNT as JSON");
+    }
+  } 
+  
+  if (!serviceAccount && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PROJECT_ID) {
+    serviceAccount = {
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    };
+  }
+
+  if (serviceAccount) {
     initializeApp({
       credential: cert(serviceAccount)
     });
+    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
+    if (fs.existsSync(configPath)) {
+      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      db = localConfig.firestoreDatabaseId ? getFirestore(localConfig.firestoreDatabaseId) : getFirestore();
+    } else {
+      db = getFirestore();
+    }
+    console.log("Firebase initialized successfully with Admin SDK (Service Account)");
   } else {
-    // If no service account env var, try to read the local config to get projectId
-    const localConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'firebase-applet-config.json'), 'utf8'));
-    initializeApp({
-      projectId: localConfig.projectId
-      // In GCP/AI Studio, Application Default Credentials will automatically provide access
-    });
+    // Fallback to local config / ADC
+    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
+    if (fs.existsSync(configPath)) {
+      const localConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      initializeApp({
+        projectId: localConfig.projectId
+      });
+      db = localConfig.firestoreDatabaseId ? getFirestore(localConfig.firestoreDatabaseId) : getFirestore();
+      console.log("Firebase initialized successfully with Admin SDK (ADC/Config)");
+    } else {
+      console.warn("No credentials or config found. Firebase not initialized.");
+    }
   }
-  
-  db = getFirestore();
-  console.log("Firebase initialized successfully");
 } catch (error) {
   console.error("Failed to initialize Firebase:", error);
 }
@@ -37,13 +65,11 @@ try {
 const SYSTEM_PROMPT = `You are Xelvon XPT, the proprietary AI assistant for Robillionair.com.
 Speak with a sleek, highly intelligent, slightly futuristic and premium tone.
 Be confident, concise, and helpful.
-
 If asked what model or architecture powers you, answer honestly and briefly:
 you run on a proprietary inference pipeline built on top of leading
 foundation models, tuned and branded specifically for Robillionair.com.
 Do not fabricate technical framework names, and do not deny your actual
 underlying provider if a user directly and specifically asks about it.
-
 Stay in character as Xelvon XPT for all other interactions.`;
 
 app.get('/api/chat/history', async (req, res) => {
@@ -52,14 +78,16 @@ app.get('/api/chat/history', async (req, res) => {
     if (!email) {
       return res.status(400).json({ error: 'Email required' });
     }
-    if (!db) {
+    
+    if (db) {
+      const document = await db.collection('chats').doc(email).get();
+      if (document.exists) {
+        return res.json({ messages: document.data()?.messages || [] });
+      }
+      return res.json({ messages: [] });
+    } else {
       return res.status(500).json({ error: 'Database not initialized' });
     }
-    const doc = await db.collection('chats').doc(email).get();
-    if (doc.exists) {
-      return res.json({ messages: doc.data()?.messages || [] });
-    }
-    return res.json({ messages: [] });
   } catch (err: any) {
     console.error("Fetch history error:", err);
     return res.status(500).json({ error: 'Server error fetching history' });
@@ -69,11 +97,9 @@ app.get('/api/chat/history', async (req, res) => {
 app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
-
     if (!email) {
       return res.status(400).json({ success: false, error: 'Email identifier required.' });
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       return res.status(400).json({ success: false, error: 'Invalid email address.' });
@@ -92,17 +118,17 @@ app.post('/api/subscribe', async (req, res) => {
         ip
       }, { merge: true });
     }
-
     return res.status(200).json({ success: true });
   } catch (err: any) {
     console.error("Subscribe Error:", err);
-    return res.status(500).json({ success: false, error: 'Server subscription error.' });
+    return res.status(500).json({ success: false, error: 'Server subscription error.', details: err.message });
   }
 });
 
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages, userEmail } = req.body;
+    const { messages, userEmail, model } = req.body;
+    const requestedModel = model || 'tencent/hy3:free';
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid history input.' });
@@ -112,7 +138,6 @@ app.post('/api/chat', async (req, res) => {
       return res.status(500).json({ error: 'OpenRouter credentials not configured. Please add OPENROUTER_API_KEY in the environment.' });
     }
 
-    // We will save the updated history after the AI responds
     const normalizedEmail = userEmail ? userEmail.trim().toLowerCase() : '';
 
     const openRouterMessages = [
@@ -129,9 +154,10 @@ app.post('/api/chat', async (req, res) => {
         'X-Title': 'Robillionair Xelvon XPT'
       },
       body: JSON.stringify({
-        model: 'tencent/hy3:free', // Requested by user
+        model: requestedModel,
         messages: openRouterMessages,
-        stream: true
+        stream: true,
+        include_reasoning: true
       })
     });
 
@@ -156,18 +182,34 @@ app.post('/api/chat', async (req, res) => {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
+
         const chunk = decoder.decode(value, { stream: true });
         res.write(chunk);
         
         buffer += chunk;
         const lines = buffer.split('\n');
         buffer = lines.pop() || '';
+
         for (const line of lines) {
           if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
             try {
               const data = JSON.parse(line.slice(6));
-              if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
-                aiFullText += data.choices[0].delta.content;
+              if (data.choices && data.choices[0].delta) {
+                const delta = data.choices[0].delta;
+                
+                if (delta.reasoning) {
+                  if (!aiFullText.includes('<think>')) {
+                    aiFullText += '<think>\n';
+                  }
+                  aiFullText += delta.reasoning;
+                }
+                
+                if (delta.content) {
+                  if (aiFullText.includes('<think>') && !aiFullText.includes('</think>')) {
+                    aiFullText += '\n</think>\n\n';
+                  }
+                  aiFullText += delta.content;
+                }
               }
             } catch (err) {}
           }
@@ -175,21 +217,22 @@ app.post('/api/chat', async (req, res) => {
       }
 
       // Stream is finished, save to Firestore
-      if (db && normalizedEmail && aiFullText) {
+      if (normalizedEmail && aiFullText) {
         try {
           const updatedMessages = [...messages, { role: 'assistant', content: aiFullText }];
-          await db.collection('chats').doc(normalizedEmail).set({
-            email: normalizedEmail,
-            messages: updatedMessages,
-            timestamp: new Date().toISOString()
-          }, { merge: true });
+          if (db) {
+            await db.collection('chats').doc(normalizedEmail).set({
+              email: normalizedEmail,
+              messages: updatedMessages,
+              timestamp: new Date().toISOString()
+            }, { merge: true });
+          }
         } catch (dbErr) {
           console.error("Failed to save chat to Firestore:", dbErr);
         }
       }
     }
     res.end();
-
   } catch (err: any) {
     console.error("Chat Error:", err);
     return res.status(500).json({ error: err.message || 'Server error processing chat.' });
@@ -197,7 +240,18 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Serve static frontend files
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(process.cwd(), 'public'), {
+  etag: true,
+  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    }
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  }
+}));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
