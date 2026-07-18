@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://robillionair.com/</loc>
-    <lastmod>2026-07-10</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://robillionair.com/anansi.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://robillionair.com/privacy.html</loc>
@@ -13,4 +19,3 @@
     <priority>0.3</priority>
   </url>
 </urlset>
-

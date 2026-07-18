@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLaunchBtn = document.getElementById('nav-launch-btn');
   const heroLaunchBtn = document.getElementById('hero-launch-btn');
   const footerLaunchBtn = document.getElementById('footer-launch-btn');
+  const betaLaunchBtn = document.getElementById('beta-launch-btn');
   const exitChatBtn = document.getElementById('exit-chat-btn');
   const exitChatMobileBtn = document.getElementById('exit-chat-mobile-btn');
   const newChatBtn = document.getElementById('new-chat-btn');
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navLaunchBtn.addEventListener('click', showChat);
   heroLaunchBtn.addEventListener('click', showChat);
   if (footerLaunchBtn) footerLaunchBtn.addEventListener('click', showChat);
+  if (betaLaunchBtn) betaLaunchBtn.addEventListener('click', showChat);
   closeModalBtn.addEventListener('click', closeModal);
   exitChatBtn.addEventListener('click', hideChat);
   if (exitChatMobileBtn) exitChatMobileBtn.addEventListener('click', hideChat);
@@ -201,6 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accessState === 'retry') {
     history.replaceState({}, document.title, window.location.pathname + window.location.hash);
     openModal();
+  }
+
+  const entryState = new URLSearchParams(window.location.search).get('enter');
+  if (entryState === 'xelvon') {
+    history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+    setTimeout(() => showChat(), 120);
   }
 
   // Explicit local-only visual QA route; never bypasses access on the live domain.
