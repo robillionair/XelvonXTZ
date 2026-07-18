@@ -1,124 +1,68 @@
 (() => {
-  const canvas = document.getElementById('anansi-brain');
+  const canvas = document.getElementById('anansi-web');
+  const spiderCanvas = document.getElementById('anansi-spider');
   const story = document.getElementById('an-story');
   const chapters = [...document.querySelectorAll('[data-an-scene]')];
   const progressBar = document.getElementById('an-progress-bar');
   const progressLabel = document.getElementById('an-progress-label');
+  if (!canvas || !spiderCanvas || !story) return;
+
+  const webContext = canvas.getContext('2d', { alpha: true, desynchronized: true });
+  const spiderContext = spiderCanvas.getContext('2d', { alpha: true, desynchronized: true });
+  if (!webContext || !spiderContext) return;
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer:fine)').matches;
   const liteMode = document.documentElement.classList.contains('flow-lite');
-  if (!canvas || !story || reduceMotion) return;
-
-  const context = canvas.getContext('2d', { alpha: true });
-  if (!context) return;
+  const mobile = window.matchMedia('(max-width: 700px)').matches;
+  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+  const mix = (a, b, amount) => a + (b - a) * amount;
+  const ease = (value) => 1 - Math.pow(1 - clamp(value), 3);
 
   let width = 0;
   let height = 0;
   let dpr = 1;
   let targetProgress = 0;
   let displayProgress = 0;
-  let active = true;
-  let animationFrame = 0;
-  let lastFrame = 0;
   let pointerX = 0;
   let pointerY = 0;
+  let active = true;
+  let running = false;
+  let lastFrame = 0;
+  let fpsStarted = 0;
+  let fpsFrames = 0;
+  let drawSamples = 0;
+  let drawTotal = 0;
+  let lastSpider = { x: 0, y: 0 };
+  let lastWebProgress = -1;
+  document.body.dataset.anRenderer = 'sovereign-silk';
 
-  const nodes = [];
-  const edges = [];
-  const dust = [];
-  const projected = [];
+  const strandCount = mobile ? 10 : 13;
+  const ringCount = mobile ? 7 : 9;
+  const droplets = Array.from({ length: mobile ? 16 : 28 }, (_, index) => ({
+    strand: (index * 7 + 3) % strandCount,
+    ring: 1 + (index * 5) % ringCount,
+    size: .55 + ((index * 13) % 8) * .15,
+    phase: index * .73
+  }));
 
-  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
-  const smooth = (value) => value * value * (3 - 2 * value);
-  const mix = (a, b, amount) => a + (b - a) * amount;
-  const seededRandom = (() => {
-    let seed = 0x6a09e667;
-    return () => {
-      seed |= 0;
-      seed = seed + 0x6d2b79f5 | 0;
-      let value = Math.imul(seed ^ seed >>> 15, 1 | seed);
-      value = value + Math.imul(value ^ value >>> 7, 61 | value) ^ value;
-      return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  const webGeometry = () => {
+    const center = {
+      x: width * (mobile ? .5 : .69) + pointerX * 7,
+      y: height * (mobile ? .37 : .49) + pointerY * 5
     };
-  })();
-
-  const buildBrain = () => {
-    nodes.length = 0;
-    edges.length = 0;
-    dust.length = 0;
-    const nodeCount = liteMode ? (window.innerWidth < 650 ? 230 : 410) : window.innerWidth < 650 ? 330 : window.innerWidth < 1000 ? 470 : 680;
-
-    for (let index = 0; index < nodeCount; index += 1) {
-      const theta = seededRandom() * Math.PI * 2;
-      const phi = Math.acos(2 * seededRandom() - 1);
-      const sinPhi = Math.sin(phi);
-      const fold = 1
-        + Math.sin(theta * 7 + phi * 4) * .055
-        + Math.sin(theta * 12 - phi * 7) * .027
-        + (seededRandom() - .5) * .065;
-      let x = Math.cos(theta) * sinPhi * 285 * fold;
-      const y = Math.cos(phi) * 205 * (1 + Math.sin(theta * 5) * .025);
-      const z = Math.sin(theta) * sinPhi * 220 * fold;
-      const lowerTaper = clamp((y + 205) / 150);
-      x *= .74 + lowerTaper * .26;
-      x += Math.sign(x || 1) * (6 + 9 * (1 - Math.abs(y) / 205));
-      nodes.push({
-        x,
-        y,
-        z,
-        phase: seededRandom() * Math.PI * 2,
-        size: .6 + seededRandom() * 1.45,
-        energy: seededRandom(),
-        hemisphere: x < 0 ? -1 : 1
-      });
-    }
-
-    const cellSize = 72;
-    const buckets = new Map();
-    const cellKey = (x, y, z) => `${Math.floor(x / cellSize)},${Math.floor(y / cellSize)},${Math.floor(z / cellSize)}`;
-    nodes.forEach((node, index) => {
-      const key = cellKey(node.x, node.y, node.z);
-      if (!buckets.has(key)) buckets.set(key, []);
-      buckets.get(key).push(index);
-    });
-
-    nodes.forEach((node, index) => {
-      const cellX = Math.floor(node.x / cellSize);
-      const cellY = Math.floor(node.y / cellSize);
-      const cellZ = Math.floor(node.z / cellSize);
-      const candidates = [];
-      for (let x = -1; x <= 1; x += 1) {
-        for (let y = -1; y <= 1; y += 1) {
-          for (let z = -1; z <= 1; z += 1) {
-            const bucket = buckets.get(`${cellX + x},${cellY + y},${cellZ + z}`) || [];
-            bucket.forEach((candidateIndex) => {
-              if (candidateIndex <= index) return;
-              const candidate = nodes[candidateIndex];
-              const dx = node.x - candidate.x;
-              const dy = node.y - candidate.y;
-              const dz = node.z - candidate.z;
-              const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-              if (distance < 78) candidates.push({ index: candidateIndex, distance });
-            });
-          }
-        }
-      }
-      candidates.sort((a, b) => a.distance - b.distance).slice(0, node.energy > .65 ? 3 : 2).forEach((candidate) => {
-        edges.push({ a: index, b: candidate.index, phase: seededRandom() });
-      });
-    });
-
-    const dustCount = window.innerWidth < 650 ? 80 : 160;
-    for (let index = 0; index < dustCount; index += 1) {
-      dust.push({
-        x: seededRandom(),
-        y: seededRandom(),
-        drift: (seededRandom() - .5) * .18,
-        size: .5 + seededRandom() * 2.5,
-        phase: seededRandom() * Math.PI * 2,
-        removed: seededRandom() < .6
-      });
-    }
+    const radius = Math.min(width * (mobile ? .49 : .43), height * (mobile ? .48 : .66));
+    const point = (strand, ring, phase = 0) => {
+      const angle = -Math.PI * .5 + (strand / strandCount) * Math.PI * 2 + Math.sin(strand * 1.7) * .018;
+      const ringRatio = ring / ringCount;
+      const irregular = 1 + Math.sin(strand * 2.13 + ring * 1.81) * .027;
+      const radial = (18 + radius * ringRatio) * irregular;
+      return {
+        x: center.x + Math.cos(angle + phase) * radial,
+        y: center.y + Math.sin(angle + phase) * radial * .76
+      };
+    };
+    return { center, radius, point };
   };
 
   const resize = () => {
@@ -126,10 +70,14 @@
     if (!rect.width || !rect.height) return;
     width = rect.width;
     height = rect.height;
-    dpr = Math.min(window.devicePixelRatio || 1, liteMode || window.innerWidth < 700 ? 1 : 1.45);
+    dpr = Math.min(window.devicePixelRatio || 1, liteMode || mobile ? 1 : 1.1);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
-    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    spiderCanvas.width = Math.round(width * dpr);
+    spiderCanvas.height = Math.round(height * dpr);
+    webContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+    spiderContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lastWebProgress = -1;
   };
 
   const updateScroll = () => {
@@ -141,331 +89,277 @@
     const activeScene = Math.min(3, Math.max(0, Math.round(targetProgress * 3)));
     document.body.dataset.anActive = String(activeScene);
     chapters.forEach((chapter, index) => chapter.classList.toggle('is-active', index === activeScene));
+    start();
   };
 
-  const rotate = (node, rotationX, rotationY, rotationZ) => {
-    const cosY = Math.cos(rotationY);
-    const sinY = Math.sin(rotationY);
-    const x1 = node.x * cosY - node.z * sinY;
-    const z1 = node.x * sinY + node.z * cosY;
-    const cosX = Math.cos(rotationX);
-    const sinX = Math.sin(rotationX);
-    const y2 = node.y * cosX - z1 * sinX;
-    const z2 = node.y * sinX + z1 * cosX;
-    const cosZ = Math.cos(rotationZ);
-    const sinZ = Math.sin(rotationZ);
-    return {
-      x: x1 * cosZ - y2 * sinZ,
-      y: x1 * sinZ + y2 * cosZ,
-      z: z2
-    };
-  };
-
-  const cameraAt = (progress, time) => {
-    const keyframes = [
-      { x: .63, y: .49, zoom: 1.02, rx: -.08, ry: -.18, rz: -.035 },
-      { x: .72, y: .45, zoom: 1.72, rx: -.24, ry: -.54, rz: -.08 },
-      { x: .64, y: .5, zoom: 1.24, rx: .12, ry: 2.65, rz: .025 },
-      { x: .67, y: .51, zoom: 2.7, rx: .04, ry: 3.18, rz: .02 }
-    ];
-    const scene = Math.min(2, Math.floor(progress * 3));
-    const amount = smooth(progress * 3 - scene);
-    const from = keyframes[scene];
-    const to = keyframes[scene + 1];
-    return {
-      x: mix(from.x, to.x, amount) * width,
-      y: mix(from.y, to.y, amount) * height,
-      zoom: mix(from.zoom, to.zoom, amount) * Math.min(width / 1180, height / 760) * 1.32,
-      rx: mix(from.rx, to.rx, amount) + pointerY * .025,
-      ry: mix(from.ry, to.ry, amount) + Math.sin(time * .00011) * .08 + pointerX * .045,
-      rz: mix(from.rz, to.rz, amount)
-    };
-  };
-
-  const projectBrain = (camera) => {
-    projected.length = nodes.length;
-    nodes.forEach((node, index) => {
-      const rotated = rotate(node, camera.rx, camera.ry, camera.rz);
-      const depth = 760 + rotated.z * camera.zoom;
-      const perspective = 760 / Math.max(180, depth);
-      projected[index] = {
-        x: camera.x + rotated.x * camera.zoom * perspective,
-        y: camera.y + rotated.y * camera.zoom * perspective,
-        z: rotated.z,
-        perspective,
-        visible: depth > 180
-      };
-    });
-  };
-
-  const drawBrainVolume = (camera, opacity, time) => {
-    if (opacity <= .02) return;
-    const radiusX = 185 * camera.zoom;
-    const radiusY = 192 * camera.zoom;
+  const strokeWeb = (geometry, progress, time) => {
+    const context = webContext;
+    const { center, radius, point } = geometry;
+    const construction = ease(.12 + progress * .88);
     context.save();
-    context.globalCompositeOperation = 'screen';
-    [-1, 1].forEach((side) => {
-      const centerX = camera.x + side * 78 * camera.zoom;
-      const centerY = camera.y - 3 * camera.zoom;
-      const tissue = context.createRadialGradient(
-        centerX - side * 44 * camera.zoom,
-        centerY - 62 * camera.zoom,
-        3,
-        centerX,
-        centerY,
-        radiusX
-      );
-      tissue.addColorStop(0, `rgba(232,255,242,${opacity * .065})`);
-      tissue.addColorStop(.18, `rgba(${side > 0 ? '82,208,162' : '71,163,197'},${opacity * .055})`);
-      tissue.addColorStop(.62, `rgba(16,83,69,${opacity * .03})`);
-      tissue.addColorStop(1, 'rgba(2,8,10,0)');
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+
+    for (let strand = 0; strand < strandCount; strand += 1) {
+      const reveal = clamp(construction * 1.16 - strand / strandCount * .13);
+      if (reveal <= 0) continue;
+      const outer = point(strand, ringCount * reveal);
       context.beginPath();
-      context.ellipse(centerX, centerY, radiusX, radiusY, side * .07, 0, Math.PI * 2);
-      context.fillStyle = tissue;
+      context.moveTo(center.x, center.y);
+      context.lineTo(outer.x, outer.y);
+      const highlight = (strand + Math.floor(progress * 10)) % 6 === 0;
+      context.strokeStyle = highlight ? `rgba(206,255,228,${.18 + reveal * .17})` : `rgba(164,196,182,${.08 + reveal * .12})`;
+      context.lineWidth = highlight ? .82 : .5;
+      context.stroke();
+    }
+
+    for (let ring = 1; ring <= ringCount; ring += 1) {
+      const ringReveal = clamp(construction * 1.28 - ring / ringCount * .25);
+      if (ringReveal <= 0) continue;
+      const visibleSegments = strandCount * ringReveal;
+      context.beginPath();
+      for (let strand = 0; strand < strandCount; strand += 1) {
+        if (strand > visibleSegments) break;
+        const from = point(strand, ring);
+        const to = point((strand + 1) % strandCount, ring);
+        const midpointX = (from.x + to.x) * .5 + (center.x - (from.x + to.x) * .5) * .045;
+        const midpointY = (from.y + to.y) * .5 + (center.y - (from.y + to.y) * .5) * .045;
+        if (strand === 0) context.moveTo(from.x, from.y);
+        context.quadraticCurveTo(midpointX, midpointY, to.x, to.y);
+      }
+      const gold = ring === Math.max(2, Math.round(progress * ringCount));
+      context.strokeStyle = gold ? 'rgba(226,181,103,.34)' : `rgba(192,216,205,${.07 + ringReveal * .11})`;
+      context.lineWidth = gold ? 1.05 : .52;
+      context.stroke();
+    }
+
+    if (progress > .2 && progress < .72) {
+      const shield = clamp(1 - Math.abs(progress - .38) / .21);
+      context.beginPath();
+      for (let side = 0; side < 7; side += 1) {
+        const angle = -Math.PI / 2 + side / 7 * Math.PI * 2;
+        const x = center.x + Math.cos(angle) * radius * .43;
+        const y = center.y + Math.sin(angle) * radius * .43 * .76;
+        if (!side) context.moveTo(x, y); else context.lineTo(x, y);
+      }
+      context.closePath();
+      context.strokeStyle = `rgba(226,181,103,${shield * .3})`;
+      context.lineWidth = 1.2;
+      context.stroke();
+    }
+
+    droplets.forEach((drop) => {
+      const required = (drop.ring / ringCount) * .82;
+      if (construction < required) return;
+      const p = point(drop.strand, drop.ring);
+      const shimmer = .35 + Math.sin(time * .0012 + drop.phase) * .25;
+      context.beginPath();
+      context.arc(p.x, p.y, drop.size, 0, Math.PI * 2);
+      context.fillStyle = `rgba(220,244,234,${shimmer})`;
       context.fill();
     });
-    const sheenX = camera.x - 86 * camera.zoom + Math.sin(time * .00035) * 26 * camera.zoom;
-    const sheenY = camera.y - 82 * camera.zoom;
-    const sheen = context.createRadialGradient(sheenX, sheenY, 0, sheenX, sheenY, 105 * camera.zoom);
-    sheen.addColorStop(0, `rgba(255,255,255,${opacity * .09})`);
-    sheen.addColorStop(.16, `rgba(154,255,213,${opacity * .045})`);
-    sheen.addColorStop(1, 'rgba(122,255,194,0)');
-    context.fillStyle = sheen;
-    context.fillRect(camera.x - radiusX * 1.5, camera.y - radiusY * 1.5, radiusX * 3, radiusY * 3);
     context.restore();
   };
 
-  const drawShield = (intensity, time, camera) => {
-    if (intensity <= .01) return;
-    context.save();
-    context.globalCompositeOperation = 'lighter';
-    context.translate(camera.x + 105 * camera.zoom, camera.y - 42 * camera.zoom);
-    context.rotate(-.18);
-    for (let ring = 0; ring < 4; ring += 1) {
-      context.beginPath();
-      context.ellipse(0, 0, (128 + ring * 18) * camera.zoom, (92 + ring * 13) * camera.zoom, 0, Math.PI * .12, Math.PI * 1.88);
-      context.strokeStyle = `rgba(122,255,194,${intensity * (.12 - ring * .018)})`;
-      context.lineWidth = ring === 0 ? 1.4 : .7;
-      context.setLineDash([5 + ring * 2, 9]);
-      context.lineDashOffset = -time * .015 * (ring % 2 ? -1 : 1);
-      context.stroke();
-    }
-    context.setLineDash([]);
-    for (let line = -3; line <= 3; line += 1) {
-      context.beginPath();
-      context.moveTo(-115 * camera.zoom, line * 25 * camera.zoom);
-      context.lineTo(125 * camera.zoom, line * 17 * camera.zoom);
-      context.strokeStyle = `rgba(99,223,255,${intensity * .055})`;
-      context.lineWidth = .7;
-      context.stroke();
-    }
-    context.restore();
+  const spiderPosition = (geometry, progress) => {
+    const angle = -.55 + progress * Math.PI * 4.45;
+    const radius = geometry.radius * mix(.68, .16, ease(progress));
+    return {
+      x: geometry.center.x + Math.cos(angle) * radius,
+      y: geometry.center.y + Math.sin(angle) * radius * .76,
+      angle: angle + Math.PI * .56
+    };
   };
 
-  const drawModelStreams = (intensity, time) => {
-    if (intensity <= .01) return;
-    const sources = [
-      { x: width * .78, y: height * .27 },
-      { x: width * .82, y: height * .74 },
-      { x: width * .64, y: height * .86 }
-    ];
-    const origin = { x: width * .61, y: height * .5 };
+  const drawSpider = (position, scale, time, progress) => {
+    const context = spiderContext;
+    const breathe = 1 + Math.sin(time * .0022) * .025;
+    const gait = Math.sin(time * .004 + progress * 12) * 2.2;
     context.save();
-    context.globalCompositeOperation = 'lighter';
-    sources.forEach((target, index) => {
-      context.beginPath();
-      context.moveTo(origin.x, origin.y);
-      context.bezierCurveTo(width * .7, origin.y + (index - 1) * 90, target.x - 80, target.y, target.x, target.y);
-      context.strokeStyle = `rgba(${index === 1 ? '99,223,255' : '122,255,194'},${intensity * .14})`;
-      context.lineWidth = 1;
-      context.stroke();
-      for (let packet = 0; packet < 3; packet += 1) {
-        const t = (time * .00024 + packet / 3 + index * .17) % 1;
-        const oneMinus = 1 - t;
-        const cx = oneMinus ** 3 * origin.x + 3 * oneMinus ** 2 * t * width * .7 + 3 * oneMinus * t ** 2 * (target.x - 80) + t ** 3 * target.x;
-        const cy = oneMinus ** 3 * origin.y + 3 * oneMinus ** 2 * t * (origin.y + (index - 1) * 90) + 3 * oneMinus * t ** 2 * target.y + t ** 3 * target.y;
+    context.translate(position.x, position.y);
+    context.rotate(position.angle);
+    context.scale(scale, scale);
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+
+    for (const side of [-1, 1]) {
+      for (let leg = 0; leg < 4; leg += 1) {
+        const baseY = -20 + leg * 14;
+        const spread = [-1.05, -.42, .35, .92][leg];
+        const motion = gait * (leg % 2 ? -1 : 1) * side;
+        const jointX = side * (34 + Math.abs(spread) * 15);
+        const jointY = baseY + spread * 20 + motion;
+        const footX = side * (68 + Math.abs(spread) * 26);
+        const footY = baseY + spread * 48 - motion * .45;
         context.beginPath();
-        context.arc(cx, cy, 2.2, 0, Math.PI * 2);
-        context.fillStyle = `rgba(166,255,213,${intensity * .9})`;
-        context.shadowColor = '#7affc2';
-        context.shadowBlur = 9;
+        context.moveTo(side * 11, baseY * .47);
+        context.quadraticCurveTo(jointX, jointY, footX, footY);
+        context.strokeStyle = 'rgba(0,3,4,.9)';
+        context.lineWidth = 6.2;
+        context.stroke();
+        context.strokeStyle = leg === 0 ? 'rgba(225,184,111,.72)' : 'rgba(119,151,137,.64)';
+        context.lineWidth = 2.05;
+        context.stroke();
+        context.beginPath();
+        context.arc(jointX, jointY, 2.4, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(235,201,136,.7)';
         context.fill();
       }
-    });
-    context.restore();
-  };
+    }
 
-  const drawPruning = (intensity, sceneProgress, time) => {
-    if (intensity <= .01) return;
-    const filterX = mix(width * .22, width * .84, sceneProgress);
-    const nodeX = width * .7;
-    const nodeY = height * .49;
-    context.save();
-    context.globalCompositeOperation = 'lighter';
-    dust.forEach((particle) => {
-      const rawX = particle.x * width + Math.sin(time * .0007 + particle.phase) * width * particle.drift;
-      const rawY = particle.y * height + Math.cos(time * .0005 + particle.phase) * 16;
-      const passed = rawX < filterX;
-      const convergence = passed && !particle.removed ? clamp(sceneProgress * 1.4 - .25) : 0;
-      const x = mix(rawX, nodeX + Math.cos(particle.phase) * 46, convergence);
-      const y = mix(rawY, nodeY + Math.sin(particle.phase) * 46, convergence);
-      const alpha = particle.removed && passed ? .04 * (1 - sceneProgress) : .18 + convergence * .45;
+    const abdomen = context.createRadialGradient(-9, -18, 2, 0, 0, 37);
+    abdomen.addColorStop(0, 'rgba(239,220,180,1)');
+    abdomen.addColorStop(.12, 'rgba(130,116,89,1)');
+    abdomen.addColorStop(.5, 'rgba(31,39,35,1)');
+    abdomen.addColorStop(1, 'rgba(2,5,5,1)');
+    context.beginPath();
+    context.ellipse(0, 8, 27 * breathe, 34 * breathe, 0, 0, Math.PI * 2);
+    context.fillStyle = abdomen;
+    context.fill();
+    context.strokeStyle = 'rgba(225,184,111,.45)';
+    context.lineWidth = 1;
+    context.stroke();
+
+    for (let mark = -1; mark <= 1; mark += 1) {
       context.beginPath();
-      context.arc(x, y, particle.size * (1 - convergence * .45), 0, Math.PI * 2);
-      context.fillStyle = `rgba(${particle.removed ? '141,125,255' : '122,255,194'},${alpha * intensity})`;
+      context.moveTo(mark * 6, -13);
+      context.quadraticCurveTo(mark * 13, 6, mark * 7, 26);
+      context.strokeStyle = `rgba(222,178,97,${mark === 0 ? .62 : .24})`;
+      context.lineWidth = mark === 0 ? 1.5 : .7;
+      context.stroke();
+    }
+    for (let hair = 0; hair < 14; hair += 1) {
+      const angle = hair / 14 * Math.PI * 2;
+      const x = Math.cos(angle) * 23;
+      const y = 8 + Math.sin(angle) * 30;
+      context.beginPath();
+      context.moveTo(x * .92, 8 + (y - 8) * .92);
+      context.lineTo(x * 1.08, 8 + (y - 8) * 1.08);
+      context.strokeStyle = 'rgba(221,205,168,.28)';
+      context.lineWidth = .55;
+      context.stroke();
+    }
+
+    const thorax = context.createRadialGradient(-7, -37, 1, 0, -28, 21);
+    thorax.addColorStop(0, '#d8c49c');
+    thorax.addColorStop(.18, '#5c645d');
+    thorax.addColorStop(1, '#080d0c');
+    context.beginPath();
+    context.ellipse(0, -27, 18, 20, 0, 0, Math.PI * 2);
+    context.fillStyle = thorax;
+    context.fill();
+
+    for (const eyeX of [-7, -2.5, 2.5, 7]) {
+      context.beginPath();
+      context.arc(eyeX, -37 + Math.abs(eyeX) * .12, 1.45, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(188,255,224,.9)';
       context.fill();
-    });
-    const filterGradient = context.createLinearGradient(filterX - 40, 0, filterX + 40, 0);
-    filterGradient.addColorStop(0, 'rgba(122,255,194,0)');
-    filterGradient.addColorStop(.5, `rgba(122,255,194,${intensity * .24})`);
-    filterGradient.addColorStop(1, 'rgba(122,255,194,0)');
-    context.fillStyle = filterGradient;
-    context.fillRect(filterX - 40, height * .12, 80, height * .76);
-    context.beginPath();
-    context.arc(nodeX, nodeY, 24 + Math.sin(time * .002) * 3, 0, Math.PI * 2);
-    context.fillStyle = `rgba(122,255,194,${intensity * .18})`;
-    context.shadowColor = '#7affc2';
-    context.shadowBlur = 35;
-    context.fill();
-    context.beginPath();
-    context.arc(nodeX, nodeY, 6, 0, Math.PI * 2);
-    context.fillStyle = `rgba(220,255,235,${intensity})`;
-    context.fill();
+    }
     context.restore();
   };
 
-  const draw = (time) => {
+  const drawProviderThreads = (geometry, progress) => {
+    const context = webContext;
+    const intensity = clamp((progress - .48) / .16) * clamp((.86 - progress) / .14);
+    if (intensity <= 0) return;
+    const targets = mobile
+      ? [{ x: width * .2, y: height * .18 }, { x: width * .8, y: height * .17 }]
+      : [{ x: width * .86, y: height * .25 }, { x: width * .9, y: height * .72 }, { x: width * .68, y: height * .86 }];
+    context.save();
+    targets.forEach((target, index) => {
+      context.beginPath();
+      context.moveTo(geometry.center.x, geometry.center.y);
+      context.quadraticCurveTo(width * (.72 + index * .03), height * (.42 + index * .09), target.x, target.y);
+      context.strokeStyle = `rgba(${index === 1 ? '126,206,255' : '226,181,103'},${intensity * .32})`;
+      context.lineWidth = .8;
+      context.stroke();
+    });
+    context.restore();
+  };
+
+  const draw = (time = 0) => {
     if (!width || !height) return;
-    context.clearRect(0, 0, width, height);
-    const camera = cameraAt(displayProgress, time);
-    projectBrain(camera);
-    const sceneFloat = displayProgress * 3;
-    const shieldIntensity = clamp(1 - Math.abs(sceneFloat - 1) * 1.2);
-    const bridgeIntensity = clamp(1 - Math.abs(sceneFloat - 2) * 1.25);
-    const pruneIntensity = clamp((sceneFloat - 2.15) / .55);
-    const brainOpacity = 1 - pruneIntensity * .72;
+    displayProgress += (targetProgress - displayProgress) * (reduceMotion ? 1 : .105);
+    const geometry = webGeometry();
+    if (Math.abs(displayProgress - lastWebProgress) > .002 || lastWebProgress < 0) {
+      webContext.clearRect(0, 0, width, height);
+      strokeWeb(geometry, displayProgress, 0);
+      drawProviderThreads(geometry, displayProgress);
+      lastWebProgress = displayProgress;
+    }
+    spiderContext.clearRect(0, 0, width, height);
+    const spider = spiderPosition(geometry, displayProgress);
 
-    drawBrainVolume(camera, brainOpacity, time);
-
-    context.save();
-    context.globalCompositeOperation = 'lighter';
-    edges.forEach((edge, index) => {
-      const from = projected[edge.a];
-      const to = projected[edge.b];
-      if (!from?.visible || !to?.visible) return;
-      const depthAlpha = clamp((from.z + to.z + 450) / 900, .08, .72);
-      const governanceBoost = shieldIntensity * (nodes[edge.a].x > 60 && nodes[edge.a].y < 90 ? .35 : 0);
-      context.beginPath();
-      context.moveTo(from.x, from.y);
-      context.lineTo(to.x, to.y);
-      context.strokeStyle = `rgba(${bridgeIntensity > .35 ? '99,223,255' : '122,255,194'},${(.025 + depthAlpha * .08 + governanceBoost) * brainOpacity})`;
-      context.lineWidth = .45 + depthAlpha * .6;
-      context.stroke();
-
-      if ((index + Math.floor(time * .006)) % 31 === 0) {
-        const pulse = (time * .00038 + edge.phase) % 1;
-        const x = mix(from.x, to.x, pulse);
-        const y = mix(from.y, to.y, pulse);
-        context.beginPath();
-        context.arc(x, y, 1.2 + depthAlpha, 0, Math.PI * 2);
-        context.fillStyle = `rgba(200,255,226,${(.45 + depthAlpha * .5) * brainOpacity})`;
-        context.shadowColor = '#7affc2';
-        context.shadowBlur = 7;
-        context.fill();
-      }
-    });
-
-    context.shadowBlur = 0;
-    nodes.forEach((node, index) => {
-      const point = projected[index];
-      if (!point?.visible) return;
-      const depthAlpha = clamp((point.z + 260) / 520, .12, 1);
-      const pulse = .7 + Math.sin(time * .0016 + node.phase) * .25;
-      const governance = shieldIntensity && node.x > 55 && node.y < 95 ? 1.9 : 1;
-      const radius = node.size * point.perspective * governance;
-      context.beginPath();
-      context.arc(point.x, point.y, Math.max(.35, radius), 0, Math.PI * 2);
-      context.fillStyle = `rgba(${node.energy > .86 ? '210,255,232' : node.hemisphere > 0 ? '122,255,194' : '99,223,255'},${depthAlpha * pulse * .64 * brainOpacity})`;
-      if (node.energy > .94) {
-        context.shadowColor = node.hemisphere > 0 ? '#7affc2' : '#63dfff';
-        context.shadowBlur = 11;
-      } else {
-        context.shadowBlur = 0;
-      }
-      context.fill();
-    });
-    context.restore();
-
-    drawShield(shieldIntensity, time, camera);
-    drawModelStreams(bridgeIntensity, time);
-    drawPruning(pruneIntensity, clamp((sceneFloat - 2.15) / .85), time);
-
-    const scanY = (time * .035) % (height + 160) - 80;
-    const scan = context.createLinearGradient(0, scanY - 35, 0, scanY + 35);
-    scan.addColorStop(0, 'rgba(122,255,194,0)');
-    scan.addColorStop(.5, 'rgba(122,255,194,.035)');
-    scan.addColorStop(1, 'rgba(122,255,194,0)');
-    context.fillStyle = scan;
-    context.fillRect(0, scanY - 35, width, 70);
+    if (lastSpider.x) {
+      spiderContext.beginPath();
+      spiderContext.moveTo(lastSpider.x, lastSpider.y);
+      spiderContext.lineTo(spider.x, spider.y);
+      spiderContext.strokeStyle = 'rgba(226,234,229,.28)';
+      spiderContext.lineWidth = .55;
+      spiderContext.stroke();
+    }
+    lastSpider = spider;
+    drawSpider(spider, Math.max(.54, Math.min(1.03, width / 1280)) * (mobile ? .72 : 1), time, displayProgress);
   };
 
-  const animate = (time) => {
-    if (!active) {
-      animationFrame = 0;
-      return;
-    }
-    displayProgress += (targetProgress - displayProgress) * .075;
-    const frameInterval = liteMode || window.innerWidth < 700 ? 1000 / 30 : 1000 / 45;
-    if (time - lastFrame >= frameInterval) {
-      draw(time);
+  const loop = (time) => {
+    if (!active || document.hidden) { running = false; return; }
+    const interval = 1000 / (liteMode || mobile ? 28 : 40);
+    if (time - lastFrame >= interval) {
       lastFrame = time;
+      const drawStarted = Date.now();
+      draw(time);
+      drawTotal += Date.now() - drawStarted;
+      drawSamples += 1;
+      if (drawSamples >= 8) {
+        document.body.dataset.webDrawMs = (drawTotal / drawSamples).toFixed(2);
+        drawSamples = 0;
+        drawTotal = 0;
+      }
+      if (!fpsStarted) fpsStarted = time;
+      fpsFrames += 1;
+      if (time - fpsStarted >= 1000) {
+        document.body.dataset.webFps = String(Math.round(fpsFrames * 1000 / (time - fpsStarted)));
+        fpsStarted = time;
+        fpsFrames = 0;
+      }
     }
-    animationFrame = requestAnimationFrame(animate);
+    requestAnimationFrame(loop);
   };
 
-  const start = () => {
-    if (!animationFrame && active) animationFrame = requestAnimationFrame(animate);
-  };
-
-  const observer = new IntersectionObserver(([entry]) => {
-    active = entry.isIntersecting;
-    if (active) start();
-  }, { rootMargin: '35% 0px 35% 0px' });
-  observer.observe(story);
-
-  if (finePointer) {
-    window.addEventListener('pointermove', (event) => {
-      pointerX = event.clientX / window.innerWidth - .5;
-      pointerY = event.clientY / window.innerHeight - .5;
-      document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
-      document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
-    }, { passive: true });
-
-    document.querySelectorAll('[data-tilt]').forEach((card) => {
-      card.addEventListener('pointermove', (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - .5;
-        const y = (event.clientY - rect.top) / rect.height - .5;
-        card.style.transform = `rotateX(${-y * 3.5}deg) rotateY(${x * 4.5}deg) translateY(-5px)`;
-      });
-      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
-    });
+  function start() {
+    if (running || reduceMotion || !active) return;
+    running = true;
+    requestAnimationFrame(loop);
   }
 
-  let resizeTimer = 0;
-  window.addEventListener('resize', () => {
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      resize();
-      buildBrain();
-      updateScroll();
-      start();
-    }, 120);
-  }, { passive: true });
-  window.addEventListener('scroll', updateScroll, { passive: true });
+  new IntersectionObserver(([entry]) => {
+    active = entry.isIntersecting;
+    if (active) start();
+  }, { rootMargin: '20% 0px' }).observe(story);
 
-  buildBrain();
+  story.addEventListener('pointermove', (event) => {
+    if (!finePointer) return;
+    pointerX = ((event.clientX / window.innerWidth) - .5) * 2;
+    pointerY = ((event.clientY / window.innerHeight) - .5) * 2;
+  }, { passive: true });
+  story.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; }, { passive: true });
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  window.addEventListener('resize', () => { resize(); updateScroll(); draw(0); }, { passive: true });
+  document.addEventListener('visibilitychange', start);
+
+  document.querySelectorAll('[data-tilt]').forEach((card) => {
+    if (!finePointer || liteMode) return;
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      card.style.transform = `perspective(1000px) rotateX(${-y * 3}deg) rotateY(${x * 4}deg) translateY(-3px)`;
+    });
+    card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+  });
+
   resize();
   updateScroll();
-  start();
+  if (reduceMotion) draw(0); else start();
 })();

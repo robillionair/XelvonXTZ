@@ -213,3 +213,15 @@ img { display: block; max-width: 100%; }
 @media(max-width:980px){.faq-section{grid-template-columns:1fr;gap:55px}.faq-heading{position:relative;top:auto}}
 @media(max-width:650px){#main-content:before,.hero:after{display:none}.core-stage:after{inset:16%}.faq-section{min-height:0;padding-top:100px;padding-bottom:100px}.faq-heading>p:last-child{font-size:14px}.faq-list summary{min-height:78px;font-size:16px}.faq-list details p{padding-right:0}.beta-clock-orbit{scale:1}}
 @media(prefers-reduced-motion:reduce){.core-stage:after,.core-shell:after{animation:none}.beta-clock-orbit,.cta-halo{scale:1;opacity:1}}
+
+/* ANANSI sovereign-web portal */
+.anansi-portal{background:radial-gradient(circle at 76% 48%,rgba(222,182,111,.075),transparent 29%),linear-gradient(115deg,#050706,#020303 68%)}
+.anansi-portal:before{background:linear-gradient(90deg,rgba(3,5,4,.99),rgba(3,5,4,.82) 52%,rgba(3,5,4,.16))}
+.anansi-portal:after{background:conic-gradient(from 225deg at 50% 100%,transparent 0 30%,rgba(222,182,111,.07) 44%,rgba(196,215,205,.035) 50%,rgba(222,182,111,.065) 57%,transparent 69%);filter:blur(8px)}
+.anansi-portal-grid{opacity:.22;background-image:repeating-conic-gradient(from 0deg at 78% 50%,rgba(222,182,111,.13) 0 .28deg,transparent .38deg 30deg),repeating-radial-gradient(circle at 78% 50%,transparent 0 55px,rgba(218,222,210,.055) 56px,transparent 57px 85px);mask-image:linear-gradient(90deg,transparent 42%,black)}
+.anansi-mini-wordmark i{border-color:rgba(222,182,111,.42);color:#deb66f;box-shadow:inset 0 0 18px rgba(222,182,111,.07),0 0 25px rgba(222,182,111,.08)}
+.anansi-mini-wordmark b{color:#f0eee5;text-shadow:0 0 24px rgba(222,182,111,.08)}
+.anansi-portal-copy .section-kicker span,.anansi-portal-tags span{color:#c7a86d}.anansi-portal-tags span{border-color:rgba(222,182,111,.15);background:rgba(10,12,10,.6)}
+.anansi-portal-copy h2 em{color:transparent;-webkit-text-stroke:1px rgba(222,190,128,.48)}
+.anansi-portal-button b{background:#d9bd86}.anansi-portal-readout b{color:#deb66f}
+@media(max-width:650px){.anansi-portal:before{background:linear-gradient(180deg,rgba(3,5,4,.28),rgba(3,5,4,.96) 44%,#030504 72%)}.anansi-portal-grid{background-position:center top}}
