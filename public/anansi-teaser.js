@@ -4,6 +4,7 @@
   if (!canvas || !section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const context = canvas.getContext('2d');
   if (!context) return;
+  const liteMode = document.documentElement.classList.contains('flow-lite');
 
   let width = 0;
   let height = 0;
@@ -23,7 +24,7 @@
   const build = () => {
     points.length = 0;
     links.length = 0;
-    const count = window.innerWidth < 650 ? 180 : 310;
+    const count = liteMode ? (window.innerWidth < 650 ? 105 : 170) : (window.innerWidth < 650 ? 180 : 310);
     for (let index = 0; index < count; index += 1) {
       const theta = random() * Math.PI * 2;
       const phi = Math.acos(2 * random() - 1);
@@ -54,7 +55,7 @@
     if (!rect.width || !rect.height) return;
     width = rect.width;
     height = rect.height;
-    dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.4);
+    dpr = Math.min(window.devicePixelRatio || 1, liteMode || window.innerWidth < 700 ? 1 : 1.4);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -110,7 +111,7 @@
 
   const animate = (time) => {
     if (!active) { frame = 0; return; }
-    if (time - lastFrame > 1000 / 35) {
+    if (time - lastFrame > 1000 / (liteMode ? 24 : 35)) {
       draw(time);
       lastFrame = time;
     }

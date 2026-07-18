@@ -6,6 +6,7 @@
   const progressLabel = document.getElementById('an-progress-label');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer:fine)').matches;
+  const liteMode = document.documentElement.classList.contains('flow-lite');
   if (!canvas || !story || reduceMotion) return;
 
   const context = canvas.getContext('2d', { alpha: true });
@@ -45,7 +46,7 @@
     nodes.length = 0;
     edges.length = 0;
     dust.length = 0;
-    const nodeCount = window.innerWidth < 650 ? 330 : window.innerWidth < 1000 ? 470 : 680;
+    const nodeCount = liteMode ? (window.innerWidth < 650 ? 230 : 410) : window.innerWidth < 650 ? 330 : window.innerWidth < 1000 ? 470 : 680;
 
     for (let index = 0; index < nodeCount; index += 1) {
       const theta = seededRandom() * Math.PI * 2;
@@ -125,7 +126,7 @@
     if (!rect.width || !rect.height) return;
     width = rect.width;
     height = rect.height;
-    dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.45);
+    dpr = Math.min(window.devicePixelRatio || 1, liteMode || window.innerWidth < 700 ? 1 : 1.45);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -195,6 +196,43 @@
         visible: depth > 180
       };
     });
+  };
+
+  const drawBrainVolume = (camera, opacity, time) => {
+    if (opacity <= .02) return;
+    const radiusX = 185 * camera.zoom;
+    const radiusY = 192 * camera.zoom;
+    context.save();
+    context.globalCompositeOperation = 'screen';
+    [-1, 1].forEach((side) => {
+      const centerX = camera.x + side * 78 * camera.zoom;
+      const centerY = camera.y - 3 * camera.zoom;
+      const tissue = context.createRadialGradient(
+        centerX - side * 44 * camera.zoom,
+        centerY - 62 * camera.zoom,
+        3,
+        centerX,
+        centerY,
+        radiusX
+      );
+      tissue.addColorStop(0, `rgba(232,255,242,${opacity * .065})`);
+      tissue.addColorStop(.18, `rgba(${side > 0 ? '82,208,162' : '71,163,197'},${opacity * .055})`);
+      tissue.addColorStop(.62, `rgba(16,83,69,${opacity * .03})`);
+      tissue.addColorStop(1, 'rgba(2,8,10,0)');
+      context.beginPath();
+      context.ellipse(centerX, centerY, radiusX, radiusY, side * .07, 0, Math.PI * 2);
+      context.fillStyle = tissue;
+      context.fill();
+    });
+    const sheenX = camera.x - 86 * camera.zoom + Math.sin(time * .00035) * 26 * camera.zoom;
+    const sheenY = camera.y - 82 * camera.zoom;
+    const sheen = context.createRadialGradient(sheenX, sheenY, 0, sheenX, sheenY, 105 * camera.zoom);
+    sheen.addColorStop(0, `rgba(255,255,255,${opacity * .09})`);
+    sheen.addColorStop(.16, `rgba(154,255,213,${opacity * .045})`);
+    sheen.addColorStop(1, 'rgba(122,255,194,0)');
+    context.fillStyle = sheen;
+    context.fillRect(camera.x - radiusX * 1.5, camera.y - radiusY * 1.5, radiusX * 3, radiusY * 3);
+    context.restore();
   };
 
   const drawShield = (intensity, time, camera) => {
@@ -307,6 +345,8 @@
     const pruneIntensity = clamp((sceneFloat - 2.15) / .55);
     const brainOpacity = 1 - pruneIntensity * .72;
 
+    drawBrainVolume(camera, brainOpacity, time);
+
     context.save();
     context.globalCompositeOperation = 'lighter';
     edges.forEach((edge, index) => {
@@ -375,7 +415,7 @@
       return;
     }
     displayProgress += (targetProgress - displayProgress) * .075;
-    const frameInterval = window.innerWidth < 700 ? 1000 / 30 : 1000 / 45;
+    const frameInterval = liteMode || window.innerWidth < 700 ? 1000 / 30 : 1000 / 45;
     if (time - lastFrame >= frameInterval) {
       draw(time);
       lastFrame = time;

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Xelvon XPT — AI Thinking Workspace with Visible Reasoning</title>
-  <meta name="description" content="Bring Xelvon XPT a difficult question, decision, or idea. Watch its reasoning unfold and turn it into a clear plan, draft, or next move. Try the live beta.">
-  <meta name="keywords" content="private AI, enterprise AI, AI assistant, privacy-first AI, secure AI, Xelvon XPT, Robillionair">
+  <meta name="description" content="Xelvon XPT is a privacy-conscious AI thinking workspace with visible reasoning, multiple model modes, and saved conversations. Bring a difficult question and leave with a clear next move.">
+  <meta name="keywords" content="AI thinking workspace, visible AI reasoning, private AI assistant, enterprise AI, multi-model AI, secure AI, Xelvon XPT, Robillionair">
   <meta name="author" content="Robillionair">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#05050a">
@@ -15,12 +15,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=20260718-anansi1">
+  <link rel="stylesheet" href="/style.css?v=20260718-flow1">
+  <link rel="stylesheet" href="/experience.css?v=20260718-flow1">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Robillionair">
   <meta property="og:title" content="Xelvon XPT — Intelligence without compromise">
-  <meta property="og:description" content="A privacy-first AI experience built to help ambitious people turn complex questions into clear action.">
+  <meta property="og:description" content="See the reasoning, compare paths, and turn difficult questions into clear action with Xelvon XPT.">
   <meta property="og:url" content="https://robillionair.com/">
   <meta property="og:image" content="https://robillionair.com/assets/images/hero_ai_abstract.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -45,9 +46,26 @@
         "name": "Xelvon XPT",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "A privacy-first AI intelligence interface by Robillionair.",
+        "description": "A privacy-conscious AI thinking workspace with visible reasoning, multiple model modes, and saved conversations.",
         "url": "https://robillionair.com/",
         "creator": { "@id": "https://robillionair.com/#organization" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://robillionair.com/#website",
+        "name": "Robillionair",
+        "url": "https://robillionair.com/",
+        "publisher": { "@id": "https://robillionair.com/#organization" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://robillionair.com/#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is Xelvon XPT?", "acceptedAnswer": { "@type": "Answer", "text": "Xelvon XPT is an AI thinking workspace that separates visible reasoning from the final answer and helps turn complex questions into plans, drafts, and decisions." } },
+          { "@type": "Question", "name": "Does Xelvon save conversations?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. During the beta, an email address reconnects saved conversation history stored in Firebase." } },
+          { "@type": "Question", "name": "Which AI models does Xelvon use?", "acceptedAnswer": { "@type": "Answer", "text": "Xelvon routes requests through OpenRouter to the model mode selected in the interface." } },
+          { "@type": "Question", "name": "What is ANANSI?", "acceptedAnswer": { "@type": "Answer", "text": "ANANSI is a Robillionair product concept for a local-first sovereign data layer that keeps AI memory portable across model providers." } }
+        ]
       }
     ]
   }
@@ -55,7 +73,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <main id="splash-screen" class="site-shell">
+  <main id="splash-screen" class="site-shell" data-scroll-root>
     <div class="ambient-noise" aria-hidden="true"></div>
     <canvas id="neural-canvas" aria-hidden="true"></canvas>
 
@@ -76,7 +94,7 @@
     </header>
 
     <div id="main-content">
-      <section id="top" class="hero" aria-labelledby="hero-title">
+      <section id="top" class="hero" aria-labelledby="hero-title" data-flow-section data-flow-tone="violet">
         <div class="hero-aura aura-one" aria-hidden="true"></div>
         <div class="hero-aura aura-two" aria-hidden="true"></div>
 
@@ -121,7 +139,7 @@
         <div class="scroll-cue" aria-hidden="true"><span></span> SCROLL TO DISCOVER</div>
       </section>
 
-      <section id="beta-window" class="beta-window" aria-labelledby="beta-window-title">
+      <section id="beta-window" class="beta-window" aria-labelledby="beta-window-title" data-flow-section data-flow-tone="mint">
         <div class="beta-window-grid">
           <div class="beta-window-copy reveal">
             <p class="section-kicker"><span>LIVE WINDOW</span> XELVON PRIVATE BETA</p>
@@ -145,7 +163,7 @@
         </div>
       </section>
 
-      <section id="neural-cinema" class="neural-cinema" aria-label="How Xelvon intelligence works">
+      <section id="neural-cinema" class="neural-cinema" aria-label="How Xelvon intelligence works" data-flow-section data-flow-tone="ice">
         <div class="neural-cinema-sticky">
           <canvas id="cinema-neural-canvas" aria-hidden="true"></canvas>
           <div class="cinema-depth" aria-hidden="true"></div>
@@ -183,7 +201,7 @@
         </div>
       </section>
 
-      <section id="intelligence" class="section section-intro" aria-labelledby="intelligence-title">
+      <section id="intelligence" class="section section-intro" aria-labelledby="intelligence-title" data-flow-section data-flow-tone="mint">
         <div class="section-kicker reveal"><span>02</span> BUILT FOR REAL MOMENTUM</div>
         <div class="intro-grid">
           <h2 id="intelligence-title" class="display-title reveal">From difficult question<br><em>to clear next move.</em></h2>
@@ -229,14 +247,14 @@
         </div>
       </section>
 
-      <section class="statement-section" aria-label="Xelvon product promise">
+      <section class="statement-section" aria-label="Xelvon product promise" data-flow-section data-flow-tone="violet">
         <div class="statement-orb" aria-hidden="true"><i></i><i></i><i></i></div>
         <p class="section-kicker reveal"><span>03</span> A DIFFERENT KIND OF AI</p>
         <blockquote class="reveal">“The breakthrough isn’t another answer. It’s a thinking partner that helps you <em>see further</em> and move sooner.”</blockquote>
         <div class="statement-signoff reveal delay-1"><span></span> XELVON PRINCIPLE 01</div>
       </section>
 
-      <section id="privacy" class="section privacy-section" aria-labelledby="privacy-title">
+      <section id="privacy" class="section privacy-section" aria-labelledby="privacy-title" data-flow-section data-flow-tone="ice">
         <div class="privacy-visual reveal">
           <div class="vault-scene" aria-hidden="true">
             <div class="vault-back"></div>
@@ -264,7 +282,7 @@
         </div>
       </section>
 
-      <section id="anansi" class="anansi-portal" aria-labelledby="anansi-portal-title">
+      <section id="anansi" class="anansi-portal" aria-labelledby="anansi-portal-title" data-flow-section data-flow-tone="mint">
         <canvas id="anansi-teaser-canvas" aria-hidden="true"></canvas>
         <div class="anansi-portal-grid" aria-hidden="true"></div>
         <div class="anansi-portal-copy reveal">
@@ -278,7 +296,7 @@
         <div class="anansi-portal-readout" aria-hidden="true"><span>LOCAL GRAPH</span><i></i><b>SOVEREIGN</b></div>
       </section>
 
-      <section id="story" class="section founder-section" aria-labelledby="story-title">
+      <section id="story" class="section founder-section" aria-labelledby="story-title" data-flow-section data-flow-tone="violet">
         <div class="founder-heading">
           <p class="section-kicker reveal"><span>05</span> WHY XELVON EXISTS</p>
           <h2 id="story-title" class="display-title reveal">AI should expand<br><em>human ambition.</em></h2>
@@ -300,7 +318,33 @@
         </div>
       </section>
 
-      <section class="final-cta" aria-labelledby="cta-title">
+      <section id="faq" class="section faq-section" aria-labelledby="faq-title" data-flow-section data-flow-tone="ice">
+        <div class="faq-heading reveal">
+          <p class="section-kicker"><span>06</span> BEFORE YOU ENTER</p>
+          <h2 id="faq-title" class="display-title">Clear questions.<br><em>Direct answers.</em></h2>
+          <p>Everything you should know before beginning a Xelvon beta session.</p>
+        </div>
+        <div class="faq-list reveal delay-1">
+          <details>
+            <summary>What is Xelvon XPT?<span aria-hidden="true">+</span></summary>
+            <p>Xelvon is an AI thinking workspace that keeps its reasoning visually separate from the finished answer, helping you move from a difficult question to a useful plan, draft, or decision.</p>
+          </details>
+          <details>
+            <summary>Does Xelvon save my conversations?<span aria-hidden="true">+</span></summary>
+            <p>Yes. Your beta email reconnects conversation history stored in Firebase so you can continue where you stopped. Read the full <a href="/privacy.html">data practices</a>.</p>
+          </details>
+          <details>
+            <summary>Which AI models does it use?<span aria-hidden="true">+</span></summary>
+            <p>Xelvon routes your request through OpenRouter to the Thinking, Fast, or Pro model mode selected in the chat interface.</p>
+          </details>
+          <details>
+            <summary>How does ANANSI connect to this vision?<span aria-hidden="true">+</span></summary>
+            <p><a href="/anansi.html">ANANSI</a> is Robillionair’s local-first sovereign data-layer concept: portable memory and governed context that can connect to different AI providers.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="final-cta" aria-labelledby="cta-title" data-flow-section data-flow-tone="mint">
         <canvas id="cta-canvas" aria-hidden="true"></canvas>
         <div class="cta-halo" aria-hidden="true"></div>
         <div class="final-inner reveal">
@@ -377,8 +421,9 @@
     </section>
   </main>
 
-  <script src="/countdown.js?v=20260718-a1"></script>
-  <script src="/anansi-teaser.js?v=20260718-a1"></script>
-  <script src="/app.js?v=20260718-anansi1"></script>
+  <script src="/experience.js?v=20260718-flow1"></script>
+  <script src="/countdown.js?v=20260718-flow1"></script>
+  <script src="/anansi-teaser.js?v=20260718-flow1"></script>
+  <script src="/app.js?v=20260718-flow1"></script>
 </body>
 </html>

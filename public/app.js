@@ -318,14 +318,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const liteMode = document.documentElement.classList.contains('flow-lite');
+      const dpr = Math.min(window.devicePixelRatio || 1, liteMode ? 1 : 1.65);
       width = rect.width;
       height = rect.height;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       dots.length = 0;
-      const count = Math.min(95, Math.max(34, Math.floor((width * height) / density)));
+      const count = Math.min(liteMode ? 56 : 82, Math.max(liteMode ? 24 : 34, Math.floor((width * height) / density)));
       for (let i = 0; i < count; i++) {
         dots.push({
           x: Math.random() * width,
@@ -339,7 +340,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const draw = (now = 0) => {
-      if (!reduceMotion && now - lastDrawAt < 32) {
+      const frameInterval = document.documentElement.classList.contains('flow-lite') ? 48 : 32;
+      if (!reduceMotion && now - lastDrawAt < frameInterval) {
         requestAnimationFrame(draw);
         return;
       }
@@ -413,7 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return cinemaNodes.length - 1;
     };
 
-    const clusterCount = window.innerWidth < 700 ? 5 : 8;
+    const cinemaLiteMode = document.documentElement.classList.contains('flow-lite');
+    const clusterCount = cinemaLiteMode ? (window.innerWidth < 700 ? 4 : 6) : (window.innerWidth < 700 ? 5 : 8);
     for (let c = 0; c < clusterCount; c++) {
       const soma = {
         x: (random() - .5) * 1250,
@@ -458,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resizeCinema = () => {
       const rect = cinemaCanvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.45);
+      const dpr = Math.min(window.devicePixelRatio || 1, cinemaLiteMode || window.innerWidth < 700 ? 1 : 1.35);
       cinemaWidth = rect.width;
       cinemaHeight = rect.height;
       cinemaCanvas.width = Math.round(rect.width * dpr);
@@ -547,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cinemaLoop = (now) => {
       if (!cinemaActive || splashScreen.classList.contains('hidden')) { cinemaRunning=false; return; }
-      if (now-cinemaLastFrame>32) { cinemaLastFrame=now; drawCinema(now); }
+      if (now-cinemaLastFrame>(cinemaLiteMode ? 48 : 32)) { cinemaLastFrame=now; drawCinema(now); }
       requestAnimationFrame(cinemaLoop);
     };
 
