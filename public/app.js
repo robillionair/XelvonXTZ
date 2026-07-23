@@ -127,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Event Listeners
-  navLaunchBtn.addEventListener('click', showChat);
-  heroLaunchBtn.addEventListener('click', showChat);
+  if (navLaunchBtn) navLaunchBtn.addEventListener('click', showChat);
+  if (heroLaunchBtn) heroLaunchBtn.addEventListener('click', showChat);
   if (footerLaunchBtn) footerLaunchBtn.addEventListener('click', showChat);
   if (betaLaunchBtn) betaLaunchBtn.addEventListener('click', showChat);
   closeModalBtn.addEventListener('click', closeModal);
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`${API_BASE}/api/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, product: 'xelvon-company', source: 'company-access' })
       });
       const data = await response.json();
       if (!data.success) {

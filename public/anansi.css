@@ -231,3 +231,10 @@ html.js-flow body.anansi-page [data-flow-reveal]{filter:none}
   .an-model-node{width:70px;height:70px}
 }
 @media(prefers-reduced-motion:reduce){#anansi-web,#anansi-spider{display:block!important;position:absolute!important}.an-moon{display:block}.an-story{height:auto}.an-sticky{padding-top:120px}.an-chapter{background:rgba(7,10,8,.92)}}
+
+.an-page-waitlist{position:relative;z-index:3;width:min(720px,100%);margin-top:42px;padding:30px;border:1px solid rgba(222,182,111,.14);border-radius:24px;background:rgba(8,11,9,.86);text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.24)}
+.an-page-waitlist label{display:block;margin-bottom:10px;color:#a39b8b;font:600 9px "Manrope",sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.an-page-waitlist>div{display:grid;grid-template-columns:1fr auto;gap:8px}
+.an-page-waitlist input{min-width:0;height:58px;padding:0 18px;border:1px solid rgba(222,182,111,.16);border-radius:100px;background:rgba(2,4,3,.76);color:#f1efe8;outline:none}.an-page-waitlist input:focus{border-color:rgba(222,182,111,.48);box-shadow:0 0 0 4px rgba(222,182,111,.055)}
+.an-page-waitlist .an-primary-button{border:0;cursor:pointer}.an-page-waitlist .waitlist-status{min-height:34px;margin:14px 4px 0;color:#706b60;font-size:10px;line-height:1.55;letter-spacing:.025em}.an-page-waitlist .waitlist-status[data-state="success"]{color:#c9b483}.an-page-waitlist .waitlist-status[data-state="error"]{color:#e3977a}
+@media(max-width:650px){.an-page-waitlist{padding:22px 15px}.an-page-waitlist>div{grid-template-columns:1fr}.an-page-waitlist .an-primary-button{max-width:none}}

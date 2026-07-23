@@ -1,9 +1,9 @@
 {
-  "name": "Xelvon XPT by Robillionair",
-  "short_name": "Xelvon XPT",
-  "description": "A privacy-first AI intelligence experience.",
+  "name": "ANANSI by Robillionair",
+  "short_name": "ANANSI",
+  "description": "A sovereign AI memory and context system in development.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050508",
-  "theme_color": "#050508"
+  "background_color": "#050403",
+  "theme_color": "#050403"
 }

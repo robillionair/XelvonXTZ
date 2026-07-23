@@ -69,7 +69,7 @@
       <a href="#pillars">Architecture</a>
       <a href="#markets">Use cases</a>
     </nav>
-    <a class="an-header-cta" href="/#top">Enter Xelvon <span aria-hidden="true">↗</span></a>
+    <a class="an-header-cta" href="#early-access">Join early access <span aria-hidden="true">↘</span></a>
   </header>
 
   <main id="an-main">
@@ -208,21 +208,17 @@
       </div>
     </section>
 
-    <section class="an-xelvon-bridge" aria-labelledby="xelvon-bridge-title" data-flow-section data-flow-tone="mint">
+    <section id="early-access" class="an-xelvon-bridge" aria-labelledby="xelvon-bridge-title" data-flow-section data-flow-tone="mint">
       <div class="an-bridge-glow" aria-hidden="true"></div>
-      <p class="an-kicker"><span>LIVE NOW</span> XELVON PRIVATE BETA</p>
-      <h2 id="xelvon-bridge-title">ANANSI is the sovereign layer.<br><em>Xelvon is the intelligence you can test today.</em></h2>
-      <p>Experience Robillionair’s visible-reasoning AI interface before beta testing closes on 20 July 2026 at 23:59 CEST.</p>
-      <div class="an-countdown" data-beta-countdown aria-live="off">
-        <div><strong data-countdown-days>00</strong><span>Days</span></div>
-        <i>:</i>
-        <div><strong data-countdown-hours>00</strong><span>Hours</span></div>
-        <i>:</i>
-        <div><strong data-countdown-minutes>00</strong><span>Minutes</span></div>
-        <i>:</i>
-        <div><strong data-countdown-seconds>00</strong><span>Seconds</span></div>
-      </div>
-      <a class="an-primary-button" href="/?enter=xelvon"><span>Enter the Xelvon beta</span><b aria-hidden="true">↗</b></a>
+      <p class="an-kicker"><span>CONTROLLED RELEASE</span> THE FIRST THREAD</p>
+      <h2 id="xelvon-bridge-title">ANANSI is being built now.<br><em>Enter before public release.</em></h2>
+      <p>Join for development updates, product previews, private testing invitations, and opportunities to influence the first controlled release.</p>
+      <form id="anansi-waitlist-form" class="an-page-waitlist" action="/api/subscribe" method="post" data-source="anansi-concept-early-access">
+        <input type="hidden" name="product" value="anansi">
+        <label for="anansi-waitlist-email">Email address</label>
+        <div><input id="anansi-waitlist-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com"><button class="an-primary-button" type="submit"><span>Request early access</span><b aria-hidden="true">↗</b></button></div>
+        <p id="anansi-waitlist-status" class="waitlist-status" role="status" aria-live="polite">Selected participants will be contacted as ANANSI approaches controlled release.</p>
+      </form>
     </section>
   </main>
 
@@ -233,7 +229,7 @@
   </footer>
 
   <script src="/experience.js?v=20260718-flow1"></script>
-  <script src="/countdown.js?v=20260718-flow1"></script>
+  <script src="/waitlist.js?v=20260723-anansi1"></script>
   <script src="/anansi.js?v=20260718-web1"></script>
 </body>
 </html>
