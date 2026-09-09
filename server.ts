@@ -3,6 +3,7 @@ import path from 'path';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
+import { createHash } from 'node:crypto';
 import {
   SecretVault,
   ProviderRepository,
@@ -41,6 +42,7 @@ let workspaceAIPolicy: WorkspaceAIPolicy = {
 };
 
 const aiRequestWindows = new Map<string, { count: number; resetAt: number }>();
+const compilerSignupWindows = new Map<string, { count: number; resetAt: number }>();
 function aiRateLimit(req: express.Request, res: express.Response, next: express.NextFunction) {
   const key = req.ip || 'local';
   const now = Date.now();
@@ -60,6 +62,20 @@ function requireAIAdmin(req: express.Request, res: express.Response, next: expre
 
 function safeAIError(error: unknown) {
   return redactSecrets(error instanceof Error ? error.message : 'The AI provider request could not be completed.');
+}
+
+function compilerSignupRateLimit(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const key = req.ip || 'unknown';
+  const now = Date.now();
+  const current = compilerSignupWindows.get(key);
+  if (compilerSignupWindows.size > 2000) {
+    for (const [storedKey, storedWindow] of compilerSignupWindows) if (storedWindow.resetAt < now) compilerSignupWindows.delete(storedKey);
+  }
+  const window = !current || current.resetAt < now ? { count: 0, resetAt: now + 60 * 60_000 } : current;
+  window.count += 1;
+  compilerSignupWindows.set(key, window);
+  if (window.count > 20) return res.status(429).json({ success: false, error: 'Too many signup attempts. Try again later.' });
+  next();
 }
 
 
@@ -179,6 +195,35 @@ app.get('/api/subscribe', (req, res) => {
     return res.redirect(303, '/?access=retry');
   }
   return res.status(405).json({ success: false, error: 'This endpoint accepts POST requests only.' });
+});
+
+app.post('/api/memory-compiler/signup', compilerSignupRateLimit, async (req, res) => {
+  try {
+    const email = typeof req.body?.email === 'string' ? req.body.email.normalize('NFKC').trim().toLowerCase() : '';
+    const consent = req.body?.consent === true;
+    const company = typeof req.body?.company === 'string' ? req.body.company.trim() : '';
+    if (company) return res.status(200).json({ success: true });
+    if (!consent) return res.status(400).json({ success: false, error: 'Please agree before downloading.' });
+    if (email.length < 3 || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return res.status(400).json({ success: false, error: 'Enter a valid email address.' });
+    }
+    if (!db) return res.status(503).json({ success: false, error: 'Signup storage is temporarily unavailable.' });
+
+    const timestamp = new Date().toISOString();
+    const signupId = createHash('sha256').update(email).digest('hex');
+    await db.collection('memory_compiler_signups').doc(signupId).set({
+      email,
+      consent: true,
+      consentVersion: 'product-updates-v1',
+      source: 'robillionair-memory-compiler',
+      consentUpdatedAt: timestamp,
+      lastDownloadAt: timestamp
+    }, { merge: true });
+    return res.status(201).json({ success: true });
+  } catch (error) {
+    console.error('Memory compiler signup could not be saved.');
+    return res.status(500).json({ success: false, error: 'Signup is temporarily unavailable.' });
+  }
 });
 
 app.post('/api/chat', async (req, res) => {
@@ -419,6 +464,10 @@ app.get('/api/health', (_req, res) => {
 
 app.get(['/app', '/anansi/app'], (_req, res) => {
   res.sendFile(path.join(process.cwd(), 'public', 'app.html'));
+});
+
+app.get(['/memory-compiler', '/memory-compiler/'], (_req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'memory-compiler.html'));
 });
 
 // Serve static frontend files

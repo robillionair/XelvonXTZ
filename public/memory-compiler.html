@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Free AI Memory Compiler — Merge Markdown for ChatGPT, Claude &amp; Gemini | ANANSI</title>
+  <meta name="description" content="Combine multiple Markdown AI memory exports into one clean, deduplicated memory.md file. Private browser processing for ChatGPT, Claude, Gemini and other AI tools.">
+  <meta name="keywords" content="AI memory compiler, ChatGPT memory export, Claude memory file, Gemini memory, merge Markdown, memory.md, portable AI context, ANANSI">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Robillionair">
+  <meta name="theme-color" content="#070908">
+  <link rel="canonical" href="https://robillionair.com/memory-compiler">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ANANSI by Robillionair">
+  <meta property="og:title" content="ANANSI Memory Compiler — One Memory File for Any AI">
+  <meta property="og:description" content="Merge and clean your AI memory exports locally in your browser, then download one portable memory.md file.">
+  <meta property="og:url" content="https://robillionair.com/memory-compiler">
+  <meta property="og:image" content="https://robillionair.com/assets/images/anansi-poster.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/memory-compiler.css?v=20260909-1">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"ANANSI Memory Compiler","applicationCategory":"UtilitiesApplication","operatingSystem":"Any modern web browser","url":"https://robillionair.com/memory-compiler","description":"A private browser tool that combines, organizes and deduplicates Markdown AI memory files.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Multiple Markdown file import","Local duplicate removal","Portable memory.md download","Universal AI memory export prompt"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are my memory files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Memory files are processed locally in the browser and are not sent to the server."}},{"@type":"Question","name":"Which AI tools can use memory.md?","acceptedAnswer":{"@type":"Answer","text":"The portable Markdown file can be attached or pasted into ChatGPT, Claude, Gemini and other AI tools that accept text or file context."}}]}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#compiler">Skip to compiler</a>
+  <header class="mc-header">
+    <a class="mc-brand" href="/" aria-label="Robillionair home"><span aria-hidden="true">A</span><strong>ANANSI</strong></a>
+    <nav aria-label="Memory compiler navigation"><a href="#how">How it works</a><a href="#export-prompt">Get memory from your AI</a><a href="/privacy.html">Privacy</a></nav>
+  </header>
+
+  <main>
+    <section class="mc-hero" id="top">
+      <div class="mc-hero-copy">
+        <p class="eyebrow"><i></i> YOUR AI MEMORY, ONE CLEAN FILE</p>
+        <h1>Bring your memory<br><em>to any AI.</em></h1>
+        <p class="lede">Combine scattered Markdown memories, remove repeats, and download one organized file—ready for ChatGPT, Gemini, Claude, or any AI that accepts text.</p>
+        <div class="trust-row" aria-label="Privacy benefits"><span>Runs in your browser</span><span>No account</span><span>Files never uploaded</span></div>
+        <a class="learn-link" href="#how">See how it works ↓</a>
+      </div>
+
+      <section class="compiler-card" id="compiler" aria-labelledby="compiler-title">
+        <div class="compiler-head"><div><span id="step-label">STEP 1 OF 3</span><h2 id="compiler-title">Add your memory files</h2></div><b aria-hidden="true">⌁</b></div>
+        <div id="input-panel">
+          <button class="drop-zone" id="drop-zone" type="button"><span class="upload-icon" aria-hidden="true">↑</span><strong>Drop Markdown files here</strong><small>or choose several files from your device</small><em>.md · .markdown · .txt</em></button>
+          <input id="file-input" hidden multiple type="file" accept=".md,.markdown,.txt,text/markdown,text/plain">
+          <ul class="file-list" id="file-list" aria-label="Selected files"></ul>
+          <button class="primary-button" id="compile-button" type="button" disabled>Clean &amp; compile memories <span>→</span></button>
+        </div>
+
+        <div class="result-panel" id="result-panel" hidden>
+          <div class="result-orbit" aria-hidden="true">✦</div>
+          <strong>memory.md</strong>
+          <span id="result-summary"></span>
+          <div class="result-stats"><span><b id="duplicate-count">0</b> duplicates removed</span><span><b id="output-size">1 KB</b> portable file</span></div>
+          <form class="signup-gate" id="signup-form">
+            <div class="signup-heading"><span>ONE LAST STEP</span><strong>Enter your email to unlock the file</strong><p>Receive occasional ANANSI product updates. Your memory content is never sent.</p></div>
+            <label for="download-email">Email address</label>
+            <div class="email-row"><input id="download-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"><button type="submit" id="unlock-button" disabled>Unlock &amp; download</button></div>
+            <div class="honeypot" aria-hidden="true"><label for="company">Company</label><input id="company" name="company" tabindex="-1" autocomplete="off"></div>
+            <label class="consent-row"><input id="signup-consent" name="consent" type="checkbox"><span>I agree to receive occasional ANANSI product updates. I can unsubscribe anytime.</span></label>
+            <p class="signup-error" id="signup-error" role="alert"></p>
+            <a class="privacy-small" href="/privacy.html">How we use your email</a>
+          </form>
+          <div class="result-actions" id="result-actions" hidden><button class="primary-button" id="download-button" type="button">Download memory.md</button><button class="secondary-button" id="copy-output" type="button">Copy</button></div>
+          <button class="reset-button" id="reset-button" type="button">↻ Start over</button>
+        </div>
+        <p class="local-note">▣ Files stay on this device. Always.</p>
+        <p class="compiler-notice" id="compiler-notice" aria-live="polite"></p>
+      </section>
+    </section>
+
+    <section class="privacy-strip"><div><strong>Nothing leaves your device.</strong><span>Your files are read and combined inside this browser tab.</span></div><div aria-hidden="true"><i></i><i></i><i></i></div></section>
+
+    <section class="content-section" id="how">
+      <header><p class="eyebrow"><i></i> THREE SMALL STEPS</p><h2>A useful memory file,<br><em>without the cleanup work.</em></h2></header>
+      <div class="step-grid"><article><b>01</b><span>＋</span><h3>Add your files</h3><p>Select several Markdown or text memory exports. Your originals are never changed.</p></article><article><b>02</b><span>≋</span><h3>Clean and combine</h3><p>ANANSI separates memory points, removes repeats, and groups related sections.</p></article><article><b>03</b><span>↓</span><h3>Use memory.md</h3><p>Attach one portable file to the AI chat or project where you need the context.</p></article></div>
+    </section>
+
+    <section class="prompt-section content-section" id="export-prompt">
+      <div><p class="eyebrow"><i></i> NO FILE YET?</p><h2>Ask your AI for the memory it already has.</h2><p>Copy this prompt into ChatGPT, Gemini, Claude, Copilot, or another AI. Save its answer as <code>memory.md</code>, then bring it back here.</p><ul><li>✓ Facts only—no guessing</li><li>✓ One clear point per bullet</li><li>✓ Conflicts kept for review</li></ul></div>
+      <div class="prompt-card"><header><span>UNIVERSAL MEMORY EXPORT PROMPT</span><small>Works with major AI chats</small></header><pre id="export-prompt-text"></pre><button id="copy-prompt" type="button">Copy memory export prompt</button></div>
+    </section>
+
+    <section class="faq-section content-section">
+      <header><p class="eyebrow"><i></i> GOOD TO KNOW</p><h2>Simple answers.</h2></header>
+      <div><details><summary>Do you upload or store my files?<span>＋</span></summary><p>No. The compiler reads selected files inside this browser tab. Only the email you enter after compilation is sent to Robillionair.</p></details><details><summary>What files can I use?<span>＋</span></summary><p>Plain Markdown and text files: .md, .markdown and .txt. Select up to 100 files, with a 20 MB combined limit.</p></details><details><summary>How are duplicates removed?<span>＋</span></summary><p>ANANSI normalizes formatting and compares meaningful words. Exact repeats and highly similar points are combined while source filenames are kept.</p></details><details><summary>Will an AI remember the file forever?<span>＋</span></summary><p>Not automatically. The file supplies context for the chat or project where you attach it. Permanent memory depends on that AI product.</p></details></div>
+    </section>
+
+    <section class="final-cta"><span aria-hidden="true">✦</span><h2>Turn scattered AI memories into one file.</h2><p>Free. Private. No account required.</p><a href="#top">Compile your memories ↑</a></section>
+  </main>
+
+  <footer><a class="mc-brand" href="/"><span aria-hidden="true">A</span><strong>ANANSI</strong></a><p>Private browser tools for portable AI memory. <a href="/privacy.html">Privacy</a></p><small>© 2026 ROBILLIONAIR</small></footer>
+  <script type="module" src="/memory-compiler.js?v=20260909-1"></script>
+</body>
+</html>
