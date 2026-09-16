@@ -470,6 +470,11 @@ app.get(['/memory-compiler', '/memory-compiler/'], (_req, res) => {
   res.sendFile(path.join(process.cwd(), 'public', 'memory-compiler.html'));
 });
 
+app.get(['/about', '/about/'], (_req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'about.html'));
+});
+
+
 // Serve static frontend files
 app.use(express.static(path.join(process.cwd(), 'public'), {
   etag: true,

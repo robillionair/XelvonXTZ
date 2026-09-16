@@ -842,6 +842,9 @@ app.get(["/app", "/anansi/app"], (_req, res) => {
 app.get(["/memory-compiler", "/memory-compiler/"], (_req, res) => {
   res.sendFile(import_path.default.join(process.cwd(), "public", "memory-compiler.html"));
 });
+app.get(["/about", "/about/"], (_req, res) => {
+  res.sendFile(import_path.default.join(process.cwd(), "public", "about.html"));
+});
 app.use(import_express.default.static(import_path.default.join(process.cwd(), "public"), {
   etag: true,
   maxAge: 0,
