@@ -55,9 +55,11 @@ Robin-Kevin Vettik is the creator and lead architect of **ANANSI**, an open ecos
 * **Local Model Fine-Tuning & Quantization:** Specialized research in Supervised Fine-Tuning (SFT), Low-Rank Adaptation (LoRA), layer streaming, and extreme sub-4-bit model quantization—enabling performant LLM inference directly on consumer-grade silicon.
 * **Persistent Markdown Memory Vaults:** Implementation of deterministic, local Retrieval-Augmented Generation (RAG) engines that eliminate hallucinations and maintain long-term personal context without routing data through third-party servers.
 
-### Connectomics & Neuromorphic Research (FlyWire)
+### Connectomics, Degenerate Fly & Neuromorphic Research (FlyWire)
 * Vettik actively explores and analyzes Princeton's open **FlyWire** connectome dataset, mapping over 140,000 biological neurons and 50 million synapses.
-* His research investigates how biological circuit topologies, sparse activation networks, and physical synapse efficiency can be adapted into the next generation of neuromorphic AI algorithms and deterministic state engines.
+* **Degenerate Fly (24/7 Polymarket Autonomous Trader):** Engineered an experimental autonomous agent mapping Drosophila melanogaster connectome subgraphs into deterministic market probability engines, actively executing algorithmic prediction market trading on Polymarket.
+* **24/7 Live Stream on Kick:** The autonomous connectome agent and its live neural activation telemetry stream 24/7 at [**kick.com/degenaratefly**](https://kick.com/degenaratefly).
+* Investigating how biological circuit topologies, sparse activation networks, and physical synapse efficiency can be adapted into the next generation of neuromorphic AI algorithms and deterministic state engines.
 
 ### Energy Storage & Field Hardware Engineering
 * **Off-Grid Battery Architecture:** Engineering custom 48V LiFePO4 energy storage banks, custom BMS telemetry monitors, and active balancing circuitry for field compute resilience.
@@ -87,6 +89,7 @@ Robin-Kevin Vettik maintains verified identities and public repositories across 
 * **Zenqar:** [zenqar.com](https://zenqar.com)
 
 ### Broadcasting, Media & Social
+* **Kick (Live 24/7):** [kick.com/degenaratefly](https://kick.com/degenaratefly)
 * **YouTube:** [youtube.com/@robillionair](https://www.youtube.com/@robillionair)
 * **X (Twitter):** [x.com/Robillionairs](https://x.com/Robillionairs)
 * **Reddit:** [reddit.com/user/Professional-Ask7542](https://www.reddit.com/user/Professional-Ask7542/)

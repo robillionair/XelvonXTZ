@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Robin-Kevin Vettik (Robillionair) — Founder &amp; Systems Architect</title>
-  <meta name="description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI (ANANSI), fintech infrastructure (Zenqar), defense robotics (XELVON), and global commodity trade (Bestlife Trade)." />
+  <meta name="description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI (ANANSI), neuromorphic connectomics (Degenerate Fly / FlyWire), fintech infrastructure (Zenqar), defense robotics (XELVON), and global commodity trade (Bestlife Trade)." />
   <link rel="canonical" href="https://robillionair.com/about" />
 
   <!-- OpenGraph / Social Metadata -->
   <meta property="og:title" content="Robin-Kevin Vettik (Robillionair) — Systems Architect &amp; Founder" />
-  <meta property="og:description" content="Systems architect and founder operating at the intersection of local AI compute, defense robotics, enterprise fintech, and physical trade." />
+  <meta property="og:description" content="Systems architect and founder operating at the intersection of local AI compute, neuromorphic connectomics, defense robotics, enterprise fintech, and physical trade." />
   <meta property="og:url" content="https://robillionair.com/about" />
   <meta property="og:type" content="profile" />
   <meta property="og:image" content="https://robillionair.com/assets/images/founder.jpg" />
@@ -17,16 +17,15 @@
   <!-- Twitter Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Robin-Kevin Vettik (Robillionair) — Systems Architect &amp; Founder" />
-  <meta name="twitter:description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI, defense robotics, and enterprise fintech." />
+  <meta name="twitter:description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI, neuromorphic connectomics, defense robotics, and enterprise fintech." />
   <meta name="twitter:image" content="https://robillionair.com/assets/images/founder.jpg" />
 
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#040407" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2218%22 fill=%22%2307070b%22/><path d=%22M18 18l28 28M46 18L18 46%22 stroke=%22%23a7f3d0%22 stroke-width=%227%22 stroke-linecap=%22round%22/></svg>" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2218%22 fill=%22%23000000%22/><path d=%22M18 18l28 28M46 18L18 46%22 stroke=%22%2300ff9d%22 stroke-width=%227%22 stroke-linecap=%22round%22/></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/experience.css?v=20260718-flow1" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Schema.org Knowledge Graph / Entity Graph -->
   <script type="application/ld+json">
@@ -40,10 +39,11 @@
         "alternateName": ["Robillionair"],
         "url": "https://robillionair.com",
         "jobTitle": "Systems Architect & Founder",
-        "description": "Founder and technologist specializing in sovereign AI memory architecture, autonomous robotics, defense tech, enterprise bookkeeping engines, and global trade logistics.",
+        "description": "Founder and technologist specializing in sovereign AI memory architecture, neuromorphic connectomics, autonomous robotics, defense tech, enterprise bookkeeping engines, and global trade logistics.",
         "sameAs": [
           "https://github.com/Rob-bio4",
           "https://huggingface.co/Robillionair",
+          "https://kick.com/degenaratefly",
           "https://www.linkedin.com/in/robin-kevin-vettik-142a69363",
           "https://x.com/Robillionairs",
           "https://www.youtube.com/@robillionair",
@@ -93,50 +93,40 @@
 
   <style>
     :root {
-      --bg: #040407;
-      --bg-card: rgba(16, 17, 24, 0.7);
-      --bg-card-hover: rgba(24, 25, 36, 0.85);
+      --bg: #000000;
+      --card-bg: #060608;
+      --card-bg-hover: #0b0b10;
       --border: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(255, 255, 255, 0.14);
-      --border-accent: rgba(167, 243, 208, 0.3);
+      --border-hover: rgba(255, 255, 255, 0.18);
       --text: #f3f5f1;
-      --muted: #a0a6a2;
-      --dim: #6b726d;
-      --mint: #a7f3d0;
-      --mint-glow: rgba(167, 243, 208, 0.15);
-      --emerald: #34d399;
+      --muted: #9ba09d;
+      --dim: #5c625e;
+      --mint: #00ff9d;
+      --mint-subtle: rgba(0, 255, 157, 0.1);
+      --mint-border: rgba(0, 255, 157, 0.28);
       --cyan: #38bdf8;
       --purple: #a78bfa;
-      --gold: #fbbf24;
+      --red-live: #ff334b;
     }
+
     * { box-sizing: border-box; }
     html {
-      background: var(--bg);
+      background: #000000;
       color-scheme: dark;
       scroll-behavior: smooth;
     }
     body {
       margin: 0;
+      background: #000000;
       color: var(--text);
-      background: radial-gradient(circle at 80% 12%, rgba(139, 92, 246, 0.12), transparent 38%),
-                  radial-gradient(circle at 20% 40%, rgba(52, 211, 153, 0.08), transparent 32%),
-                  var(--bg);
       font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
       line-height: 1.65;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      z-index: 100;
-    }
+
     a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
     .site-container {
-      width: min(1080px, calc(100% - 40px));
+      width: min(1080px, calc(100% - 44px));
       margin: 0 auto;
     }
 
@@ -144,10 +134,10 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(4, 4, 7, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
     .topbar-inner {
@@ -161,9 +151,9 @@
       align-items: center;
       gap: 10px;
       font-family: "Manrope", sans-serif;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       color: #fff;
     }
     .brand-mark {
@@ -188,36 +178,56 @@
     .topbar nav a.active {
       color: #fff;
     }
+    .live-chip-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255, 51, 75, 0.1);
+      border: 1px solid rgba(255, 51, 75, 0.35);
+      color: #ff6b7e !important;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em;
+    }
+    .live-chip-nav:hover {
+      background: rgba(255, 51, 75, 0.2);
+      border-color: #ff334b;
+      color: #fff !important;
+    }
     .nav-cta {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 16px;
+      padding: 7px 16px;
       border-radius: 999px;
-      background: rgba(167, 243, 208, 0.08);
-      border: 1px solid var(--border-accent);
+      background: var(--mint-subtle);
+      border: 1px solid var(--mint-border);
       color: var(--mint) !important;
       font-size: 12px !important;
       font-weight: 600 !important;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
     }
     .nav-cta:hover {
-      background: rgba(167, 243, 208, 0.16);
+      background: rgba(0, 255, 157, 0.18);
       border-color: var(--mint);
+      box-shadow: 0 0 16px rgba(0, 255, 157, 0.2);
     }
 
     /* Main Container */
     main {
-      padding: 60px 0 120px;
+      padding: 50px 0 100px;
     }
 
     /* Hero Header */
     .profile-hero {
       display: grid;
       grid-template-columns: 1fr 340px;
-      gap: 48px;
+      gap: 52px;
       align-items: center;
-      padding-bottom: 60px;
+      padding-bottom: 56px;
       border-bottom: 1px solid var(--border);
     }
     .hero-badge-row {
@@ -225,21 +235,21 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: "Manrope", sans-serif;
+      font-family: "JetBrains Mono", monospace;
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 999px;
-      background: rgba(167, 243, 208, 0.07);
-      border: 1px solid rgba(167, 243, 208, 0.2);
+      background: var(--mint-subtle);
+      border: 1px solid var(--mint-border);
       color: var(--mint);
     }
     .pulse-dot {
@@ -247,28 +257,27 @@
       height: 6px;
       border-radius: 50%;
       background: var(--mint);
-      box-shadow: 0 0 8px var(--mint);
-      animation: pulse 2.5s infinite;
+      box-shadow: 0 0 10px var(--mint);
+      animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.35; transform: scale(0.85); }
     }
     .alias-badge {
       font-family: "Manrope", sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-size: 12px;
       color: var(--muted);
     }
     .alias-badge strong {
       color: #fff;
+      letter-spacing: 0.04em;
     }
 
     h1.hero-name {
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       font-family: "Manrope", sans-serif;
-      font-size: clamp(40px, 5.5vw, 64px);
+      font-size: clamp(40px, 5.2vw, 62px);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.04em;
@@ -280,7 +289,7 @@
       font-weight: 600;
       color: var(--mint);
       letter-spacing: -0.01em;
-      margin: 0 0 8px;
+      margin: 0 0 10px;
     }
     .hero-meta {
       font-size: 14px;
@@ -296,9 +305,9 @@
     /* Founder Quote */
     .hero-quote {
       position: relative;
-      margin: 28px 0 0;
-      padding: 20px 24px;
-      background: linear-gradient(135deg, rgba(167, 243, 208, 0.04), rgba(167, 139, 250, 0.04));
+      margin: 24px 0 0;
+      padding: 22px 24px;
+      background: #060608;
       border-left: 3px solid var(--mint);
       border-top: 1px solid var(--border);
       border-right: 1px solid var(--border);
@@ -306,10 +315,10 @@
       border-radius: 0 12px 12px 0;
     }
     .hero-quote p {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-size: 16px;
-      line-height: 1.6;
-      color: #e2e5df;
+      line-height: 1.65;
+      color: #e5e7eb;
       font-style: italic;
     }
     .hero-quote cite {
@@ -332,35 +341,35 @@
       aspect-ratio: 4/5;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--border-light);
-      background: #09090f;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(167, 243, 208, 0.08);
+      border: 1px solid var(--border);
+      background: #030304;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
     }
     .portrait-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(25%) contrast(105%);
-      transition: filter 0.5s ease;
+      filter: grayscale(35%) contrast(110%);
+      transition: filter 0.4s ease;
     }
     .portrait-frame:hover img {
-      filter: grayscale(0%) contrast(105%);
+      filter: grayscale(0%) contrast(108%);
     }
     .portrait-frame::after {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(to top, rgba(4, 4, 7, 0.85) 0%, transparent 40%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 45%);
     }
     .portrait-caption {
       margin-top: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: "Manrope", sans-serif;
+      font-family: "JetBrains Mono", monospace;
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--dim);
     }
@@ -368,46 +377,44 @@
       color: var(--muted);
     }
 
-    /* Section Typography */
+    /* SECTION BASICS */
+    .content-block {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
     .section-kicker {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: "Manrope", sans-serif;
+      font-family: "JetBrains Mono", monospace;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--mint);
       margin-bottom: 12px;
     }
     .section-kicker span {
       display: inline-block;
-      width: 18px;
+      width: 16px;
       height: 1px;
       background: var(--mint);
     }
     h2.section-heading {
       margin: 0 0 24px;
       font-family: "Manrope", sans-serif;
-      font-size: clamp(26px, 3.2vw, 36px);
+      font-size: clamp(24px, 3.2vw, 34px);
       font-weight: 700;
       letter-spacing: -0.03em;
       color: #fff;
     }
 
-    /* Standard Section Wrapper */
-    .content-block {
-      padding: 60px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
     /* Executive Overview */
     .overview-text {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #cfd5ce;
-      max-width: 860px;
+      font-size: 17.5px;
+      line-height: 1.85;
+      color: #d1d5db;
+      max-width: 900px;
     }
     .overview-text p {
       margin: 0 0 20px;
@@ -417,39 +424,139 @@
       font-weight: 600;
     }
 
-    /* Ventures Grid */
+    /* 24/7 LIVE STREAM SHOWCASE BANNER */
+    .stream-spotlight {
+      margin: 32px 0 10px;
+      background: #050508;
+      border: 1px solid rgba(255, 51, 75, 0.4);
+      border-radius: 18px;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 0 35px rgba(255, 51, 75, 0.08);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+    }
+    .stream-spotlight:hover {
+      border-color: #ff334b;
+      box-shadow: 0 0 45px rgba(255, 51, 75, 0.16);
+    }
+    .stream-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .live-pulse-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(255, 51, 75, 0.14);
+      border: 1px solid #ff334b;
+      color: #ff4d64;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .live-red-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff334b;
+      box-shadow: 0 0 10px #ff334b;
+      animation: liveBlink 1.4s infinite;
+    }
+    @keyframes liveBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
+    }
+    .stream-meta-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: var(--dim);
+    }
+    .stream-title {
+      margin: 0 0 10px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(20px, 2.4vw, 25px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .stream-description {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #9ca3af;
+      max-width: 680px;
+    }
+    .stream-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .stream-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 12px;
+      background: #53fc18; /* Kick signature green */
+      color: #000;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 0 25px rgba(83, 252, 24, 0.35);
+      white-space: nowrap;
+    }
+    .stream-button:hover {
+      background: #6eff3b;
+      box-shadow: 0 0 35px rgba(83, 252, 24, 0.55);
+      transform: translateY(-2px);
+    }
+    .stream-handle {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .stream-handle span {
+      color: #53fc18;
+    }
+
+    /* VENTURES GRID */
     .ventures-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 32px;
+      gap: 22px;
+      margin-top: 28px;
     }
     .venture-card {
-      position: relative;
-      background: var(--bg-card);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 32px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.25s ease;
-      backdrop-filter: blur(10px);
     }
     .venture-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-accent);
+      background: var(--card-bg-hover);
+      border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-    }
-    .venture-card-header {
-      margin-bottom: 16px;
     }
     .venture-num {
       font-family: "JetBrains Mono", monospace;
       font-size: 11px;
       color: var(--mint);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       margin-bottom: 8px;
       display: block;
     }
@@ -471,9 +578,6 @@
     }
     .venture-entity a {
       color: var(--mint);
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
       font-weight: 500;
     }
     .venture-entity a:hover {
@@ -482,7 +586,7 @@
     .venture-scope {
       margin: 16px 0;
       font-size: 14px;
-      color: #b3b9b4;
+      color: #9ca3af;
       line-height: 1.6;
     }
     .venture-scope strong {
@@ -516,27 +620,35 @@
       color: var(--mint);
     }
     .venture-subsystems li strong {
-      color: #e5eae3;
+      color: #e5e7eb;
     }
 
-    /* Research Projects */
+    /* RESEARCH GRID */
     .research-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 32px;
+      gap: 22px;
+      margin-top: 28px;
     }
     .research-card {
-      background: var(--bg-card);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 30px;
+      padding: 28px;
       transition: all 0.25s ease;
     }
     .research-card:hover {
-      border-color: rgba(167, 139, 250, 0.4);
-      background: var(--bg-card-hover);
+      background: var(--card-bg-hover);
+      border-color: var(--border-hover);
       transform: translateY(-2px);
+    }
+    .research-card.highlight-card {
+      border-color: rgba(0, 255, 157, 0.3);
+      background: #040806;
+    }
+    .research-card.highlight-card:hover {
+      border-color: var(--mint);
+      box-shadow: 0 0 25px rgba(0, 255, 157, 0.12);
     }
     .research-card h3 {
       margin: 0 0 12px;
@@ -545,9 +657,6 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
     .research-card p {
       margin: 0 0 14px;
@@ -569,37 +678,37 @@
       margin-bottom: 10px;
       font-size: 13.5px;
       line-height: 1.6;
-      color: #a7aea8;
+      color: #9ca3af;
     }
     .research-card ul li::before {
       content: "•";
       position: absolute;
       left: 2px;
-      color: var(--purple);
+      color: var(--mint);
     }
     .research-card ul li strong {
-      color: #e1e6e0;
+      color: #e5e7eb;
     }
 
-    /* Verification & Links Directory */
+    /* VERIFICATION DIRECTORY */
     .verification-directory {
-      margin-top: 32px;
+      margin-top: 28px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
     .verification-group {
-      background: var(--bg-card);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px;
     }
     .verification-group h4 {
       margin: 0 0 16px;
-      font-family: "Manrope", sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mint);
       display: flex;
@@ -609,7 +718,7 @@
     .verification-links {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
     .v-link {
       display: flex;
@@ -617,19 +726,40 @@
       justify-content: space-between;
       padding: 10px 12px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: #020202;
+      border: 1px solid var(--border);
       font-size: 13px;
       color: var(--muted);
     }
     .v-link:hover {
-      background: rgba(167, 243, 208, 0.06);
-      border-color: var(--border-accent);
+      background: #0c0c10;
+      border-color: var(--border-hover);
       color: #fff;
+    }
+    .v-link.v-link-live {
+      border-color: rgba(255, 51, 75, 0.4);
+    }
+    .v-link.v-link-live:hover {
+      border-color: #ff334b;
+      background: rgba(255, 51, 75, 0.08);
     }
     .v-link span {
       font-weight: 500;
       color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .live-tag-mini {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #ff334b;
+      color: #fff;
+      letter-spacing: 0.06em;
     }
     .v-link small {
       font-family: "JetBrains Mono", monospace;
@@ -652,14 +782,13 @@
       color: var(--mint);
     }
 
-    /* Outro Banner */
+    /* INQUIRY BANNER */
     .inquiry-banner {
-      margin-top: 60px;
-      padding: 40px;
+      margin-top: 56px;
+      padding: 38px;
       border-radius: 16px;
-      border: 1px solid var(--border-accent);
-      background: linear-gradient(135deg, rgba(167, 243, 208, 0.06), rgba(4, 4, 7, 0.8)),
-                  radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.1), transparent 50%);
+      border: 1px solid var(--border);
+      background: #060608;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -676,8 +805,8 @@
       margin: 0;
       color: var(--muted);
       font-size: 15px;
-      max-width: 650px;
-      line-height: 1.6;
+      max-width: 700px;
+      line-height: 1.65;
     }
     .inquiry-banner a.button {
       display: inline-flex;
@@ -686,21 +815,21 @@
       padding: 12px 24px;
       border-radius: 10px;
       background: var(--mint);
-      color: #040407;
+      color: #000;
       font-family: "Manrope", sans-serif;
       font-weight: 700;
       font-size: 13px;
-      letter-spacing: 0.04em;
-      margin-top: 8px;
+      letter-spacing: 0.02em;
+      margin-top: 6px;
     }
     .inquiry-banner a.button:hover {
-      background: #c3fae3;
-      box-shadow: 0 0 24px rgba(167, 243, 208, 0.35);
+      background: #33ffaf;
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
     }
 
-    /* Footer */
+    /* FOOTER */
     .site-footer {
-      padding: 40px 0;
+      padding: 36px 0;
       border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
@@ -718,14 +847,21 @@
       color: var(--mint);
     }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media (max-width: 960px) {
       .profile-hero {
         grid-template-columns: 1fr;
+        gap: 36px;
       }
       .portrait-stage {
         max-width: 320px;
         margin: 0 auto;
+      }
+      .stream-spotlight {
+        grid-template-columns: 1fr;
+      }
+      .stream-actions {
+        align-items: flex-start;
       }
       .ventures-grid,
       .research-grid,
@@ -734,7 +870,7 @@
       }
     }
     @media (max-width: 640px) {
-      .topbar nav a:not(.nav-cta) {
+      .topbar nav a:not(.nav-cta):not(.live-chip-nav) {
         display: none;
       }
       .inquiry-banner {
@@ -755,6 +891,9 @@
         <a href="/anansi.html">ANANSI</a>
         <a href="/memory-compiler">Memory Compiler</a>
         <a href="/about" class="active">About</a>
+        <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="live-chip-nav">
+          <span class="live-red-dot" aria-hidden="true"></span> Kick 24/7
+        </a>
         <a href="/privacy.html">Privacy</a>
         <a href="https://robillionair.com" class="nav-cta">robillionair.com ↗</a>
       </nav>
@@ -793,16 +932,37 @@
         </aside>
       </article>
 
+      <!-- 24/7 LIVE STREAM SHOWCASE: DEGENERATE FLY (FLYWIRE CONNECTOME x POLYMARKET) -->
+      <section class="stream-spotlight" aria-label="Degenerate Fly 24/7 Live Stream">
+        <div class="stream-info">
+          <div class="stream-badge-row">
+            <span class="live-pulse-badge"><span class="live-red-dot" aria-hidden="true"></span> LIVE 24/7 ON KICK</span>
+            <span class="stream-meta-tag">CONNECTOME COMPUTING · POLYMARKET</span>
+          </div>
+          <h2 class="stream-title">Degenerate Fly: 24/7 Autonomous FlyWire Connectome Trader</h2>
+          <p class="stream-description">
+            A 24/7 live neuromorphic experiment where an autonomous state engine modeled after the Princeton <strong>FlyWire connectome</strong> (140,000 biological neurons, 50M synapses) executes real-time prediction market trading on <strong>Polymarket</strong>, streamed continuously with live neural activation telemetry.
+          </p>
+        </div>
+        <div class="stream-actions">
+          <a class="stream-button" href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">
+            <span>Watch Live Stream</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <div class="stream-handle">kick.com/<span>degenaratefly</span></div>
+        </div>
+      </section>
+
       <!-- BIOGRAPHY & EXECUTIVE OVERVIEW -->
       <section class="content-block" aria-labelledby="bio-heading">
         <div class="section-kicker"><span></span> Executive Dossier</div>
         <h2 id="bio-heading" class="section-heading">Biography &amp; Executive Overview</h2>
         <div class="overview-text" itemprop="description">
           <p>
-            <strong>Robin-Kevin Vettik</strong> (known professionally and across developer networks as <strong>Robillionair</strong>) is an Estonian systems architect, technologist, and venture builder operating across sovereign AI compute, autonomous defense robotics, enterprise fintech, and physical commodity supply chains.
+            <strong>Robin-Kevin Vettik</strong> (known professionally and across developer networks as <strong>Robillionair</strong>) is an Estonian systems architect, technologist, and venture builder operating across sovereign AI compute, autonomous defense robotics, neuromorphic connectome trading, enterprise fintech, and physical commodity supply chains.
           </p>
           <p>
-            Vettik’s work focuses on <strong>systemic independence</strong>: engineering high-performance software, local neural networks, and physical hardware architectures that function with zero reliance on closed cloud infrastructure, centralized API bottlenecks, or legacy corporate rails.
+            Vettik’s work focuses on <strong>systemic independence</strong>: engineering high-performance software, local neural networks, biological connectome state engines, and physical hardware architectures that function with zero reliance on closed cloud infrastructure, centralized API bottlenecks, or legacy corporate rails.
           </p>
         </div>
       </section>
@@ -916,6 +1076,25 @@
         <h2 id="research-heading" class="section-heading">Key Research &amp; Technical Projects</h2>
 
         <div class="research-grid">
+          <!-- Connectomics & Degenerate Fly (Highlighted) -->
+          <div class="research-card highlight-card">
+            <h3>Connectomics, Degenerate Fly &amp; Polymarket (FlyWire)</h3>
+            <p>
+              Vettik actively explores Princeton's open <strong>FlyWire</strong> connectome dataset (mapping 140,000 biological neurons and 50 million synapses) and translates biological circuit topologies into deterministic state engines:
+            </p>
+            <ul>
+              <li>
+                <strong>24/7 Autonomous Polymarket Trading Engine:</strong> Development of <em>Degenerate Fly</em>, an autonomous agent mapping fruit fly connectome subgraphs directly to dynamic probability curves and trading positions on Polymarket.
+              </li>
+              <li>
+                <strong>24/7 Live Stream on Kick:</strong> The autonomous agent and its neural state activation graph are broadcast 24/7 at <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" style="color: var(--mint); text-decoration: underline;"><strong>kick.com/degenaratefly</strong></a>, providing transparent telemetry into neuromorphic decision-making.
+              </li>
+              <li>
+                <strong>Neuromorphic Circuit Research:</strong> Investigating biological circuit topologies, sparse activation networks, and physical synapse efficiency to design the next generation of neuromorphic AI algorithms and low-power deterministic state machines.
+              </li>
+            </ul>
+          </div>
+
           <!-- ANANSI -->
           <div class="research-card">
             <h3>ANANSI: Sovereign AI Memory Architecture</h3>
@@ -928,19 +1107,6 @@
               </li>
               <li>
                 <strong>Persistent Markdown Memory Vaults:</strong> Implementation of deterministic, local Retrieval-Augmented Generation (RAG) engines that eliminate hallucinations and maintain long-term personal context without routing data through third-party servers.
-              </li>
-            </ul>
-          </div>
-
-          <!-- Connectomics -->
-          <div class="research-card">
-            <h3>Connectomics &amp; Neuromorphic Research (FlyWire)</h3>
-            <p>
-              Vettik actively explores and analyzes Princeton's open <strong>FlyWire</strong> connectome dataset, mapping over 140,000 biological neurons and 50 million synapses.
-            </p>
-            <ul>
-              <li>
-                His research investigates how biological circuit topologies, sparse activation networks, and physical synapse efficiency can be adapted into the next generation of neuromorphic AI algorithms and deterministic state engines.
               </li>
             </ul>
           </div>
@@ -984,72 +1150,19 @@
         <div class="section-kicker"><span></span> Identity Graph</div>
         <h2 id="verification-heading" class="section-heading">Official Links &amp; Verification Network</h2>
         <p class="overview-text" style="font-size: 15px; margin-bottom: 24px;">
-          Robin-Kevin Vettik maintains verified identities and public repositories across the following developer and professional platforms:
+          Robin-Kevin Vettik maintains verified identities, live streams, and public repositories across the following developer and professional platforms:
         </p>
 
         <div class="verification-directory">
-          <!-- Technical & Engineering Repositories -->
+          <!-- Broadcasting, Streaming & Social -->
           <div class="verification-group">
-            <h4>Technical &amp; Engineering</h4>
+            <h4>Live Streaming &amp; Media</h4>
             <div class="verification-links">
-              <a class="v-link" href="https://github.com/Rob-bio4" target="_blank" rel="noopener noreferrer">
-                <span>GitHub</span>
-                <small>Rob-bio4</small>
+              <a class="v-link v-link-live" href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">
+                <span>Kick <b class="live-tag-mini">LIVE 24/7</b></span>
+                <small>degenaratefly</small>
                 <i>↗</i>
               </a>
-              <a class="v-link" href="https://huggingface.co/Robillionair" target="_blank" rel="noopener noreferrer">
-                <span>Hugging Face</span>
-                <small>Robillionair</small>
-                <i>↗</i>
-              </a>
-              <a class="v-link" href="https://dev.to/robillionair" target="_blank" rel="noopener noreferrer">
-                <span>Dev.to</span>
-                <small>robillionair</small>
-                <i>↗</i>
-              </a>
-              <a class="v-link" href="https://news.ycombinator.com/user?id=robillionair" target="_blank" rel="noopener noreferrer">
-                <span>Hacker News</span>
-                <small>robillionair</small>
-                <i>↗</i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Publications & Research Dispatches -->
-          <div class="verification-group">
-            <h4>Publications &amp; Dispatches</h4>
-            <div class="verification-links">
-              <a class="v-link" href="https://medium.com/@robillionairs" target="_blank" rel="noopener noreferrer">
-                <span>Medium</span>
-                <small>@robillionairs</small>
-                <i>↗</i>
-              </a>
-              <a class="v-link" href="https://substack.com/@robillionair" target="_blank" rel="noopener noreferrer">
-                <span>Substack</span>
-                <small>@robillionair</small>
-                <i>↗</i>
-              </a>
-            </div>
-            
-            <h4 style="margin-top: 24px;">Professional &amp; Ventures</h4>
-            <div class="verification-links">
-              <a class="v-link" href="https://www.linkedin.com/in/robin-kevin-vettik-142a69363" target="_blank" rel="noopener noreferrer">
-                <span>LinkedIn</span>
-                <small>robin-kevin-vettik</small>
-                <i>↗</i>
-              </a>
-              <a class="v-link" href="https://zenqar.com" target="_blank" rel="noopener noreferrer">
-                <span>Zenqar</span>
-                <small>zenqar.com</small>
-                <i>↗</i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Broadcasting, Media & Social -->
-          <div class="verification-group">
-            <h4>Broadcasting &amp; Social</h4>
-            <div class="verification-links">
               <a class="v-link" href="https://www.youtube.com/@robillionair" target="_blank" rel="noopener noreferrer">
                 <span>YouTube</span>
                 <small>@robillionair</small>
@@ -1091,6 +1204,83 @@
               </a>
             </div>
           </div>
+
+          <!-- Technical & Engineering Repositories -->
+          <div class="verification-group">
+            <h4>Technical &amp; Engineering</h4>
+            <div class="verification-links">
+              <a class="v-link" href="https://github.com/Rob-bio4" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span>
+                <small>Rob-bio4</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://huggingface.co/Robillionair" target="_blank" rel="noopener noreferrer">
+                <span>Hugging Face</span>
+                <small>Robillionair</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://dev.to/robillionair" target="_blank" rel="noopener noreferrer">
+                <span>Dev.to</span>
+                <small>robillionair</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://news.ycombinator.com/user?id=robillionair" target="_blank" rel="noopener noreferrer">
+                <span>Hacker News</span>
+                <small>robillionair</small>
+                <i>↗</i>
+              </a>
+            </div>
+
+            <h4 style="margin-top: 24px;">Professional &amp; Ventures</h4>
+            <div class="verification-links">
+              <a class="v-link" href="https://www.linkedin.com/in/robin-kevin-vettik-142a69363" target="_blank" rel="noopener noreferrer">
+                <span>LinkedIn</span>
+                <small>robin-kevin-vettik</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://zenqar.com" target="_blank" rel="noopener noreferrer">
+                <span>Zenqar</span>
+                <small>zenqar.com</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://robillionair.com" target="_blank" rel="noopener noreferrer">
+                <span>Robillionair</span>
+                <small>robillionair.com</small>
+                <i>↗</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Publications & Research Dispatches -->
+          <div class="verification-group">
+            <h4>Publications &amp; Dispatches</h4>
+            <div class="verification-links">
+              <a class="v-link" href="https://medium.com/@robillionairs" target="_blank" rel="noopener noreferrer">
+                <span>Medium</span>
+                <small>@robillionairs</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://substack.com/@robillionair" target="_blank" rel="noopener noreferrer">
+                <span>Substack</span>
+                <small>@robillionair</small>
+                <i>↗</i>
+              </a>
+            </div>
+
+            <h4 style="margin-top: 24px;">Key Initiatives</h4>
+            <div class="verification-links">
+              <a class="v-link" href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">
+                <span>Degenerate Fly</span>
+                <small>FlyWire Trader</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="/memory-compiler">
+                <span>Memory Compiler</span>
+                <small>ANANSI Vault</small>
+                <i>↗</i>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1120,12 +1310,11 @@
         <a href="/">Home</a>
         <a href="/anansi.html">ANANSI</a>
         <a href="/memory-compiler">Memory Compiler</a>
+        <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" style="color: #53fc18;">Kick 24/7</a>
         <a href="/privacy.html">Privacy</a>
         <a href="mailto:hello@robillionair.com">Contact</a>
       </div>
     </div>
   </footer>
-
-  <script src="/experience.js?v=20260718-flow1"></script>
 </body>
 </html>
