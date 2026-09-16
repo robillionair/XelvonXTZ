@@ -827,6 +827,165 @@
     .inquiry-banner a.button:hover {
       background: #33ffaf;
       box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    /* PERSONA SPOTLIGHT */
+    .persona-spotlight {
+      background: #040406;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      margin: 40px 0 10px;
+    }
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .persona-stage {
+      position: relative;
+      margin: 0;
+    }
+    .persona-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #020202;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 35px rgba(225, 48, 108, 0.08);
+    }
+    .persona-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+    .persona-frame:hover img {
+      transform: scale(1.025);
+    }
+    .persona-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 40%);
+    }
+    .persona-caption {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .persona-caption strong {
+      color: var(--muted);
+    }
+    .persona-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .persona-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #ff5e87;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(225, 48, 108, 0.1);
+      border: 1px solid rgba(225, 48, 108, 0.3);
+    }
+    .persona-handle {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .persona-title {
+      margin: 0 0 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+    }
+    .persona-lead {
+      margin: 0 0 22px;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: #9ca3af;
+      max-width: 620px;
+    }
+    .persona-lead strong {
+      color: #fff;
+    }
+    .persona-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+    .meta-item {
+      padding: 10px 14px;
+      background: #020202;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .meta-item small {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+    }
+    .meta-item strong {
+      font-family: "Manrope", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .persona-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+    .button-instagram {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #e1306c, #c13584, #833ab4);
+      color: #fff !important;
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 20px rgba(225, 48, 108, 0.3);
+    }
+    .button-instagram:hover {
+      box-shadow: 0 6px 28px rgba(225, 48, 108, 0.5);
+      transform: translateY(-2px);
+    }
+    .persona-sublink {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .persona-sublink:hover {
+      color: var(--mint);
     }
 
     /* FOOTER */
@@ -867,8 +1026,13 @@
       }
       .ventures-grid,
       .research-grid,
-      .verification-directory {
+      .verification-directory,
+      .persona-grid {
         grid-template-columns: 1fr;
+      }
+      .persona-stage {
+        max-width: 320px;
+        margin: 0 auto;
       }
     }
     @media (max-width: 640px) {
@@ -1143,6 +1307,62 @@
                 Researching narrative world-building, autonomous production workflows, and cinematic myth-making around sovereign intelligence architectures.
               </li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROBILLIONAIR PERSONA & INSTAGRAM SPOTLIGHT -->
+      <section class="persona-spotlight" aria-labelledby="persona-heading">
+        <div class="persona-grid">
+          <figure class="persona-stage">
+            <div class="persona-frame">
+              <img src="/assets/images/robillionair-persona.jpg" alt="Robin-Kevin Vettik (Robillionair) — International Venture Builder &amp; Persona" width="768" height="1024" loading="lazy" />
+            </div>
+            <figcaption class="persona-caption">
+              <strong>Robillionair</strong>
+              <span>Athens / Global Operations</span>
+            </figcaption>
+          </figure>
+
+          <div class="persona-info">
+            <div class="persona-badge-row">
+              <span class="persona-tag">PUBLIC PERSONA · INSTAGRAM</span>
+              <span class="persona-handle">@robillionair</span>
+            </div>
+            <h2 id="persona-heading" class="persona-title">Operating Globally as Robillionair</h2>
+            <p class="persona-lead">
+              Beyond sovereign AI algorithms, bare-metal infrastructure, and autonomous defense platforms, Robin-Kevin Vettik operates globally under the professional persona <strong>Robillionair</strong>—documenting international travel dispatches, high-stakes venture building, and the intersection of physical trade and digital sovereignty.
+            </p>
+            <div class="persona-meta-grid">
+              <div class="meta-item">
+                <small>PUBLIC IDENTITY</small>
+                <strong>Robillionair</strong>
+              </div>
+              <div class="meta-item">
+                <small>PRIMARY SOCIAL</small>
+                <strong>Instagram (@robillionair)</strong>
+              </div>
+              <div class="meta-item">
+                <small>HEADQUARTERS</small>
+                <strong>Tallinn, Estonia · Global</strong>
+              </div>
+              <div class="meta-item">
+                <small>VENTURE REACH</small>
+                <strong>Fintech · Defense · AI · Trade</strong>
+              </div>
+            </div>
+            <div class="persona-actions">
+              <a class="button-instagram" href="https://www.instagram.com/robillionair/" target="_blank" rel="noopener noreferrer">
+                <span>Follow on Instagram (@robillionair)</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a class="persona-sublink" href="https://x.com/Robillionairs" target="_blank" rel="noopener noreferrer">
+                X / Twitter Dispatches ↗
+              </a>
+              <a class="persona-sublink" href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" style="color: #53fc18;">
+                Kick 24/7 Live Stream ↗
+              </a>
+            </div>
           </div>
         </div>
       </section>
