@@ -848,6 +848,18 @@ app.get(["/about", "/about/"], (_req, res) => {
 app.get("/googleff4939264e557eff.html", (_req, res) => {
   res.type("html").send("google-site-verification: googleff4939264e557eff.html");
 });
+app.get(["/sitemap.xml", "/sitemap"], (_req, res) => {
+  res.setHeader("Content-Type", "application/xml; charset=utf-8");
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  res.sendFile(import_path.default.join(process.cwd(), "public", "sitemap.xml"));
+});
+app.get("/robots.txt", (_req, res) => {
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  res.sendFile(import_path.default.join(process.cwd(), "public", "robots.txt"));
+});
+app.get("*sitemap.xml", (_req, res) => {
+  res.redirect(301, "/sitemap.xml");
+});
 app.use(import_express.default.static(import_path.default.join(process.cwd(), "public"), {
   etag: true,
   maxAge: 0,

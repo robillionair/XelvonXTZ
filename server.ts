@@ -478,6 +478,22 @@ app.get('/googleff4939264e557eff.html', (_req, res) => {
   res.type('html').send('google-site-verification: googleff4939264e557eff.html');
 });
 
+app.get(['/sitemap.xml', '/sitemap'], (_req, res) => {
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.sendFile(path.join(process.cwd(), 'public', 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (_req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.sendFile(path.join(process.cwd(), 'public', 'robots.txt'));
+});
+
+app.get('*sitemap.xml', (_req, res) => {
+  res.redirect(301, '/sitemap.xml');
+});
+
+
 
 // Serve static frontend files
 app.use(express.static(path.join(process.cwd(), 'public'), {
