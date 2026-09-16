@@ -474,6 +474,10 @@ app.get(['/about', '/about/'], (_req, res) => {
   res.sendFile(path.join(process.cwd(), 'public', 'about.html'));
 });
 
+app.get('/googleff4939264e557eff.html', (_req, res) => {
+  res.type('html').send('google-site-verification: googleff4939264e557eff.html');
+});
+
 
 // Serve static frontend files
 app.use(express.static(path.join(process.cwd(), 'public'), {

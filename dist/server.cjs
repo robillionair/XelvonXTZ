@@ -845,6 +845,9 @@ app.get(["/memory-compiler", "/memory-compiler/"], (_req, res) => {
 app.get(["/about", "/about/"], (_req, res) => {
   res.sendFile(import_path.default.join(process.cwd(), "public", "about.html"));
 });
+app.get("/googleff4939264e557eff.html", (_req, res) => {
+  res.type("html").send("google-site-verification: googleff4939264e557eff.html");
+});
 app.use(import_express.default.static(import_path.default.join(process.cwd(), "public"), {
   etag: true,
   maxAge: 0,
