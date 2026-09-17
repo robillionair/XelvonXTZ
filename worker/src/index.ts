@@ -1,4 +1,5 @@
 export interface Env {
+  ASSETS?: Fetcher;
   XELVON_EMAILS?: KVNamespace;
   EMAILS?: KVNamespace;
   ADMIN_KEY?: string;
@@ -201,7 +202,11 @@ export default {
       });
     }
 
-    // Default route fallback
+    // Default route fallback: serve static assets if available
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
     return new Response(JSON.stringify({ error: 'Endpoint not found.' }), {
       status: 404,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
