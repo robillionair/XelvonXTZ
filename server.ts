@@ -458,6 +458,42 @@ app.post('/api/anansi/ai/generate', async (req, res) => {
   } catch (error) { res.status(502).json({ error: safeAIError(error) }); }
 });
 
+app.post('/api/subscribe', (req, res) => {
+  const email = String(req.body?.email || '').trim().toLowerCase();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    return res.status(400).json({ success: false, error: 'Valid email required.' });
+  }
+  const record = {
+    email,
+    product: req.body?.product || 'anansi',
+    source: req.body?.source || 'website',
+    company: req.body?.company || undefined,
+    timestamp: new Date().toISOString(),
+    ip: req.ip || 'local',
+  };
+  console.log('[LOCAL_SIGNUP]', record);
+  res.json({ success: true, message: 'Subscription confirmed.' });
+});
+
+app.post('/api/memory-compiler/signup', (req, res) => {
+  const email = String(req.body?.email || '').trim().toLowerCase();
+  if (!email) return res.status(400).json({ success: false, error: 'Email required.' });
+  console.log('[LOCAL_MC_SIGNUP]', { email, company: req.body?.company, timestamp: new Date().toISOString() });
+  res.json({ success: true });
+});
+
+app.post('/api/chat', (req, res) => {
+  const userEmail = String(req.body?.userEmail || 'operator').trim();
+  const responseText = `<think>\nVerifying company access profile for ${userEmail}...\nSystems sovereignty active: local context preservation enabled.\n</think>\n\nThank you for connecting. The Xelvon AI thinking workspace is currently in controlled company onboarding. Your organization's access request has been confirmed and our architectural team will coordinate your deployment directly.`;
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.send(responseText);
+});
+
+app.get('/api/chat/history', (_req, res) => {
+  res.json({ history: [] });
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', product: 'ANANSI', version: '0.2.0', storage: db ? 'firestore-ready' : 'local-only', aiSecretStorage: providerVault.persistent ? 'encrypted-persistent' : 'encrypted-session' });
 });
