@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Robin-Kevin Vettik (Robillionair) — Founder &amp; Systems Architect</title>
-  <meta name="description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI (ANANSI), neuromorphic connectomics (Degenerate Fly / FlyWire), fintech infrastructure (Zenqar), defense robotics (XELVON), and global commodity trade (Bestlife Trade)." />
+  <meta name="description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect working at the intersection of computational neuroscience, low-level sparse PyTorch engineering, and language models (DrosophiLLM, FlyWire), sovereign AI (ANANSI), enterprise fintech (Zenqar), and global commodity trade (Bestlife Trade)." />
   <link rel="canonical" href="https://robillionair.com/about" />
   <meta name="google-site-verification" content="googleff4939264e557eff.html" />
   <meta name="google-site-verification" content="googleff4939264e557eff" />
 
   <!-- OpenGraph / Social Metadata -->
   <meta property="og:title" content="Robin-Kevin Vettik (Robillionair) — Systems Architect &amp; Founder" />
-  <meta property="og:description" content="Systems architect and founder operating at the intersection of local AI compute, neuromorphic connectomics, defense robotics, enterprise fintech, and physical trade." />
+  <meta property="og:description" content="Systems architect and founder operating at the intersection of computational neuroscience, low-level sparse PyTorch engineering, language models (DrosophiLLM), sovereign AI compute, and autonomous state engines." />
   <meta property="og:url" content="https://robillionair.com/about" />
   <meta property="og:type" content="profile" />
   <meta property="og:image" content="https://robillionair.com/assets/images/founder.jpg" />
@@ -19,7 +19,7 @@
   <!-- Twitter Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Robin-Kevin Vettik (Robillionair) — Systems Architect &amp; Founder" />
-  <meta name="twitter:description" content="Official profile of Robin-Kevin Vettik (Robillionair). Founder and systems architect across sovereign AI, neuromorphic connectomics, defense robotics, and enterprise fintech." />
+  <meta name="twitter:description" content="Official profile of Robin-Kevin Vettik (Robillionair). Builder working at the intersection of computational neuroscience, low-level sparse PyTorch engineering, and language models." />
   <meta name="twitter:image" content="https://robillionair.com/assets/images/founder.jpg" />
 
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -41,10 +41,12 @@
         "alternateName": ["Robillionair"],
         "url": "https://robillionair.com",
         "jobTitle": "Systems Architect & Founder",
-        "description": "Founder and technologist specializing in sovereign AI memory architecture, neuromorphic connectomics, autonomous robotics, defense tech, enterprise bookkeeping engines, and global trade logistics.",
+        "description": "Founder and systems architect working at the intersection of computational neuroscience, low-level sparse PyTorch engineering, and language models (DrosophiLLM), sovereign AI memory systems (ANANSI), and autonomous neuromorphic state engines.",
         "sameAs": [
           "https://github.com/Rob-bio4",
+          "https://github.com/Rob-bio4/DrosophiLLM",
           "https://huggingface.co/Robillionair",
+          "https://huggingface.co/Robillionair/DrosophiLLM-0.5B",
           "https://kick.com/degenaratefly",
           "https://www.linkedin.com/in/robin-kevin-vettik-142a69363",
           "https://x.com/Robillionairs",
@@ -692,6 +694,114 @@
       color: #e5e7eb;
     }
 
+    /* SPOTLIGHT CARD & METRIC PILLS */
+    .research-card.spotlight-card {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(0, 255, 157, 0.45);
+      background: radial-gradient(circle at 88% 18%, rgba(0, 255, 157, 0.08), transparent 35%), #030604;
+      box-shadow: 0 0 45px rgba(0, 255, 157, 0.08);
+      position: relative;
+    }
+    .research-card.spotlight-card:hover {
+      border-color: var(--mint);
+      box-shadow: 0 0 60px rgba(0, 255, 157, 0.18);
+    }
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(0, 255, 157, 0.12);
+      border: 1px solid rgba(0, 255, 157, 0.35);
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+    .metric-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 22px 0 24px;
+    }
+    .metric-pill-box {
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: all 0.2s ease;
+    }
+    .metric-pill-box:hover {
+      border-color: rgba(0, 255, 157, 0.4);
+      background: #050a06;
+    }
+    .metric-pill-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--mint);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-pill-title {
+      font-family: "Manrope", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .metric-pill-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .project-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .btn-project-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-project-cta-primary {
+      background: var(--mint);
+      color: #000 !important;
+      border: 1px solid var(--mint);
+    }
+    .btn-project-cta-primary:hover {
+      background: #4effb5;
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+      transform: translateY(-2px);
+    }
+    .btn-project-cta-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .btn-project-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .metric-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* VERIFICATION DIRECTORY */
     .verification-directory {
       margin-top: 28px;
@@ -1125,10 +1235,10 @@
         <h2 id="bio-heading" class="section-heading">Biography &amp; Executive Overview</h2>
         <div class="overview-text" itemprop="description">
           <p>
-            <strong>Robin-Kevin Vettik</strong> (known professionally and across developer networks as <strong>Robillionair</strong>) is an Estonian systems architect, technologist, and venture builder operating across sovereign AI compute, autonomous defense robotics, neuromorphic connectome trading, enterprise fintech, and physical commodity supply chains.
+            <strong>Robin-Kevin Vettik</strong> (known professionally and across developer networks as <strong>Robillionair</strong>) is an Estonian systems architect, technologist, and venture builder operating at the intersection of computational neuroscience, low-level sparse PyTorch engineering, language models, sovereign AI compute, and autonomous neuromorphic state engines.
           </p>
           <p>
-            Vettik’s work focuses on <strong>systemic independence</strong>: engineering high-performance software, local neural networks, biological connectome state engines, and physical hardware architectures that function with zero reliance on closed cloud infrastructure, centralized API bottlenecks, or legacy corporate rails.
+            Vettik’s work focuses on <strong>systemic independence and biological circuit efficiency</strong>: splicing whole-brain connectome topologies directly into modern language models (such as <em>DrosophiLLM</em>), enforcing Dale’s Law with hardware-aligned sparse CSR kernels, and engineering local-first software and bare-metal architectures that operate with zero reliance on centralized cloud bottlenecks or legacy corporate rails.
           </p>
         </div>
       </section>
@@ -1242,6 +1352,55 @@
         <h2 id="research-heading" class="section-heading">Key Research &amp; Technical Projects</h2>
 
         <div class="research-grid">
+          <!-- DrosophiLLM (Featured Research Spotlight) -->
+          <div class="research-card spotlight-card">
+            <span class="spotlight-badge"><span class="pulse-dot" aria-hidden="true"></span> Neuromorphic AI / Systems Research</span>
+            <h3>DrosophiLLM: Connectome-Constrained Language Model Routing</h3>
+            <p>
+              Spliced an adult <em>Drosophila melanogaster</em> whole-brain connectome (FlyWire Nature 2024; 2,048 neurons, 59,963 synapses) into Layer 12 of Qwen2.5-0.5B using real sparse CSR PyTorch operations (\(O(E)\) complexity) and Dale's Law enforcement:
+            </p>
+            <ul>
+              <li>
+                <strong>Sparse CSR Kernels with \(O(E)\) Efficiency:</strong> Implemented hardware-aligned Compressed Sparse Row (CSR) sparse matrix operations in PyTorch, replacing quadratic dense parameter matrices with direct biological synaptic wiring.
+              </li>
+              <li>
+                <strong>Dale's Law Enforcement:</strong> Strictly partitioned neurons into non-negative excitatory and non-positive inhibitory neurotransmitter projections, eliminating artificial sign-flipping and aligning artificial routing with biological biophysics.
+              </li>
+              <li>
+                <strong>Subcircuit Neuropil Mapping:</strong> Grounded linguistic latent states into sensory (antennal lobe, optic lobe), central integrative (central complex, mushroom body), and motor output subcircuits.
+              </li>
+            </ul>
+
+            <div class="metric-grid-3">
+              <div class="metric-pill-box">
+                <div class="metric-pill-num">22.8×</div>
+                <div class="metric-pill-title">Synaptic Memory Compression</div>
+                <div class="metric-pill-desc">0.70 MB sparse CSR vs 16.00 MB dense parameter baseline</div>
+              </div>
+              <div class="metric-pill-box">
+                <div class="metric-pill-num">2.00×</div>
+                <div class="metric-pill-title">Wall-Clock Speedup</div>
+                <div class="metric-pill-desc">Measured forward pass speedup over dense baseline matrix</div>
+              </div>
+              <div class="metric-pill-box">
+                <div class="metric-pill-num">5-Way</div>
+                <div class="metric-pill-title">Empirical Ablation Suite</div>
+                <div class="metric-pill-desc">Validating Dale's Law &amp; neuropil systematic testing</div>
+              </div>
+            </div>
+
+            <div class="project-actions-row">
+              <a class="btn-project-cta btn-project-cta-primary" href="https://github.com/Rob-bio4/DrosophiLLM" target="_blank" rel="noopener noreferrer">
+                <span>GitHub Repository</span>
+                <i>↗</i>
+              </a>
+              <a class="btn-project-cta btn-project-cta-secondary" href="https://huggingface.co/Robillionair/DrosophiLLM-0.5B" target="_blank" rel="noopener noreferrer">
+                <span>Hugging Face Model</span>
+                <i>↗</i>
+              </a>
+            </div>
+          </div>
+
           <!-- Connectomics & Degenerate Fly (Highlighted) -->
           <div class="research-card highlight-card">
             <h3>Connectomics, Degenerate Fly &amp; Polymarket (FlyWire)</h3>
@@ -1436,9 +1595,19 @@
                 <small>Rob-bio4</small>
                 <i>↗</i>
               </a>
+              <a class="v-link" href="https://github.com/Rob-bio4/DrosophiLLM" target="_blank" rel="noopener noreferrer">
+                <span>DrosophiLLM</span>
+                <small>Sparse Connectome LLM</small>
+                <i>↗</i>
+              </a>
               <a class="v-link" href="https://huggingface.co/Robillionair" target="_blank" rel="noopener noreferrer">
                 <span>Hugging Face</span>
                 <small>Robillionair</small>
+                <i>↗</i>
+              </a>
+              <a class="v-link" href="https://huggingface.co/Robillionair/DrosophiLLM-0.5B" target="_blank" rel="noopener noreferrer">
+                <span>DrosophiLLM-0.5B</span>
+                <small>HF Model Checkpoint</small>
                 <i>↗</i>
               </a>
               <a class="v-link" href="https://dev.to/robillionair" target="_blank" rel="noopener noreferrer">
@@ -1491,6 +1660,11 @@
 
             <h4 style="margin-top: 24px;">Key Initiatives</h4>
             <div class="verification-links">
+              <a class="v-link" href="https://github.com/Rob-bio4/DrosophiLLM" target="_blank" rel="noopener noreferrer">
+                <span>DrosophiLLM</span>
+                <small>Connectome LLM</small>
+                <i>↗</i>
+              </a>
               <a class="v-link" href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">
                 <span>Degenerate Fly</span>
                 <small>FlyWire Trader</small>

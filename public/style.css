@@ -258,3 +258,210 @@ img { display: block; max-width: 100%; }
   .anansi-waitlist{min-height:850px}.anansi-waitlist .beta-window-grid{min-height:850px}.waitlist-panel{padding:24px 16px}.waitlist-form>div,.an-page-waitlist>div{grid-template-columns:1fr}.waitlist-form .button,.an-page-waitlist .an-primary-button{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.poster-light-two,.waitlist-symbol:before,.waitlist-symbol:after{animation:none}.anansi-poster-frame{transform:none}}
+
+/* Systems Research & Projects Grid */
+.projects-section {
+  border-top: 1px solid var(--line);
+  padding: 130px 0;
+  background: radial-gradient(circle at 80% 20%, rgba(124, 232, 189, 0.04), transparent 45%), var(--bg);
+}
+.projects-showcase-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 60px;
+}
+.project-spotlight-card {
+  position: relative;
+  border: 1px solid rgba(124, 232, 189, 0.35);
+  border-radius: 20px;
+  padding: 44px 48px;
+  background: radial-gradient(circle at 90% 10%, rgba(124, 232, 189, 0.08), transparent 35%), linear-gradient(145deg, #070908, #030403);
+  box-shadow: 0 0 50px rgba(124, 232, 189, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.project-spotlight-card:hover {
+  border-color: var(--mint);
+  box-shadow: 0 0 65px rgba(124, 232, 189, 0.16);
+  transform: translateY(-2px);
+}
+.project-spotlight-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.project-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(124, 232, 189, 0.12);
+  border: 1px solid rgba(124, 232, 189, 0.38);
+  color: var(--mint);
+  font: 600 11px/1 "Manrope", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.spotlight-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+}
+.project-version-badge {
+  color: #7d847f;
+  font: 500 11px "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+}
+.project-spotlight-title {
+  font: 500 clamp(28px, 3.2vw, 42px)/1.15 "Manrope", sans-serif;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin: 0 0 18px;
+}
+.project-spotlight-summary {
+  color: #a4aaa2;
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.7;
+  max-width: 920px;
+  margin: 0 0 32px;
+}
+.project-spotlight-summary strong, .project-spotlight-summary em {
+  color: #f1f5f0;
+}
+.project-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 34px;
+}
+.project-metric-card {
+  background: #010202;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.project-metric-card:hover {
+  border-color: rgba(124, 232, 189, 0.35);
+  background: #040806;
+}
+.project-metric-val {
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 700;
+  color: var(--mint);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.project-metric-name {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.project-metric-sub {
+  font-size: 12px;
+  color: #787f76;
+  line-height: 1.45;
+}
+.project-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.btn-project-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+.btn-project-cta-primary {
+  background: var(--mint);
+  color: #030605 !important;
+  box-shadow: 0 8px 24px rgba(124, 232, 189, 0.2);
+}
+.btn-project-cta-primary:hover {
+  background: #a2ffd7;
+  box-shadow: 0 12px 36px rgba(124, 232, 189, 0.35);
+  transform: translateY(-2px);
+}
+.btn-project-cta-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.btn-project-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+.projects-subgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.project-mini-card {
+  background: linear-gradient(145deg, rgba(16, 18, 22, 0.7), rgba(8, 9, 12, 0.85));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 30px;
+  transition: all 0.25s ease;
+}
+.project-mini-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(145deg, rgba(20, 22, 28, 0.8), rgba(10, 12, 15, 0.95));
+  transform: translateY(-2px);
+}
+.mini-card-tag {
+  color: var(--mint);
+  font: 600 10px "Manrope", sans-serif;
+  letter-spacing: 0.16em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.live-dot-green {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #53fc18;
+  box-shadow: 0 0 8px #53fc18;
+}
+.project-mini-card h4 {
+  font: 500 21px/1.25 "Manrope", sans-serif;
+  color: #fff;
+  margin: 0 0 10px;
+}
+.project-mini-card p {
+  font-size: 14px;
+  color: #8c928b;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+@media (max-width: 860px) {
+  .project-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .projects-subgrid {
+    grid-template-columns: 1fr;
+  }
+  .project-spotlight-card {
+    padding: 30px 24px;
+  }
+}
