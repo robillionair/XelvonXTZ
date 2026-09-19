@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://robillionair.com/sitemap.xml
+
