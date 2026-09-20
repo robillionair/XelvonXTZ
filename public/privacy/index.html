@@ -11,15 +11,103 @@
   <link rel="canonical" href="https://robillionair.com/privacy.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/experience.css?v=20260718-flow1">
+  <link rel="stylesheet" href="/nav.css">
   <style>
-    :root{--bg:#050508;--text:#eceee9;--muted:#979c97;--dim:#636863;--line:rgba(255,255,255,.11);--mint:#b7f7c7}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;color:var(--text);background:radial-gradient(circle at 75% 8%,rgba(100,78,180,.13),transparent 28%),var(--bg);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}a{color:inherit}.topbar{position:relative;z-index:3;height:76px;width:min(1180px,calc(100% - 40px));margin:auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.topbar nav{display:flex;gap:22px}.brand{font:700 11px "Manrope";letter-spacing:.2em;text-decoration:none}.brand i{display:inline-block;width:7px;height:7px;margin-right:10px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}.back{color:#9ba09b;font-size:12px;text-decoration:none}.back:hover{color:var(--mint)}main{position:relative;z-index:2;width:min(960px,calc(100% - 40px));margin:auto;padding:100px 0 130px}.eyebrow{color:var(--mint);font:600 10px "Manrope";letter-spacing:.2em}.hero{position:relative;max-width:790px;padding-bottom:70px}.hero h1{margin:22px 0;font:500 clamp(52px,7vw,88px)/.95 "Manrope";letter-spacing:-.065em}.hero p{max-width:680px;color:var(--muted);font-size:18px;line-height:1.75}.effective{display:inline-block;margin-top:18px;color:var(--dim);font-size:11px;letter-spacing:.1em}.policy{position:relative;border-top:1px solid var(--line)}section{display:grid;grid-template-columns:210px 1fr;gap:55px;padding:42px 0;border-bottom:1px solid var(--line)}section h2{margin:0;font:600 12px "Manrope";letter-spacing:.13em;text-transform:uppercase;color:#bec2bd}section div{color:var(--muted);font-size:15px;line-height:1.75}section p{margin:0 0 16px}section ul{margin:0;padding-left:18px}section li{margin:8px 0}strong{color:#dde0db;font-weight:500}.contact{position:relative;margin-top:70px;padding:30px;border:1px solid rgba(183,247,199,.18);background:linear-gradient(145deg,rgba(183,247,199,.055),rgba(139,124,255,.025))}.contact h2{margin:0 0 10px;font:500 24px "Manrope";letter-spacing:-.03em}.contact p{margin:0;color:var(--muted);line-height:1.7}.contact a{color:var(--mint)}@media(max-width:680px){main{padding-top:70px}.hero h1{font-size:52px}section{grid-template-columns:1fr;gap:16px}.topbar{width:calc(100% - 28px)}.topbar nav{gap:12px}.topbar nav a:first-child{display:none}main{width:calc(100% - 32px)}}
+    :root{--bg:#050508;--text:#eceee9;--muted:#979c97;--dim:#636863;--line:rgba(255,255,255,.11);--mint:#00ff9d;--lime:#b7f7c7}*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(circle at 75% 8%,rgba(100,78,180,.13),transparent 28%),var(--bg);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}a{color:inherit}.skip-link{position:fixed;left:12px;top:-80px;z-index:2000;padding:10px 14px;background:var(--mint);color:#050806;border-radius:8px;font-weight:700;text-decoration:none}.skip-link:focus{top:12px}main{position:relative;z-index:2;width:min(960px,calc(100% - 40px));margin:auto;padding:120px 0 130px}.eyebrow{color:var(--mint);font:600 10px "Manrope";letter-spacing:.2em}.hero{position:relative;max-width:790px;padding-bottom:70px}.hero h1{margin:22px 0;font:500 clamp(42px,6.5vw,80px)/1.02 "Manrope";letter-spacing:-.055em}.hero p{max-width:680px;color:var(--muted);font-size:18px;line-height:1.75}.effective{display:inline-block;margin-top:18px;color:var(--dim);font-size:11px;letter-spacing:.1em}.policy{position:relative;border-top:1px solid var(--line)}section{display:grid;grid-template-columns:210px 1fr;gap:55px;padding:42px 0;border-bottom:1px solid var(--line)}section h2{margin:0;font:600 12px "Manrope";letter-spacing:.13em;text-transform:uppercase;color:#bec2bd}section div{color:var(--muted);font-size:15px;line-height:1.75}section p{margin:0 0 16px}section ul{margin:0;padding-left:18px}section li{margin:8px 0}strong{color:#dde0db;font-weight:500}.contact{position:relative;margin-top:70px;padding:30px;border:1px solid rgba(0,255,157,.22);border-radius:16px;background:linear-gradient(145deg,rgba(0,255,157,.05),rgba(139,124,255,.025))}.contact h2{margin:0 0 10px;font:500 24px "Manrope";letter-spacing:-.03em}.contact p{margin:0;color:var(--muted);line-height:1.7}.contact a{color:var(--mint)}@media(max-width:768px){main{padding-top:100px;width:calc(100% - 32px)}.hero h1{font-size:clamp(34px,8.5vw,50px)}section{grid-template-columns:1fr;gap:16px}.contact{padding:24px;margin-top:50px}}
   </style>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="/"><i></i>ROBILLIONAIR</a><nav aria-label="Related pages"><a class="back" href="/about">About founder</a><a class="back" href="/anansi.html">ANANSI concept</a><a class="back" href="/">Return to Xelvon ↑</a></nav></header>
-  <main>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Unified Sticky Site Header -->
+  <header class="site-header" aria-label="Main navigation">
+    <a class="site-brand" href="/" aria-label="Robillionair home">
+      <span class="site-brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="site-brand-text">ROBILLIONAIR</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/#projects" class="nav-link">Projects &amp; Research</a>
+      <a href="/anansi.html" class="nav-link">ANANSI</a>
+      <a href="/memory-compiler" class="nav-link">Memory Compiler</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-live">
+        <span class="nav-live-dot"></span> Kick 24/7
+      </a>
+      <a href="/privacy.html" class="nav-link active">Privacy</a>
+    </nav>
+    <div class="site-header-actions">
+      <a class="site-btn-cta" href="/#projects">
+        <span>Explore Work</span>
+        <b aria-hidden="true">↗</b>
+      </a>
+      <button class="site-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
+    <div class="mobile-drawer-inner">
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="/#projects" class="mobile-nav-link">
+            <span>Projects &amp; Research</span>
+            <span class="mobile-nav-badge">01</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/anansi.html" class="mobile-nav-link">
+            <span>ANANSI Middleware</span>
+            <span class="mobile-nav-badge">02</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/memory-compiler" class="mobile-nav-link">
+            <span>Memory Compiler</span>
+            <span class="mobile-nav-badge">03</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/about" class="mobile-nav-link">
+            <span>About Founder</span>
+            <span class="mobile-nav-badge">04</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="mobile-nav-link">
+            <span>Kick 24/7 Stream</span>
+            <span class="mobile-nav-badge" style="color: #53fc18;">LIVE</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/privacy.html" class="mobile-nav-link">
+            <span>Privacy Policy</span>
+            <span class="mobile-nav-badge">05</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <a class="mobile-drawer-cta" href="/#projects">
+          <span>Explore All Projects</span>
+          <i aria-hidden="true">↗</i>
+        </a>
+        <div class="mobile-drawer-socials">
+          <a href="https://github.com/Rob-bio4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span>•</span>
+          <a href="https://huggingface.co/Rob-bio4" target="_blank" rel="noopener noreferrer">HuggingFace</a>
+          <span>•</span>
+          <a href="mailto:hello@robillionair.com">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
     <div class="hero" data-flow-section data-flow-tone="violet">
       <span class="eyebrow">ROBILLIONAIR · DATA PRACTICES</span>
       <h1>Clarity includes your data.</h1>
@@ -38,6 +126,14 @@
     </div>
     <div class="contact" data-flow-section data-flow-tone="mint"><h2>Questions, unsubscribe or deletion request?</h2><p>Contact <a href="mailto:hello@robillionair.com">hello@robillionair.com</a> and include the email used for the relevant ANANSI or Xelvon service.</p></div>
   </main>
+
+  <footer class="site-footer">
+    <a class="site-brand" href="/"><span class="site-brand-mark" aria-hidden="true"><i></i><i></i></span><span class="site-brand-text">ROBILLIONAIR</span></a>
+    <p>© 2026 Robillionair. Intelligence without compromise.</p>
+    <div><a href="/#projects">Projects</a><a href="/anansi.html">ANANSI</a><a href="/memory-compiler">Compiler</a><a href="/about">About</a><a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">Kick 24/7</a><a href="/privacy.html">Privacy</a><a href="mailto:hello@robillionair.com">Contact</a></div>
+  </footer>
+
   <script src="/experience.js?v=20260718-flow1"></script>
+  <script src="/nav.js"></script>
 </body>
 </html>

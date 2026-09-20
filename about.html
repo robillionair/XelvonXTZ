@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/nav.css" />
 
   <!-- Schema.org Knowledge Graph / Entity Graph -->
   <script type="application/ld+json">
@@ -222,7 +223,12 @@
 
     /* Main Container */
     main {
-      padding: 50px 0 100px;
+      padding: 110px 0 100px;
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 95px 0 80px;
+      }
     }
 
     /* Hero Header */
@@ -1156,25 +1162,97 @@
   </style>
 </head>
 <body>
-  <header class="topbar" aria-label="Main Navigation">
-    <div class="site-container topbar-inner">
-      <a class="brand" href="/" aria-label="Robillionair Homepage">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>ROBILLIONAIR</span>
+  <header class="site-header" aria-label="Main navigation">
+    <a class="site-brand" href="/" aria-label="Robillionair home">
+      <span class="site-brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="site-brand-text">ROBILLIONAIR</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/#projects" class="nav-link">Projects &amp; Research</a>
+      <a href="/anansi.html" class="nav-link">ANANSI</a>
+      <a href="/memory-compiler" class="nav-link">Memory Compiler</a>
+      <a href="/about" class="nav-link active">About</a>
+      <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-live">
+        <span class="nav-live-dot"></span> Kick 24/7
       </a>
-      <nav aria-label="Site Links">
-        <a href="/">Home</a>
-        <a href="/anansi.html">ANANSI</a>
-        <a href="/memory-compiler">Memory Compiler</a>
-        <a href="/about" class="active">About</a>
-        <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="live-chip-nav">
-          <span class="live-red-dot" aria-hidden="true"></span> Kick 24/7
-        </a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="https://robillionair.com" class="nav-cta">robillionair.com ↗</a>
-      </nav>
+      <a href="/privacy.html" class="nav-link">Privacy</a>
+    </nav>
+    <div class="site-header-actions">
+      <a class="site-btn-cta" href="/memory-compiler">
+        <span>Try Compiler</span>
+        <b aria-hidden="true">↗</b>
+      </a>
+      <button class="site-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
     </div>
   </header>
+
+  <!-- Fullscreen Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
+    <div class="mobile-drawer-inner">
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="/" class="mobile-nav-link">
+            <span>Home</span>
+            <span class="mobile-nav-badge">01</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/#projects" class="mobile-nav-link">
+            <span>Projects &amp; Research (DrosophiLLM)</span>
+            <span class="mobile-nav-badge">02</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/anansi.html" class="mobile-nav-link">
+            <span>ANANSI Sovereign Web</span>
+            <span class="mobile-nav-badge">03</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/memory-compiler" class="mobile-nav-link">
+            <span>Free Memory Compiler</span>
+            <span class="mobile-nav-badge">04</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/about" class="mobile-nav-link active" style="color: var(--nav-mint);">
+            <span>Executive Dossier (About)</span>
+            <span class="mobile-nav-badge">05</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #7aff55;">
+            <span><span class="nav-live-dot" style="display:inline-block; margin-right:6px;"></span> Kick 24/7 (Degenerate Fly)</span>
+            <i>↗</i>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="/privacy.html" class="mobile-nav-link">
+            <span>Privacy &amp; Data Practices</span>
+            <span class="mobile-nav-badge">06</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="mobile-drawer-footer">
+        <a class="mobile-drawer-cta" href="/memory-compiler">
+          <span>Launch Memory Compiler in Browser</span>
+          <i>↗</i>
+        </a>
+        <div class="mobile-drawer-socials">
+          <a href="https://github.com/Rob-bio4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span>•</span>
+          <a href="https://huggingface.co/Robillionair" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+          <span>•</span>
+          <a href="mailto:hello@robillionair.com">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main id="main-content">
     <div class="site-container">
@@ -1712,5 +1790,6 @@
       </div>
     </div>
   </footer>
+  <script src="/nav.js"></script>
 </body>
 </html>
