@@ -105,6 +105,87 @@ Robin-Kevin Vettik maintains verified identities and public repositories across 
 
 ---
 
+## Knowledge Graph, SEO & Entity Disambiguation Strategy
+
+This repository and the production web properties for [robillionair.com](https://robillionair.com) are engineered to establish an authoritative personal Knowledge Graph on search engines (Googlebot, Bing) for the canonical entity **Robin-Kevin Vettik**.
+
+### What Is Working Much Better Now
+
+* **High Domain-Authority (DA) External Citations:**  
+  Personal websites often struggle to rank on page 1 alone if they lack domain age and backlink volume. By associating your exact name with **GitHub (DA 96)**, **Hugging Face (DA 88)**, **Dev.to (DA 80)**, and **Substack (DA 92)**, Google’s crawlers encounter high-trust third-party domains explicitly attributing code, models, and articles to **Robin-Kevin Vettik**.
+* **Entity Disambiguation:**  
+  `"Robin-Kevin Vettik"` is an uncommon, distinct name. Because you tied it to unique keywords (**DrosophiLLM**, **Robillionair OÜ**, **FlyWire Connectome**), there is virtually zero keyword collision or competitor ambiguity.
+* **Cleaned Crawl Pipeline:**  
+  The updated `sitemap.xml` with canonical URLs, valid XML headers, and `<lastmod>` tags prevents Googlebot from getting stuck on redirects or skipping stale pages.
+
+---
+
+### What Still Needs Fixing (The 4-Step Action Checklist)
+
+#### 1. Add Person Schema (JSON-LD) to Your Website (Critical — Implemented)
+Google doesn't just read plain text; it reads entity graphs. If you don't explicitly tell Google that the person "Robin-Kevin Vettik" owns `robillionair.com` and created DrosophiLLM, it has to guess.  
+The Person Schema has been integrated inside the `<head>` of both `https://robillionair.com/` (`index.html`) and `https://robillionair.com/about` (`about.html`):
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Robin-Kevin Vettik",
+  "url": "https://robillionair.com",
+  "jobTitle": "Founder & Systems Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Robillionair OÜ",
+    "url": "https://robillionair.com"
+  },
+  "sameAs": [
+    "https://github.com/Rob-bio4",
+    "https://huggingface.co/Robillionair",
+    "https://substack.com/@robillionair"
+  ],
+  "knowsAbout": [
+    "Neuromorphic Computing",
+    "Large Language Models",
+    "Sparse Connectomics",
+    "PyTorch",
+    "Systems Architecture"
+  ]
+}
+</script>
+```
+
+* **Why this matters:** The `sameAs` array acts as a cryptographic mesh for Googlebot. It links your personal domain directly to your GitHub, Hugging Face, and social profiles, which triggers Google to assemble a unified Knowledge Graph box on the right side of the search results.
+
+#### 2. Synchronize Your Cross-Platform Backlinks
+A common mistake is having links point in only one direction. Ensure the loop is closed across every profile:
+* **GitHub Bio (@Rob-bio4):**
+  * **Display Name:** `Robin-Kevin Vettik`
+  * **Bio:** `Founder @ Robillionair OÜ · Creator of DrosophiLLM`
+  * **Website:** [https://robillionair.com](https://robillionair.com)
+* **Hugging Face (@Robillionair):**
+  * **Full Name field:** `Robin-Kevin Vettik`
+  * **Homepage URL:** [https://robillionair.com](https://robillionair.com)
+* **Substack / Dev.to Author Bio:**
+  * **Byline:** `Robin-Kevin Vettik, Founder at Robillionair OÜ`
+  * **Link:** [https://robillionair.com](https://robillionair.com)
+
+When all these high-authority platforms point back to `robillionair.com` using the exact string **"Robin-Kevin Vettik"**, Google treats `robillionair.com` as the canonical authority for that name.
+
+#### 3. Force Re-Indexing in Google Search Console (GSC)
+Googlebot will eventually discover the changes on its own, but that can take 1 to 3 weeks. You can accelerate this:
+1. Go to [search.google.com/search-console](https://search.google.com/search-console).
+2. Go to **Sitemaps** on the left menu and resubmit [https://robillionair.com/sitemap.xml](https://robillionair.com/sitemap.xml).
+3. Paste [https://robillionair.com/](https://robillionair.com/) and [https://robillionair.com/about](https://robillionair.com/about) into the **URL Inspection** search bar at the very top.
+4. Click **"Request Indexing"**. This forces Google’s crawler to fetch the updated content and sitemap within 24 to 48 hours.
+
+#### 4. The Exact Spelling Rule (Hyphenation Consistency)
+Ensure you use the exact same format everywhere:
+* **Target string:** `Robin-Kevin Vettik`
+* **Rule:** Avoid dropping the hyphen (e.g., *Robin Kevin Vettik*) or using initials (e.g., *R. K. Vettik*) on primary profile headers. Consistency allows search engines to aggregate all mentions under a single indexed entity.
+
+---
+
 ## Repository Technical Overview: Xelvon & Robillionair Web Platform
 
 ```

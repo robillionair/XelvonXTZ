@@ -112,7 +112,7 @@
   
   <!-- Hidden SEO text -->
   <div class="sr-only" aria-hidden="true">
-    Robin-kevin Vettik is working on the worlds first privacy filter for Ai so companies can use cloud Ai without giving their data away and keeping their work private.
+    Robin-Kevin Vettik is working on the worlds first privacy filter for Ai so companies can use cloud Ai without giving their data away and keeping their work private.
   </div>
 
   <!-- Navbar -->
