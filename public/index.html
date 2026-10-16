@@ -156,6 +156,21 @@
     /* MONOLITHIC CRACKED MARBLE & STONE PILLAR TYPOGRAPHY               */
     /* Replicates the visual weight and chiseled fissures of ancient ruins */
     /* ================================================================= */
+    .stone-pillar-title-horizon {
+      font-family: 'Cinzel', serif !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05em !important;
+      display: inline-block;
+      background: linear-gradient(180deg, #FFFFFF 0%, #E8E5DD 22%, #C4BCAC 48%, #8E8675 75%, #38332A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(255, 255, 255, 0.35))
+              drop-shadow(0 4px 1px #050505)
+              drop-shadow(0 12px 20px rgba(0, 0, 0, 0.95));
+    }
+
     .stone-pillar-title {
       font-family: 'Cinzel', serif !important;
       font-weight: 900 !important;
@@ -1493,27 +1508,33 @@
   </section>
 
   <!-- ===================================================================== -->
-  <!-- SECTION 7: RADIAL 3D STRAND EXPLOSION CTA (StrandsThreeJS)            -->
+  <!-- SECTION 7: RADIAL 3D STRAND EXPLOSION CTA (OPTIMIZED FOR MOBILE & DESKTOP) -->
   <!-- ===================================================================== -->
   <section class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000]">
-    <div class="strand-frame relative h-[620px] flex items-center justify-center overflow-hidden bg-[#000000]">
-      <!-- Authentic StrandsThreeJS Canvas -->
-      <div id="strands-3d-mount" class="w-full h-full absolute inset-0 canvas-touch-safe"></div>
+    <div class="strand-frame relative min-h-[440px] sm:h-[540px] lg:h-[620px] py-16 sm:py-20 flex items-center justify-center overflow-hidden bg-[#000000]">
+      <!-- Mobile Atmospheric Ambient Halo (No stark white, rich warm platinum/gold aura) -->
+      <div class="md:hidden absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(214,203,182,0.18)_0%,rgba(10,10,12,0.85)_55%,#000000_100%)]"></div>
+      <div class="md:hidden absolute inset-0 pointer-events-none opacity-20 mix-blend-screen bg-[radial-gradient(circle_at_50%_35%,#F4D068_0%,transparent_65%)]"></div>
+
+      <!-- Authentic StrandsThreeJS Canvas (Desktop Only: Zero mobile CPU/battery drain) -->
+      <div id="strands-3d-mount" class="hidden md:block w-full h-full absolute inset-0"></div>
 
       <!-- Centered CTA -->
       <div class="relative z-10 text-center max-w-2xl px-6 pointer-events-none">
-        <h2 class="stone-pillar-title text-[38px] sm:text-[54px] lg:text-[62px] leading-[1.05] mb-4 drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]" data-text="BEYOND THE HORIZON.">
+        <h2 class="stone-pillar-title-horizon text-[28px] sm:text-[44px] lg:text-[58px] leading-[1.12] mb-4 drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]" data-text="BEYOND THE HORIZON.">
           BEYOND THE HORIZON.
         </h2>
-        <p class="text-[16px] sm:text-[17px] text-obsidian-silver mb-8 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-light">
-          Sovereign Synthetic Intelligence. 100% IP ownership. Shipped via flat B2B contracts.
+        <p class="text-[14px] sm:text-[16.5px] text-obsidian-silver mb-8 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-light max-w-xl mx-auto leading-relaxed">
+          <strong class="text-obsidian-platinum font-medium">Sovereign Synthetic Intelligence</strong>. 100% IP ownership shipped via transparent B2B outcome contracts.
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-3.5 pointer-events-auto">
-          <a href="mailto:human@robillionai.com" class="touch-target tap-press px-8 py-3.5 rounded-full bg-[#F4F4F6] text-[#000000] font-mono text-[12px] tracking-widest uppercase font-bold hover:bg-white transition shadow-[0_0_35px_rgba(255,255,255,0.22)]">
-            Email human@robillionai.com
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pointer-events-auto w-full max-w-md mx-auto">
+          <a href="mailto:human@robillionai.com" class="touch-target tap-press w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F4F4F6] via-[#E8E2D5] to-[#D6CBB6] text-[#0A0A0C] font-mono text-[11.5px] sm:text-[12px] tracking-widest uppercase font-bold hover:brightness-105 transition shadow-[0_0_30px_rgba(214,203,182,0.25)] flex items-center justify-center gap-2">
+            <span>Email human@robillionai.com</span>
+            <span>↗</span>
           </a>
-          <a href="#benchmarks" class="touch-target tap-press px-8 py-3.5 rounded-full bg-black/80 backdrop-blur-xl text-white border border-white/20 font-mono text-[12px] tracking-wider uppercase hover:bg-white/10 transition">
-            View Project Benchmarks ↑
+          <a href="#benchmarks" class="touch-target tap-press w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#0A0A0C]/90 backdrop-blur-xl text-obsidian-silver hover:text-white border border-white/15 font-mono text-[11.5px] sm:text-[12px] tracking-wider uppercase transition flex items-center justify-center gap-2">
+            <span>View Project Benchmarks</span>
+            <span>↑</span>
           </a>
         </div>
       </div>
