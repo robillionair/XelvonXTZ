@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Vision Dispatches // Robillionair OÜ — Applied AI &amp; Neuromorphic Systems</title>
+  <meta name="description" content="Official technical essays on neuromorphic cognition, biological connectome splicing (DrosophiLLM), memory compilers (ANANSI), and studio leverage by Robin-Kevin Vettik." />
+  <link rel="canonical" href="https://robillionair.com/vision" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Google Fonts: Cinzel, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              void: '#000000',
+              deep: '#050506',
+              carbon: '#0A0A0C',
+              platinum: '#D6CBB6',
+              silver: '#9CA3AF',
+              alabaster: '#F4F4F6'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #F4F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.8;
+      overflow-x: clip;
+    }
+    .stone-pillar-title {
+      font-family: 'Cinzel', serif !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.04em !important;
+      color: #E5E7EB;
+      position: relative;
+      display: inline-block;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
+        linear-gradient(180deg, #FFFFFF 0%, #D4D4D8 28%, #85858A 65%, #27272A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(255, 255, 255, 0.4))
+              drop-shadow(0 8px 1px #050505)
+              drop-shadow(0 14px 18px rgba(0, 0, 0, 0.95));
+    }
+    .stone-pillar-title::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, transparent 20%, #000 95%),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(0, 0, 0, 0.4) 19px, transparent 21px);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+    .strand-frame {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .strand-rule {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .chromatic-card {
+      background: rgba(10, 10, 12, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+    }
+  </style>
+</head>
+<body class="selection:bg-white/15 selection:text-white">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-[#000000]/90 backdrop-blur-xl strand-rule">
+    <div class="strand-frame px-6 sm:px-10 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-[#D6CBB6]" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5.5" r="3.2" />
+          <circle cx="6.2" cy="16.5" r="3.2" />
+          <circle cx="17.8" cy="16.5" r="3.2" />
+          <path d="M12 8.7L7.8 14.2M12 8.7L16.2 14.2M9.2 16.5H14.8" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <span class="font-cinzel text-[19px] font-bold text-white tracking-wider">ROBILLIONAIR</span>
+        <span class="text-[10px] font-mono tracking-widest px-1.5 py-0.5 rounded bg-white/[0.05] text-[#D6CBB6] border border-white/10">OÜ</span>
+      </a>
+
+      <div class="flex items-center gap-6 text-[12px] font-mono uppercase tracking-wider text-obsidian-silver">
+        <a href="/" class="hover:text-white transition">← Return to Studio</a>
+        <a href="mailto:human@robillionai.com" class="hidden sm:inline-flex px-4 py-2 rounded-full border border-white/15 text-white hover:border-[#D6CBB6] transition">human@robillionai.com</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="strand-rule bg-[#000000] py-20 px-6 sm:px-12">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#D6CBB6] mb-4">
+        TECHNICAL ESSAYS &amp; ARCHITECTURAL DISPATCHES
+      </div>
+      <h1 class="stone-pillar-title text-[38px] sm:text-[56px] lg:text-[68px] leading-[1.04] mb-6" data-text="THE VISION DISPATCHES">
+        THE VISION DISPATCHES
+      </h1>
+      <p class="text-[17px] sm:text-[19px] text-obsidian-silver font-light max-w-2xl leading-relaxed">
+        Research treatises on neuromorphic computing, deterministic memory compilers, and studio leverage by Robin-Kevin Vettik.
+      </p>
+    </div>
+  </section>
+
+  <!-- Unabridged Essays -->
+  <main class="strand-frame px-6 sm:px-12 py-16 space-y-20">
+
+    <!-- Essay 1 -->
+    <article id="dispatch-01" class="chromatic-card rounded-3xl p-8 sm:p-12 border border-white/15">
+      <div class="flex items-center justify-between font-mono text-[11px] text-[#D6CBB6] tracking-widest uppercase mb-4">
+        <span>DISPATCH 01 // MEMORY COMPILATION</span>
+        <span>ROBIN-KEVIN VETTIK</span>
+      </div>
+      <h2 class="font-cinzel font-bold text-[26px] sm:text-[34px] text-white leading-tight mb-8">
+        Why 90% of Multi-Agent Systems Rot in Production (And How We Solved Context Memory)
+      </h2>
+      <div class="space-y-6 text-[16px] text-obsidian-silver leading-[1.85] font-light">
+        <p>
+          The most pervasive lie in modern agentic AI is that massive context windows have solved memory. When a frontier model provider announces a 1-million or 2-million token window, naive engineering teams assume they can simply append raw logs, API responses, and conversation transcripts indefinitely.
+        </p>
+        <p>
+          In production, this naive assumption collapses within 48 hours. Three fatal failure modes emerge:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-white/90">
+          <li><strong>Attention Dilution:</strong> Crucial system guardrails and constraints get lost in a sea of peripheral tokens ("lost-in-the-middle" phenomenon).</li>
+          <li><strong>Token Cost Escalation:</strong> Passing millions of repetitive tokens through every round-trip query degrades throughput and multiplies compute expenses exponentially.</li>
+          <li><strong>Context Rot:</strong> Historical, deprecated requirements contradict new instructions, causing agents to enter infinite circular loops or hallucinate stale parameters.</li>
+        </ul>
+        <p>
+          Standard vector RAG does not fix this. Cosine similarity retrieves semantic fragments, not state trees. If an agent asked a question on day two that changed the entire architecture on day four, naive vector search will return both statements with equal weight, completely oblivious to temporal lineage.
+        </p>
+        <p>
+          At Robillionair OÜ, we solved this by engineering our own deterministic compiler: <strong class="text-white">ANANSI</strong>. Rather than feeding raw transcripts into agent context, ANANSI processes conversational state through a multi-step reduction pipeline: deduplication, temporal lineage pruning, semantic summarization with provenance hashes, and dynamic context budgeting. When our agents execute, their context is always 100% signal, zero noise.
+        </p>
+      </div>
+    </article>
+
+    <!-- Essay 2 -->
+    <article id="dispatch-02" class="chromatic-card rounded-3xl p-8 sm:p-12 border border-white/15">
+      <div class="flex items-center justify-between font-mono text-[11px] text-[#D6CBB6] tracking-widest uppercase mb-4">
+        <span>DISPATCH 02 // NEUROMORPHIC ML</span>
+        <span>ROBIN-KEVIN VETTIK</span>
+      </div>
+      <h2 class="font-cinzel font-bold text-[26px] sm:text-[34px] text-white leading-tight mb-8">
+        Merging Drosophila Connectome Connectomics with Large Language Models (The DrosophiLLM Experiment)
+      </h2>
+      <div class="space-y-6 text-[16px] text-obsidian-silver leading-[1.85] font-light">
+        <p>
+          The adult <em>Drosophila melanogaster</em> brain contains 139,255 biological neurons connected by 2,613,129 directed synapses. It consumes approximately 10 microwatts of power while performing real-time flight navigation, sensory integration, olfactory tracking, and associative memory learning.
+        </p>
+        <p>
+          Modern deep learning, by contrast, relies on dense matrix multiplications that burn hundreds of megawatts. Dense layers treat every token as if every neuron must talk to every other neuron simultaneously. Biology proved half a billion years ago that this is unnecessary.
+        </p>
+        <p>
+          In the DrosophiLLM experiment, we took the FlyWire 2024 full-brain connectome and converted its directed adjacency graph into a Compressed Sparse Row (CSR) topology. We then spliced this biological graph directly into layers 18 through 23 of Qwen2.5-0.5B, replacing dense MLP blocks with biologically constrained sparse linear layers and Dale's Law sign constraints (enforcing that excitatory neurons only excite, and inhibitory neurons only inhibit).
+        </p>
+        <p>
+          The results were startling: synaptic parameter memory dropped from 16.00 MB to 0.70 MB (a 22.8× compression ratio), step latency was halved from 306 ms to 153 ms, and validation perplexity remained strictly bounded (1.48 vs 1.56 on shuffled controls). Biological wiring rules offer an immense, unexplored optimization frontier for sovereign computing.
+        </p>
+      </div>
+    </article>
+
+    <!-- Essay 3 -->
+    <article id="dispatch-03" class="chromatic-card rounded-3xl p-8 sm:p-12 border border-white/15">
+      <div class="flex items-center justify-between font-mono text-[11px] text-[#D6CBB6] tracking-widest uppercase mb-4">
+        <span>DISPATCH 03 // STUDIO LEVERAGE</span>
+        <span>ROBIN-KEVIN VETTIK</span>
+      </div>
+      <h2 class="font-cinzel font-bold text-[26px] sm:text-[34px] text-white leading-tight mb-8">
+        The Death of the 50-Person Engineering Team: Studio Leverage in the Age of Synthetic Intelligence
+      </h2>
+      <div class="space-y-6 text-[16px] text-obsidian-silver leading-[1.85] font-light">
+        <p>
+          The traditional agency model is an economic artifact of an era when writing code required armies of junior developers manually typing boilerplate. When a client asked for an enterprise platform or real-time spatial experience, the agency would bill for an account director, three project managers, two Scrum masters, eight backend engineers, and five QA testers.
+        </p>
+        <p>
+          Eighty percent of that headcount did not write software—they managed the communication overhead created by having too many humans in the room. In Brooks' Law terms, adding manpower to a software project makes it later.
+        </p>
+        <p>
+          Synthetic intelligence fundamentally inverts this equation. At Robillionair OÜ, our senior systems team orchestrates specialized local and cloud AI agent swarms. Because our internal ANANSI compilers eliminate boilerplate, 100% of human brainpower is focused on architecture design, security boundaries, edge-case testing, and real-time integration.
+        </p>
+        <p>
+          What used to take six months of standups and 50 people can now be shipped by an elite, locked-in studio in two weeks. And because every repository we ship includes a living, crystal-clear ARCHITECTURE.md and ROADMAP.md, our clients own 100% of their IP with zero contractor lock-in.
+        </p>
+      </div>
+    </article>
+
+    <!-- Back to Home CTA -->
+    <div class="text-center py-12 border-t border-white/[0.08]">
+      <a href="/#contact" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#F4F4F6] text-black font-mono text-[12px] uppercase font-bold tracking-widest hover:bg-white transition">
+        <span>Initiate Architecture Engagement</span>
+        <span>→</span>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="strand-rule bg-[#000000] py-8 text-center font-mono text-[11px] text-white/40">
+    ROBILLIONAIR OÜ — Registered in Tallinn, Estonia (EU). Global B2B Invoicing with 0% Reverse-Charge VAT compliance.
+  </footer>
+</body>
+</html>
