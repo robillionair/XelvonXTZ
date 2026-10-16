@@ -13,6 +13,8 @@
   <link rel="canonical" href="https://robillionair.com/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="theme-color" content="#000000" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
@@ -177,16 +179,14 @@
               drop-shadow(0 14px 18px rgba(0, 0, 0, 0.95));
     }
 
-    /* Subtle CSS Fissure / Crack Overlay */
-    .stone-pillar-title::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, transparent 20%, #000 95%),
-        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(0, 0, 0, 0.4) 19px, transparent 21px);
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      opacity: 0.45;
+    /* Desktop 3D Gold Mouse Pointer */
+    @media (hover: hover) and (pointer: fine) {
+      *, *::before, *::after {
+        cursor: url('/assets/gold-cursor-32.png') 2 2, auto !important;
+      }
+      a, button, [role="button"], input, select, textarea, label, .clickable, summary, input[type="radio"] {
+        cursor: url('/assets/gold-cursor-32.png') 2 2, pointer !important;
+      }
     }
 
     @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
@@ -261,10 +261,6 @@
     /* 3D Canvases touch friendliness */
     .canvas-touch-safe {
       touch-action: pan-y;
-      cursor: grab;
-    }
-    .canvas-touch-safe:active {
-      cursor: grabbing;
     }
 
     /* Custom Obsidian Scrollbar */
@@ -426,25 +422,10 @@
   </style>
 </head>
 <body class="selection:bg-white/15 selection:text-white">
+  <!-- Gold Cursor Trailing Aura (Desktop Only) -->
+  <div id="gold-cursor-aura" class="hidden md:block pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(214,203,182,0.45)] bg-[radial-gradient(circle,rgba(244,208,104,0.22)_0%,transparent_70%)] w-8 h-8 opacity-0 transition-opacity duration-300"></div>
 
-  <!-- ===================================================================== -->
-  <!-- TOP STATUS BAR: OBSIDIAN LUXURY TELEMETRY                             -->
-  <!-- ===================================================================== -->
-  <div class="strand-rule bg-[#050506] text-[11px] font-mono tracking-widest uppercase text-obsidian-silver">
-    <div class="strand-frame px-4 sm:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5">
-        <span class="inline-block w-2 h-2 rounded-full bg-obsidian-platinum animate-pulse-dot shadow-[0_0_10px_rgba(214,203,182,0.8)]"></span>
-        <span class="text-obsidian-alabaster font-medium tracking-[0.14em]">STATUS: ACCEPTING PRIVATE B2B SPRINTS &amp; RETAINERS (Q4 2026) — ROBILLIONAIR OÜ (ESTONIA / EU)</span>
-      </div>
-      <div class="flex items-center gap-5 text-[11px]">
-        <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener" class="text-obsidian-platinum hover:text-white transition flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum"></span> LIVE 24/7: DEGENERATE FLY ON KICK ↗
-        </a>
-        <span class="text-white/20 hidden sm:inline">|</span>
-        <a href="mailto:human@robillionai.com" class="text-obsidian-alabaster hover:text-obsidian-platinum transition hidden sm:inline tracking-wider">human@robillionai.com</a>
-      </div>
-    </div>
-  </div>
+  <!-- Top status bar removed per specification -->
 
   <!-- ===================================================================== -->
   <!-- STICKY NAVIGATION BAR: PURE BLACK SPECULAR GLASS                      -->
@@ -461,7 +442,7 @@
         </svg>
         <div class="flex items-baseline gap-2">
           <span class="font-cinzel text-[20px] tracking-wider font-bold text-white">ROBILLIONAIR</span>
-          <span class="text-[10px] font-mono tracking-widest px-1.5 py-0.5 rounded bg-white/[0.05] text-obsidian-platinum border border-white/10">OÜ</span>
+          
         </div>
       </a>
 
@@ -478,7 +459,7 @@
         <a href="mailto:human@robillionai.com" class="hidden sm:inline-flex touch-target px-4 py-2 rounded-full text-[11.5px] font-mono tracking-wider text-obsidian-silver hover:text-white border border-white/10 hover:border-obsidian-platinum/40 transition-all">
           human@robillionai.com
         </a>
-        <a href="#contact" class="touch-target tap-press inline-flex items-center px-5 py-2 rounded-full text-[12px] font-mono tracking-wider uppercase font-semibold bg-[#F4F4F6] text-[#000000] hover:bg-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.14)]">
+        <a href="#contact" class="touch-target tap-press hidden md:inline-flex items-center px-5 py-2 rounded-full text-[12px] font-mono tracking-wider uppercase font-semibold bg-[#F4F4F6] text-[#000000] hover:bg-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.14)]">
           Transmit Brief
         </a>
       </div>
@@ -558,10 +539,10 @@
       </div>
 
       <!-- Right Column (5 cols): Authentic HeroThreeJSV2 3D Extruded Trefoil -->
-      <div class="lg:col-span-5 relative min-h-[460px] lg:min-h-[680px] flex items-center justify-center overflow-hidden bg-transparent">
-        <div id="hero-3d-mount" class="w-full h-full absolute inset-0 canvas-touch-safe"></div>
+      <div class="hidden md:flex lg:col-span-5 relative min-h-[460px] lg:min-h-[680px] items-center justify-center overflow-hidden bg-transparent">
+        <div id="hero-3d-mount" class="w-full h-full absolute inset-0"></div>
         <div class="absolute top-4 right-4 pointer-events-none font-mono text-[10px] tracking-widest uppercase text-white/35 bg-black/60 px-3 py-1 rounded border border-white/[0.08] backdrop-blur-md">
-          WEBGL2 // 1,025 EXTRUDED STRANDS · DRAG / TOUCH
+          WEBGL2 // 1,025 EXTRUDED STRANDS · REACTIVE TO MOUSE
         </div>
       </div>
     </div>
@@ -1571,10 +1552,38 @@
         </div>
       </div>
 
-      <!-- Giant Outlined Brand Watermark -->
-      <div class="relative py-8 select-none pointer-events-none text-center overflow-hidden">
-        <div class="font-cinzel font-black text-[58px] sm:text-[110px] lg:text-[160px] tracking-tight text-transparent leading-none" style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);">
-          ROBILLIONAIR
+      <!-- ===================================================================== -->
+      <!-- 3D BEDROCK REVELATION: ROBILLIONAIR SHATTERING CRACKS VIDEO           -->
+      <!-- ===================================================================== -->
+      <div id="monolith-cracks-container" class="relative my-8 sm:my-14 select-none overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#000000] shadow-[0_0_90px_rgba(0,0,0,1)]">
+        <!-- Ambient Fissure Gold Halo Background -->
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(214,203,182,0.15),transparent_75%)]"></div>
+
+        <div class="relative w-full aspect-[16/9] max-h-[620px] overflow-hidden flex items-center justify-center">
+          <video
+            id="monolith-cracks-video"
+            src="/assets/robillionair-cracks.mp4"
+            playsinline
+            muted
+            preload="auto"
+            class="w-full h-full object-cover pointer-events-none select-none"
+            style="mask-image: radial-gradient(ellipse 90% 84% at 50% 50%, #000 62%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 90% 84% at 50% 50%, #000 62%, transparent 100%); mix-blend-mode: lighten;"
+          ></video>
+
+          <!-- Smooth Edge Dark Vignettes into #000 Void -->
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-[#000000] opacity-85"></div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000000] via-transparent to-[#000000] opacity-85"></div>
+        </div>
+
+        <!-- Telemetry HUD footer on the stone slab -->
+        <div class="absolute bottom-3 sm:bottom-5 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between pointer-events-none font-mono text-[9px] sm:text-[11px] tracking-widest uppercase text-white/45">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse"></span>
+            <span>SYSTEM BEDROCK // MONOLITHIC COGNITION</span>
+          </div>
+          <div class="text-obsidian-platinum">
+            FOUNDED BY ROBIN-KEVIN VETTIK
+          </div>
         </div>
       </div>
 
@@ -1704,10 +1713,10 @@
       if (sel === 'system') label = 'Benchmark 02: Turnkey Autonomous System Build (~€12,000–€18,000, 3–4 Weeks)';
       else if (sel === 'retainer') label = 'Benchmark 03: Dedicated Systems Engineering Retainer (~€9,500/month)';
 
-      var name = (document.getElementById('brief-name').value || 'Prospective Partner').trim();
-      var email = (document.getElementById('brief-email').value || 'Not provided').trim();
-      var url = (document.getElementById('brief-url').value || 'Not provided').trim();
-      var notes = (document.getElementById('brief-notes').value || 'No additional notes provided.').trim();
+      var name = sanitizeInput(document.getElementById('brief-name').value) || 'Prospective Partner';
+      var email = sanitizeInput(document.getElementById('brief-email').value) || 'Not provided';
+      var url = sanitizeInput(document.getElementById('brief-url').value) || 'Not provided';
+      var notes = sanitizeInput(document.getElementById('brief-notes').value) || 'No additional notes provided.';
 
       return [
         '=== ROBILLIONAIR OÜ // PROJECT BENCHMARK BRIEF ===',
@@ -1754,6 +1763,90 @@
     }
 
     // -----------------------------------------------------------------------
+    // MONOLITHIC 3D CRACKS VIDEO SCROLL & INTERSECTION INTEGRATION
+    // -----------------------------------------------------------------------
+    (function initCracksVideoScroll() {
+      var video = document.getElementById('monolith-cracks-video');
+      var container = document.getElementById('monolith-cracks-container');
+      if (!video || !container) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            video.play().catch(function() {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(container);
+
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var rect = container.getBoundingClientRect();
+            var windowHeight = window.innerHeight;
+            if (rect.top < windowHeight && rect.bottom > 0) {
+              var totalDist = windowHeight + rect.height;
+              var progress = (windowHeight - rect.top) / totalDist;
+              progress = Math.max(0, Math.min(1, progress));
+              if (video.duration && !isNaN(video.duration)) {
+                var targetTime = progress * video.duration;
+                if (Math.abs(video.currentTime - targetTime) > 0.08) {
+                  video.currentTime = targetTime;
+                }
+              }
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // -----------------------------------------------------------------------
+    // GOLD MOUSE POINTER LUXURY FOLLOWER (DESKTOP)
+    // -----------------------------------------------------------------------
+    (function initGoldCursorFollower() {
+      if (window.matchMedia('(hover: none)').matches) return;
+      var aura = document.getElementById('gold-cursor-aura');
+      if (!aura) return;
+
+      var mouseX = -100, mouseY = -100;
+      var currentX = -100, currentY = -100;
+      var active = false;
+
+      window.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!active) {
+          active = true;
+          aura.style.opacity = '1';
+        }
+      }, { passive: true });
+
+      function renderAura() {
+        currentX += (mouseX - currentX) * 0.15;
+        currentY += (mouseY - currentY) * 0.15;
+        aura.style.left = currentX.toFixed(1) + 'px';
+        aura.style.top = currentY.toFixed(1) + 'px';
+        requestAnimationFrame(renderAura);
+      }
+      requestAnimationFrame(renderAura);
+    })();
+
+    // -----------------------------------------------------------------------
+    // INPUT SANITIZATION GUARD (SAFE & FAST INTAKE)
+    // -----------------------------------------------------------------------
+    function sanitizeInput(str) {
+      if (!str) return '';
+      return String(str).replace(/[<>&"']/g, function(m) {
+        return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[m];
+      }).trim();
+    }
+
+        // -----------------------------------------------------------------------
     // 3. VISION DISPATCH MODAL READER
     // -----------------------------------------------------------------------
     var dispatches = {
