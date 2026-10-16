@@ -11,7 +11,7 @@
   <!-- Google Fonts: Luxury Editorial + Modern Narrative + Technical Monospace Precision -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -202,6 +202,176 @@
     .animate-pulse-dot {
       animation: pulse-dot 2.4s infinite ease-in-out;
     }
+
+    /* ================================================================= */
+    /* REALISTIC STONE & POLISHED MARBLE HEADINGS (h1 / h2)               */
+    /* ================================================================= */
+    .marble-heading {
+      font-family: 'Cormorant Garamond', 'Instrument Serif', serif !important;
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      letter-spacing: -0.01em !important;
+      color: #F4F4F6;
+      /* Polished dark marble / carved stone with platinum veining:
+         layer 1-2 = fine specular veins, layer 3 = stone base gradient */
+      background:
+        linear-gradient(112deg, transparent 38%, rgba(255,255,255,0.55) 41%, transparent 44%),
+        linear-gradient(68deg, transparent 62%, rgba(138,133,123,0.55) 64.5%, transparent 67%),
+        linear-gradient(135deg, #FFFFFF 0%, #D6CBB6 35%, #8A857B 70%, #E2D9C8 100%);
+      background-size: 100% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* drop-shadow instead of text-shadow: text-shadow paints over clipped gradients in Chromium */
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.8)) drop-shadow(0 1px 1px rgba(214, 203, 182, 0.2));
+      position: relative;
+      text-wrap: balance;
+    }
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .marble-heading { -webkit-text-fill-color: #F4F4F6; background: none; }
+    }
+
+    /* ================================================================= */
+    /* CINEMATIC IMAGE INTEGRATION (blend into #000 obsidian)             */
+    /* ================================================================= */
+    .cine-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* Hero ambient background */
+    .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .hero-bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      /* cyan render graded to warm platinum */
+      filter: grayscale(1) sepia(0.22) brightness(0.95) contrast(1.1);
+      mix-blend-mode: screen;
+      opacity: 0.55;
+      transform: scale(1.06);
+      animation: hero-drift 28s ease-in-out infinite alternate;
+    }
+    .hero-bg-vignette {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 75% 70% at 62% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.78) 62%, #000 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.35) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0) 70%, #000 100%);
+    }
+    @keyframes hero-drift {
+      0% { transform: scale(1.06) translate3d(0, 0, 0); }
+      100% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+    }
+
+    /* Framed displays (schematic / glass) */
+    .cine-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #050506;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      isolation: isolate;
+    }
+    .cine-frame:hover, .cine-frame:active { border-color: rgba(214,203,182,0.35); }
+    .cine-frame::after {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse 85% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.85) 100%);
+    }
+    .cine-frame--schematic { aspect-ratio: 16 / 9; }
+    .cine-img--schematic {
+      filter: grayscale(1) sepia(0.18) brightness(1.05) contrast(1.12);
+      mix-blend-mode: luminosity;
+      transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .cine-frame--schematic:hover .cine-img--schematic { transform: scale(1.03); }
+    .cine-scan {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: linear-gradient(to bottom, transparent 0%, rgba(214,203,182,0.10) 50%, transparent 100%);
+      background-size: 100% 30%;
+      background-repeat: no-repeat;
+      animation: scan 6s linear infinite;
+      mix-blend-mode: screen;
+    }
+    @keyframes scan { 0% { background-position: 0 -40%; } 100% { background-position: 0 140%; } }
+
+    /* Floating glass card (Chapter I) */
+    .cine-float { perspective: 1200px; margin: 0; }
+    .cine-float .cine-frame--glass {
+      transform: rotateY(var(--ry, -6deg)) rotateX(var(--rx, 3deg));
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease;
+      background: rgba(10,10,12,0.6);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 60px 120px rgba(0,0,0,0.95), 0 0 60px rgba(214,203,182,0.05), inset 0 1px 0 rgba(255,255,255,0.08);
+      animation: float-y 9s ease-in-out infinite;
+    }
+    @keyframes float-y { 0%,100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+    .cine-img--glass {
+      filter: grayscale(0.85) sepia(0.15) brightness(1.08) contrast(1.08);
+      mix-blend-mode: screen;
+    }
+    .cine-sheen {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.07) 45%, transparent 60%);
+    }
+
+    /* Capability cards (Chapter II) */
+    .cap-card {
+      position: relative;
+      display: flex; flex-direction: column;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0A0A0C;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.85);
+      transition: border-color 0.35s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+      touch-action: pan-y;
+    }
+    .cap-card:hover { border-color: rgba(214,203,182,0.35); transform: translateY(-4px); box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 30px rgba(214,203,182,0.07); }
+    .cap-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+    .cap-media::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(10,10,12,0.75) 82%, #0A0A0C 100%),
+                  radial-gradient(ellipse 90% 85% at 50% 40%, transparent 60%, rgba(0,0,0,0.7) 100%);
+    }
+    .cine-img--card {
+      filter: saturate(0.55) brightness(0.92) contrast(1.08);
+      transition: transform 1.1s cubic-bezier(0.16,1,0.3,1), filter 0.6s ease;
+    }
+    .cine-img--top { object-position: 50% 22%; }
+    .cap-card:hover .cine-img--card { transform: scale(1.05); filter: saturate(0.75) brightness(1) contrast(1.08); }
+    .cap-body { padding: 4px 24px 28px; margin-top: -28px; position: relative; z-index: 1; }
+
+    /* Communication node transition */
+    .cine-transition { overflow: hidden; }
+    .cine-img--node {
+      filter: grayscale(0.6) sepia(0.12) brightness(1.05) contrast(1.05);
+      mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 40%, transparent 100%);
+    }
+
+    /* Layer 04 custom scope state */
+    .custom-scope { transition: border-color 0.3s ease, background 0.3s ease; }
+    .custom-scope.active { border-style: solid; border-color: rgba(214,203,182,0.45); background: linear-gradient(135deg, rgba(214,203,182,0.08), rgba(255,255,255,0.02)); }
+    .custom-scope.active .custom-scope-dot { background: #D6CBB6; box-shadow: 0 0 10px rgba(214,203,182,0.8); }
+    .custom-scope.active #custom-scope-state { color: #D6CBB6; }
+
+    @media (max-width: 767px) {
+      .cine-float .cine-frame--glass { transform: none; }
+      .hero-bg-img { opacity: 0.45; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg-img, .cine-scan, .cine-float .cine-frame--glass { animation: none !important; }
+    }
   </style>
 </head>
 <body class="selection:bg-white/15 selection:text-white">
@@ -267,23 +437,28 @@
   <!-- ===================================================================== -->
   <!-- SECTION 1: HERO (Luxury Editorial Copy + HeroThreeJSV2 3D Canvas)     -->
   <!-- ===================================================================== -->
-  <section class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000]">
-    <div class="strand-frame grid grid-cols-1 lg:grid-cols-12 min-h-[660px]">
+  <section class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000] hero-cine">
+    <!-- Ambient cinematic background: glowing neural network (platinum-graded, vignetted) -->
+    <div class="hero-bg" aria-hidden="true">
+      <img src="/assets/cinematic/neural-network.jpg" alt="" fetchpriority="high" decoding="async" class="hero-bg-img" />
+      <div class="hero-bg-vignette"></div>
+    </div>
+    <div class="strand-frame grid grid-cols-1 lg:grid-cols-12 min-h-[660px] relative z-[1]">
       <!-- Left Column (7 cols): Editorial Typography -->
       <div class="lg:col-span-7 px-6 sm:px-12 py-16 lg:py-24 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/[0.08] relative z-10">
         <div>
           <!-- Eyebrow Pill -->
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[11px] font-mono tracking-widest text-obsidian-platinum uppercase mb-6">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[11px] font-mono tracking-widest text-obsidian-platinum uppercase mb-6">
             <span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse"></span>
-            <span>2-HUMAN AI-AUGMENTED ENGINEERING POD · ESTONIA / EU</span>
+            <span>AI-AUGMENTED SYSTEMS STUDIO · ESTONIA / EU</span>
           </div>
 
-          <h1 class="font-serif-lux font-light text-[42px] sm:text-[56px] lg:text-[64px] leading-[1.03] tracking-[-0.03em] text-[#F4F4F6] mb-6">
+          <h1 class="marble-heading font-serif-lux text-[38px] sm:text-[52px] lg:text-[60px] leading-[1.02] tracking-[-0.03em] mb-6" data-text="We Build What Normal Dev Teams Say Takes Six Months—In Two Weeks.">
             We Build What Normal Dev Teams Say Takes Six Months—In Two Weeks.
           </h1>
 
           <p class="text-[16px] sm:text-[17px] leading-[1.8] text-obsidian-silver max-w-[580px] mb-8 font-light">
-            We are a <strong class="text-white font-medium">2-human, AI-augmented engineering pod</strong> led by <strong class="text-white font-medium">Robin-Kevin Vettik</strong> (<span class="font-mono text-[13px] text-obsidian-platinum">Robillionair OÜ</span>). No HR bloat, no hourly time-padding, and no salaried employment theater. Just working Agentic AI systems, real-time 3D WebGL experiences, connectome-spliced LLMs, and clean architecture shipped via flat B2B contracts.
+            <strong class="text-white font-medium">Our engineering team</strong>, led by <strong class="text-white font-medium">Robin-Kevin Vettik</strong> (<span class="font-mono text-[13px] text-obsidian-platinum">Robillionair OÜ</span>), ships working Agentic AI systems, real-time 3D WebGL experiences, connectome-spliced LLMs, and clean architecture via flat B2B contracts. No HR bloat, no hourly time-padding, no employment theater.
           </p>
 
           <!-- Primary & Secondary CTAs -->
@@ -322,7 +497,7 @@
       </div>
 
       <!-- Right Column (5 cols): Authentic HeroThreeJSV2 3D Extruded Trefoil -->
-      <div class="lg:col-span-5 relative min-h-[460px] lg:min-h-[660px] flex items-center justify-center overflow-hidden bg-[#000000]">
+      <div class="lg:col-span-5 relative min-h-[460px] lg:min-h-[660px] flex items-center justify-center overflow-hidden bg-transparent">
         <div id="hero-3d-mount" class="w-full h-full absolute inset-0 canvas-touch-safe"></div>
         <div class="absolute top-4 right-4 pointer-events-none font-mono text-[10px] tracking-widest uppercase text-white/35 bg-black/60 px-3 py-1 rounded border border-white/[0.08] backdrop-blur-md">
           WEBGL2 // 1,025 EXTRUDED STRANDS · DRAG / TOUCH
@@ -366,7 +541,7 @@
             <div class="flex flex-wrap items-center gap-2">
               <button type="button" onclick="setConsoleMode('anansi')" id="console-tab-anansi" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white text-black font-semibold transition">01 ANANSI Spec</button>
               <button type="button" onclick="setConsoleMode('drosophi')" id="console-tab-drosophi" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] text-obsidian-silver hover:text-white transition">02 DrosophiLLM</button>
-              <button type="button" onclick="setConsoleMode('b2b')" id="console-tab-b2b" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] text-obsidian-silver hover:text-white transition">03 B2B Pod</button>
+              <button type="button" onclick="setConsoleMode('b2b')" id="console-tab-b2b" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] text-obsidian-silver hover:text-white transition">03 B2B Studio</button>
             </div>
             <span class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center text-[12px] font-bold">↑</span>
           </div>
@@ -418,7 +593,7 @@
     <div class="strand-frame px-6 sm:px-12 py-14 border-b border-white/[0.08] flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div>
         <div class="font-mono text-[11px] uppercase tracking-widest text-obsidian-platinum mb-2">Sovereign Systems &amp; Master Specifications</div>
-        <h2 class="font-serif-lux font-light text-[38px] sm:text-[48px] leading-[1.06] tracking-[-0.03em] text-white">
+        <h2 class="marble-heading font-serif-lux text-[38px] sm:text-[48px] leading-[1.06] tracking-[-0.03em] " data-text="Core Architectures &amp; Live Systems">
           Core Architectures &amp; Live Systems
         </h2>
       </div>
@@ -651,112 +826,104 @@
   <!-- ===================================================================== -->
   <!-- SECTION 4: EXPANDED B2B STORY & NARRATIVE ("WHAT WE ACTUALLY DO")     -->
   <!-- ===================================================================== -->
-  <section id="narrative" class="strand-rule chromatic-edge bg-[#000000]">
+  <section id="narrative" class="strand-rule chromatic-edge bg-[#000000] relative overflow-hidden">
     <div class="strand-frame px-6 sm:px-12 py-24">
-      
+
       <!-- Section Header -->
-      <div class="max-w-4xl mb-16">
-        <div class="font-mono text-[11px] tracking-[0.16em] uppercase text-obsidian-platinum mb-3">
+      <div class="max-w-5xl mb-16 sm:mb-20">
+        <div class="font-mono text-[11px] tracking-[0.16em] uppercase text-obsidian-platinum mb-4">
           ROBILLIONAIR OÜ // PRIVATE R&amp;D &amp; B2B SYSTEMS STUDIO
         </div>
-        <h2 class="font-serif-lux font-light text-[38px] sm:text-[50px] lg:text-[58px] leading-[1.08] text-white">
-          When Off-The-Shelf Software Hits a Wall, You Don't Need Fifty More Developers. You Need an Architect.
+        <h2 class="marble-heading font-serif-lux text-[34px] sm:text-[48px] lg:text-[60px] leading-[1.02]" data-text="When Off-The-Shelf Software Hits a Wall, You Need an Architecture Team.">
+          When Off-The-Shelf Software Hits a Wall, You Need an Architecture Team.
         </h2>
       </div>
 
-      <!-- Editorial 3-Chapter Narrative Layout -->
-      <div class="space-y-16">
-        
-        <!-- Chapter I -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pb-14 border-b border-white/[0.08]">
-          <div class="lg:col-span-4">
-            <div class="font-mono text-[11.5px] tracking-widest text-obsidian-platinum uppercase mb-2">CHAPTER I</div>
-            <h3 class="font-serif-lux text-[28px] sm:text-[32px] text-white font-normal leading-tight">
-              The Illusion of Headcount
-            </h3>
-          </div>
-          <div class="lg:col-span-8">
-            <div class="text-[16px] sm:text-[17.5px] leading-[1.85] text-obsidian-silver font-light space-y-5">
-              <p>
-                "Traditional software teams are built to move slowly. When a company wants to build an autonomous AI pipeline, a custom memory architecture, or an interactive 3D web experience, they usually hire a bloated agency or spend six months recruiting a ten-person team. Ninety percent of that budget evaporates into standup meetings, management layers, and hand-typing boilerplate code that should have been automated on day one.
-              </p>
-              <p>
-                At <strong class="text-white font-medium">Robillionair OÜ</strong>, we operate on a different law of physics. We are a locked-in, two-human engineering studio—a Principal Systems Architect paired with a dedicated Implementation Engineer—orchestrating specialized local and cloud AI agent swarms. We use AI unapologetically and aggressively as a force multiplier, while our human minds own the system design, security boundaries, edge-case stress testing, and final polish."
-              </p>
-            </div>
+      <!-- CHAPTER I — The Illusion of Bureaucracy (copy + floating command center glass card) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center pb-20 border-b border-white/[0.08]">
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="font-mono text-[11px] tracking-[0.16em] text-obsidian-platinum uppercase mb-3">CHAPTER I</div>
+          <h3 class="font-serif-lux text-[30px] sm:text-[38px] text-white font-normal leading-[1.1] mb-6">The Illusion of Bureaucracy</h3>
+          <div class="text-[16px] sm:text-[17px] leading-[1.75] text-obsidian-silver font-light space-y-5 max-w-[560px]">
+            <p>Traditional software teams are built to move slowly.</p>
+            <p>When a company wants to deploy autonomous AI pipelines, custom memory architectures, or spatial 3D web environments, they usually wade through months of management layers and padded agency hours.</p>
+            <p class="text-white/90">Ninety percent of that budget evaporates into meetings before a single line of production code is written.</p>
+            <p>Our engineering team operates on a different law of physics. We orchestrate specialized local and cloud AI agent swarms as aggressive force multipliers—combining automated execution with rigorous human system design, security boundaries, and edge-case engineering.</p>
           </div>
         </div>
-
-        <!-- Chapter II -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pb-14 border-b border-white/[0.08]">
-          <div class="lg:col-span-4">
-            <div class="font-mono text-[11.5px] tracking-widest text-obsidian-platinum uppercase mb-2">CHAPTER II</div>
-            <h3 class="font-serif-lux text-[28px] sm:text-[32px] text-white font-normal leading-tight">
-              What We Engineer (Beyond Standard Web Apps)
-            </h3>
-          </div>
-          <div class="lg:col-span-8">
-            <div class="text-[16px] sm:text-[17.5px] leading-[1.85] text-obsidian-silver font-light space-y-6">
-              <p>
-                "We don't take on generic brochure websites or maintenance tickets. Companies bring us in on direct B2B contracts when they need to build something proprietary, complex, or first-of-its-kind:
-              </p>
-
-              <div class="space-y-6 pl-2 sm:pl-4 border-l-2 border-obsidian-platinum/30">
-                <div class="space-y-2">
-                  <div class="text-[15.5px] font-mono text-white font-medium">
-                    • Autonomous Agent Swarms &amp; Memory Compilers
-                  </div>
-                  <p class="text-[15px] sm:text-[16px] text-obsidian-silver">
-                    Most AI wrappers fail in production because their context windows rot and hallucinate over time. Having built our own local context and memory compiler (<strong class="text-obsidian-platinum font-mono">ANANSI</strong>) and neuromorphic connectome-inspired routing architectures (<strong class="text-obsidian-platinum font-mono">DrosophiLLM</strong>), we engineer multi-agent systems that retain long-term state, verify their own outputs, and connect cleanly to your internal APIs, databases, and live web signals.
-                  </p>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="text-[15.5px] font-mono text-white font-medium">
-                    • Spatial Web, Real-Time 3D &amp; Autonomous Digital Humans
-                  </div>
-                  <p class="text-[15px] sm:text-[16px] text-obsidian-silver">
-                    We bridge deep backend AI with high-frame-rate browser graphics. From interactive Three.js and WebGL product environments to fully rigged, autonomous 3D avatars driven by real-time LLMs and low-latency voice synthesis, we build visual interfaces that feel alive across desktop and mobile.
-                  </p>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="text-[15.5px] font-mono text-white font-medium">
-                    • Bespoke Full-Stack &amp; Sovereign Infrastructure
-                  </div>
-                  <p class="text-[15px] sm:text-[16px] text-obsidian-silver">
-                    Whether you need a zero-to-one fintech or SaaS platform (<strong class="text-obsidian-platinum font-mono">ZENQAR</strong>-grade infrastructure), edge-deployed Cloudflare Worker pipelines, custom local LLM inference (Qwen, Llama, Ollama) that keeps your data off third-party clouds, or automated intelligence scrapers—we architect and ship the entire stack end-to-end.
-                  </p>
-                </div>
-              </div>
+        <div class="lg:col-span-6 order-1 lg:order-2">
+          <figure class="cine-float tilt-card" data-tilt>
+            <div class="cine-frame cine-frame--glass aspect-[4/3.4] sm:aspect-[4/3]">
+              <img src="/assets/cinematic/command-center.jpg" alt="Executive command center interface with floating glass telemetry panels" loading="lazy" decoding="async" class="cine-img cine-img--glass" />
+              <div class="cine-sheen" aria-hidden="true"></div>
+              <figcaption class="absolute left-4 bottom-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase text-white/55">COMMAND LAYER // HUMAN-OWNED ARCHITECTURE</figcaption>
             </div>
-          </div>
+          </figure>
         </div>
-
-        <!-- Chapter III -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div class="lg:col-span-4">
-            <div class="font-mono text-[11.5px] tracking-widest text-obsidian-platinum uppercase mb-2">CHAPTER III</div>
-            <h3 class="font-serif-lux text-[28px] sm:text-[32px] text-white font-normal leading-tight">
-              The Zero-Lock-In Doctrine
-            </h3>
-          </div>
-          <div class="lg:col-span-8">
-            <div class="text-[16px] sm:text-[17.5px] leading-[1.85] text-obsidian-silver font-light space-y-5">
-              <p>
-                "The dirtiest secret in B2B consulting is intentional complexity—contractors writing messy, undocumented code so you can never fire them.
-              </p>
-              <p>
-                Every system we build is governed by our internal <strong class="text-white font-medium">ANANSI Roadmap Protocol</strong>. When we hand over a repository—or work alongside your team on an ongoing B2B retainer—every module is isolated, security-checked, and accompanied by a crystal-clear, human-readable <code class="px-2 py-0.5 rounded bg-white/[0.06] font-mono text-[13px] text-obsidian-platinum border border-white/10">ARCHITECTURE.md</code> and <code class="px-2 py-0.5 rounded bg-white/[0.06] font-mono text-[13px] text-white border border-white/10">ROADMAP.md</code>. If you ever hand our work to a new internal engineer a year from now, they will understand how the entire machine works in fifteen minutes.
-              </p>
-              <p class="text-white font-medium pt-2">
-                No HR friction. No Employer-of-Record fees. No hourly clock-padding. Just direct B2B collaboration through <span class="font-mono text-obsidian-platinum">Robillionair OÜ</span>, tailored to the exact technical reality of what you are building."
-              </p>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- CHAPTER II — What We Engineer (3 cinematic capability cards) -->
+      <div class="pt-20 pb-20 border-b border-white/[0.08]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+          <div class="lg:col-span-5">
+            <div class="font-mono text-[11px] tracking-[0.16em] text-obsidian-platinum uppercase mb-3">CHAPTER II</div>
+            <h3 class="font-serif-lux text-[30px] sm:text-[38px] text-white font-normal leading-[1.1]">What We Engineer</h3>
+          </div>
+          <div class="lg:col-span-7 text-[16px] sm:text-[17px] leading-[1.75] text-obsidian-silver font-light space-y-4 lg:pt-8">
+            <p>We don't take on generic template websites or maintenance tickets.</p>
+            <p>Companies retain us on direct B2B contracts when they require proprietary, high-complexity systems:</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="cap-card tap-press">
+            <div class="cap-media">
+              <img src="/assets/cinematic/memory-compiler.jpg" alt="Layered glass memory compiler visualization" loading="lazy" decoding="async" class="cine-img cine-img--card" />
+            </div>
+            <div class="cap-body">
+              <div class="font-mono text-[10.5px] tracking-[0.14em] uppercase text-obsidian-platinum mb-2">01 // INTELLIGENCE</div>
+              <h4 class="font-serif-lux text-[24px] leading-[1.15] text-white mb-3">Autonomous Agent Swarms &amp; Memory Compilers</h4>
+              <p class="text-[14.5px] leading-[1.7] text-obsidian-silver font-light">Engineered for long-term state retention, self-verification, and clean internal API integration without context rot.</p>
+            </div>
+          </article>
+
+          <article class="cap-card tap-press">
+            <div class="cap-media">
+              <img src="/assets/cinematic/avatar.jpg" alt="Digital human avatar dissolving into a constellation of particles" loading="lazy" decoding="async" class="cine-img cine-img--card cine-img--top" />
+            </div>
+            <div class="cap-body">
+              <div class="font-mono text-[10.5px] tracking-[0.14em] uppercase text-obsidian-platinum mb-2">02 // SPATIAL</div>
+              <h4 class="font-serif-lux text-[24px] leading-[1.15] text-white mb-3">Spatial Web, Real-Time 3D &amp; Autonomous Digital Humans</h4>
+              <p class="text-[14.5px] leading-[1.7] text-obsidian-silver font-light">High-frame-rate browser graphics, Three.js interactive environments, and fully rigged autonomous 3D avatars driven by real-time LLMs and voice synthesis.</p>
+            </div>
+          </article>
+
+          <article class="cap-card tap-press">
+            <div class="cap-media">
+              <img src="/assets/cinematic/microchip.jpg" alt="Brushed titanium microchip glowing with amber circuitry" loading="lazy" decoding="async" class="cine-img cine-img--card" />
+            </div>
+            <div class="cap-body">
+              <div class="font-mono text-[10.5px] tracking-[0.14em] uppercase text-obsidian-platinum mb-2">03 // SOVEREIGN</div>
+              <h4 class="font-serif-lux text-[24px] leading-[1.15] text-white mb-3">Sovereign Infrastructure &amp; Secure Backends</h4>
+              <p class="text-[14.5px] leading-[1.7] text-obsidian-silver font-light">Zero-to-one fintech/SaaS architecture (<span class="font-mono text-obsidian-platinum text-[13px]">ZENQAR</span>-grade), distributed Cloudflare Worker edge pipelines, and private local LLM deployments (Qwen, Llama, Ollama) that keep corporate data strictly isolated.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- CHAPTER III — The Zero-Lock-In Doctrine (condensed) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-20">
+        <div class="lg:col-span-5">
+          <div class="font-mono text-[11px] tracking-[0.16em] text-obsidian-platinum uppercase mb-3">CHAPTER III</div>
+          <h3 class="font-serif-lux text-[30px] sm:text-[38px] text-white font-normal leading-[1.1]">The Zero-Lock-In Doctrine</h3>
+        </div>
+        <div class="lg:col-span-7 text-[16px] sm:text-[17px] leading-[1.75] text-obsidian-silver font-light space-y-5">
+          <p>The dirtiest secret in B2B consulting is intentional complexity—undocumented code written so you can never leave.</p>
+          <p>Every repository we hand over is modular, security-checked, and ships with a living <code class="px-2 py-0.5 rounded bg-white/[0.06] font-mono text-[13px] text-obsidian-platinum border border-white/10">ARCHITECTURE.md</code> and <code class="px-2 py-0.5 rounded bg-white/[0.06] font-mono text-[13px] text-white border border-white/10">ROADMAP.md</code>. Your next engineer understands the whole machine in fifteen minutes.</p>
+          <p class="text-white font-medium">No HR friction. No hourly clock-padding. Direct B2B through <span class="font-mono text-obsidian-platinum">Robillionair OÜ</span>.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -767,7 +934,7 @@
     <div class="strand-frame px-6 sm:px-12 py-20">
       <div class="mb-14">
         <div class="font-mono text-[11px] uppercase tracking-widest text-obsidian-platinum mb-2">PROOF OF WORK // SHIPPED &amp; ACTIVE ARCHITECTURES</div>
-        <h2 class="font-serif-lux font-light text-[36px] sm:text-[46px] tracking-[-0.03em] text-white mb-6">
+        <h2 class="marble-heading font-serif-lux text-[36px] sm:text-[46px] tracking-[-0.03em] mb-6" data-text="What We've Already Engineered">
           What We've Already Engineered
         </h2>
 
@@ -989,7 +1156,7 @@
             Two Weeks
           </div>
           <div class="text-[13px] font-mono text-obsidian-silver mt-2 pb-6 border-b border-white/[0.08]">
-            Typical fixed zero-to-one system sprint velocity with our 2-human AI-augmented engineering pod
+            Typical fixed zero-to-one system sprint velocity with our AI-augmented engineering team
           </div>
 
           <blockquote class="mt-8 font-serif-lux italic text-[21px] sm:text-[24px] leading-[1.5] text-[#E5E5EB] font-normal">
@@ -1092,17 +1259,27 @@
   <section id="configurator" class="strand-rule chromatic-edge bg-[#000000]">
     <div class="strand-frame px-6 sm:px-12 py-24">
       
-      <!-- Configurator Header -->
-      <div class="max-w-4xl mb-14">
-        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
-          TECHNICAL ARCHITECTURE CONFIGURATOR // BESPOKE B2B SPEC BUILDER
+      <!-- Configurator Header + Engineering Schematic Display -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-14">
+        <div class="lg:col-span-5">
+          <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+            TECHNICAL ARCHITECTURE CONFIGURATOR // BESPOKE B2B SPEC BUILDER
+          </div>
+          <h2 class="marble-heading font-serif-lux text-[38px] sm:text-[50px] lg:text-[56px] leading-[1.08] mb-4" data-text="Assemble Your Custom System Architecture">
+            Assemble Your Custom System Architecture
+          </h2>
+          <p class="text-[15.5px] sm:text-[16.5px] text-obsidian-silver leading-relaxed font-light">
+            Select your architectural nodes across the layers below to generate a live <strong class="text-white font-mono">SYSTEM_SPEC_MANIFEST</strong> and transmit it directly to our engineering team.
+          </p>
         </div>
-        <h2 class="font-serif-lux font-light text-[38px] sm:text-[50px] lg:text-[56px] leading-[1.08] text-white mb-4">
-          Assemble Your Custom System Architecture
-        </h2>
-        <p class="text-[15.5px] sm:text-[16.5px] text-obsidian-silver leading-relaxed font-light">
-          Designed for founders, CTOs, and systems leads who know the technical shape of what they need to ship. Select your architectural nodes across four layers below to generate a live <strong class="text-white font-mono">SYSTEM_SPEC_MANIFEST</strong> and transmit it directly to our Principal Architect.
-        </p>
+        <div class="lg:col-span-7">
+          <figure class="cine-frame cine-frame--schematic group">
+            <img src="/assets/cinematic/schematic.jpg" alt="Exploded engineering schematic of a modular AI cognitive core" loading="lazy" decoding="async" class="cine-img cine-img--schematic" />
+            <div class="cine-scan" aria-hidden="true"></div>
+            <figcaption class="absolute left-4 bottom-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase text-white/55">SCHEMATIC // MODULAR SUBSYSTEM MAP</figcaption>
+            <span class="absolute right-4 top-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase text-obsidian-platinum flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse-dot"></span>LIVE SPEC</span>
+          </figure>
+        </div>
       </div>
 
       <!-- Configurator Body: 4 Layers (Left 7 cols) + Live Manifest & Dispatch (Right 5 cols) -->
@@ -1278,68 +1455,42 @@
             </div>
           </div>
 
-          <!-- LAYER 04: Engagement & Handoff Protocol -->
+          <!-- LAYER 04: Engagement Anchor (single fixed Pilot + auto Custom B2B Scope) -->
           <div class="p-6 sm:p-7 rounded-2xl bg-[#0A0A0C] border border-white/[0.08]">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.06]">
               <div>
-                <span class="font-mono text-[11px] tracking-widest text-obsidian-platinum uppercase block">Layer 04 // Engagement &amp; Handoff Protocol</span>
-                <span class="text-[12.5px] text-white/50">Select your B2B contract format</span>
+                <span class="font-mono text-[11px] tracking-widest text-obsidian-platinum uppercase block">Layer 04 // Engagement Anchor</span>
+                <span class="text-[12.5px] text-white/50">One fixed entry point. Everything else is scoped to your architecture.</span>
               </div>
-              <span class="font-mono text-[10.5px] text-white/40 uppercase">Single-Select</span>
+              <span class="font-mono text-[10.5px] text-white/40 uppercase">Fixed Entry</span>
             </div>
 
             <div class="space-y-3">
-              <label id="lbl-eng-pilot" class="cfg-node active p-4 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer flex items-start gap-3.5">
-                <input type="radio" name="engagement_model" value="pilot" checked onchange="updateArchitectureSpec()" class="mt-1 accent-[#D6CBB6]" />
+              <label id="lbl-eng-pilot" class="cfg-node active tap-press p-5 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer flex items-start gap-4 min-h-[48px]">
+                <input type="checkbox" id="eng-pilot" checked onchange="updateArchitectureSpec()" class="mt-1.5 w-5 h-5 accent-[#D6CBB6]" />
                 <div class="flex-1">
                   <div class="flex items-center justify-between flex-wrap gap-2">
-                    <span class="text-[14.5px] font-medium text-white">Proof-of-Architecture Pilot (Fixed Entry Sprint)</span>
-                    <span class="font-mono text-[11.5px] px-2 py-0.5 rounded bg-white/10 text-obsidian-platinum font-semibold">€3,000 FLAT SPRINT</span>
+                    <span class="text-[15px] font-medium text-white">Request Proof-of-Architecture Pilot</span>
+                    <span class="font-mono text-[11.5px] px-2 py-0.5 rounded bg-white/10 text-obsidian-platinum font-semibold tracking-wider">€3,000 B2B SPRINT</span>
                   </div>
-                  <p class="text-[12.5px] text-obsidian-silver mt-1.5 leading-relaxed font-light">
-                    Our only fixed-price entry point: a focused <strong>€3,000 B2B Pilot</strong> to prove and deploy the hardest core module of your spec first in 10 days, with zero long-term commitment (100% credited toward a full build if upgraded).
+                  <p class="text-[13px] text-obsidian-silver mt-2 leading-relaxed font-light">
+                    A focused, fixed-price B2B sprint where our studio builds, proves, and deploys the hardest core module of your system specification in 10 days—credited 100% toward a full system build if you continue.
                   </p>
                 </div>
               </label>
 
-              <label id="lbl-eng-build" class="cfg-node p-4 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer flex items-start gap-3.5">
-                <input type="radio" name="engagement_model" value="build" onchange="updateArchitectureSpec()" class="mt-1 accent-[#D6CBB6]" />
+              <div id="custom-scope-panel" class="custom-scope p-5 rounded-xl border border-dashed border-white/10 bg-transparent flex items-start gap-4">
+                <span class="mt-2 inline-block w-2 h-2 rounded-full bg-white/25 custom-scope-dot"></span>
                 <div class="flex-1">
                   <div class="flex items-center justify-between flex-wrap gap-2">
-                    <span class="text-[14.5px] font-medium text-white">Turnkey Zero-to-One System Build</span>
-                    <span class="font-mono text-[11px] text-obsidian-silver">CUSTOM B2B SCOPE</span>
+                    <span class="text-[14.5px] font-medium text-white/85">Custom B2B Retainers / Full Builds</span>
+                    <span id="custom-scope-state" class="font-mono text-[10.5px] tracking-widest text-white/40">STANDBY</span>
                   </div>
                   <p class="text-[12.5px] text-obsidian-silver mt-1.5 leading-relaxed font-light">
-                    Custom-scoped B2B project to take your full multi-layer specification from blank repository to live staging and production with complete <code>ARCHITECTURE.md</code> handoff.
+                    Automatically selected when full modular layers are configured: <span class="font-mono text-[11.5px] text-obsidian-platinum">Custom B2B Scope — Quoted After Technical Review via Robillionair OÜ</span>.
                   </p>
                 </div>
-              </label>
-
-              <label id="lbl-eng-retainer" class="cfg-node p-4 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer flex items-start gap-3.5">
-                <input type="radio" name="engagement_model" value="retainer" onchange="updateArchitectureSpec()" class="mt-1 accent-[#D6CBB6]" />
-                <div class="flex-1">
-                  <div class="flex items-center justify-between flex-wrap gap-2">
-                    <span class="text-[14.5px] font-medium text-white">Dedicated 2-Person B2B Engineering Pod</span>
-                    <span class="font-mono text-[11px] text-obsidian-silver">MONTHLY RETAINER</span>
-                  </div>
-                  <p class="text-[12.5px] text-obsidian-silver mt-1.5 leading-relaxed font-light">
-                    Ongoing monthly retainer embedding our Principal Architect + Dedicated Implementation Engineer directly into your roadmap. Weekly shipping, zero payroll friction.
-                  </p>
-                </div>
-              </label>
-
-              <label id="lbl-eng-audit" class="cfg-node p-4 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer flex items-start gap-3.5">
-                <input type="radio" name="engagement_model" value="audit" onchange="updateArchitectureSpec()" class="mt-1 accent-[#D6CBB6]" />
-                <div class="flex-1">
-                  <div class="flex items-center justify-between flex-wrap gap-2">
-                    <span class="text-[14.5px] font-medium text-white">Architectural Blueprint &amp; Feasibility Audit Only</span>
-                    <span class="font-mono text-[11px] text-obsidian-silver">5-DAY DEEP DIVE</span>
-                  </div>
-                  <p class="text-[12.5px] text-obsidian-silver mt-1.5 leading-relaxed font-light">
-                    We design the complete system specification, data flow diagrams, model routing benchmarks, and <code>ROADMAP.md</code> so your internal engineering team can execute without costly dead-ends.
-                  </p>
-                </div>
-              </label>
+              </div>
             </div>
           </div>
 
@@ -1445,11 +1596,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div class="lg:col-span-4">
           <div class="font-mono text-[11px] tracking-widest uppercase text-obsidian-platinum mb-2">CLARITY // FAQ</div>
-          <h2 class="font-serif-lux font-light text-[34px] sm:text-[42px] leading-[1.1] tracking-[-0.03em] text-white mb-3">
+          <h2 class="marble-heading font-serif-lux text-[34px] sm:text-[42px] leading-[1.1] tracking-[-0.03em] mb-3" data-text="Frequently Asked Questions">
             Frequently Asked Questions
           </h2>
           <p class="text-[14.5px] text-obsidian-silver leading-relaxed font-light">
-            Direct clarity on ANANSI ULTIMATE, our 2-human engineering pod, IP ownership, and Estonian corporate invoicing.
+            Direct clarity on ANANSI ULTIMATE, our engineering team, IP ownership, and Estonian corporate invoicing.
           </p>
         </div>
 
@@ -1527,6 +1678,19 @@
   </section>
 
   <!-- ===================================================================== -->
+  <!-- TRANSITION NODE: PLATINUM COMMUNICATION NODE (ABOVE CONTACT DISPATCH)  -->
+  <!-- ===================================================================== -->
+  <section id="contact" class="relative overflow-hidden bg-[#000000]" aria-label="Transmission node">
+    <div class="cine-transition relative h-[340px] sm:h-[460px] lg:h-[520px]">
+      <img src="/assets/cinematic/comm-node.jpg" alt="Platinum communication node emitting concentric signal rings across an obsidian plane" loading="lazy" decoding="async" class="cine-img cine-img--node" />
+      <div class="absolute inset-x-0 bottom-0 z-10 pb-10 sm:pb-14 text-center px-6">
+        <div class="font-mono text-[11px] tracking-[0.16em] uppercase text-obsidian-platinum mb-2">SIGNAL // OPEN CHANNEL</div>
+        <div class="font-mono text-[12px] sm:text-[13px] tracking-[0.12em] uppercase text-white/70">Direct transmission to <a href="mailto:Human@robillionair.com" class="text-white hover:text-obsidian-platinum underline-offset-4 hover:underline">Human@robillionair.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
   <!-- SECTION 9: RADIAL 3D STRAND EXPLOSION CTA (StrandsThreeJS)            -->
   <!-- ===================================================================== -->
   <section class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000]">
@@ -1536,11 +1700,11 @@
 
       <!-- Centered CTA -->
       <div class="relative z-10 text-center max-w-xl px-6 pointer-events-none">
-        <h2 class="font-serif-lux font-light text-[40px] sm:text-[54px] leading-[1.05] tracking-[-0.03em] text-white mb-4 drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+        <h2 class="marble-heading font-serif-lux text-[40px] sm:text-[54px] leading-[1.05] tracking-[-0.03em] mb-4 drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]" data-text="Your architecture, finally sovereign.">
           Your architecture, finally sovereign.
         </h2>
         <p class="text-[16px] text-obsidian-silver mb-8 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-light">
-          Ship production Agentic AI, ANANSI memory pipelines, and 3D WebGL systems in two weeks with our 2-human B2B engineering pod.
+          Ship production Agentic AI, ANANSI memory pipelines, and 3D WebGL systems in weeks, not quarters, with our engineering team.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-3.5 pointer-events-auto">
           <a href="mailto:Human@robillionair.com" class="touch-target tap-press px-7 py-3.5 rounded-full bg-[#F4F4F6] text-[#000000] font-mono text-[12px] tracking-widest uppercase font-semibold hover:bg-white transition shadow-[0_0_35px_rgba(255,255,255,0.22)]">
@@ -1695,10 +1859,10 @@
           '<div class="flex items-center justify-between py-1 border-t border-white/[0.05]"><span class="text-white font-medium">Inference &amp; Training Step Time</span><span class="font-mono text-[11px] text-white">153 ms vs 306 ms (2.00× Speedup)</span></div>' +
           '<div class="flex items-center justify-between py-1 border-t border-white/[0.05]"><span class="text-white font-medium">5-Way Empirical Ablation</span><span class="font-mono text-[11px] text-obsidian-platinum">Val PPL 1.48 vs 1.56 Shuffled Graph</span></div>';
       } else {
-        qText.textContent = '"Query Robillionair OÜ 2-human AI-augmented engineering pod availability, B2B architecture contracts, and IP handoff terms."';
-        rTitle.textContent = 'Robillionair OÜ (Estonia / EU) — 2-Person B2B Engineering Pod';
+        qText.textContent = '"Query Robillionair OÜ engineering team availability, B2B architecture contracts, and IP handoff terms."';
+        rTitle.textContent = 'Robillionair OÜ (Estonia / EU) — Private B2B Systems Studio';
         rBadge.textContent = 'Q4 2026 OPEN';
-        rDesc.innerHTML = 'Principal Architect + Dedicated Implementation Engineer orchestrating internal ANANSI context compilers and agent swarms. Zero HR friction, flat outcome billing, and 100% IP handoff.';
+        rDesc.innerHTML = 'Our engineering team orchestrates internal ANANSI context compilers and agent swarms. Zero HR friction, flat outcome billing, and 100% IP handoff.';
         rRows.innerHTML =
           '<div class="flex items-center justify-between py-1"><span class="text-white font-medium">Proof-of-Architecture Pilot</span><span class="font-mono text-[11px] text-obsidian-platinum">€3,000 Flat Entry Sprint (100% Credited)</span></div>' +
           '<div class="flex items-center justify-between py-1 border-t border-white/[0.05]"><span class="text-white font-medium">Turnkey Zero-to-One Build</span><span class="font-mono text-[11px] text-white">Custom B2B Scope (3–4 Weeks Delivery)</span></div>' +
@@ -1742,13 +1906,10 @@
         }
       });
 
-      var engRadios = document.querySelectorAll('input[name="engagement_model"]');
-      var selEng = 'pilot';
-      engRadios.forEach(function(r) {
-        if (r.checked) selEng = r.value;
-        var rLbl = document.getElementById('lbl-eng-' + r.value);
-        if (rLbl) rLbl.classList.toggle('active', r.checked);
-      });
+      var pilotEl = document.getElementById('eng-pilot');
+      var pilotOn = !!(pilotEl && pilotEl.checked);
+      var pilotLbl = document.getElementById('lbl-eng-pilot');
+      if (pilotLbl) pilotLbl.classList.toggle('active', pilotOn);
 
       // Gather selections
       var l1 = [];
@@ -1772,6 +1933,9 @@
       if (document.getElementById('node-webgpu').checked) l3.push('Browser WebGPU Compute');
       if (document.getElementById('node-integration').checked) l3.push('CRM / DB Integrations');
       if (document.getElementById('node-privacy').checked) l3.push('Strict Zero-Training Isolation');
+
+      var fullModular = l1.length > 0 && l2.length > 0 && l3.length > 0 && (l1.length + l2.length + l3.length) >= 6;
+      var selEng = pilotOn ? (fullModular ? 'pilot+custom' : 'pilot') : 'custom';
 
       technicalSpecState = {
         layer1: l1,
@@ -1797,21 +1961,23 @@
         }
       }
 
-      // Render Engagement Model
+      // Render Engagement Model (single Pilot anchor + auto Custom B2B Scope)
       var engTitle = document.getElementById('manifest-engagement');
       var engTerms = document.getElementById('manifest-terms');
+      var customPanel = document.getElementById('custom-scope-panel');
+      var customState = document.getElementById('custom-scope-state');
+      var isCustom = selEng !== 'pilot';
+      if (customPanel) customPanel.classList.toggle('active', isCustom);
+      if (customState) customState.textContent = isCustom ? 'AUTO-SELECTED' : 'STANDBY';
       if (selEng === 'pilot') {
-        engTitle.textContent = 'Proof-of-Architecture Pilot (€3,000 Flat Entry Sprint)';
-        engTerms.textContent = '10-Day Focused Proof Module · 100% Credited on Full Build';
-      } else if (selEng === 'build') {
-        engTitle.textContent = 'Turnkey Zero-to-One System Build';
-        engTerms.textContent = 'Custom B2B Scope — Quoted After Technical Architecture Review';
-      } else if (selEng === 'retainer') {
-        engTitle.textContent = 'Dedicated 2-Person B2B Engineering Pod';
-        engTerms.textContent = 'Ongoing Monthly Retainer · Weekly Shipping Sprints (Cancel/Pause 30d Notice)';
+        engTitle.textContent = 'Proof-of-Architecture Pilot (€3,000 B2B Sprint)';
+        engTerms.textContent = '10-Day Focused Proof Module · 100% Credited Toward Full Build';
+      } else if (selEng === 'pilot+custom') {
+        engTitle.textContent = 'Pilot (€3,000 B2B Sprint) → Custom B2B Full Build';
+        engTerms.textContent = 'Custom B2B Scope — Quoted After Technical Review via Robillionair OÜ';
       } else {
-        engTitle.textContent = 'Architectural Blueprint & Feasibility Audit Only';
-        engTerms.textContent = '5-Day Deep Dive + Complete ARCHITECTURE.md & ROADMAP.md Blueprint';
+        engTitle.textContent = 'Custom B2B Retainer / Full System Build';
+        engTerms.textContent = 'Custom B2B Scope — Quoted After Technical Review via Robillionair OÜ';
       }
     }
 
@@ -1821,10 +1987,9 @@
       var email = (document.getElementById('client-email').value || 'Not provided').trim();
       var context = (document.getElementById('client-context').value || 'No additional context provided.').trim();
 
-      var engLabel = 'Proof-of-Architecture Pilot (€3,000 Fixed Entry Sprint)';
-      if (technicalSpecState.engagementModel === 'build') engLabel = 'Turnkey Zero-to-One System Build (Custom B2B Scope)';
-      else if (technicalSpecState.engagementModel === 'retainer') engLabel = 'Dedicated 2-Person B2B Engineering Pod (Monthly Retainer)';
-      else if (technicalSpecState.engagementModel === 'audit') engLabel = 'Architectural Blueprint & Feasibility Audit Only';
+      var engLabel = 'Proof-of-Architecture Pilot (€3,000 B2B Sprint, 10 days, 100% credited toward full build)';
+      if (technicalSpecState.engagementModel === 'pilot+custom') engLabel = 'Pilot (€3,000 B2B Sprint) followed by Custom B2B Full Build — Quoted After Technical Review';
+      else if (technicalSpecState.engagementModel === 'custom') engLabel = 'Custom B2B Retainer / Full Build — Quoted After Technical Review via Robillionair OÜ';
 
       return [
         '=== ROBILLIONAIR OÜ // B2B ARCHITECTURAL SPECIFICATION ===',
@@ -3074,6 +3239,37 @@
         requestAnimationFrame(animateStrands);
       })();
 
+    })();
+
+    // -----------------------------------------------------------------------
+    // 4. GLASS CARD TILT (pointer + passive touch, lerp-damped, scroll-safe)
+    // -----------------------------------------------------------------------
+    (function initGlassTilt() {
+      var cards = document.querySelectorAll('[data-tilt]');
+      cards.forEach(function(card) {
+        var frame = card.querySelector('.cine-frame--glass');
+        if (!frame) return;
+        var tx = -6, ty = 3, cx = -6, cy = 3, raf = null;
+        function setTarget(clientX, clientY) {
+          var r = card.getBoundingClientRect();
+          var nx = (clientX - r.left) / r.width - 0.5;
+          var ny = (clientY - r.top) / r.height - 0.5;
+          tx = nx * 14; ty = -ny * 10;
+          if (!raf) raf = requestAnimationFrame(step);
+        }
+        function reset() { tx = -6; ty = 3; if (!raf) raf = requestAnimationFrame(step); }
+        function step() {
+          cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+          frame.style.setProperty('--ry', cx.toFixed(2) + 'deg');
+          frame.style.setProperty('--rx', cy.toFixed(2) + 'deg');
+          if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) raf = requestAnimationFrame(step); else raf = null;
+        }
+        card.addEventListener('mousemove', function(e) { setTarget(e.clientX, e.clientY); });
+        card.addEventListener('mouseleave', reset);
+        card.addEventListener('touchstart', function(e) { var t = e.touches[0]; if (t) setTarget(t.clientX, t.clientY); }, { passive: true });
+        card.addEventListener('touchmove', function(e) { var t = e.touches[0]; if (t) setTarget(t.clientX, t.clientY); }, { passive: true });
+        card.addEventListener('touchend', reset, { passive: true });
+      });
     })();
   </script>
 </body>
