@@ -464,6 +464,7 @@
       <!-- Direct Nav Links (Prompt Spec) -->
       <nav class="hidden lg:flex items-center gap-7 text-[12px] font-mono tracking-wider text-obsidian-silver uppercase">
         <a href="#benchmarks" class="hover:text-white transition-colors">Services &amp; Benchmarks</a>
+        <a href="#oracle" class="hover:text-white transition-colors text-obsidian-platinum flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse"></span>AI Oracle</a>
         <a href="#ventures" class="hover:text-white transition-colors">Proof of Work</a>
         <a href="#anansi-ultimate" class="hover:text-white transition-colors text-obsidian-platinum">ANANSI Ultimate</a>
         <a href="#vision" class="hover:text-white transition-colors">Vision</a>
@@ -682,50 +683,99 @@
   </section>
 
   <!-- ===================================================================== -->
-  <!-- INTERACTIVE 3D WAVE TERRAIN CONSOLE (ParticleGridThreeJSV2)          -->
+  <!-- INTERACTIVE 3D WAVE TERRAIN + SOVEREIGN AI ARCHITECTURE ORACLE        -->
+  <!-- Powered by NVIDIA: Nemotron 3.5 Super VL (free) via /api/oracle       -->
   <!-- ===================================================================== -->
-  <section class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000]">
-    <div class="strand-frame px-6 sm:px-12 py-12 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08]">
+  <section id="oracle" class="strand-rule chromatic-edge relative overflow-hidden bg-[#000000]">
+    <div class="strand-frame px-6 sm:px-12 py-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08]">
       <div class="flex items-center gap-3">
         <span class="w-2 h-2 rounded-full bg-obsidian-platinum animate-pulse-dot"></span>
-        <span class="font-mono text-[11.5px] tracking-widest uppercase text-white font-medium">ROBILLIONAIR ARCHITECTURAL CONSOLE</span>
+        <span class="font-mono text-[11.5px] tracking-widest uppercase text-white font-medium">ANANSI // SOVEREIGN AI ARCHITECTURE ORACLE</span>
       </div>
-      <div class="font-mono text-[11px] text-white/50 tracking-wider">
-        FBM NOISE DISPERSION · INTERACTIVE RUNTIME
+      <div class="flex items-center gap-3 font-mono text-[10.5px] sm:text-[11px] text-obsidian-platinum tracking-wider">
+        <span class="px-2.5 py-1 rounded-full bg-white/[0.05] border border-obsidian-platinum/30">NVIDIA: NEMOTRON 3.5 SUPER VL</span>
+        <span class="hidden sm:inline text-white/40">FBM WAVE RUNTIME</span>
       </div>
     </div>
 
-    <div class="strand-frame relative h-[480px] lg:h-[540px] overflow-hidden bg-[#000000]">
+    <div class="strand-frame relative min-h-[640px] lg:min-h-[680px] py-10 px-4 sm:px-8 flex items-center justify-center overflow-hidden bg-[#000000]">
       <!-- 3D FBM Wave Canvas -->
       <div id="wave-3d-mount" class="w-full h-full absolute inset-0 canvas-touch-safe wave-mask"></div>
 
-      <!-- Floating Interactive Architecture Console -->
-      <div class="absolute inset-x-4 sm:inset-x-8 bottom-6 z-10 max-w-3xl mx-auto pointer-events-auto">
-        <div class="chromatic-card rounded-2xl p-5 sm:p-6 border border-white/15">
-          <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08]">
+      <!-- Floating Interactive Architecture & Sovereign AI Oracle Console -->
+      <div class="relative z-10 w-full max-w-4xl mx-auto pointer-events-auto">
+        <div class="chromatic-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-white/15 shadow-[0_25px_80px_rgba(0,0,0,0.95)]">
+          <!-- Top Mode Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-white/[0.08]">
             <div class="flex flex-wrap items-center gap-2">
               <button type="button" onclick="setConsoleMode('anansi')" id="console-tab-anansi" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white text-black font-semibold transition">01 ANANSI Spec</button>
               <button type="button" onclick="setConsoleMode('drosophi')" id="console-tab-drosophi" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] text-obsidian-silver hover:text-white transition">02 DrosophiLLM</button>
               <button type="button" onclick="setConsoleMode('b2b')" id="console-tab-b2b" class="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] text-obsidian-silver hover:text-white transition">03 B2B Studio</button>
             </div>
-            <span class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center text-[12px] font-bold">↑</span>
+            <div class="flex items-center gap-2 font-mono text-[10.5px] text-obsidian-platinum">
+              <span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse"></span>
+              <span id="oracle-model-badge">NEMOTRON 3.5 SUPER VL // ONLINE</span>
+            </div>
           </div>
 
-          <div id="console-query-text" class="text-[13px] font-mono text-obsidian-silver mb-3">
+          <!-- Tactical Preset Prompts (One-Click Robillionair Character Prompts) -->
+          <div class="mb-4">
+            <div class="font-mono text-[10px] uppercase tracking-widest text-white/45 mb-2">
+              SELECT TACTICAL DIAGNOSTIC OR TRANSMIT CUSTOM ARCHITECTURE QUERY:
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="runSovereignOracle('We are building a multi-agent SaaS but our LLM agents hallucinate and burn tokens after 30 turns. Roast our stack and tell us how Robillionair would rebuild it.', 'roast')" class="px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-obsidian-platinum/50 text-[11px] font-mono text-obsidian-platinum hover:text-white transition">
+                ⚡ Roast &amp; Rebuild My AI Stack
+              </button>
+              <button type="button" onclick="runSovereignOracle('Explain how DrosophiLLM achieves 22.8x synaptic memory compression using 139,255 Drosophila FlyWire neurons and Dale\'s Law.', 'connectome')" class="px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-obsidian-platinum/50 text-[11px] font-mono text-white/80 hover:text-white transition">
+                🧬 DrosophiLLM 22.8× Connectome Math
+              </button>
+              <button type="button" onclick="runSovereignOracle('Why does standard vector RAG fail on long-horizon tasks, and how does ANANSI Ultimate compile deterministic local memory?', 'anansi')" class="px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-obsidian-platinum/50 text-[11px] font-mono text-white/80 hover:text-white transition">
+                🕸️ How ANANSI Prevents Context Rot
+              </button>
+              <button type="button" onclick="runSovereignOracle('We need a real-time 3D WebGL configurator + autonomous AI agent backend shipped in 3 weeks. Which Robillionair B2B benchmark fits best?', 'sprint')" class="px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-obsidian-platinum/50 text-[11px] font-mono text-white/80 hover:text-white transition">
+                🏛️ Scope My B2B Sprint Benchmark
+              </button>
+            </div>
+          </div>
+
+          <!-- Custom Query Input Bar -->
+          <form onsubmit="handleOracleSubmit(event)" class="flex flex-col sm:flex-row gap-2.5 mb-5">
+            <input
+              type="text"
+              id="oracle-prompt-input"
+              maxlength="800"
+              placeholder="Ask ANANSI Oracle to architect your AI system, audit your stack, or recommend a sprint..."
+              class="flex-1 px-4 py-3 rounded-xl bg-black/80 border border-white/15 text-[13px] text-white placeholder-white/35 focus:outline-none focus:border-obsidian-platinum font-mono"
+            />
+            <button
+              type="submit"
+              id="oracle-submit-btn"
+              class="touch-target tap-press px-6 py-3 rounded-xl bg-gradient-to-r from-[#F4F4F6] via-[#E8E2D5] to-[#D6CBB6] text-[#0A0A0C] font-mono text-[11.5px] tracking-widest uppercase font-bold hover:brightness-105 transition flex items-center justify-center gap-2 shrink-0"
+            >
+              <span id="oracle-submit-label">Transmit to Oracle</span>
+              <span>↗</span>
+            </button>
+          </form>
+
+          <div id="console-query-text" class="text-[12.5px] font-mono text-obsidian-platinum mb-3 italic">
             "Compile deterministically pruned memory vaults with zero token degradation."
           </div>
 
-          <div class="p-4 rounded-xl bg-black/60 border border-white/[0.08] font-mono text-[12px] space-y-2">
-            <div class="flex items-center justify-between">
-              <span id="console-result-title" class="text-white font-medium">ANANSI ULTIMATE — Deterministic Context Compiler</span>
-              <span id="console-result-badge" class="px-2 py-0.5 rounded text-[10px] bg-white/10 text-obsidian-platinum">IN PROGRESS</span>
+          <!-- Live Oracle Output Terminal -->
+          <div class="p-4 sm:p-5 rounded-xl bg-black/75 border border-white/[0.1] font-mono text-[12px] space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span id="console-result-title" class="text-white font-semibold">ANANSI ULTIMATE — Deterministic Context Compiler</span>
+              <span id="console-result-badge" class="px-2.5 py-0.5 rounded text-[10px] bg-white/10 text-obsidian-platinum border border-obsidian-platinum/30">READY</span>
             </div>
-            <p id="console-result-desc" class="text-[12px] text-obsidian-silver font-light leading-relaxed">
+            <div id="console-result-desc" class="text-[12.5px] text-obsidian-silver font-sans font-light leading-relaxed space-y-2">
               Proprietary context compiler architected to consolidate conversational state, prune token redundancy, and prevent LLM attention drift across long-horizon agent execution.
-            </p>
-            <div id="console-result-rows" class="pt-2 border-t border-white/[0.06] space-y-1 text-[11px] text-white/70">
-              <div class="flex justify-between"><span>Context Efficiency Gain:</span><span class="text-obsidian-platinum font-semibold">10-Step Deterministic Pruning</span></div>
-              <div class="flex justify-between"><span>Architecture Paradigm:</span><span class="text-white">Local-First Vault + Vector Index</span></div>
+            </div>
+            <div id="console-result-rows" class="pt-3 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-[11px] text-white/70">
+              <div>Context Efficiency: <span class="text-obsidian-platinum font-semibold">Deterministic Pruning + CSR Sparsity</span></div>
+              <button type="button" onclick="injectOracleIntoBrief()" class="text-obsidian-platinum hover:text-white underline underline-offset-4 font-mono text-[11px] transition">
+                Inject Synthesis Into Project Brief ↓
+              </button>
             </div>
           </div>
         </div>
@@ -1671,24 +1721,124 @@
         rBadge.textContent = 'IN PROGRESS';
         rDesc.innerHTML = 'Proprietary context compiler architected to consolidate conversational state, prune token redundancy, and prevent LLM attention drift across long-horizon agent execution.';
         rRows.innerHTML =
-          '<div class="flex justify-between"><span>Context Efficiency Gain:</span><span class="text-obsidian-platinum font-semibold">10-Step Deterministic Pruning</span></div>' +
-          '<div class="flex justify-between"><span>Architecture Paradigm:</span><span class="text-white">Local-First Vault + Vector Index</span></div>';
+          '<div>Context Efficiency: <span class="text-obsidian-platinum font-semibold">10-Step Deterministic Pruning</span></div>' +
+          '<button type="button" onclick="injectOracleIntoBrief()" class="text-obsidian-platinum hover:text-white underline underline-offset-4 font-mono text-[11px] transition">Inject Synthesis Into Project Brief ↓</button>';
       } else if (mode === 'drosophi') {
         qText.textContent = '"Benchmark CSR sparse connectome matrix against dense baseline on Qwen2.5-0.5B."';
         rTitle.textContent = 'DrosophiLLM — 139,255 Neurons & 2,613,129 Directed Synapses';
         rBadge.textContent = '22.8× COMPRESSION';
         rDesc.innerHTML = 'Biological <em>Drosophila melanogaster</em> connectome spliced directly into Qwen2.5-0.5B layers 18–23 using CSR sparse matrices, Dale\'s Law sign constraints, and Mushroom Body Sparse LIF dynamics.';
         rRows.innerHTML =
-          '<div class="flex justify-between"><span>Synaptic Memory Footprint:</span><span class="text-obsidian-platinum font-semibold">0.70 MB CSR vs 16.00 MB Dense (22.8×)</span></div>' +
-          '<div class="flex justify-between"><span>Step Latency:</span><span class="text-white">153 ms vs 306 ms (2.00× Speedup)</span></div>';
+          '<div>Synaptic Footprint: <span class="text-obsidian-platinum font-semibold">0.70 MB CSR vs 16.00 MB Dense (22.8×)</span></div>' +
+          '<button type="button" onclick="injectOracleIntoBrief()" class="text-obsidian-platinum hover:text-white underline underline-offset-4 font-mono text-[11px] transition">Inject Synthesis Into Project Brief ↓</button>';
       } else {
         qText.textContent = '"Query Robillionair OÜ studio sprint availability, B2B architecture contracts, and IP terms."';
         rTitle.textContent = 'Robillionair OÜ (Estonia / EU) — Systems Studio';
         rBadge.textContent = 'Q4 2026 OPEN';
         rDesc.innerHTML = 'Our engineering team orchestrates internal ANANSI context compilers and agent swarms. Zero HR friction, flat outcome billing, and 100% IP handoff.';
         rRows.innerHTML =
-          '<div class="flex justify-between"><span>Proof-of-Architecture Pilot:</span><span class="text-obsidian-platinum font-semibold">~€3,000 Flat Entry Sprint (100% Credited)</span></div>' +
-          '<div class="flex justify-between"><span>Turnkey Autonomous Build:</span><span class="text-white font-semibold">~€12k–€18k (3–4 Weeks Delivery)</span></div>';
+          '<div>Pilot Sprint: <span class="text-obsidian-platinum font-semibold">~€3,000 Flat Entry (100% Credited)</span></div>' +
+          '<button type="button" onclick="injectOracleIntoBrief()" class="text-obsidian-platinum hover:text-white underline underline-offset-4 font-mono text-[11px] transition">Inject Synthesis Into Project Brief ↓</button>';
+      }
+      if (window.pulseWave) window.pulseWave();
+    }
+
+    // -----------------------------------------------------------------------
+    // 1B. SOVEREIGN AI ORACLE (NVIDIA: Nemotron 3.5 Super VL (free))
+    // -----------------------------------------------------------------------
+    var lastOracleSynthesis = '';
+
+    function formatOracleMarkdown(raw) {
+      var safe = sanitizeInput(raw || '');
+      safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+      safe = safe.replace(/\*([^*]+)\*/g, '<em class="text-obsidian-platinum">$1</em>');
+      safe = safe.replace(/\`([^\`]+)\`/g, '<code class="px-1.5 py-0.5 rounded bg-white/10 text-obsidian-platinum font-mono text-[11px]">$1</code>');
+      var lines = safe.split(/\r?\n/).filter(function(l) { return l.trim().length > 0; });
+      return lines.map(function(line) {
+        var trimmed = line.trim();
+        if (trimmed.indexOf('- ') === 0 || trimmed.indexOf('* ') === 0) {
+          return '<div class="flex items-start gap-2"><span class="text-obsidian-platinum mt-0.5">▸</span><span>' + trimmed.slice(2) + '</span></div>';
+        }
+        return '<div>' + trimmed + '</div>';
+      }).join('');
+    }
+
+    function handleOracleSubmit(e) {
+      if (e) e.preventDefault();
+      var input = document.getElementById('oracle-prompt-input');
+      if (!input) return;
+      var q = (input.value || '').trim();
+      if (!q) {
+        q = 'Architect a sovereign multi-agent and real-time 3D WebGL system with zero cloud lock-in.';
+        input.value = q;
+      }
+      runSovereignOracle(q, 'architect');
+    }
+
+    function runSovereignOracle(promptText, mode) {
+      var qText = document.getElementById('console-query-text');
+      var rTitle = document.getElementById('console-result-title');
+      var rBadge = document.getElementById('console-result-badge');
+      var rDesc = document.getElementById('console-result-desc');
+      var submitBtn = document.getElementById('oracle-submit-btn');
+      var submitLbl = document.getElementById('oracle-submit-label');
+      var modelBadge = document.getElementById('oracle-model-badge');
+      var input = document.getElementById('oracle-prompt-input');
+
+      if (input && promptText) input.value = promptText;
+      if (qText) qText.textContent = '"' + promptText + '"';
+      if (rTitle) rTitle.textContent = 'ANANSI ORACLE // SYNTHESIZING ARCHITECTURE...';
+      if (rBadge) rBadge.textContent = 'COMPUTING';
+      if (rDesc) {
+        rDesc.innerHTML = '<div class="flex items-center gap-2.5 text-obsidian-platinum font-mono text-[12px]"><span class="w-2 h-2 rounded-full bg-obsidian-platinum animate-ping"></span><span>Routing through NVIDIA: Nemotron 3.5 Super VL cognitive graph...</span></div>';
+      }
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitLbl) submitLbl.textContent = 'Synthesizing...';
+      if (window.pulseWave) window.pulseWave();
+
+      fetch('/api/oracle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptText, mode: mode || 'architect' })
+      })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (window.pulseWave) window.pulseWave();
+          if (data && data.ok && data.reply) {
+            lastOracleSynthesis = data.reply;
+            if (rTitle) rTitle.textContent = 'SOVEREIGN ORACLE SYNTHESIS // ROBILLIONAIR OÜ';
+            if (rBadge) rBadge.textContent = data.source === 'openrouter-nemotron' ? 'NEMOTRON 3.5 LIVE' : 'SOVEREIGN CORE';
+            if (modelBadge) modelBadge.textContent = (data.model || 'NVIDIA: NEMOTRON 3.5 SUPER VL').toUpperCase();
+            if (rDesc) rDesc.innerHTML = formatOracleMarkdown(data.reply);
+          } else {
+            var errMsg = (data && data.error) ? data.error : 'Oracle synthesis complete.';
+            if (rTitle) rTitle.textContent = 'SOVEREIGN ORACLE // TELEMETRY NOTICE';
+            if (rBadge) rBadge.textContent = 'STANDBY';
+            if (rDesc) rDesc.textContent = errMsg;
+          }
+        })
+        .catch(function() {
+          lastOracleSynthesis = 'Recommended Topology: Local-first ANANSI memory compiler + DrosophiLLM 22.8x sparse routing. Start with Benchmark 01 (~€3,000 10-Day Pilot Sprint) or Benchmark 02 (~€12k–€18k Turnkey System Build).';
+          if (rTitle) rTitle.textContent = 'SOVEREIGN ORACLE SYNTHESIS // ROBILLIONAIR OÜ';
+          if (rBadge) rBadge.textContent = 'SOVEREIGN CORE';
+          if (rDesc) rDesc.innerHTML = formatOracleMarkdown(lastOracleSynthesis);
+        })
+        .finally(function() {
+          if (submitBtn) submitBtn.disabled = false;
+          if (submitLbl) submitLbl.textContent = 'Transmit to Oracle';
+        });
+    }
+
+    function injectOracleIntoBrief() {
+      var notesEl = document.getElementById('brief-notes');
+      var rDesc = document.getElementById('console-result-desc');
+      var textToInject = lastOracleSynthesis || (rDesc ? rDesc.innerText : '');
+      if (notesEl && textToInject) {
+        notesEl.value = '[ANANSI ORACLE SYNTHESIS]\n' + textToInject.trim();
+      }
+      var formEl = document.getElementById('benchmark-intake-form');
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
 

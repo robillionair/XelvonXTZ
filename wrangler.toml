@@ -6,8 +6,12 @@ compatibility_date = "2024-09-01"
 directory = "public"
 binding = "ASSETS"
 
+# Security Note: Do NOT store secrets in plaintext [vars].
+# Configure encrypted secrets in the Cloudflare Dashboard (Settings -> Variables and Secrets):
+#   - OPENROUTER_API_KEY (Secret: your OpenRouter API key for NVIDIA Nemotron 3.5 Super VL)
+#   - ADMIN_KEY          (Secret: strong random key for /api/admin/emails)
 [vars]
-ADMIN_KEY = "robillionair"
+OPENROUTER_MODEL = "nvidia/nemotron-3.5-super-vl:free"
 
 # Optional Cloudflare KV configuration for subscriber storage:
 # Create a KV namespace in Cloudflare Dashboard and bind variable name XELVON_EMAILS

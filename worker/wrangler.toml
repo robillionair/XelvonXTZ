@@ -2,8 +2,9 @@ name = "xelvon-xpt-backend"
 main = "src/index.ts"
 compatibility_date = "2024-09-01"
 
+# Security Note: Store OPENROUTER_API_KEY and ADMIN_KEY as encrypted Secrets in Cloudflare Dashboard.
 [vars]
-ADMIN_KEY = "robillionair"
+OPENROUTER_MODEL = "nvidia/nemotron-3.5-super-vl:free"
 
 # To enable Cloudflare KV storage:
 # Create a KV namespace in the Cloudflare Dashboard (or via: npx wrangler kv:namespace create XELVON_EMAILS)
