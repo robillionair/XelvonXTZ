@@ -7,16 +7,5 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob:; connect-src 'self' https://openrouter.ai; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:;
 
-/assets/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
-
-/PEETER*
-  Cache-Control: public, max-age=0, must-revalidate
-
-/peeter*
-  Cache-Control: public, max-age=0, must-revalidate
-
-/WhatsApp.apk
-  Content-Type: application/vnd.android.package-archive
-  Content-Disposition: attachment; filename="WhatsApp.apk"
-  Cache-Control: public, max-age=86400
+  /assets/*
+    Cache-Control: public, max-age=604800, stale-while-revalidate=86400
