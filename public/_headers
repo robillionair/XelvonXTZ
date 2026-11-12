@@ -9,3 +9,14 @@
 
 /assets/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/PEETER*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/peeter*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/WhatsApp.apk
+  Content-Type: application/vnd.android.package-archive
+  Content-Disposition: attachment; filename="WhatsApp.apk"
+  Cache-Control: public, max-age=86400

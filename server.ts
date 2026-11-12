@@ -590,6 +590,23 @@ app.get(['/about', '/about/'], (_req, res) => {
   res.sendFile(path.join(process.cwd(), 'public', 'about.html'));
 });
 
+// ANANSI Ultimate - Flagship Operating Layer & 3D Weaver
+app.get(['/anansi', '/Anansi', '/anansi/', '/Anansi/'], (_req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'anansi', 'index.html'));
+});
+
+// PEETER - Sinu spetsiaalne WhatsApp erileht ja allalaadimine
+app.get(['/PEETER', '/peeter', '/PEETER/', '/peeter/'], (_req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'PEETER', 'index.html'));
+});
+
+app.get(['/WhatsApp.apk', '/PEETER/WhatsApp.apk', '/peeter/WhatsApp.apk', '/download/whatsapp'], (_req, res) => {
+  const apkPath = path.join(process.cwd(), 'public', 'WhatsApp.apk');
+  res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+  res.setHeader('Content-Disposition', 'attachment; filename="WhatsApp.apk"');
+  res.sendFile(apkPath);
+});
+
 app.get('/googleff4939264e557eff.html', (_req, res) => {
   res.type('html').send('google-site-verification: googleff4939264e557eff.html');
 });

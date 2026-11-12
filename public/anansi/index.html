@@ -1,316 +1,1378 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ANANSI — The Sovereign Web for Portable AI Memory</title>
-  <meta name="description" content="Explore ANANSI, Robillionair's local-first sovereign data web for portable AI memory, zero-trust governance, model agility, and intelligent context pruning.">
-  <meta name="keywords" content="sovereign AI data layer, local-first AI, enterprise AI security, AI vendor lock-in, knowledge graph, private AI memory, context pruning, ANANSI">
-  <meta name="author" content="Robillionair">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#020608">
-  <link rel="canonical" href="https://robillionair.com/anansi.html">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2218%22 fill=%22%23020608%22/><circle cx=%2232%22 cy=%2232%22 r=%2217%22 fill=%22none%22 stroke=%22%237affc2%22 stroke-width=%224%22/><path d=%22M19 39L32 16l13 23M24 31h16%22 fill=%22none%22 stroke=%22%237affc2%22 stroke-width=%223%22/></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/anansi.css?v=20260718-web1">
-  <link rel="stylesheet" href="/nav.css">
-  <link rel="stylesheet" href="/experience.css?v=20260718-flow1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ANANSI ULTIMATE — The Sovereign Context &amp; Memory Operating Layer</title>
+  <meta name="description" content="What if the machine finally stopped forgetting? ANANSI Ultimate is the local-first context compiler and intelligence workspace. Windows desktop (Tauri 2) and Linux edition coming soon." />
+  <link rel="canonical" href="https://robillionair.com/anansi" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#000000" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Robillionair">
-  <meta property="og:title" content="ANANSI — The Sovereign Web for AI Memory">
-  <meta property="og:description" content="Enter a cinematic sovereign web where local memory connects securely to any AI model.">
-  <meta property="og:url" content="https://robillionair.com/anansi.html">
-  <meta property="og:image" content="https://robillionair.com/assets/images/hero_ai_abstract.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ANANSI — The Sovereign Data Layer">
-  <meta name="twitter:description" content="Explore the local-first cognitive middleware concept by Robillionair.">
+  <!-- Google Fonts: Cinzel, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "ANANSI Concept Profile",
-    "url": "https://robillionair.com/anansi.html",
-    "description": "A concept profile for an offline-first sovereign data layer for enterprise and personal AI.",
-    "isPartOf": { "@type": "WebSite", "name": "Robillionair", "url": "https://robillionair.com/" },
-    "about": {
-      "@type": "SoftwareApplication",
-      "name": "ANANSI",
-      "applicationCategory": "BusinessApplication",
-      "description": "An offline-first knowledge graph and cognitive middleware concept for portable AI memory, access control, and context pruning."
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              void: '#000000',
+              deep: '#050506',
+              carbon: '#0A0A0C',
+              platinum: '#D6CBB6',
+              silver: '#9CA3AF',
+              alabaster: '#F4F4F6'
+            },
+            anansi: {
+              gold: '#D6CBB6',
+              amber: '#E5A93C',
+              cyan: '#00E5FF',
+              crimson: '#E53E3E',
+              glow: 'rgba(214, 203, 182, 0.18)'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Three.js r128 for 3D Cybernetic Spider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #F4F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: clip;
+      line-height: 1.75;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(214, 203, 182, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 85% 30%, rgba(229, 169, 60, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 15% 70%, rgba(0, 229, 255, 0.03) 0%, transparent 50%);
     }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Robillionair", "item": "https://robillionair.com/" },
-      { "@type": "ListItem", "position": 2, "name": "ANANSI", "item": "https://robillionair.com/anansi.html" }
-    ]
-  }
-  </script>
-</head>
-<body class="anansi-page">
-  <a class="an-skip" href="#an-main">Skip to content</a>
-  <div class="an-noise" aria-hidden="true"></div>
-  <div class="an-cursor-glow" aria-hidden="true"></div>
 
-  <header class="site-header" aria-label="Main navigation">
-    <a class="site-brand" href="/" aria-label="Robillionair home">
-      <span class="site-brand-mark" aria-hidden="true"><i></i><i></i></span>
-      <span class="site-brand-text">ROBILLIONAIR</span>
-    </a>
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a href="/#projects" class="nav-link">Projects &amp; Research</a>
-      <a href="/anansi.html" class="nav-link active">ANANSI</a>
-      <a href="/memory-compiler" class="nav-link">Memory Compiler</a>
-      <a href="/about" class="nav-link">About</a>
-      <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-live">
-        <span class="nav-live-dot"></span> Kick 24/7
+    /* Monolithic Stone & Chiseled Marble Heading Style */
+    .stone-pillar-title {
+      font-family: 'Cinzel', serif !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.04em !important;
+      color: #E5E7EB;
+      position: relative;
+      display: inline-block;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 60%),
+        linear-gradient(180deg, #FFFFFF 0%, #E2D9C8 28%, #8A857B 65%, #27272A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(255, 255, 255, 0.4))
+              drop-shadow(0 8px 1px #050505)
+              drop-shadow(0 14px 18px rgba(0, 0, 0, 0.95));
+    }
+
+    .strand-frame {
+      max-width: 1220px;
+      margin-left: auto;
+      margin-right: auto;
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .strand-rule {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chromatic-card {
+      background: rgba(10, 10, 12, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chromatic-card:hover {
+      border-color: rgba(214, 203, 182, 0.35);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(214, 203, 182, 0.06);
+    }
+
+    /* 3D Spider Canvas Styles */
+    #spider-container {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      touch-action: pan-y;
+      cursor: crosshair;
+    }
+    @media (min-width: 1024px) {
+      #spider-container { height: 620px; }
+    }
+
+    /* Download CTA Glowing Button */
+    .btn-anansi-primary {
+      background: linear-gradient(135deg, #F4F4F6 0%, #E2D9C8 45%, #D6CBB6 100%);
+      color: #000000;
+      box-shadow: 0 0 35px rgba(214, 203, 182, 0.35), 0 10px 30px rgba(0, 0, 0, 0.8);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-anansi-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 50px rgba(214, 203, 182, 0.6), 0 14px 40px rgba(0, 0, 0, 0.9);
+      background: #FFFFFF;
+    }
+    .btn-anansi-primary:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Web Thread Ambient Grid */
+    .spider-web-bg {
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(214, 203, 182, 0.08) 1px, transparent 1px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px, 80px 80px, 80px 80px;
+    }
+
+    /* Custom Pulse Dot */
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.4; }
+    }
+    .animate-pulse-dot {
+      animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+    }
+  </style>
+</head>
+<body class="selection:bg-obsidian-platinum/30 selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- NAVIGATION: PURE BLACK OBSIDIAN GLASS                                 -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-50 bg-[#000000]/92 backdrop-blur-xl strand-rule">
+    <div class="strand-frame px-4 sm:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <svg class="w-5 h-5 text-obsidian-platinum transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5.5" r="3.2" />
+          <circle cx="6.2" cy="16.5" r="3.2" />
+          <circle cx="17.8" cy="16.5" r="3.2" />
+          <path d="M12 8.7L7.8 14.2M12 8.7L16.2 14.2M9.2 16.5H14.8" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <span class="font-cinzel text-[19px] sm:text-[21px] font-bold text-white tracking-wider">ROBILLIONAIR</span>
+        <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest bg-white/[0.06] text-obsidian-platinum border border-white/10 font-medium">
+          ANANSI ULTIMATE
+        </span>
       </a>
-      <a href="/privacy.html" class="nav-link">Privacy</a>
-    </nav>
-    <div class="site-header-actions">
-      <a class="site-btn-cta" href="/memory-compiler">
-        <span>Try Compiler</span>
-        <b aria-hidden="true">↗</b>
-      </a>
-      <button class="site-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+
+      <div class="flex items-center gap-4 sm:gap-6 text-[12px] font-mono tracking-wider text-obsidian-silver uppercase">
+        <a href="#spider-arena" class="hidden md:inline hover:text-white transition">3D Weaver</a>
+        <a href="#who-is-this-for" class="hidden md:inline hover:text-white transition">Archetypes</a>
+        <a href="#truths" class="hidden md:inline hover:text-white transition">Core Truths</a>
+        <a href="#cycle" class="hidden md:inline hover:text-white transition">The Cycle</a>
+        <a href="#download" class="text-obsidian-platinum hover:text-white font-semibold transition flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-obsidian-platinum animate-pulse"></span>
+          <span>Download</span>
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-full border border-white/15 text-white hover:border-obsidian-platinum transition text-[11px]">
+          ← Studio
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- Fullscreen Mobile Navigation Drawer -->
-  <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
-    <div class="mobile-drawer-inner">
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="/" class="mobile-nav-link">
-            <span>Home</span>
-            <span class="mobile-nav-badge">01</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="/#projects" class="mobile-nav-link">
-            <span>Projects &amp; Research (DrosophiLLM)</span>
-            <span class="mobile-nav-badge">02</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="/anansi.html" class="mobile-nav-link active" style="color: var(--nav-mint);">
-            <span>ANANSI Sovereign Web</span>
-            <span class="mobile-nav-badge">03</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="/memory-compiler" class="mobile-nav-link">
-            <span>Free Memory Compiler</span>
-            <span class="mobile-nav-badge">04</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="/about" class="mobile-nav-link">
-            <span>Executive Dossier (About)</span>
-            <span class="mobile-nav-badge">05</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #7aff55;">
-            <span><span class="nav-live-dot" style="display:inline-block; margin-right:6px;"></span> Kick 24/7 (Degenerate Fly)</span>
-            <i>↗</i>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="/privacy.html" class="mobile-nav-link">
-            <span>Privacy &amp; Data Practices</span>
-            <span class="mobile-nav-badge">06</span>
-          </a>
-        </li>
-      </ul>
+  <!-- ===================================================================== -->
+  <!-- HERO SECTION: MONOLITHIC MANIFESTO                                    -->
+  <!-- ===================================================================== -->
+  <section class="strand-rule relative overflow-hidden bg-[#000000] pt-16 sm:pt-24 pb-16">
+    <div class="strand-frame px-6 sm:px-12">
+      
+      <!-- Top Status Pill -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-obsidian-platinum/30 text-[11px] font-mono tracking-widest text-obsidian-platinum uppercase mb-8 shadow-[0_0_20px_rgba(214,203,182,0.12)]">
+        <span class="w-2 h-2 rounded-full bg-obsidian-platinum animate-pulse-dot"></span>
+        <span>FLAGSHIP RELEASE // THE SOVEREIGN CONTEXT &amp; MEMORY OPERATING LAYER</span>
+      </div>
 
-      <div class="mobile-drawer-footer">
-        <a class="mobile-drawer-cta" href="/memory-compiler">
-          <span>Launch Memory Compiler in Browser</span>
-          <i>↗</i>
-        </a>
-        <div class="mobile-drawer-socials">
-          <a href="https://github.com/Rob-bio4" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <span>•</span>
-          <a href="https://huggingface.co/Robillionair" target="_blank" rel="noopener noreferrer">Hugging Face</a>
-          <span>•</span>
-          <a href="mailto:Human@robillionair.com">Human@robillionair.com</a>
+      <!-- Main Stone Title -->
+      <div class="mb-4">
+        <h1 class="stone-pillar-title text-[44px] sm:text-[68px] lg:text-[88px] leading-[1.0]" data-text="ANANSI ULTIMATE">
+          ANANSI ULTIMATE
+        </h1>
+      </div>
+
+      <!-- Dramatic Subtitle -->
+      <div class="font-cinzel text-[20px] sm:text-[28px] lg:text-[34px] text-white/90 font-bold mb-8 tracking-wide">
+        The Sovereign Context &amp; Memory Operating Layer.
+      </div>
+
+      <!-- Status Callout -->
+      <div class="flex flex-wrap items-center gap-4 mb-12 font-mono text-[11.5px] uppercase tracking-wider text-obsidian-silver">
+        <span class="px-3 py-1 rounded bg-white/[0.06] text-obsidian-platinum border border-white/10 font-bold">
+          PUBLIC LAUNCH IMMINENT
+        </span>
+        <span class="px-3 py-1 rounded bg-white/[0.03] text-white/70 border border-white/[0.08]">
+          WINDOWS PILOT APPROACHING
+        </span>
+        <span class="px-3 py-1 rounded bg-white/[0.03] text-white/70 border border-white/[0.08]">
+          LINUX CORE FOLLOWING
+        </span>
+      </div>
+
+      <!-- The Opening Philosophical Treatise -->
+      <div class="chromatic-card rounded-3xl p-8 sm:p-12 border border-white/15 max-w-4xl mb-12 relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-obsidian-platinum/5 blur-3xl pointer-events-none"></div>
+
+        <div class="space-y-6 text-[17px] sm:text-[20px] text-obsidian-silver font-light leading-[1.8] relative z-10">
+          <p class="text-white font-medium text-[20px] sm:text-[23px] font-cinzel leading-snug">
+            What if the machine finally stopped forgetting?
+          </p>
+          <p>
+            What if every insight, every decision, every fragile thread of reasoning could be held, compacted, and recalled without dilution, without leakage, without the slow death of context rot?
+          </p>
+          <p>
+            What if the place where ideas are born, tested, and forged into products was no longer scattered across tabs, chats, and cloud vaults that do not belong to you?
+          </p>
+          <div class="pt-4 border-t border-white/[0.08] text-obsidian-platinum font-mono text-[14px] sm:text-[15px] font-semibold tracking-wide">
+            This is the question ANANSI Ultimate answers.
+          </div>
         </div>
+      </div>
+
+      <!-- Quick Platform Actions -->
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a href="#download" class="btn-anansi-primary px-8 py-4 rounded-full font-mono text-[12.5px] tracking-widest uppercase font-bold flex items-center gap-3">
+          <span>Explore Windows Pilot &amp; Linux Release</span>
+          <span class="text-sm">↓</span>
+        </a>
+        <a href="#spider-arena" class="px-7 py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-white font-mono text-[12px] tracking-wider uppercase transition flex items-center gap-2">
+          <span>Inspect 3D Spider Weaver</span>
+          <span class="text-obsidian-platinum">🕷️</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: 3D CYBERNETIC SPIDER (TRIES TO CATCH THE MOUSE POINTER!)      -->
+  <!-- ===================================================================== -->
+  <section id="spider-arena" class="strand-rule relative overflow-hidden bg-[#000000] py-16">
+    <div class="strand-frame px-6 sm:px-12 mb-8 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-2 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-obsidian-platinum animate-pulse"></span>
+          <span>ARID WEAVER RUNTIME // 3D PROCEDURAL KINEMATICS</span>
+        </div>
+        <h2 class="stone-pillar-title text-[32px] sm:text-[46px] leading-[1.08]" data-text="THE WEAVER IN THE VOID">
+          THE WEAVER IN THE VOID
+        </h2>
+        <p class="text-[14.5px] sm:text-[16px] text-obsidian-silver font-light mt-2 max-w-xl">
+          Move your cursor or touch the void. The 3D ANANSI arachnid tracks, pursues, and lunges to intercept your pointer while weaving living memory threads.
+        </p>
+      </div>
+
+      <!-- Telemetry HUD readout -->
+      <div class="font-mono text-[11px] p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1 text-white/60">
+        <div class="flex items-center justify-between gap-4">
+          <span>TRACKING STATUS:</span>
+          <span id="spider-hud-status" class="text-obsidian-platinum font-semibold">PURSUING POINTER</span>
+        </div>
+        <div class="flex items-center justify-between gap-4">
+          <span>DISTANCE:</span>
+          <span id="spider-hud-dist" class="text-white">0.00 mm</span>
+        </div>
+        <div class="flex items-center justify-between gap-4">
+          <span>STRIKE MATRIX:</span>
+          <span id="spider-hud-state" class="text-amber-400">READY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D Canvas Mount -->
+    <div class="strand-frame px-4 sm:px-8">
+      <div class="relative rounded-3xl border border-white/15 overflow-hidden bg-gradient-to-b from-[#08080A] via-[#030304] to-[#000000] shadow-[0_25px_90px_rgba(0,0,0,1)]">
+        
+        <!-- Live Three.js Mount -->
+        <div id="spider-container"></div>
+
+        <!-- Floating Tactical Controls / Hints -->
+        <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none text-[11px] font-mono text-white/50">
+          <div class="flex items-center gap-2 pointer-events-auto bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10">
+            <span>🖱️ Move cursor to lead spider</span>
+            <span>·</span>
+            <span>⚡ Click canvas to trigger pounce</span>
+          </div>
+          <div class="pointer-events-auto flex items-center gap-2">
+            <button type="button" onclick="triggerSpiderPounce()" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/20 text-obsidian-platinum hover:text-white border border-white/10 transition uppercase tracking-wider text-[10.5px]">
+              Trigger Strike Lunge
+            </button>
+            <button type="button" onclick="resetSpiderWeb()" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/20 text-white/80 hover:text-white border border-white/10 transition uppercase tracking-wider text-[10.5px]">
+              Reset Web Strands
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: DOWNLOAD & PLATFORM AVAILABILITY (WINDOWS PILOT & LINUX)      -->
+  <!-- ===================================================================== -->
+  <section id="download" class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="max-w-3xl mb-14">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+          SOVEREIGN BINARY DEPLOYMENT // ZERO CLOUD PREREQUISITE
+        </div>
+        <h2 class="stone-pillar-title text-[36px] sm:text-[50px] lg:text-[60px] leading-[1.04] mb-4" data-text="INITIATE RUNTIME">
+          INITIATE RUNTIME
+        </h2>
+        <p class="text-[16px] sm:text-[18px] text-obsidian-silver font-light leading-relaxed">
+          ANANSI Ultimate is compiled natively in Rust via Tauri 2. It lives directly on your silicon. Select your platform to enter the sovereign pilot.
+        </p>
+      </div>
+
+      <!-- Platform Grid: Windows (Featured) + Linux (Coming Soon) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+
+        <!-- Windows Desktop (Tauri 2) - Featured Pilot Download -->
+        <div class="lg:col-span-7 chromatic-card rounded-3xl p-8 sm:p-12 border-2 border-obsidian-platinum/40 relative overflow-hidden shadow-[0_20px_70px_rgba(214,203,182,0.12)]">
+          <div class="absolute top-0 right-0 px-4 py-1.5 rounded-bl-2xl bg-obsidian-platinum text-black font-mono text-[10.5px] font-bold uppercase tracking-widest">
+            WINDOWS PILOT APPROACHING
+          </div>
+
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-obsidian-platinum">
+              <!-- Windows / Desktop Icon -->
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 5.48L10.38 4.47V11.23H3V5.48ZM3 18.52L10.38 19.53V12.77H3V18.52ZM11.62 4.3L21 3V11.23H11.62V4.3ZM11.62 19.7L21 21V12.77H11.62V19.7Z" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-mono text-[11px] text-obsidian-platinum uppercase tracking-wider font-semibold">FLAGSHIP RUNTIME // DESKTOP</div>
+              <h3 class="font-cinzel text-[24px] sm:text-[28px] font-bold text-white">Windows Edition (Tauri 2)</h3>
+            </div>
+          </div>
+
+          <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed mb-8">
+            Native, hardware-accelerated Windows desktop client paired with a local SQLite FTS5 encrypted vault. Includes the full Context Compiler, Opportunity Engine, SwarmTank, and SOMNIA counterfactual engine.
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-[11.5px] mb-8 pb-6 border-b border-white/[0.08]">
+            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <div class="text-white/40 text-[10px]">ARCHITECTURE</div>
+              <div class="text-white font-medium mt-0.5">Rust + Tauri 2</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <div class="text-white/40 text-[10px]">VAULT TYPE</div>
+              <div class="text-obsidian-platinum font-medium mt-0.5">100% On-Device</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] col-span-2 sm:col-span-1">
+              <div class="text-white/40 text-[10px]">TARGET OS</div>
+              <div class="text-white font-medium mt-0.5">Windows 10 / 11 (x64)</div>
+            </div>
+          </div>
+
+          <!-- Big Windows CTA Button -->
+          <button type="button" onclick="openPilotModal('Windows')" class="btn-anansi-primary w-full py-4 px-6 rounded-2xl font-mono text-[13px] sm:text-[14px] tracking-wider uppercase font-black flex items-center justify-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>DOWNLOAD WINDOWS PILOT (TAURI 2)</span>
+          </button>
+        </div>
+
+        <!-- Linux Edition - Coming Very Soon -->
+        <div class="lg:col-span-5 chromatic-card rounded-3xl p-8 sm:p-12 border border-white/15 flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/80">
+                <!-- Linux Tux Icon -->
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 7.3 7.7 8.1 8.1 8.8C6.9 9.6 6 11 6 12.6C6 14.1 6.8 15.4 8 16.2C8 16.4 8 16.7 8 17C8 19.8 9.8 22 12 22C14.2 22 16 19.8 16 17C16 16.7 16 16.4 16 16.2C17.2 15.4 18 14.1 18 12.6C18 11 17.1 9.6 15.9 8.8C16.3 8.1 16.5 7.3 16.5 6.5C16.5 4 14.5 2 12 2Z" />
+                </svg>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 font-mono text-[10.5px] text-white/60 uppercase tracking-widest">
+                LAUNCHING VERY SOON
+              </span>
+            </div>
+
+            <div class="font-mono text-[11px] text-white/50 uppercase tracking-wider font-semibold">SOVEREIGN KERNEL</div>
+            <h3 class="font-cinzel text-[24px] sm:text-[28px] font-bold text-white mb-4">Linux Edition</h3>
+
+            <p class="text-[14px] text-obsidian-silver font-light leading-relaxed mb-6">
+              Packaged as a standalone <code class="text-obsidian-platinum font-mono text-[12px]">.AppImage</code> and <code class="text-obsidian-platinum font-mono text-[12px]">.deb</code> binary for Debian, Ubuntu, and Arch. Zero root requirements and full local hardware inference support.
+            </p>
+
+            <div class="space-y-2 text-[12px] font-mono text-white/60 mb-8 border-t border-white/[0.06] pt-4">
+              <div class="flex justify-between"><span>Packaging:</span><span class="text-white">AppImage · .deb · Tarball</span></div>
+              <div class="flex justify-between"><span>Kernel Support:</span><span class="text-obsidian-platinum">Linux 5.15+ (glibc 2.31+)</span></div>
+              <div class="flex justify-between"><span>Status:</span><span class="text-amber-400">Release Build Compiling</span></div>
+            </div>
+          </div>
+
+          <!-- Linux Coming Soon Button -->
+          <button type="button" onclick="openPilotModal('Linux')" class="w-full py-4 px-6 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-obsidian-platinum hover:text-white font-mono text-[12.5px] tracking-wider uppercase font-semibold transition flex items-center justify-center gap-2">
+            <span>LINUX EDITION — COMING VERY SOON</span>
+            <span class="text-xs">↗</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Zero Telemetry Guarantee Strip -->
+      <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07] grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-[12px]">
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian-platinum"></span>
+          <span class="text-white font-medium">100% On-Device Vault</span>
+          <span class="text-white/40 text-[10.5px]">SQLite FTS5</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian-platinum"></span>
+          <span class="text-white font-medium">Zero Telemetry Leakage</span>
+          <span class="text-white/40 text-[10.5px]">Fail-Closed</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian-platinum"></span>
+          <span class="text-white font-medium">Zero Cloud Lock-In</span>
+          <span class="text-white/40 text-[10.5px]">Open Spec</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: WHO IS THIS FOR? (THE 4 ARCHETYPES)                          -->
+  <!-- ===================================================================== -->
+  <section id="who-is-this-for" class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="max-w-3xl mb-16">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+          AUDIENCE AUDIT // INTELLECTUAL SOVEREIGNTY
+        </div>
+        <h2 class="stone-pillar-title text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.05] mb-4" data-text="WHO IS THIS FOR?">
+          WHO IS THIS FOR?
+        </h2>
+        <p class="text-[15.5px] sm:text-[17px] text-obsidian-silver font-light">
+          ANANSI Ultimate was not designed for casual prompt chatter. It was engineered for practitioners whose work cannot tolerate loss.
+        </p>
+      </div>
+
+      <!-- 4 Archetypes Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+        <!-- Archetype 1: The Founders -->
+        <div class="chromatic-card rounded-2xl p-7 sm:p-9 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] text-obsidian-platinum mb-3 uppercase tracking-wider">
+              <span>01 // THE FOUNDERS</span>
+              <span class="text-white/40">TOTAL RECALL</span>
+            </div>
+            <h3 class="font-cinzel text-[22px] sm:text-[24px] font-bold text-white mb-4 leading-tight">
+              A Second Brain That Never Lies
+            </h3>
+            <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed">
+              For the founders who carry an entire product in their head and need a second brain that never lies. Holds the full weight of your technical debt, pivot rationales, and architecture decisions without shedding a single constraint.
+            </p>
+          </div>
+        </div>
+
+        <!-- Archetype 2: The Indie Builders -->
+        <div class="chromatic-card rounded-2xl p-7 sm:p-9 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] text-obsidian-platinum mb-3 uppercase tracking-wider">
+              <span>02 // THE INDIE BUILDERS</span>
+              <span class="text-white/40">ZERO EXFILTRATION</span>
+            </div>
+            <h3 class="font-cinzel text-[22px] sm:text-[24px] font-bold text-white mb-4 leading-tight">
+              Refusing to Bleed IP to Remote Servers
+            </h3>
+            <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed">
+              For the indie builders who refuse to bleed intellectual property into someone else's servers. Every roadmap, prompt chain, and competitive blueprint stays locked on your local drive with zero telemetry exfiltration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Archetype 3: Researchers & Product Teams -->
+        <div class="chromatic-card rounded-2xl p-7 sm:p-9 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] text-obsidian-platinum mb-3 uppercase tracking-wider">
+              <span>03 // RESEARCH &amp; PRODUCT</span>
+              <span class="text-white/40">PROVENANCE</span>
+            </div>
+            <h3 class="font-cinzel text-[22px] sm:text-[24px] font-bold text-white mb-4 leading-tight">
+              Evidence Behind Every Recommendation
+            </h3>
+            <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed">
+              For the researchers and product teams who must keep the evidence behind every recommendation. Eliminates hand-waving: every synthesized specification carries immutable source lineage and cryptographic citations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Archetype 4: AI Engineers & Practitioners -->
+        <div class="chromatic-card rounded-2xl p-7 sm:p-9 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] text-obsidian-platinum mb-3 uppercase tracking-wider">
+              <span>04 // DEVELOPERS &amp; AI ENGINEERS</span>
+              <span class="text-white/40">INSPECTABILITY</span>
+            </div>
+            <h3 class="font-cinzel text-[22px] sm:text-[24px] font-bold text-white mb-4 leading-tight">
+              Absolute Control Over Model Context
+            </h3>
+            <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed">
+              For the developers and AI practitioners who demand to see exactly what context reaches the model — and what was deliberately left behind. Deterministic pruning eliminates token bloat and ensures 100% signal density.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Core Creed Card -->
+      <div class="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#0C0B0E] via-[#121116] to-[#0A0A0C] border border-obsidian-platinum/30 text-center max-w-3xl mx-auto shadow-2xl">
+        <div class="font-cinzel text-[20px] sm:text-[24px] text-white font-bold tracking-wide">
+          "If you build in the dark and still expect precision, this is for you."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: WHAT IS ANANSI ULTIMATE?                                     -->
+  <!-- ===================================================================== -->
+  <section class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="max-w-3xl mb-16">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+          ANATOMY OF THE ENGINE // LOCAL-FIRST ARCHITECTURE
+        </div>
+        <h2 class="stone-pillar-title text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.05] mb-4" data-text="WHAT IS ANANSI ULTIMATE?">
+          WHAT IS ANANSI ULTIMATE?
+        </h2>
+        <p class="text-[16px] sm:text-[18px] text-obsidian-silver font-light leading-relaxed">
+          A local-first product creation and intelligence workspace. Windows desktop (Tauri 2) and paired browser interface. Zero telemetry. Zero required cloud. Zero attention drift.
+        </p>
+      </div>
+
+      <!-- The 5 Pillars of ANANSI Ultimate -->
+      <div class="space-y-4 mb-16">
+
+        <div class="p-6 sm:p-7 rounded-2xl chromatic-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-[13px] text-obsidian-platinum font-bold">01 //</span>
+            <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white">The memory compiler that refuses to rot.</span>
+          </div>
+          <span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">Deterministic State Reduction</span>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-2xl chromatic-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-[13px] text-obsidian-platinum font-bold">02 //</span>
+            <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white">The sealed vault that answers only to you.</span>
+          </div>
+          <span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">Local SQLite FTS5 + Encryption</span>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-2xl chromatic-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-[13px] text-obsidian-platinum font-bold">03 //</span>
+            <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white">The forge where opportunities become specifications.</span>
+          </div>
+          <span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">Opportunity Engine &amp; Product Forge</span>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-2xl chromatic-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-[13px] text-obsidian-platinum font-bold">04 //</span>
+            <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white">The arena where synthetic buyers stress-test assumptions.</span>
+          </div>
+          <span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">SwarmTank 3D Simulation</span>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-2xl chromatic-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-[13px] text-obsidian-platinum font-bold">05 //</span>
+            <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white">The chamber where compacted histories replay without illusion.</span>
+          </div>
+          <span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">SOMNIA Counterfactual Replay</span>
+        </div>
+
+      </div>
+
+      <!-- Studio Lineage Callout -->
+      <div class="p-8 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="max-w-2xl">
+          <div class="font-mono text-[11px] text-obsidian-platinum uppercase tracking-widest mb-1.5 font-bold">STUDIO LINEAGE</div>
+          <p class="text-[14.5px] sm:text-[15.5px] text-obsidian-silver font-light leading-relaxed">
+            Born inside a private systems studio to protect long-horizon agents from context death. Now rising as a sovereign standalone platform.
+          </p>
+        </div>
+        <a href="#download" class="px-6 py-3 rounded-full bg-white text-black font-mono text-[11.5px] tracking-wider uppercase font-bold hover:bg-obsidian-platinum transition shrink-0">
+          Request Pilot Access →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: THE CORE TRUTHS IT ENFORCES                                  -->
+  <!-- ===================================================================== -->
+  <section id="truths" class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="max-w-3xl mb-16">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+          MATHEMATICAL &amp; ARCHITECTURAL INVARIANTS
+        </div>
+        <h2 class="stone-pillar-title text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.05] mb-4" data-text="THE CORE TRUTHS">
+          THE CORE TRUTHS IT ENFORCES
+        </h2>
+        <p class="text-[15.5px] sm:text-[17px] text-obsidian-silver font-light">
+          Four unbreakable covenants that govern every byte processed inside ANANSI Ultimate.
+        </p>
+      </div>
+
+      <!-- 4 Core Truths Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="chromatic-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10.5px] tracking-widest text-obsidian-platinum uppercase mb-3 font-semibold">I // CONTEXT INTEGRITY</div>
+            <h3 class="font-cinzel text-[18px] text-white font-bold mb-3 leading-snug">Zero Attention Dilution</h3>
+            <p class="text-[13.5px] text-obsidian-silver font-light leading-relaxed">
+              Eliminates attention dilution and hallucination across extended reasoning. Irrelevant state is deterministically purged before tokens reach inference.
+            </p>
+          </div>
+        </div>
+
+        <div class="chromatic-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10.5px] tracking-widest text-obsidian-platinum uppercase mb-3 font-semibold">II // SOVEREIGN PRIVACY</div>
+            <h3 class="font-cinzel text-[18px] text-white font-bold mb-3 leading-snug">100% On-Device Isolation</h3>
+            <p class="text-[13.5px] text-obsidian-silver font-light leading-relaxed">
+              100% on-device. Encrypted vault. Fail-closed boundaries. No silent exfiltration, telemetry pings, or background cloud synchronization.
+            </p>
+          </div>
+        </div>
+
+        <div class="chromatic-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10.5px] tracking-widest text-obsidian-platinum uppercase mb-3 font-semibold">III // INTEROPERABILITY</div>
+            <h3 class="font-cinzel text-[18px] text-white font-bold mb-3 leading-snug">Agility Without Surrender</h3>
+            <p class="text-[13.5px] text-obsidian-silver font-light leading-relaxed">
+              Connect models and providers on your terms while memory stays sealed. Switch between local Ollama, Claude, and GPT without surrendering your vault.
+            </p>
+          </div>
+        </div>
+
+        <div class="chromatic-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10.5px] tracking-widest text-obsidian-platinum uppercase mb-3 font-semibold">IV // EVIDENCE OVER OPINION</div>
+            <h3 class="font-cinzel text-[18px] text-white font-bold mb-3 leading-snug">Cryptographic Lineage</h3>
+            <p class="text-[13.5px] text-obsidian-silver font-light leading-relaxed">
+              Every artifact carries its lineage. Decisions remain inspectable. If a recommendation was forged, you can trace the exact evidence trail that created it.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SECTION: THE CYCLE IT UNLOCKS (7-STAGE PRODUCT PIPELINE)               -->
+  <!-- ===================================================================== -->
+  <section id="cycle" class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12">
+      <div class="max-w-3xl mb-16">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian-platinum mb-3">
+          SYNTHETIC PRODUCT FORGE // DETERMINISTIC WORKFLOW
+        </div>
+        <h2 class="stone-pillar-title text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.05] mb-4" data-text="THE CYCLE IT UNLOCKS">
+          THE CYCLE IT UNLOCKS
+        </h2>
+        <p class="text-[15.5px] sm:text-[17px] text-obsidian-silver font-light">
+          From volatile intuition to unbreakable, production-grade systems without losing a single decision.
+        </p>
+      </div>
+
+      <!-- 7 Steps Vertical Stepper -->
+      <div class="space-y-4 mb-16 max-w-4xl">
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">01</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Capture the raw signal.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">Raw customer friction, market anomalies, code snippets, and conversational transcripts ingested without formatting overhead.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">02</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Discover the opportunity.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">The Opportunity Engine parses unaddressed value vectors, scoring commercial viability against your domain context.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">03</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Forge the product.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">Product Forge translates opportunities into executable technical architecture, data schemas, and API contracts.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">04</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Collide the concepts.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">LEXI-COLLIDER runs high-energy dialectic tests, forcing opposing architectural paradigms into direct friction to expose weak assumptions.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">05</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Deploy the swarm of synthetic buyers.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">SwarmTank releases deterministic autonomous buyer personas that critique, stress-test, and attempt to break your positioning.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">06</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Replay the failures in SOMNIA.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">Counterfactual simulation environment replaying worst-case scenarios, agent deadlocks, and edge-case bugs until boundaries are sealed.</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-start gap-5">
+          <span class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 text-obsidian-platinum font-mono text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">07</span>
+          <div>
+            <h3 class="font-cinzel text-[18px] font-bold text-white mb-1">Export the living record.</h3>
+            <p class="text-[14px] text-obsidian-silver font-light">Crystal-clean repositories, specifications, and test suites with 100% intellectual property ownership. Zero vendor tethering.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Affirmation -->
+      <div class="p-6 rounded-2xl bg-white/[0.03] border border-obsidian-platinum/40 text-center max-w-4xl font-mono text-[13px] text-obsidian-platinum uppercase tracking-wider">
+        Nothing is lost. Nothing is diluted. Nothing leaves without your command.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- CLOSING MANIFESTO & PILOT CALLOUT                                     -->
+  <!-- ===================================================================== -->
+  <section class="strand-rule relative overflow-hidden bg-[#000000] py-24">
+    <div class="strand-frame px-6 sm:px-12 text-center max-w-4xl mx-auto">
+      
+      <div class="font-mono text-[11px] text-obsidian-platinum uppercase tracking-[0.2em] mb-4">
+        EPILOGUE // THE AGE OF DISPOSABLE CONTEXT IS ENDING
+      </div>
+
+      <h2 class="stone-pillar-title text-[34px] sm:text-[52px] lg:text-[64px] leading-[1.06] mb-8" data-text="THE VAULT IS ALMOST OPEN">
+        THE VAULT IS ALMOST OPEN
+      </h2>
+
+      <div class="space-y-6 text-[17px] sm:text-[19px] text-obsidian-silver font-light leading-relaxed max-w-2xl mx-auto mb-12">
+        <p>
+          <strong class="text-white font-medium">ANANSI Ultimate</strong> is the operating layer that treats memory as sacred infrastructure.
+        </p>
+        <p class="font-mono text-[14px] text-obsidian-platinum">
+          Public launch imminent. Windows pilot approaching. The vault is almost open.
+        </p>
+        <div class="font-cinzel text-[24px] sm:text-[30px] font-bold text-white pt-2">
+          Stand by.
+        </div>
+      </div>
+
+      <!-- Action Button to Open Early Access Form -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <button type="button" onclick="openPilotModal('Windows &amp; Linux')" class="btn-anansi-primary px-9 py-4 rounded-full font-mono text-[13px] tracking-widest uppercase font-bold flex items-center gap-3">
+          <span>Apply For Private Pilot Access</span>
+          <span class="text-sm">↗</span>
+        </button>
+        <a href="/" class="px-7 py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-white font-mono text-[12px] tracking-wider uppercase transition">
+          Return to Robillionair Studio
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER                                                                -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#000000] py-12 border-t border-white/[0.08] text-[11.5px] font-mono text-white/40">
+    <div class="strand-frame px-6 sm:px-12 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        ROBILLIONAIR OÜ // ANANSI ULTIMATE — REGISTERED IN TALLINN, ESTONIA (EU REG 17333318)
+      </div>
+      <div class="flex items-center gap-5 text-obsidian-silver">
+        <a href="/" class="hover:text-white transition">Studio</a>
+        <a href="/vision" class="hover:text-white transition">Vision</a>
+        <a href="/about" class="hover:text-white transition">Founder</a>
+        <a href="mailto:human@robillionai.com" class="text-obsidian-platinum hover:underline">human@robillionai.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- PILOT ACCESS MODAL                                                    -->
+  <!-- ===================================================================== -->
+  <div id="pilot-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4 sm:p-6 overflow-y-auto" onclick="if(event.target===this)closePilotModal()">
+    <div class="relative w-full max-w-lg rounded-3xl bg-[#0A0A0E] border border-obsidian-platinum/40 p-6 sm:p-10 shadow-[0_30px_90px_rgba(0,0,0,0.98)]">
+      
+      <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.08]">
+        <div class="font-mono text-[11px] text-obsidian-platinum tracking-widest uppercase font-bold">
+          ANANSI ULTIMATE // PILOT ACCESS INTAKE
+        </div>
+        <button type="button" onclick="closePilotModal()" class="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/20 text-white flex items-center justify-center font-mono text-sm transition">✕</button>
+      </div>
+
+      <h3 class="font-cinzel font-bold text-[22px] sm:text-[26px] text-white leading-tight mb-2">
+        Request Early Sovereign Binary
+      </h3>
+      <p class="text-[13px] text-obsidian-silver font-light leading-relaxed mb-6">
+        The Windows pilot (Tauri 2) and upcoming Linux builds are distributed under authenticated developer licenses. Enter your direct transmission address.
+      </p>
+
+      <form id="pilot-form" onsubmit="handlePilotSubmit(event)" class="space-y-4">
+        <div>
+          <label for="pilot-platform" class="block font-mono text-[10.5px] uppercase tracking-wider text-white/50 mb-1">Target Platform</label>
+          <select id="pilot-platform" class="w-full px-4 py-3 rounded-xl bg-black border border-white/15 text-white font-mono text-[12px] focus:outline-none focus:border-obsidian-platinum">
+            <option value="Windows (Tauri 2 x64)">Windows Desktop (Tauri 2 x64) — Pilot Approaching</option>
+            <option value="Linux (.AppImage / .deb)">Linux Core (.AppImage / .deb) — Launching Soon</option>
+            <option value="Dual (Windows + Linux)">Both Platforms</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="pilot-name" class="block font-mono text-[10.5px] uppercase tracking-wider text-white/50 mb-1">Name / Handle *</label>
+          <input type="text" id="pilot-name" required placeholder="Alex Vance" class="w-full px-4 py-3 rounded-xl bg-black border border-white/15 text-white text-[13px] font-mono focus:outline-none focus:border-obsidian-platinum" />
+        </div>
+
+        <div>
+          <label for="pilot-email" class="block font-mono text-[10.5px] uppercase tracking-wider text-white/50 mb-1">Direct Email *</label>
+          <input type="email" id="pilot-email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-black border border-white/15 text-white text-[13px] font-mono focus:outline-none focus:border-obsidian-platinum" />
+        </div>
+
+        <div>
+          <label for="pilot-intent" class="block font-mono text-[10.5px] uppercase tracking-wider text-white/50 mb-1">Primary Use Case (Optional)</label>
+          <textarea id="pilot-intent" rows="2" placeholder="e.g. Multi-agent state orchestration, proprietary product forge, offline knowledge vault..." class="w-full px-4 py-3 rounded-xl bg-black border border-white/15 text-white text-[13px] font-mono focus:outline-none focus:border-obsidian-platinum"></textarea>
+        </div>
+
+        <button type="submit" class="btn-anansi-primary w-full py-3.5 px-6 rounded-xl font-mono text-[12.5px] tracking-widest uppercase font-bold flex items-center justify-center gap-2 mt-2">
+          <span>Transmit Pilot Request →</span>
+        </button>
+      </form>
+
+      <div id="pilot-modal-toast" class="hidden mt-4 p-3.5 rounded-xl bg-white/[0.05] border border-obsidian-platinum/50 text-obsidian-platinum font-mono text-[12px] text-center">
+        ✓ Transmission ready! Opening client dispatch to human@robillionai.com.
       </div>
     </div>
   </div>
 
-  <main id="an-main">
-    <section id="an-story" class="an-story" aria-label="ANANSI system journey" data-flow-section data-flow-tone="mint">
-      <div class="an-sticky">
-        <canvas id="anansi-web" aria-hidden="true"></canvas>
-        <canvas id="anansi-spider" aria-hidden="true"></canvas>
-        <div class="an-moon" aria-hidden="true"></div>
-        <div class="an-scanlines" aria-hidden="true"></div>
-        <div class="an-vignette" aria-hidden="true"></div>
+  <!-- ===================================================================== -->
+  <!-- 3D PROCEDURAL SPIDER RUNTIME (THREE.JS R128)                          -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // PILOT MODAL DISPATCH
+    // -----------------------------------------------------------------------
+    function openPilotModal(platform) {
+      var modal = document.getElementById('pilot-modal');
+      var sel = document.getElementById('pilot-platform');
+      if (sel && platform) {
+        if (platform.indexOf('Linux') >= 0) sel.value = 'Linux (.AppImage / .deb)';
+        else sel.value = 'Windows (Tauri 2 x64)';
+      }
+      if (modal) modal.classList.remove('hidden');
+    }
 
-        <div class="an-system-hud" aria-hidden="true">
-          <span>ANANSI ULTIMATE / IN PROGRESS (OCT 2026 SPEC)</span>
-          <i><b id="an-progress-bar"></b></i>
-          <strong id="an-progress-label">00%</strong>
-        </div>
-        <div class="an-coordinate an-coordinate-left" aria-hidden="true">TAURI 2 + RUST + SQLITE FTS5 // MARKDOWN VAULTS</div>
-        <div class="an-coordinate an-coordinate-right" aria-hidden="true">MASTER GREENFIELD BUILD SPEC // 6 ENGINES</div>
+    function closePilotModal() {
+      var modal = document.getElementById('pilot-modal');
+      if (modal) modal.classList.add('hidden');
+    }
 
-        <div class="an-model-nodes" aria-hidden="true">
-          <div class="an-model-node node-a"><i></i><span>MEMORY OS</span><small>MARKDOWN+FTS5</small></div>
-          <div class="an-model-node node-b"><i></i><span>AI MATRIX</span><small>20+ PROVIDERS</small></div>
-          <div class="an-model-node node-local"><i></i><span>FORGE + SWARM</span><small>LOCAL SANDBOX</small></div>
-        </div>
+    function handlePilotSubmit(e) {
+      e.preventDefault();
+      var name = document.getElementById('pilot-name').value.trim();
+      var email = document.getElementById('pilot-email').value.trim();
+      var platform = document.getElementById('pilot-platform').value;
+      var intent = document.getElementById('pilot-intent').value.trim();
 
-        <div class="an-chapters">
-          <article class="an-chapter an-chapter-hero is-active" data-an-scene="0">
-            <p><span></span> STATUS: IN PROGRESS // MASTER GREENFIELD BUILD SPECIFICATION (OCT 2026)</p>
-            <div class="an-wordmark"><i>A</i><strong>ANANSI ULTIMATE</strong></div>
-            <h1>One Memory. Many Minds.<br><em>Infinite Possibilities.</em></h1>
-            <div class="an-chapter-copy">Currently in active development: the local-first AI-Native Operating System uniting Memory OS, AI Matrix, LEXI-COLLIDER, Product Forge, SwarmTank 3D, and SOMNIA.</div>
-            <a class="an-scroll-link" href="#pillars">Explore the Master Spec <span aria-hidden="true">↓</span></a>
-          </article>
+      var subject = 'ANANSI Ultimate Pilot Request // ' + name + ' (' + platform + ')';
+      var body = '=== ANANSI ULTIMATE PILOT ACCESS INTAKE ===\n' +
+                 'From: ' + name + ' (' + email + ')\n' +
+                 'Platform: ' + platform + '\n' +
+                 'Primary Use Case: ' + (intent || 'General intelligence workspace / memory compilation') + '\n' +
+                 'Direct Studio: Robillionair OÜ (Tallinn, Estonia)\n';
 
-          <article class="an-chapter" data-an-scene="1">
-            <p><span>01</span> ENGINE 1 &amp; 2 // MEMORY OS &amp; AI MATRIX</p>
-            <h2>Portable Markdown vaults.<br><em>10-Step Context Compiler.</em></h2>
-            <div class="an-chapter-copy">Every durable memory lives as human-readable Markdown with YAML frontmatter alongside an embedded SQLite FTS5 + vector index. Connect 20+ cloud and local models via PKCE OAuth and OS Keychain with a strict Zero-Cost Lock and "View What ANANSI Sent" disclosure manifest.</div>
-            <ul><li>Markdown + SQLite FTS5</li><li>PKCE OAuth + OS Vault</li><li>10-Step Context Compiler</li></ul>
-          </article>
+      var toast = document.getElementById('pilot-modal-toast');
+      if (toast) toast.classList.remove('hidden');
 
-          <article class="an-chapter" data-an-scene="2">
-            <p><span>02</span> ENGINE 3 &amp; 4 // LEXI-COLLIDER &amp; PRODUCT FORGE</p>
-            <h2>Collide concepts into specs.<br><em>Compile specs into repos.</em></h2>
-            <div class="an-chapter-copy">Innovation Lab &amp; LEXI-COLLIDER run a 6-stage cross-domain pipeline outputting CONCEPT.md, ARCHITECTURE.md, FEASIBILITY.md, ROADMAP.md, RISKS.md, and TEST_PLAN.md—which Product Forge's 6 specialized agents build inside an isolated sandbox.</div>
-            <ul><li>6-File Spec Pack</li><li>6-Agent Sandbox Builder</li><li>Live Diffs &amp; Checkpoints</li></ul>
-          </article>
+      setTimeout(function() {
+        window.location.href = 'mailto:human@robillionai.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      }, 600);
+    }
 
-          <article class="an-chapter" data-an-scene="3">
-            <p><span>03</span> ENGINE 5 &amp; 6 // SWARMTANK 3D &amp; SOMNIA</p>
-            <h2>Stress-test with 100 buyers.<br><em>Consolidate during REM sleep.</em></h2>
-            <div class="an-chapter-copy">Pitch products to 20, 50, or 100 synthetic buyer personas in SwarmTank 3D (CONVERT / CONFUSED / REJECT zones), while SOMNIA runs motor-inhibited offline adversarial "nightmare" simulations and memory consolidation.</div>
-            <div class="an-prune-meter"><span><i></i></span><b>100</b><small>SYNTHETIC BUYER PERSONAS IN SWARMTANK 3D</small></div>
-          </article>
-        </div>
-      </div>
-    </section>
+    // -----------------------------------------------------------------------
+    // THREE.JS CYBERNETIC 3D SPIDER (CHASES AND TRIES TO CATCH MOUSE POINTER)
+    // -----------------------------------------------------------------------
+    var spiderApp = (function() {
+      var container = document.getElementById('spider-container');
+      if (!container || typeof THREE === 'undefined') return {};
 
-    <section class="an-manifesto" aria-labelledby="manifesto-title" data-flow-section data-flow-tone="ice">
-      <p class="an-kicker"><span>IN PROGRESS — MASTER SPECIFICATION</span> SOLVING 4 SYSTEMIC FAILURES</p>
-      <h2 id="manifesto-title">Built on Tauri 2, Rust, React/TS &amp; SQLite FTS5.<br><em>Zero lock-in. 100% local sovereignty.</em></h2>
-      <div class="an-manifesto-grid">
-        <p>ANANSI ULTIMATE is currently in progress to eliminate the four core failures of modern AI workflows: (1) Context Rot &amp; Stateless Amnesia, (2) Fragmented Model &amp; Subscription Silos, (3) Disconnected Ideation, Building &amp; Validation, and (4) Cloud Lock-In &amp; Privacy Erosion.</p>
-        <p>Unlike cloud wrappers that trap your knowledge in opaque databases, ANANSI stores every project, memory node, and spec pack as plain Markdown files on your local filesystem, backed by a Rust/Tokio runtime and SQLite WAL + FTS5 hybrid lexical/vector retrieval.</p>
-      </div>
-    </section>
+      var scene, camera, renderer;
+      var spiderGroup, cephalothorax, abdomen, eyesGroup, fangsGroup;
+      var legs = [];
+      var webLinesGroup;
+      var mousePlane;
+      var raycaster = new THREE.Raycaster();
+      var mousePos2D = new THREE.Vector2(0, 0);
+      var targetWorldPos = new THREE.Vector3(0, 0, 0);
+      var currentSpiderPos = new THREE.Vector3(0, 0, 0);
+      var spiderVelocity = new THREE.Vector3(0, 0, 0);
+      var isMouseActive = false;
+      var walkCycle = 0;
+      var isPouncing = false;
+      var pounceTimer = 0;
 
-    <section id="pillars" class="an-pillars" aria-labelledby="pillars-title" data-flow-section data-flow-tone="mint">
-      <div class="an-section-heading">
-        <p class="an-kicker"><span>MASTER GREENFIELD SPEC</span> SIX UNIFIED ENGINES + GHOST-PROMPT</p>
-        <h2 id="pillars-title">The complete autonomous<br><em>creation loop.</em></h2>
-      </div>
-      <div class="an-pillar-grid">
-        <article class="an-pillar-card" data-tilt>
-          <div class="an-card-index">01 / MEMORY OS + AI MATRIX</div>
-          <div class="an-card-orbit an-orbit-shield" aria-hidden="true"><i></i><i></i><b></b></div>
-          <p>LOCAL-FIRST GRAPH &amp; 20+ PROVIDERS</p>
-          <h3>10-Step Context Compiler.</h3>
-          <ul>
-            <li><b>Hybrid FTS5 + Vector</b><span>0.45 lexical + 0.55 cosine scoring with provenance, lifecycle states, and Sealed/Private/Standard/Public privacy classes.</span></li>
-            <li><b>OAuth-First + Zero-Cost Lock</b><span>PKCE S256 sign-in, OS Keychain storage, and local routing across Ollama, LM Studio, llama.cpp, MLX, and 20+ cloud APIs.</span></li>
-            <li><b>Outbound Disclosure</b><span>Every model call generates a "View What ANANSI Sent" manifest showing exact included and excluded memory nodes.</span></li>
-          </ul>
-        </article>
-        <article class="an-pillar-card" data-tilt>
-          <div class="an-card-index">02 / COLLIDER + PRODUCT FORGE</div>
-          <div class="an-card-orbit an-orbit-bridge" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
-          <p>IDEA DISCOVERY TO WORKING REPO</p>
-          <h3>6-Stage Collider &amp; 6-Agent Forge.</h3>
-          <ul>
-            <li><b>Innovation Lab</b><span>Proactive Opportunity Discovery Engine plus One-Click "Generate New Idea" grounded in your memory graph.</span></li>
-            <li><b>LEXI-COLLIDER 3D</b><span>Toroidal beam collision synthesizing distant domains into a 6-file Spec Pack (CONCEPT, ARCHITECTURE, FEASIBILITY, ROADMAP, RISKS, TEST_PLAN).</span></li>
-            <li><b>Product Forge Sandbox</b><span>Product Architect, UI, Backend, QA, Security, and Product Reviewer agents building real code in an allowlisted sandbox.</span></li>
-          </ul>
-        </article>
-        <article class="an-pillar-card" data-tilt>
-          <div class="an-card-index">03 / SWARMTANK 3D + SOMNIA</div>
-          <div class="an-card-orbit an-orbit-prune" aria-hidden="true"><i></i><i></i><b></b></div>
-          <p>VALIDATION &amp; REM CONSOLIDATION</p>
-          <h3>Synthetic Market &amp; Dream Engine.</h3>
-          <ul>
-            <li><b>SwarmTank 3D Arena</b><span>20, 50, or 100 structured buyer personas with price sensitivity sliders, deterministic seeds, and "Improve Product" feedback loops.</span></li>
-            <li><b>SOMNIA REM-Sleep</b><span>Motor-inhibited offline adversarial "nightmare" stress-testing and recoverable memory consolidation (SOMNIA_DIGEST.md).</span></li>
-            <li><b>GHOST-PROMPT + MCP</b><span>Strictly opt-in (OFF by default) local draft revision explorer plus full Model Context Protocol (MCP) Client &amp; Server.</span></li>
-          </ul>
-        </article>
-      </div>
-    </section>
+      // HUD elements
+      var hudStatus = document.getElementById('spider-hud-status');
+      var hudDist = document.getElementById('spider-hud-dist');
+      var hudState = document.getElementById('spider-hud-state');
 
-    <section id="markets" class="an-markets" aria-labelledby="markets-title" data-flow-section data-flow-tone="violet">
-      <div class="an-section-heading">
-        <p class="an-kicker"><span>TECHNICAL STACK</span> NATIVE DESKTOP ARCHITECTURE</p>
-        <h2 id="markets-title">Engineered in Rust &amp; TypeScript<br><em>for zero-latency sovereignty.</em></h2>
-      </div>
-      <div class="an-market-list">
-        <article><span>01</span><div><p>DESKTOP SHELL &amp; CORE</p><h3>Tauri 2 + Rust + Tokio</h3></div><p>Native desktop performance on Windows 11 and macOS (Apple Silicon) with strict OS Keychain secret storage (Windows Credential Manager / macOS Keychain) and sandboxed execution.</p></article>
-        <article><span>02</span><div><p>STORAGE &amp; HYBRID INDEX</p><h3>Portable Markdown + SQLite FTS5</h3></div><p>Plain .md files with YAML frontmatter remain the human-readable source of truth, paired with an embedded SQLite WAL + FTS5 + vector index that can be rebuilt from disk at any time.</p></article>
-        <article><span>03</span><div><p>B2B STUDIO &amp; CUSTOM BUILDS</p><h3>2-Human AI-Augmented Engineering Pod</h3></div><p>Need custom ANANSI-grade context pipelines, multi-agent systems, or 3D WebGL interfaces for your organization? Partner directly with Robillionair OÜ via flat B2B sprints.</p></article>
-      </div>
-    </section>
+      function init() {
+        var w = container.clientWidth || 1100;
+        var h = container.clientHeight || 560;
 
-    <section class="an-deployment" aria-labelledby="deployment-title" data-flow-section data-flow-tone="ice">
-      <div class="an-deploy-visual" aria-hidden="true">
-        <div class="an-deploy-core"><i></i><span>A</span></div>
-        <div class="an-deploy-path path-one"><i></i><b>TAURI 2</b></div>
-        <div class="an-deploy-path path-two"><i></i><b>B2B POD</b></div>
-      </div>
-      <div class="an-deploy-copy">
-        <p class="an-kicker"><span>DEVELOPMENT ROADMAP</span> 15-MILESTONE BUILD PLAN</p>
-        <h2 id="deployment-title">In active development.<br><em>Built to ship.</em></h2>
-        <div class="an-deploy-options">
-          <article><span>A</span><div><h3>Native Desktop App (In Progress)</h3><p>Following the 15-milestone Master Greenfield Build Prompt across Foundation, Memory OS, AI Matrix, Context Compiler, Innovation Lab, LEXI-COLLIDER, Product Forge, SwarmTank 3D, and SOMNIA.</p></div></article>
-          <article><span>B</span><div><h3>B2B Engineering Sprints (Open Now)</h3><p>Work directly with our 2-person engineering pod (Robillionair OÜ) to deploy custom agentic memory and 3D WebGL systems in 2 weeks.</p></div></article>
-        </div>
-        <a class="an-text-link" href="mailto:Human@robillionair.com?subject=ANANSI%20ULTIMATE%20%26%20B2B%20Inquiry">Email Human@robillionair.com <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+        // Scene
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.022);
 
-    <section id="early-access" class="an-xelvon-bridge" aria-labelledby="xelvon-bridge-title" data-flow-section data-flow-tone="mint">
-      <div class="an-bridge-glow" aria-hidden="true"></div>
-      <p class="an-kicker"><span>IN PROGRESS</span> ANANSI ULTIMATE EARLY ACCESS</p>
-      <h2 id="xelvon-bridge-title">ANANSI ULTIMATE is in progress.<br><em>Request early access or B2B deployment.</em></h2>
-      <p>Join for milestone updates on the Master Greenfield Build Specification, private testing invitations, or contact <a href="mailto:Human@robillionair.com" style="color:#7affc2;">Human@robillionair.com</a> directly.</p>
-      <form id="anansi-waitlist-form" class="an-page-waitlist" action="/api/subscribe" method="post" data-source="anansi-concept-early-access">
-        <input type="hidden" name="product" value="anansi">
-        <label for="anansi-waitlist-email">Email address</label>
-        <div><input id="anansi-waitlist-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com"><button class="an-primary-button" type="submit"><span>Request early access</span><b aria-hidden="true">↗</b></button></div>
-        <p id="anansi-waitlist-status" class="waitlist-status" role="status" aria-live="polite">Selected participants will be contacted as ANANSI ULTIMATE approaches controlled release.</p>
-      </form>
-    </section>
-  </main>
+        // Camera
+        camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
+        camera.position.set(0, 16, 18);
+        camera.lookAt(0, 0, 0);
 
-  <footer class="site-footer">
-    <a class="site-brand" href="/"><span class="site-brand-mark" aria-hidden="true"><i></i><i></i></span><span class="site-brand-text">ROBILLIONAIR</span></a>
-    <p>© 2026 Robillionair OÜ. Intelligence without compromise.</p>
-    <div><a href="/#features">Projects</a><a href="/anansi.html">ANANSI</a><a href="/memory-compiler">Compiler</a><a href="/about">About</a><a href="https://kick.com/degenaratefly" target="_blank" rel="noopener noreferrer">Kick 24/7</a><a href="/privacy.html">Privacy</a><a href="mailto:Human@robillionair.com">Human@robillionair.com</a></div>
-  </footer>
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(w, h);
+        renderer.setClearColor(0x000000, 0);
+        container.appendChild(renderer.domElement);
 
-  <script src="/experience.js?v=20260718-flow1"></script>
-  <script src="/waitlist.js?v=20260723-anansi1"></script>
-  <script src="/anansi.js?v=20260718-web1"></script>
-  <script src="/nav.js"></script>
+        // Lights
+        var ambientLight = new THREE.AmbientLight(0x222225, 1.2);
+        scene.add(ambientLight);
+
+        var dirLight = new THREE.DirectionalLight(0xD6CBB6, 2.5);
+        dirLight.position.set(5, 20, 10);
+        scene.add(dirLight);
+
+        var cyanPoint = new THREE.PointLight(0x00E5FF, 3.0, 25);
+        cyanPoint.position.set(0, 4, 0);
+        scene.add(cyanPoint);
+
+        // Invisible ground plane for mouse raycasting
+        var planeGeom = new THREE.PlaneGeometry(80, 80);
+        var planeMat = new THREE.MeshBasicMaterial({ visible: false });
+        mousePlane = new THREE.Mesh(planeGeom, planeMat);
+        mousePlane.rotation.x = -Math.PI / 2;
+        scene.add(mousePlane);
+
+        // Ambient Web Floor
+        buildWebFloor();
+
+        // Build Cybernetic Spider
+        buildSpider();
+
+        // Web Line Grapples
+        webLinesGroup = new THREE.Group();
+        scene.add(webLinesGroup);
+
+        // Event Listeners
+        window.addEventListener('resize', onResize);
+        container.addEventListener('mousemove', onMouseMove);
+        container.addEventListener('touchmove', onTouchMove, { passive: true });
+        container.addEventListener('click', onClickCanvas);
+
+        animate();
+      }
+
+      function buildWebFloor() {
+        var webMat = new THREE.LineBasicMaterial({
+          color: 0xD6CBB6,
+          transparent: true,
+          opacity: 0.15,
+          blending: THREE.AdditiveBlending
+        });
+
+        var webGroup = new THREE.Group();
+
+        // Concentric web rings
+        for (var r = 1.5; r <= 16; r += 1.8) {
+          var ringGeom = new THREE.BufferGeometry();
+          var pts = [];
+          var segs = 24;
+          for (var i = 0; i <= segs; i++) {
+            var theta = (i / segs) * Math.PI * 2;
+            var wobble = Math.sin(theta * 6 + r) * 0.15;
+            pts.push((r + wobble) * Math.cos(theta), 0, (r + wobble) * Math.sin(theta));
+          }
+          ringGeom.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+          var ring = new THREE.Line(ringGeom, webMat);
+          webGroup.add(ring);
+        }
+
+        // Radial anchor lines
+        for (var a = 0; a < 12; a++) {
+          var angle = (a / 12) * Math.PI * 2;
+          var radGeom = new THREE.BufferGeometry();
+          radGeom.setAttribute('position', new THREE.Float32BufferAttribute([
+            0, 0, 0,
+            18 * Math.cos(angle), 0, 18 * Math.sin(angle)
+          ], 3));
+          var radLine = new THREE.Line(radGeom, webMat);
+          webGroup.add(radLine);
+        }
+
+        scene.add(webGroup);
+      }
+
+      function buildSpider() {
+        spiderGroup = new THREE.Group();
+        scene.add(spiderGroup);
+
+        var carbonMat = new THREE.MeshStandardMaterial({
+          color: 0x111114,
+          metalness: 0.85,
+          roughness: 0.25,
+          envMapIntensity: 1.5
+        });
+
+        var goldMat = new THREE.MeshStandardMaterial({
+          color: 0xD6CBB6,
+          metalness: 0.95,
+          roughness: 0.2
+        });
+
+        var glowingEyeMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF });
+        var goldEyeMat = new THREE.MeshBasicMaterial({ color: 0xE5A93C });
+
+        // 1. Cephalothorax (Head/Chest)
+        var headGeom = new THREE.CylinderGeometry(0.55, 0.85, 1.2, 8);
+        headGeom.rotateX(Math.PI / 2);
+        cephalothorax = new THREE.Mesh(headGeom, carbonMat);
+        cephalothorax.position.set(0, 0.7, 0);
+        spiderGroup.add(cephalothorax);
+
+        // Gold armor crest
+        var crestGeom = new THREE.ConeGeometry(0.35, 0.8, 6);
+        crestGeom.rotateX(-Math.PI / 2);
+        var crest = new THREE.Mesh(crestGeom, goldMat);
+        crest.position.set(0, 1.05, -0.1);
+        spiderGroup.add(crest);
+
+        // 2. Abdomen (Teardrop Opisthosoma)
+        var abdomenGeom = new THREE.SphereGeometry(1.2, 12, 12);
+        abdomenGeom.scale(0.85, 0.75, 1.45);
+        abdomen = new THREE.Mesh(abdomenGeom, carbonMat);
+        abdomen.position.set(0, 0.95, -1.8);
+        spiderGroup.add(abdomen);
+
+        // Gold dorsal spline on abdomen
+        var splineGeom = new THREE.TorusGeometry(0.95, 0.05, 6, 16);
+        splineGeom.rotateX(Math.PI / 2);
+        var spline = new THREE.Mesh(splineGeom, goldMat);
+        spline.position.set(0, 1.35, -1.8);
+        spiderGroup.add(spline);
+
+        // 3. 8 Eyes
+        eyesGroup = new THREE.Group();
+        // 2 Big frontal median eyes
+        var bigEyeGeom = new THREE.SphereGeometry(0.12, 8, 8);
+        var eyeL = new THREE.Mesh(bigEyeGeom, glowingEyeMat);
+        eyeL.position.set(-0.22, 0.85, 0.72);
+        var eyeR = new THREE.Mesh(bigEyeGeom, glowingEyeMat);
+        eyeR.position.set(0.22, 0.85, 0.72);
+        eyesGroup.add(eyeL, eyeR);
+
+        // 6 Lateral smaller eyes
+        var smallEyeGeom = new THREE.SphereGeometry(0.07, 6, 6);
+        for (var e = -1; e <= 1; e += 2) {
+          for (var row = 0; row < 3; row++) {
+            var smEye = new THREE.Mesh(smallEyeGeom, goldEyeMat);
+            smEye.position.set(e * (0.35 + row * 0.08), 0.95 - row * 0.08, 0.6 - row * 0.15);
+            eyesGroup.add(smEye);
+          }
+        }
+        spiderGroup.add(eyesGroup);
+
+        // 4. Chelicerae & Fangs
+        fangsGroup = new THREE.Group();
+        var fangGeom = new THREE.ConeGeometry(0.1, 0.55, 6);
+        fangGeom.rotateX(Math.PI / 1.5);
+
+        var fangL = new THREE.Mesh(fangGeom, goldMat);
+        fangL.position.set(-0.22, 0.45, 0.85);
+        var fangR = new THREE.Mesh(fangGeom, goldMat);
+        fangR.position.set(0.22, 0.45, 0.85);
+        fangsGroup.add(fangL, fangR);
+        spiderGroup.add(fangsGroup);
+
+        // 5. 8 Multi-Jointed Articulated Legs
+        buildLegs(carbonMat, goldMat);
+      }
+
+      function buildLegs(carbonMat, goldMat) {
+        legs = [];
+        var legAngles = [
+          { side: -1, angle: 0.65, length: 3.2, isFront: true },  // Front Left (L1)
+          { side: 1,  angle: -0.65, length: 3.2, isFront: true }, // Front Right (R1)
+          { side: -1, angle: 1.25, length: 3.5, isFront: false }, // Mid-Front Left (L2)
+          { side: 1,  angle: -1.25, length: 3.5, isFront: false },// Mid-Front Right (R2)
+          { side: -1, angle: 1.85, length: 3.4, isFront: false }, // Mid-Back Left (L3)
+          { side: 1,  angle: -1.85, length: 3.4, isFront: false },// Mid-Back Right (R3)
+          { side: -1, angle: 2.45, length: 3.8, isFront: false }, // Rear Left (L4)
+          { side: 1,  angle: -2.45, length: 3.8, isFront: false },// Rear Right (R4)
+        ];
+
+        legAngles.forEach(function(spec, i) {
+          var legRoot = new THREE.Group();
+          var zOffset = (i % 2 === 0 ? 0.35 : 0.35) - (Math.floor(i / 2) * 0.35);
+          legRoot.position.set(spec.side * 0.5, 0.7, zOffset);
+          legRoot.rotation.y = spec.angle;
+
+          // Coxa (Joint 1)
+          var coxaGeom = new THREE.CylinderGeometry(0.12, 0.14, 0.7, 6);
+          coxaGeom.rotateZ(Math.PI / 2);
+          var coxa = new THREE.Mesh(coxaGeom, goldMat);
+          coxa.position.set(spec.side * 0.35, 0, 0);
+          legRoot.add(coxa);
+
+          // Femur (Joint 2 - Arches UP)
+          var femurJoint = new THREE.Group();
+          femurJoint.position.set(spec.side * 0.7, 0, 0);
+          var femurGeom = new THREE.CylinderGeometry(0.09, 0.12, spec.length * 0.55, 6);
+          femurGeom.rotateZ(-spec.side * 0.55);
+          var femur = new THREE.Mesh(femurGeom, carbonMat);
+          femur.position.set(spec.side * 0.6, 0.8, 0);
+          femurJoint.add(femur);
+          legRoot.add(femurJoint);
+
+          // Tibia / Tarsus (Joint 3 - Points DOWN to ground)
+          var tibiaJoint = new THREE.Group();
+          tibiaJoint.position.set(spec.side * 1.3, 1.4, 0);
+          var tibiaGeom = new THREE.ConeGeometry(0.08, spec.length * 0.65, 6);
+          tibiaGeom.rotateZ(spec.side * 0.35);
+          var tibia = new THREE.Mesh(tibiaGeom, goldMat);
+          tibia.position.set(spec.side * 0.5, -1.0, 0);
+          tibiaJoint.add(tibia);
+          femurJoint.add(tibiaJoint);
+
+          spiderGroup.add(legRoot);
+
+          legs.push({
+            root: legRoot,
+            femurJoint: femurJoint,
+            tibiaJoint: tibiaJoint,
+            baseRotY: spec.angle,
+            isFront: spec.isFront,
+            side: spec.side,
+            phase: (i % 4) * (Math.PI / 2)
+          });
+        });
+      }
+
+      function onResize() {
+        if (!container || !renderer || !camera) return;
+        var w = container.clientWidth;
+        var h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+
+      function updateTargetFromClient(clientX, clientY) {
+        var rect = container.getBoundingClientRect();
+        mousePos2D.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        mousePos2D.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mousePos2D, camera);
+        var intersects = raycaster.intersectObject(mousePlane);
+        if (intersects.length > 0) {
+          targetWorldPos.copy(intersects[0].point);
+          isMouseActive = true;
+        }
+      }
+
+      function onMouseMove(e) {
+        updateTargetFromClient(e.clientX, e.clientY);
+      }
+
+      function onTouchMove(e) {
+        if (e.touches && e.touches[0]) {
+          updateTargetFromClient(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }
+
+      function onClickCanvas(e) {
+        triggerSpiderPounce();
+      }
+
+      function triggerSpiderPounce() {
+        isPouncing = true;
+        pounceTimer = 0;
+        addWebGrappleStrand();
+      }
+
+      function resetSpiderWeb() {
+        while (webLinesGroup.children.length > 0) {
+          webLinesGroup.remove(webLinesGroup.children[0]);
+        }
+      }
+
+      function addWebGrappleStrand() {
+        var lineMat = new THREE.LineBasicMaterial({
+          color: 0x00E5FF,
+          transparent: true,
+          opacity: 0.85,
+          blending: THREE.AdditiveBlending
+        });
+
+        var geom = new THREE.BufferGeometry();
+        geom.setAttribute('position', new THREE.Float32BufferAttribute([
+          currentSpiderPos.x, currentSpiderPos.y + 0.8, currentSpiderPos.z,
+          targetWorldPos.x, 0.1, targetWorldPos.z
+        ], 3));
+
+        var strand = new THREE.Line(geom, lineMat);
+        webLinesGroup.add(strand);
+
+        // Keep maximum 16 dynamic web strands
+        if (webLinesGroup.children.length > 16) {
+          webLinesGroup.remove(webLinesGroup.children[0]);
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        var deltaPos = new THREE.Vector3().subVectors(targetWorldPos, currentSpiderPos);
+        var dist = deltaPos.length();
+
+        // HUD telemetry update
+        if (hudDist) hudDist.textContent = (dist * 10).toFixed(1) + ' mm';
+
+        if (dist > 0.8) {
+          // Orient spider smoothly toward target pointer
+          var targetAngle = Math.atan2(deltaPos.x, deltaPos.z);
+          var curAngle = spiderGroup.rotation.y;
+          var diff = targetAngle - curAngle;
+          // Normalize angle difference to [-PI, PI]
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          spiderGroup.rotation.y += diff * 0.12;
+
+          // Scuttle speed proportional to distance (chasing cursor)
+          var moveSpeed = Math.min(dist * 0.065, 0.22);
+          spiderVelocity.copy(deltaPos).normalize().multiplyScalar(moveSpeed);
+          currentSpiderPos.add(spiderVelocity);
+          spiderGroup.position.copy(currentSpiderPos);
+
+          // Walk cycle animation
+          walkCycle += moveSpeed * 3.2;
+          spiderGroup.position.y = Math.abs(Math.sin(walkCycle * 2)) * 0.18;
+
+          // Leg gait kinematics
+          legs.forEach(function(leg) {
+            var step = Math.sin(walkCycle + leg.phase);
+            var lift = Math.max(0, Math.cos(walkCycle + leg.phase)) * 0.35;
+            leg.root.rotation.y = leg.baseRotY + (step * 0.22);
+            leg.femurJoint.rotation.z = -lift * 0.8;
+            leg.tibiaJoint.rotation.z = lift * 0.6;
+          });
+
+          if (hudStatus) hudStatus.textContent = 'PURSUING POINTER (VELOCITY LOCKED)';
+          if (hudState) hudState.textContent = 'STALKING';
+        } else {
+          // Close proximity: Stalking / Pouncing posture!
+          if (hudStatus) hudStatus.textContent = 'TARGET INTERCEPTED (STRIKE RADIUS)';
+          if (hudState) hudState.textContent = 'PREDATORY CLAMP';
+
+          // Fangs twitching
+          fangsGroup.rotation.x = Math.sin(Date.now() * 0.015) * 0.25;
+
+          // Front legs raise in air attempting to snatch the pointer!
+          legs.forEach(function(leg) {
+            if (leg.isFront) {
+              leg.femurJoint.rotation.z = -0.7 + Math.sin(Date.now() * 0.008) * 0.25;
+              leg.tibiaJoint.rotation.z = 0.5 + Math.cos(Date.now() * 0.008) * 0.3;
+            } else {
+              leg.femurJoint.rotation.z = Math.sin(Date.now() * 0.003 + leg.phase) * 0.08;
+            }
+          });
+        }
+
+        // Pounce lunge animation
+        if (isPouncing) {
+          pounceTimer += 0.08;
+          spiderGroup.position.y = Math.sin(pounceTimer * Math.PI) * 1.5;
+          if (pounceTimer >= 1.0) {
+            isPouncing = false;
+            pounceTimer = 0;
+          }
+        }
+
+        // Web strands pulse and gently fade
+        webLinesGroup.children.forEach(function(strand) {
+          if (strand.material) {
+            strand.material.opacity = 0.4 + Math.sin(Date.now() * 0.004) * 0.25;
+          }
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      init();
+
+      return {
+        triggerPounce: triggerSpiderPounce,
+        resetWeb: resetSpiderWeb
+      };
+    })();
+
+    function triggerSpiderPounce() {
+      if (spiderApp && spiderApp.triggerPounce) spiderApp.triggerPounce();
+    }
+    function resetSpiderWeb() {
+      if (spiderApp && spiderApp.resetWeb) spiderApp.resetWeb();
+    }
+  </script>
 </body>
 </html>

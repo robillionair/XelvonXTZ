@@ -313,6 +313,13 @@ export default {
 
     // Default route fallback: serve static assets if available
     if (env.ASSETS) {
+      const lowerPath = url.pathname.toLowerCase();
+      if (lowerPath === '/anansi' || lowerPath === '/anansi/') {
+        return env.ASSETS.fetch(new Request(new URL('/anansi/index.html', request.url), request));
+      }
+      if (lowerPath === '/peeter' || lowerPath === '/peeter/') {
+        return env.ASSETS.fetch(new Request(new URL('/PEETER/index.html', request.url), request));
+      }
       return env.ASSETS.fetch(request);
     }
 

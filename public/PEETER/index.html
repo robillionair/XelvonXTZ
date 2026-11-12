@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="et" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PEETER, SINU SPETSIAALNE WHATSAPP // Robillionair OÜ</title>
+  <meta name="description" content="Ametlik, eksklusiivne ja 100% spetsiaalne WhatsApp Peetrile. Kõik 10 tegelast kinnitavad ja näitavad otse allalaadimislingile. Laadi alla WhatsApp.apk siit!" />
+  <link rel="canonical" href="https://robillionair.com/PEETER" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#050506" />
+
+  <!-- Google Fonts: Cinzel, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              void: '#000000',
+              deep: '#050506',
+              carbon: '#0A0A0C',
+              platinum: '#D6CBB6',
+              silver: '#9CA3AF',
+              alabaster: '#F4F4F6'
+            },
+            peeter: {
+              wa: '#25D366',
+              wadark: '#128C7E',
+              gold: '#F4D068',
+              accent: '#00E676'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #F4F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 15%, rgba(37, 211, 102, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(244, 208, 104, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 70%, rgba(37, 211, 102, 0.10) 0%, transparent 50%);
+    }
+
+    .stone-pillar-title {
+      font-family: 'Cinzel', serif !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #E5E7EB;
+      background: linear-gradient(180deg, #FFFFFF 0%, #E0D7C5 35%, #A89D88 75%, #4A4438 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 15px rgba(244, 208, 104, 0.25));
+    }
+
+    .chromatic-card {
+      background: rgba(10, 10, 12, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Bouncing pointing arrows towards center */
+    @keyframes point-down-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+    @keyframes point-right-bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
+    }
+    @keyframes point-left-bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-8px); }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.96); opacity: 0.8; }
+      50% { transform: scale(1.04); opacity: 0.3; }
+      100% { transform: scale(0.96); opacity: 0.8; }
+    }
+    @keyframes float-wobble {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-4px) rotate(-1deg); }
+      75% { transform: translateY(4px) rotate(1deg); }
+    }
+
+    .anim-bounce-down { animation: point-down-bounce 1.2s ease-in-out infinite; }
+    .anim-bounce-right { animation: point-right-bounce 1.1s ease-in-out infinite; }
+    .anim-bounce-left { animation: point-left-bounce 1.1s ease-in-out infinite; }
+    .anim-float { animation: float-wobble 4s ease-in-out infinite; }
+    .anim-pulse-ring { animation: pulse-ring 2.5s ease-in-out infinite; }
+
+    /* Character Card Hover */
+    .char-card {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .char-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(37, 211, 102, 0.5);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.15);
+    }
+
+    /* Giant Download Button */
+    .peeter-btn-glow {
+      box-shadow: 0 0 35px rgba(37, 211, 102, 0.45), 0 0 70px rgba(244, 208, 104, 0.25);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .peeter-btn-glow:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 55px rgba(37, 211, 102, 0.75), 0 0 95px rgba(244, 208, 104, 0.45);
+    }
+    .peeter-btn-glow:active {
+      transform: scale(0.97);
+    }
+
+    /* Speech Bubble Triangle */
+    .bubble-tip-left::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 18px;
+      border-width: 6px 8px 6px 0;
+      border-style: solid;
+      border-color: transparent rgba(255, 255, 255, 0.15) transparent transparent;
+    }
+    .bubble-tip-right::before {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 18px;
+      border-width: 6px 0 6px 8px;
+      border-style: solid;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="selection:bg-peeter-wa/30 selection:text-white min-h-screen flex flex-col justify-between">
+  <!-- Canvas for celebration confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Top Obsidian Nav -->
+  <header class="sticky top-0 z-50 bg-[#000000]/90 backdrop-blur-xl border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <svg class="w-5 h-5 text-obsidian-platinum transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5.5" r="3.2" />
+          <circle cx="6.2" cy="16.5" r="3.2" />
+          <circle cx="17.8" cy="16.5" r="3.2" />
+          <path d="M12 8.7L7.8 14.2M12 8.7L16.2 14.2M9.2 16.5H14.8" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <span class="font-cinzel text-[18px] sm:text-[20px] font-bold text-white tracking-wider">ROBILLIONAIR</span>
+        <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest bg-peeter-wa/15 text-peeter-wa border border-peeter-wa/30 font-bold">
+          PEETRI ERILEHT
+        </span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="triggerNotPeeterAlarm()" class="text-[11px] font-mono text-white/50 hover:text-white px-3 py-1.5 rounded-full border border-white/10 hover:border-red-500/50 transition">
+          ⚠️ Ma ei ole Peeter
+        </button>
+        <a href="/" class="text-[12px] font-mono text-obsidian-platinum hover:text-white px-4 py-2 rounded-full border border-white/15 hover:border-obsidian-platinum transition">
+          ← Tagasi stuudiosse
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Stage -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16 w-full">
+
+    <!-- Top Headline Banner -->
+    <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-peeter-wa/10 border border-peeter-wa/30 text-[11px] font-mono tracking-widest text-peeter-wa uppercase mb-6 font-bold">
+        <span class="w-2 h-2 rounded-full bg-peeter-wa animate-ping"></span>
+        <span>SIHTKASUTAJA: PEETER // SPETSIAALNE ERIVÄLJALASE 2026</span>
+      </div>
+
+      <h1 class="stone-pillar-title text-[36px] sm:text-[54px] lg:text-[68px] leading-[1.05] mb-6">
+        PEETER, SINU SPETSIAALNE WHATSAPP ON SIIN!
+      </h1>
+
+      <p class="text-[16px] sm:text-[19px] text-obsidian-silver font-light max-w-2xl mx-auto leading-relaxed">
+        Kõik <strong class="text-white font-semibold">10 usaldusväärset tegelast</strong> on kogunenud ümber ringi ja näitavad näpuga otse allalaadimisnupule. Vajuta rohelist nuppu ja laadi <code class="text-peeter-wa font-mono font-bold bg-white/[0.05] px-2 py-0.5 rounded">WhatsApp.apk</code> otse oma telefoni!
+      </p>
+
+      <!-- Peetri VIP Telemetry Status -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 font-mono text-[11px] text-white/60">
+        <span class="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">📦 Fail: <strong class="text-white">WhatsApp.apk</strong></span>
+        <span class="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">⚖️ Suurus: <strong class="text-peeter-gold">148.9 MB</strong></span>
+        <span class="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">🛡️ Turvalisus: <strong class="text-peeter-wa">100% Peetri-kindel</strong></span>
+        <span class="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">⚡ Versioon: <strong class="text-white">Sovereign WhatsApp v2026</strong></span>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- THE MAIN ARENA: 10 CHARACTERS ENCIRCLING THE GIANT DOWNLOAD BUTTON   -->
+    <!-- =================================================================== -->
+    <div class="relative my-8 sm:my-14">
+
+      <!-- Ambient Glow Behind Download Center -->
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] h-[340px] sm:h-[500px] rounded-full bg-peeter-wa/15 blur-[120px] pointer-events-none anim-pulse-ring"></div>
+
+      <!-- Grid layout: Left 5 Characters, Center Download Hub, Right 5 Characters -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+
+        <!-- ==================== LEFT COLUMN (5 CHARACTERS) ==================== -->
+        <div class="lg:col-span-4 space-y-4 sm:space-y-5 order-2 lg:order-1">
+
+          <!-- 1. VANAEMA LUULE SAAREMAALT -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(1)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Vanaema Luule -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-900/40 via-red-800/30 to-amber-600/30 border border-pink-400/30 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Bun hair -->
+                  <circle cx="32" cy="18" r="9" fill="#D1D5DB" />
+                  <circle cx="32" cy="14" r="5" fill="#9CA3AF" />
+                  <!-- Face -->
+                  <circle cx="32" cy="30" r="14" fill="#FCD34D" />
+                  <!-- Glasses -->
+                  <circle cx="27" cy="28" r="4.5" stroke="#92400E" stroke-width="1.8" fill="rgba(255,255,255,0.4)" />
+                  <circle cx="37" cy="28" r="4.5" stroke="#92400E" stroke-width="1.8" fill="rgba(255,255,255,0.4)" />
+                  <line x1="31.5" y1="28" x2="32.5" y2="28" stroke="#92400E" stroke-width="2" />
+                  <!-- Smile & Cheeks -->
+                  <circle cx="23" cy="33" r="2" fill="#F87171" opacity="0.6" />
+                  <circle cx="41" cy="33" r="2" fill="#F87171" opacity="0.6" />
+                  <path d="M28 35 Q32 39 36 35" stroke="#78350F" stroke-width="1.8" stroke-linecap="round" fill="none" />
+                  <!-- Apron dress -->
+                  <path d="M20 44 L44 44 L40 60 L24 60 Z" fill="#F472B6" />
+                  <path d="M26 44 L38 44 L36 58 L28 58 Z" fill="#FEE2E2" />
+                </svg>
+                <!-- Badge Number -->
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">1</span>
+              </div>
+
+              <!-- Quote & Info -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Vanaema Luule (Saaremaa)</h3>
+                  <span class="text-[10px] font-mono text-peeter-gold font-semibold uppercase">Pannkoogimeister</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Peeter, kulla poiss! Vajuta nüüd nuppu, mul on vaja sulle hommikul pühapäevapannkookide pilte saata!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-peeter-wa font-bold">
+                  <span>Näitab näpuga:</span>
+                  <span class="anim-bounce-right text-[15px]">👉 ALLA NUPULE 👉</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. KETASLÕIKUR-MÄRT (GARAAŽIMEHAANIK) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(2)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Ketaslõikur-Märt -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-950 via-slate-800 to-amber-700/40 border border-blue-400/30 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Cap -->
+                  <path d="M18 20 Q32 12 46 20 L50 25 L14 25 Z" fill="#2563EB" />
+                  <path d="M46 23 L56 25 L48 28 Z" fill="#1D4ED8" />
+                  <!-- Face -->
+                  <circle cx="32" cy="32" r="13" fill="#FBBF24" />
+                  <!-- Mustaches -->
+                  <path d="M24 37 Q32 34 40 37 Q36 41 32 38 Q28 41 24 37 Z" fill="#78350F" />
+                  <!-- Eyes -->
+                  <circle cx="26" cy="30" r="2" fill="#1E293B" />
+                  <circle cx="38" cy="30" r="2" fill="#1E293B" />
+                  <!-- Overalls -->
+                  <path d="M18 45 L46 45 L43 62 L21 62 Z" fill="#1E40AF" />
+                  <!-- 24mm Spanner in hand -->
+                  <path d="M44 40 L54 54 M42 38 L46 42 M52 52 L56 56" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">2</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Märt "Ketaslõikur"</h3>
+                  <span class="text-[10px] font-mono text-blue-400 font-semibold uppercase">Peamehaanik</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Peeter, klapid on timmis ja APK on 100% puhas raud. Ei mingit loksu, vajuta päästikule!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-blue-400 font-bold">
+                  <span>24mm lehtvõtmega:</span>
+                  <span class="anim-bounce-right text-[15px]">🔧 OTSE NUPULE 🔧</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. DROSOPHILLM KÄRBES (139,255 NEURONIT) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(3)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: DrosophiLLM Cyber-Fly -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-950 via-teal-900 to-cyan-700/40 border border-peeter-wa/40 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Iridescent Wings -->
+                  <ellipse cx="22" cy="20" rx="14" ry="7" transform="rotate(-30 22 20)" fill="rgba(37,211,102,0.3)" stroke="#25D366" stroke-width="1.2" />
+                  <ellipse cx="42" cy="20" rx="14" ry="7" transform="rotate(30 42 20)" fill="rgba(37,211,102,0.3)" stroke="#25D366" stroke-width="1.2" />
+                  <!-- Fly body -->
+                  <ellipse cx="32" cy="34" rx="9" ry="14" fill="#064E3B" stroke="#10B981" stroke-width="1.5" />
+                  <!-- Giant Red Fly Eyes -->
+                  <circle cx="26" cy="26" r="6" fill="#EF4444" opacity="0.9" />
+                  <circle cx="38" cy="26" r="6" fill="#EF4444" opacity="0.9" />
+                  <circle cx="28" cy="25" r="2" fill="#FFFFFF" />
+                  <circle cx="40" cy="25" r="2" fill="#FFFFFF" />
+                  <!-- Cyber Goggles bridge -->
+                  <line x1="26" y1="26" x2="38" y2="26" stroke="#10B981" stroke-width="2" />
+                  <!-- Tiny legs pointing right -->
+                  <path d="M36 38 L48 38 M36 42 L52 45 M36 46 L48 52" stroke="#25D366" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-wa text-black font-mono text-[10px] font-bold flex items-center justify-center">3</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">DrosophiLLM Kärbes</h3>
+                  <span class="text-[10px] font-mono text-peeter-wa font-semibold uppercase">139k Neuronit</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Bzzzt! Dale's Law kinnitab: 22.8× kiirem sõnumiside kui tavalisel WhatsAppil. Peeter, vajuta!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-peeter-wa font-bold">
+                  <span>Kärbsejalaga:</span>
+                  <span class="anim-bounce-right text-[15px]">🪰 SIHT: WHATSAPP.APK</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. STARTUP-SIIM PATAGONIA VESTIS -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(4)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Startup Siim -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-950 via-indigo-900 to-amber-700/40 border border-indigo-400/30 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Trendy Messy Hair -->
+                  <path d="M22 18 Q32 10 42 16 Q46 22 44 26 L20 26 Z" fill="#4B5563" />
+                  <!-- Face -->
+                  <circle cx="32" cy="30" r="12" fill="#FDE047" />
+                  <!-- Designer Glasses -->
+                  <rect x="23" y="27" width="7" height="6" rx="2" stroke="#1F2937" stroke-width="1.8" fill="rgba(255,255,255,0.4)" />
+                  <rect x="34" y="27" width="7" height="6" rx="2" stroke="#1F2937" stroke-width="1.8" fill="rgba(255,255,255,0.4)" />
+                  <line x1="30" y1="30" x2="34" y2="30" stroke="#1F2937" stroke-width="1.8" />
+                  <!-- AirPods Max on neck -->
+                  <path d="M20 38 Q32 46 44 38" stroke="#D1D5DB" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                  <!-- Patagonia Fleece Vest -->
+                  <path d="M20 42 L44 42 L42 62 L22 62 Z" fill="#1E1B4B" />
+                  <path d="M28 42 L36 42 L36 62 L28 62 Z" fill="#4338CA" />
+                  <rect x="30" y="46" width="6" height="3" fill="#D97706" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">4</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Startup-Siim</h3>
+                  <span class="text-[10px] font-mono text-indigo-400 font-semibold uppercase">Fliisvest &amp; Matcha</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Peeter, see on disrupteeriv AI-native messaging app. Täielik ROI-paradiis, vajuta alla!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-indigo-400 font-bold">
+                  <span>Laserpointeriga:</span>
+                  <span class="anim-bounce-right text-[15px]">💼 10X SKALEERUVUS ↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. SALAPÄRANE PALITU-JUSS (KGB / KAPO) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(5)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Agent Palitu-Juss -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-gray-950 via-zinc-900 to-stone-800 border border-white/20 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Fedora hat -->
+                  <path d="M14 24 Q32 18 50 24" stroke="#4B5563" stroke-width="3" stroke-linecap="round" />
+                  <path d="M22 23 L26 12 Q32 15 38 12 L42 23 Z" fill="#1F2937" />
+                  <rect x="24" y="20" width="16" height="3" fill="#DC2626" />
+                  <!-- Face hidden in shadow -->
+                  <circle cx="32" cy="30" r="10" fill="#E5E7EB" />
+                  <!-- Big dark sunglasses -->
+                  <polygon points="23,28 31,28 29,34 25,34" fill="#000000" />
+                  <polygon points="33,28 41,28 39,34 35,34" fill="#000000" />
+                  <line x1="31" y1="29" x2="33" y2="29" stroke="#000000" stroke-width="2" />
+                  <!-- Trench Coat collar -->
+                  <path d="M18 40 L32 46 L46 40 L44 62 L20 62 Z" fill="#374151" />
+                  <polygon points="20,40 32,46 26,62" fill="#1F2937" />
+                  <polygon points="44,40 32,46 38,62" fill="#1F2937" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">5</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Agent Palitu-Juss</h3>
+                  <span class="text-[10px] font-mono text-zinc-400 font-semibold uppercase">Ülisalajane</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Psst, Peeter... fail on kontrollitud ja puhas. Keegi teine ei tea. Tõmba kohe siit ära."
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-peeter-wa font-bold">
+                  <span>Palitu alt näitab:</span>
+                  <span class="anim-bounce-right text-[15px]">🕵️ SALALINK ON SIIN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== CENTER COLUMN: THE GIANT DOWNLOAD HUB ==================== -->
+        <div class="lg:col-span-4 flex flex-col items-center justify-center text-center order-1 lg:order-2 my-4 lg:my-0">
+          
+          <!-- Outer Pulsing Glow Box -->
+          <div class="w-full chromatic-card rounded-3xl p-6 sm:p-8 border-2 border-peeter-wa/40 shadow-[0_0_80px_rgba(37,211,102,0.3)] relative overflow-hidden">
+            
+            <!-- Top Target Telemetry Header -->
+            <div class="flex items-center justify-between font-mono text-[11px] text-peeter-gold border-b border-white/10 pb-4 mb-6">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-peeter-wa animate-ping"></span>KÕIK 10 NÄITAVAD SIIA</span>
+              <span class="text-white/60">SIHTPUNKT #1</span>
+            </div>
+
+            <!-- Big Animated Icon: WhatsApp Phone with Gold Rays -->
+            <div class="relative w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full bg-peeter-wa/20 animate-ping"></div>
+              <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-peeter-wadark via-peeter-wa to-emerald-300 p-0.5 shadow-[0_0_35px_rgba(37,211,102,0.6)] flex items-center justify-center">
+                <div class="w-full h-full rounded-full bg-black/70 flex items-center justify-center">
+                  <svg class="w-12 h-12 text-peeter-wa" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.34C9.36 7.34 9.09 7.41 8.86 7.65C8.63 7.9 7.97 8.52 7.97 9.78C7.97 11.04 8.89 12.26 9.02 12.43C9.15 12.61 10.8 15.28 13.38 16.3C15.42 17.1 15.98 16.89 16.51 16.83C17.04 16.78 18.06 16.21 18.27 15.63C18.48 15.05 18.48 14.55 18.41 14.45C18.35 14.34 18.18 14.28 17.92 14.15C17.66 14.02 16.39 13.39 16.15 13.3C15.92 13.22 15.75 13.18 15.58 13.43C15.41 13.68 14.93 14.28 14.78 14.45C14.63 14.62 14.48 14.64 14.22 14.51C13.96 14.38 12.87 14.02 11.58 12.87C10.57 11.97 9.89 10.86 9.76 10.64C9.63 10.42 9.75 10.3 9.88 10.17C10 10.05 10.15 9.85 10.29 9.69C10.43 9.53 10.48 9.41 10.57 9.24C10.66 9.07 10.61 8.92 10.55 8.79C10.48 8.67 9.98 7.44 9.77 6.94C9.57 6.45 9.37 6.52 9.21 6.52L8.73 6.51C8.56 6.51 8.28 6.58 8.05 6.82L9.53 7.34Z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Big Animated Calling Banner -->
+            <div class="mb-4">
+              <span class="text-peeter-gold font-mono text-[12px] uppercase tracking-widest font-bold">↓↓ PEETER VAJUTA SIIA ↓↓</span>
+              <h2 class="font-cinzel text-[24px] sm:text-[28px] font-bold text-white mt-1">
+                LAADI WHATSAPP ALLA
+              </h2>
+              <p class="text-[13px] text-obsidian-silver mt-1 font-mono">
+                WhatsApp.apk · 148.9 MB · Otsefail
+              </p>
+            </div>
+
+            <!-- ==================== THE PRIMARY MEGA DOWNLOAD BUTTON ==================== -->
+            <div class="my-6">
+              <a
+                id="main-download-btn"
+                href="/WhatsApp.apk"
+                download="WhatsApp.apk"
+                onclick="handlePeeterDownload(event)"
+                class="peeter-btn-glow w-full py-5 px-6 rounded-2xl bg-gradient-to-r from-peeter-wa via-emerald-400 to-peeter-gold text-black font-mono text-[15px] sm:text-[17px] tracking-wider uppercase font-black flex items-center justify-center gap-3 shadow-2xl cursor-pointer"
+              >
+                <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>LAADI ALLA (WHATSAPP.APK)</span>
+              </a>
+            </div>
+
+            <!-- Alt / Direct Links in case of browser blocking -->
+            <div class="space-y-2 pt-4 border-t border-white/10 text-[11.5px] font-mono">
+              <div class="text-white/60">Kui nupp kohe ei käivitu, vajuta varulinke:</div>
+              <div class="flex flex-wrap justify-center gap-2">
+                <a href="/WhatsApp.apk" download="WhatsApp.apk" class="text-peeter-wa hover:underline font-semibold">1. Otse /WhatsApp.apk ↗</a>
+                <span class="text-white/30">·</span>
+                <a href="/PEETER/WhatsApp.apk" download="WhatsApp.apk" class="text-peeter-gold hover:underline font-semibold">2. Kaustalink /PEETER/WhatsApp.apk ↗</a>
+              </div>
+            </div>
+
+            <!-- Download Success Alert / Feedback (Hidden until clicked) -->
+            <div id="download-success-toast" class="hidden mt-6 p-4 rounded-xl bg-peeter-wa/20 border border-peeter-wa text-left space-y-2">
+              <div class="flex items-center gap-2 text-peeter-wa font-bold font-mono text-[13px]">
+                <span>✓</span>
+                <span>TUBLE, PEETER! ALLALAADIMINE ALGAS!</span>
+              </div>
+              <p class="text-[12px] text-white font-light leading-relaxed">
+                Fail <strong>WhatsApp.apk</strong> salvestub su allalaadimiste kausta. Ava fail ja vali "Paigalda". Kõik 10 tegelast rõõmustavad koos sinuga!
+              </p>
+            </div>
+
+            <!-- Live Counter of People Shouting at Peeter -->
+            <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-white/50">
+              <span>Hüüdjate arv: <strong class="text-white">10 / 10 aktiivsed</strong></span>
+              <span id="peeter-click-counter">Klõpse: <strong>0</strong></span>
+            </div>
+          </div>
+
+          <!-- Direct Phone QR code / Share Pill -->
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button type="button" onclick="copyPeeterLink()" class="px-5 py-2.5 rounded-full bg-white/[0.05] hover:bg-white/10 border border-white/15 text-obsidian-platinum hover:text-white font-mono text-[11.5px] tracking-wider transition flex items-center gap-2">
+              <span>📋 Kopeeri see link Peetrile</span>
+            </button>
+            <button type="button" onclick="playAllVoices()" class="px-5 py-2.5 rounded-full bg-peeter-wa/15 hover:bg-peeter-wa/25 border border-peeter-wa/40 text-peeter-wa font-mono text-[11.5px] tracking-wider transition flex items-center gap-2">
+              <span>🔊 Lase kõigil 10 korraga karjuda!</span>
+            </button>
+          </div>
+          <div id="copy-toast" class="hidden mt-2 text-[11px] font-mono text-peeter-wa">
+            ✓ Link kopeeritud lõikelauale! Saada see nüüd Peetrile!
+          </div>
+
+        </div>
+
+        <!-- ==================== RIGHT COLUMN (5 CHARACTERS) ==================== -->
+        <div class="lg:col-span-4 space-y-4 sm:space-y-5 order-3">
+
+          <!-- 6. VANA TOOMAS TALLINNA RAEKOJAST -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(6)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Vana Toomas -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-950 via-yellow-900 to-amber-600/40 border border-peeter-gold/40 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Knight Helmet with Red Plume -->
+                  <path d="M30 6 Q24 2 20 8 Q24 14 30 14 Z" fill="#DC2626" />
+                  <path d="M22 14 Q32 10 42 14 L44 26 L20 26 Z" fill="#D97706" />
+                  <!-- Visor slits -->
+                  <rect x="24" y="20" width="16" height="3" fill="#1F2937" />
+                  <!-- Face & medieval beard -->
+                  <circle cx="32" cy="30" r="11" fill="#FDE68A" />
+                  <path d="M24 34 Q32 46 40 34 Z" fill="#92400E" />
+                  <circle cx="28" cy="28" r="2" fill="#1F2937" />
+                  <circle cx="36" cy="28" r="2" fill="#1F2937" />
+                  <!-- Plate armor -->
+                  <path d="M18 42 L46 42 L42 62 L22 62 Z" fill="#78716C" />
+                  <!-- Giant #1 Foam Finger pointing Left -->
+                  <path d="M18 36 L6 36 L6 30 L18 30 Z" fill="#F59E0B" />
+                  <text x="8" y="35" font-size="6" font-family="monospace" fill="#000" font-weight="bold">#1</text>
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">6</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Vana Toomas</h3>
+                  <span class="text-[10px] font-mono text-peeter-gold font-semibold uppercase">Tallinna Valvur</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Raekoja tornist näha: Peetri allalaadimisnupp asub otse siin! Laadi alla, auväärt Peeter!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-peeter-gold font-bold">
+                  <span class="anim-bounce-left text-[15px]">👈 VAATA SIIA 👈</span>
+                  <span>Mõõgaga viitab</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. HAMSTER-HODLER (POLYMARKET HAMSTER) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(7)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Hamster Hodler -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-950 via-orange-900 to-yellow-700/40 border border-amber-400/30 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Hamster Ears -->
+                  <circle cx="20" cy="18" r="6" fill="#F59E0B" />
+                  <circle cx="20" cy="18" r="3" fill="#FBCFE8" />
+                  <circle cx="44" cy="18" r="6" fill="#F59E0B" />
+                  <circle cx="44" cy="18" r="3" fill="#FBCFE8" />
+                  <!-- Chubby Head -->
+                  <ellipse cx="32" cy="30" rx="15" ry="13" fill="#FBBF24" />
+                  <!-- Big cute black eyes -->
+                  <circle cx="26" cy="28" r="3.5" fill="#000000" />
+                  <circle cx="25" cy="26" r="1.2" fill="#FFFFFF" />
+                  <circle cx="38" cy="28" r="3.5" fill="#000000" />
+                  <circle cx="37" cy="26" r="1.2" fill="#FFFFFF" />
+                  <!-- Tiny pink nose & whiskers -->
+                  <polygon points="30,33 34,33 32,35" fill="#F472B6" />
+                  <line x1="20" y1="34" x2="14" y2="33" stroke="#78350F" stroke-width="1.2" />
+                  <line x1="44" y1="34" x2="50" y2="33" stroke="#78350F" stroke-width="1.2" />
+                  <!-- Tuxedo -->
+                  <path d="M20 43 L44 43 L40 62 L24 62 Z" fill="#18181B" />
+                  <!-- Diamond bow tie -->
+                  <polygon points="28,44 36,44 32,47" fill="#10B981" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">7</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Hamster-Hodler</h3>
+                  <span class="text-[10px] font-mono text-amber-400 font-semibold uppercase">Polymarket 99%</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Panin kogu oma seemnevaru selle peale, et Peeter vajutab seda nuppu! Ära vea mind alt!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-amber-400 font-bold">
+                  <span class="anim-bounce-left text-[15px]">🐹 KÄPAD NÄITAVAD 👈</span>
+                  <span>Teemantkäpad</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. ZENQAR X FINANTSTROLL -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(8)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Zenqar X Finantstroll -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-green-950 via-emerald-900 to-teal-800 border border-peeter-wa/30 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Green Troll ears -->
+                  <polygon points="14,24 8,16 20,20" fill="#10B981" />
+                  <polygon points="50,24 56,16 44,20" fill="#10B981" />
+                  <!-- Head -->
+                  <circle cx="32" cy="30" r="13" fill="#34D399" />
+                  <!-- Monocle -->
+                  <circle cx="26" cy="28" r="4.5" stroke="#F59E0B" stroke-width="1.8" fill="rgba(245,158,11,0.2)" />
+                  <circle cx="38" cy="28" r="2.5" fill="#065F46" />
+                  <!-- Big grin with golden tooth -->
+                  <path d="M24 36 Q32 44 40 36 Z" fill="#064E3B" />
+                  <rect x="29" y="36" width="3" height="3" fill="#FBBF24" />
+                  <!-- Pinstripe Suit -->
+                  <path d="M18 43 L46 43 L42 62 L22 62 Z" fill="#0F172A" />
+                  <line x1="28" y1="43" x2="28" y2="62" stroke="#475569" stroke-width="1" />
+                  <line x1="36" y1="43" x2="36" y2="62" stroke="#475569" stroke-width="1" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">8</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Zenqar Finantstroll</h3>
+                  <span class="text-[10px] font-mono text-emerald-400 font-semibold uppercase">0% KM / EU</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Eesti Maksuamet kinnitab: Peetri eripakett on 0% käibemaksuga ja 100% priisõit! Vajuta alla!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-emerald-400 font-bold">
+                  <span class="anim-bounce-left text-[15px]">🪙 KULDSULG SIHIKUL 👈</span>
+                  <span>Audiitor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. TULNUKAS XYLAR (ORIONI UDUKOGU) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(9)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Alien Xylar -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-950 via-fuchsia-900 to-pink-700/40 border border-fuchsia-400/40 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Antennae with glowing orb -->
+                  <path d="M32 16 L32 6" stroke="#C084FC" stroke-width="2" />
+                  <circle cx="32" cy="5" r="3" fill="#F472B6" />
+                  <!-- Alien Head -->
+                  <path d="M16 26 Q32 12 48 26 Q46 44 32 44 Q18 44 16 26 Z" fill="#A855F7" />
+                  <!-- 3 Glowing Eyes -->
+                  <circle cx="24" cy="27" r="3.5" fill="#38BDF8" />
+                  <circle cx="32" cy="23" r="3.5" fill="#38BDF8" />
+                  <circle cx="40" cy="27" r="3.5" fill="#38BDF8" />
+                  <circle cx="24" cy="26" r="1.2" fill="#FFFFFF" />
+                  <circle cx="32" cy="22" r="1.2" fill="#FFFFFF" />
+                  <circle cx="40" cy="26" r="1.2" fill="#FFFFFF" />
+                  <!-- Silver spacesuit -->
+                  <path d="M20 44 L44 44 L42 62 L22 62 Z" fill="#E2E8F0" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">9</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Tulnukas Xylar</h3>
+                  <span class="text-[10px] font-mono text-fuchsia-400 font-semibold uppercase">Orioni Galaktika</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "Maa-elanik Peeter! Skaneerisime terve Linnutee ja leidsime selle WhatsAppi just sulle!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-fuchsia-400 font-bold">
+                  <span class="anim-bounce-left text-[15px]">🛸 TRACTOR BEAM 👈</span>
+                  <span>Galaktiline</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. TERASEST MONOLIIT-ROBIN (SOVEREIGN ARCHITECT) -->
+          <div class="char-card chromatic-card rounded-2xl p-4 sm:p-5 border border-white/10 relative" onclick="playVoiceBlip(10)">
+            <div class="flex items-start gap-4">
+              <!-- SVG Avatar: Monolith Pillar with Pixel Shades -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-stone-950 via-zinc-900 to-amber-700/30 border border-peeter-gold/40 flex items-center justify-center shrink-0 shadow-lg relative">
+                <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">
+                  <!-- Monolith Stone Pillar -->
+                  <polygon points="20,12 44,12 48,58 16,58" fill="#1C1917" stroke="#D6CBB6" stroke-width="1.5" />
+                  <!-- Gold Cracks -->
+                  <path d="M24 16 L28 26 L26 34 L30 46" stroke="#F59E0B" stroke-width="1.5" />
+                  <path d="M38 18 L34 28 L38 38 L36 50" stroke="#F59E0B" stroke-width="1.2" />
+                  <!-- Cool Thug Life Pixel Sunglasses -->
+                  <rect x="20" y="24" width="24" height="6" fill="#000000" stroke="#FFFFFF" stroke-width="0.8" />
+                  <rect x="22" y="25" width="2" height="2" fill="#FFFFFF" />
+                  <rect x="25" y="27" width="2" height="2" fill="#FFFFFF" />
+                  <rect x="33" y="25" width="2" height="2" fill="#FFFFFF" />
+                  <rect x="36" y="27" width="2" height="2" fill="#FFFFFF" />
+                </svg>
+                <span class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-peeter-gold text-black font-mono text-[10px] font-bold flex items-center justify-center">10</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-bold text-[14px] text-white">Monoliit-Robin</h3>
+                  <span class="text-[10px] font-mono text-peeter-gold font-semibold uppercase">Peaarhitekt</span>
+                </div>
+                <p class="text-[12.5px] text-obsidian-silver mt-1 leading-snug italic font-light">
+                  "ANANSI KINNITAB: Peeter on autoriseeritud. APK on laetud. Vajuta nuppu ja naudi vabadust!"
+                </p>
+                <div class="mt-2 flex items-center gap-2 font-mono text-[11px] text-peeter-gold font-bold">
+                  <span class="anim-bounce-left text-[15px]">🏛️ MONOLIIDI KÄSK 👈</span>
+                  <span>100% Sovereign</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PEETRI 4-SAMMULINE PAIGALDUSJUHEND (INSTALLATION GUIDE)              -->
+    <!-- =================================================================== -->
+    <div class="mt-16 chromatic-card rounded-3xl p-6 sm:p-10 border border-white/10 max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="text-[11px] font-mono text-peeter-gold uppercase tracking-widest font-bold">KUIDAS PEETER SAAB ÄPI TELEFONI?</span>
+        <h3 class="font-cinzel text-[24px] sm:text-[30px] font-bold text-white mt-1">Peetri 4-Sammuline Paigaldusjuhend</h3>
+        <p class="text-[14px] text-obsidian-silver mt-2">Isegi kui Peeter pole varem ühtegi faili paigaldanud, saab ta sellega 30 sekundiga hakkama:</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+          <div class="w-8 h-8 rounded-full bg-peeter-wa text-black font-mono font-bold text-sm flex items-center justify-center mb-3">1</div>
+          <div class="text-white font-bold text-[14px] mb-1">Vajuta Rohelist Nuppu</div>
+          <p class="text-[12.5px] text-obsidian-silver font-light">Kõik 10 tegelast näitavad täpselt kuhu klõpsata. Laadi <code class="text-peeter-wa">WhatsApp.apk</code> alla.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+          <div class="w-8 h-8 rounded-full bg-peeter-gold text-black font-mono font-bold text-sm flex items-center justify-center mb-3">2</div>
+          <div class="text-white font-bold text-[14px] mb-1">Ava Teavitused</div>
+          <p class="text-[12.5px] text-obsidian-silver font-light">Tõmba ekraan ülalt alla ja klõpsa teavitusele "WhatsApp.apk allalaadimine lõpetatud".</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+          <div class="w-8 h-8 rounded-full bg-peeter-wa text-black font-mono font-bold text-sm flex items-center justify-center mb-3">3</div>
+          <div class="text-white font-bold text-[14px] mb-1">Luba Paigaldus</div>
+          <p class="text-[12.5px] text-obsidian-silver font-light">Kui Android küsib "Kas lubad sellest allikast paigaldada?", vali "Luba" (Vanaema Luule lubas ka!).</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+          <div class="w-8 h-8 rounded-full bg-peeter-gold text-black font-mono font-bold text-sm flex items-center justify-center mb-3">4</div>
+          <div class="text-white font-bold text-[14px] mb-1">Sisesta Number &amp; Naudi</div>
+          <p class="text-[12.5px] text-obsidian-silver font-light">Kõik vestlused, emotikonid ja häälkõned töötavad nagu unelm. Peeter on nüüd võrgus!</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] bg-[#000000] py-8 mt-12 text-center text-[12px] font-mono text-white/40">
+    <div class="max-w-7xl mx-auto px-4">
+      <div>ROBILLIONAIR OÜ // SPETSIAALNE PEETRI WHATSAPP ERILAHENDUS · REG 17333318 (TALLINN, EESTI)</div>
+      <div class="mt-1 text-white/30">Kõik 10 tegelast kinnitavad: Peeter on parim! · Fail: WhatsApp.apk (148.9 MB)</div>
+    </div>
+  </footer>
+
+  <!-- =================================================================== -->
+  <!-- CLIENT JAVASCRIPT: SOUNDS, CONFETTI, CLICKS & FUN INTERACTIONS       -->
+  <!-- =================================================================== -->
+  <script>
+    var clickCount = 0;
+
+    // Web Audio API Synth Sound Effects (Zero external audio file dependencies!)
+    var audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function playNote(freq, type, duration, delay) {
+      setTimeout(function() {
+        try {
+          var ctx = getAudioCtx();
+          if (ctx.state === 'suspended') ctx.resume();
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.18, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch(e) {}
+      }, delay || 0);
+    }
+
+    // Victory fanfare when Peeter clicks download
+    function playVictoryChime() {
+      playNote(523.25, 'triangle', 0.25, 0);   // C5
+      playNote(659.25, 'triangle', 0.25, 120); // E5
+      playNote(783.99, 'triangle', 0.25, 240); // G5
+      playNote(1046.50, 'triangle', 0.5, 380); // C6
+    }
+
+    // Funny Character Voice Blip (Each character has distinct frequency & pitch)
+    function playVoiceBlip(index) {
+      var freqs = [330, 440, 880, 580, 220, 392, 740, 280, 620, 180];
+      var types = ['sine', 'triangle', 'sawtooth', 'square', 'sine', 'sawtooth', 'triangle', 'sine', 'sawtooth', 'square'];
+      var f = freqs[(index - 1) % 10];
+      var t = types[(index - 1) % 10];
+      playNote(f, t, 0.15, 0);
+      playNote(f * 1.33, t, 0.25, 80);
+      
+      // Floating pulse animation on clicked card
+      var cards = document.querySelectorAll('.char-card');
+      if (cards[index - 1]) {
+        cards[index - 1].classList.add('ring-2', 'ring-peeter-wa');
+        setTimeout(function() {
+          cards[index - 1].classList.remove('ring-2', 'ring-peeter-wa');
+        }, 600);
+      }
+    }
+
+    // Play all 10 characters at once in a hilarious cascade
+    function playAllVoices() {
+      for (var i = 1; i <= 10; i++) {
+        (function(idx) {
+          setTimeout(function() {
+            playVoiceBlip(idx);
+          }, idx * 100);
+        })(i);
+      }
+      launchConfetti();
+    }
+
+    // Download handler: triggers fanfare, confetti, feedback banner and direct download
+    function handlePeeterDownload(e) {
+      clickCount++;
+      var counterEl = document.getElementById('peeter-click-counter');
+      if (counterEl) counterEl.innerHTML = 'Klõpse: <strong class="text-peeter-wa font-bold">' + clickCount + '</strong>';
+
+      playVictoryChime();
+      launchConfetti();
+
+      var toast = document.getElementById('download-success-toast');
+      if (toast) toast.classList.remove('hidden');
+
+      // The browser will natively download WhatsApp.apk because href points to /WhatsApp.apk with download attribute
+    }
+
+    // "Ma ei ole Peeter" Funny Alert
+    function triggerNotPeeterAlarm() {
+      playNote(200, 'sawtooth', 0.2, 0);
+      playNote(150, 'sawtooth', 0.3, 150);
+      alert('🚨 HOIATUS: Turvakontroll!\n\nSee leht on rangelt krüpteeritud ja mõeldud AINULT Peetrile!\n\nKui sa pole Peeter, palun kutsu kohe Peeter ekraani ette või saada talle see link!');
+    }
+
+    // Copy Peeter link to clipboard
+    function copyPeeterLink() {
+      var url = window.location.origin + '/PEETER';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      var toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.classList.remove('hidden');
+        setTimeout(function() { toast.classList.add('hidden'); }, 5000);
+      }
+    }
+
+    // Pure Lightweight Canvas Confetti Engine (No external scripts needed)
+    function launchConfetti() {
+      var canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      var pieces = [];
+      var colors = ['#25D366', '#F4D068', '#FFFFFF', '#10B981', '#F59E0B', '#3B82F6', '#EC4899'];
+      for (var i = 0; i < 120; i++) {
+        pieces.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.9) * 18,
+          size: Math.random() * 8 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+
+      var frame = 0;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(function(p) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.4; // gravity
+          p.rotation += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+        frame++;
+        if (frame < 120) {
+          requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      requestAnimationFrame(render);
+    }
+  </script>
+</body>
+</html>
