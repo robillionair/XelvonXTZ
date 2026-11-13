@@ -32,7 +32,11 @@ Authenticated export: `GET /api/anansi/admin/emails`, with `Authorization: Beare
 - In-app browser: inspected desktop hero at normal viewport and mobile at 390×844; one canvas, no horizontal overflow, `pointer-events: none`; successful synthetic email/consent submission and unlocked download on desktop and mobile. Temporary viewport reset afterward. No sensitive data used.
 - Initial preview found an existing clean-URL redirect loop from fetching `/anansi/index.html` through Assets. Fixed Worker mapping to `/anansi/` and reverified all four routes.
 
-Production push/deployment state is recorded after publication. Local dry-run does not prove deployment or production storage. Wrangler has no local Cloudflare authentication; the existing Git-connected Workers Builds deployment is the authorized publication route.
+## Production verification
+
+Implementation `9a1e821` was pushed to main. Cloudflare `Workers Builds: xelvonxtz` completed successfully: build `55a5de6e-0691-4746-aea6-f32c7cdc38ef`. Live `https://robillionair.com/Anansi` returned the new page. Production browser submission with synthetic `website-verification-20261113@example.com` displayed “Email saved. Your Windows beta is ready.” The returned short-lived capability downloaded 10,547,273 bytes with the expected pilot SHA256 and attachment/no-store headers. No email was sent. This reserved-domain QA record can be excluded from beta communications.
+
+Production access checks: missing capability returned 403; direct installer asset and percent-encoded directory spelling returned 404; public build identity returned 200. Screenshots: `anansi-live-access.png` and `anansi-live-page.png`. Local Wrangler has no Cloudflare authentication; publication used the existing authorized Git-connected Workers Builds deployment. The admin export is locally tested, but its production ADMIN_KEY configuration was not inspected or changed.
 
 ## Recovery
 
