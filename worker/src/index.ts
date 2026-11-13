@@ -1,4 +1,8 @@
+import { betaRoute } from './anansi-beta';
+export { AnansiBetaRegistry } from './anansi-beta';
+
 export interface Env {
+  ANANSI_BETA?: DurableObjectNamespace;
   ASSETS?: Fetcher;
   XELVON_EMAILS?: KVNamespace;
   EMAILS?: KVNamespace;
@@ -97,6 +101,8 @@ function buildSovereignFallback(prompt: string): string {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
+    const beta = await betaRoute(request, env);
+    if (beta) return beta;
     const corsHeaders = getCorsHeaders(request);
 
     if (request.method === 'OPTIONS') {
@@ -314,8 +320,8 @@ export default {
     // Default route fallback: serve static assets if available
     if (env.ASSETS) {
       const lowerPath = url.pathname.toLowerCase();
-      if (lowerPath === '/anansi' || lowerPath === '/anansi/') {
-        return env.ASSETS.fetch(new Request(new URL('/anansi/index.html', request.url), request));
+      if (lowerPath === '/anansi' || lowerPath === '/anansi/' || lowerPath === '/anansi.html') {
+        return env.ASSETS.fetch(new Request(new URL('/anansi/', request.url), request));
       }
       if (lowerPath === '/peeter' || lowerPath === '/peeter/') {
         return env.ASSETS.fetch(new Request(new URL('/PEETER/index.html', request.url), request));

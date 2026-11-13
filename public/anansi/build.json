@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "kind": "unsigned-development-nsis",
+  "architecture": "x64",
+  "version": "0.1.0",
+  "gitCommit": "6f216e3224e2c855236aac5492f69b467cf8c5d5",
+  "dirtySource": false,
+  "toolchain": {
+    "node": "v26.7.0",
+    "pnpm": "11.25.0",
+    "git": "git version 2.53.0.windows.2",
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "rustcHost": "x86_64-pc-windows-msvc",
+    "rustcCommit": "58cf8f9c35b355199727627d07ae34a4e2846d67",
+    "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
+    "windowsSdk": "10.0.26100.0",
+    "webviewVersions": [
+      "157.0.4341.42",
+      "157.0.4341.46"
+    ]
+  },
+  "installer": "ANANSI Ultimate_0.1.0_x64-setup.exe",
+  "installerSha256": "2b0c1c7980b7cf8c62b1d9b621723276ef943208d988ea579a62494da5408d74",
+  "applicationSha256": "2f6bbd2b0572fca2a8e9d3d9fc616d6667a962b193c72eb7ee5ecd3ff6816580",
+  "unbundledApplicationSha256": "47e1695d95325f574970331f89d514bb797669dc00021ded50646868901b2a7c",
+  "bundleMarker": "__TAURI_BUNDLE_TYPE_VAR_NSS",
+  "configSha256": "8868aded25eb36066561ceb3a3404b01219dda839b14985a571d4a794dd77c4d",
+  "webviewRequirement": "Existing WebView2, or internet to install the runtime using the embedded Microsoft bootstrapper."
+}

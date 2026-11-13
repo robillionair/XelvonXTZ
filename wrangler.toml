@@ -5,6 +5,15 @@ compatibility_date = "2024-09-01"
 [assets]
 directory = "public"
 binding = "ASSETS"
+run_worker_first = true
+
+[[durable_objects.bindings]]
+name = "ANANSI_BETA"
+class_name = "AnansiBetaRegistry"
+
+[[migrations]]
+tag = "anansi-beta-v1"
+new_sqlite_classes = ["AnansiBetaRegistry"]
 
 # Security Note: Do NOT store secrets in plaintext [vars].
 # Configure encrypted secrets in the Cloudflare Dashboard (Settings -> Variables and Secrets):
